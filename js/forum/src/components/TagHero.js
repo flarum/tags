@@ -5,6 +5,8 @@ export default class TagHero extends Component {
     const tag = this.props.tag;
     const color = tag.color();
 
+    app.setTitle(tag.name());
+    
     return (
       <header className={'Hero TagHero' + (color ? ' TagHero--colored' : '')}
         style={color ? {color: '#fff', backgroundColor: color} : ''}>
