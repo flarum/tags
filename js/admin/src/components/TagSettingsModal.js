@@ -11,7 +11,7 @@ export default class TagSettingsModal extends SettingsModal {
   }
 
   title() {
-    return app.translator.trans('flarum-tags.admin.tag_settings.title');
+    return app.translator.trans('tags::admin.tag_settings.title');
   }
 
   form() {
@@ -23,9 +23,9 @@ export default class TagSettingsModal extends SettingsModal {
 
     return [
       <div className="Form-group">
-        <label>{app.translator.trans('flarum-tags.admin.tag_settings.required_primary_heading')}</label>
+        <label>{app.translator.trans('tags::admin.tag_settings.required_primary_heading')}</label>
         <div className="helpText">
-          {app.translator.trans('flarum-tags.admin.tag_settings.required_primary_text')}
+          {app.translator.trans('tags::admin.tag_settings.required_primary_text')}
         </div>
         <div className="TagSettingsModal-rangeInput">
           <input className="FormControl"
@@ -33,7 +33,7 @@ export default class TagSettingsModal extends SettingsModal {
             min="0"
             value={minPrimaryTags()}
             oninput={m.withAttr('value', this.setMinTags.bind(this, minPrimaryTags, maxPrimaryTags))} />
-          {app.translator.trans('flarum-tags.admin.tag_settings.range_separator_text')}
+          {app.translator.trans('tags::admin.tag_settings.range_separator_text')}
           <input className="FormControl"
             type="number"
             min={minPrimaryTags()}
@@ -42,9 +42,9 @@ export default class TagSettingsModal extends SettingsModal {
       </div>,
 
       <div className="Form-group">
-        <label>{app.translator.trans('flarum-tags.admin.tag_settings.required_secondary_heading')}</label>
+        <label>{app.translator.trans('tags::admin.tag_settings.required_secondary_heading')}</label>
         <div className="helpText">
-          {app.translator.trans('flarum-tags.admin.tag_settings.required_secondary_text')}
+          {app.translator.trans('tags::admin.tag_settings.required_secondary_text')}
         </div>
         <div className="TagSettingsModal-rangeInput">
           <input className="FormControl"
@@ -52,7 +52,7 @@ export default class TagSettingsModal extends SettingsModal {
             min="0"
             value={minSecondaryTags()}
             oninput={m.withAttr('value', this.setMinTags.bind(this, minSecondaryTags, maxSecondaryTags))} />
-          {app.translator.trans('flarum-tags.admin.tag_settings.range_separator_text')}
+          {app.translator.trans('tags::admin.tag_settings.range_separator_text')}
           <input className="FormControl"
             type="number"
             min={minSecondaryTags()}

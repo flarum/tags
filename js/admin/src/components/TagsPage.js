@@ -36,17 +36,17 @@ export default class TagsPage extends Page {
         <div className="TagsPage-header">
           <div className="container">
             <p>
-              {app.translator.trans('flarum-tags.admin.tags.about_tags_text')}
+              {app.translator.trans('tags::admin.tags.about_tags_text')}
             </p>
             {Button.component({
               className: 'Button Button--primary',
               icon: 'plus',
-              children: app.translator.trans('flarum-tags.admin.tags.create_tag_button'),
+              children: app.translator.trans('tags::admin.tags.create_tag_button'),
               onclick: () => app.modal.show(new EditTagModal())
             })}
             {Button.component({
               className: 'Button',
-              children: app.translator.trans('flarum-tags.admin.tags.settings_button'),
+              children: app.translator.trans('tags::admin.tags.settings_button'),
               onclick: () => app.modal.show(new TagSettingsModal())
             })}
           </div>
@@ -54,7 +54,7 @@ export default class TagsPage extends Page {
         <div className="TagsPage-list">
           <div className="container">
             <div className="TagGroup">
-              <label>{app.translator.trans('flarum-tags.admin.tags.primary_heading')}</label>
+              <label>{app.translator.trans('tags::admin.tags.primary_heading')}</label>
               <ol className="TagList TagList--primary">
                 {sortTags(app.store.all('tags'))
                   .filter(tag => tag.position() !== null && !tag.isChild())
@@ -63,7 +63,7 @@ export default class TagsPage extends Page {
             </div>
 
             <div className="TagGroup">
-              <label>{app.translator.trans('flarum-tags.admin.tags.secondary_heading')}</label>
+              <label>{app.translator.trans('tags::admin.tags.secondary_heading')}</label>
               <ul className="TagList">
                 {app.store.all('tags')
                   .filter(tag => tag.position() === null)
