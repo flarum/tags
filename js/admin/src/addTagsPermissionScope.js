@@ -51,7 +51,7 @@ export default function() {
       items.add('tag', Dropdown.component({
         className: 'Dropdown--restrictByTag',
         buttonClassName: 'Button Button--text',
-        label: app.translator.trans('flarum-tags.admin.permissions.restrict_by_tag_heading'),
+        label: app.translator.trans('tags::admin.permissions.restrict_by_tag_heading'),
         icon: 'plus',
         caretIcon: null,
         children: tags.map(tag => Button.component({
