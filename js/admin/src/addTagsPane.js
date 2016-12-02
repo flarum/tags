@@ -13,8 +13,8 @@ export default function() {
     items.add('tags', AdminLinkButton.component({
       href: app.route('tags'),
       icon: 'tags',
-      children: app.translator.trans('flarum-tags.admin.nav.tags_button'),
-      description: app.translator.trans('flarum-tags.admin.nav.tags_text')
+      children: app.translator.trans('tags::nav.tags_button'),
+      description: app.translator.trans('tags::nav.tags_text')
     }));
   });
 }
