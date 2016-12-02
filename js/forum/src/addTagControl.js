@@ -9,7 +9,7 @@ export default function() {
   extend(DiscussionControls, 'moderationControls', function(items, discussion) {
     if (discussion.canTag()) {
       items.add('tags', Button.component({
-        children: app.translator.trans('flarum-tags.forum.discussion_controls.edit_tags_button'),
+        children: app.translator.trans('tags::discussion_controls.edit_tags_button'),
         icon: 'tag',
         onclick: () => app.modal.show(new TagDiscussionModal({discussion}))
       }));
