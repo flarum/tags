@@ -30,7 +30,7 @@ class OrderTagsController implements ControllerInterface
 
         $order = array_get($request->getParsedBody(), 'order');
         
-        if ($order == "") {
+        if ($order == '') {
             return new EmptyResponse(422);
         }
 
