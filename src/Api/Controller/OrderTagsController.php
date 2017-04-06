@@ -29,7 +29,7 @@ class OrderTagsController implements ControllerInterface
         $this->assertAdmin($request->getAttribute('actor'));
 
         $order = array_get($request->getParsedBody(), 'order');
-        
+
         if ($order == '') {
             return new EmptyResponse(422);
         }
