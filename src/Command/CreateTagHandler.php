@@ -51,10 +51,14 @@ class CreateTagHandler
             array_get($data, 'attributes.isHidden')
         );
 
-        if ($parentId = array_get($data, 'relationships.parent.data.id')) {
+        $parentId = array_get($data, 'relationships.parent.data.id');
+
+        if ($parentId !== null) {
             $rootTags = Tag::whereNull('parent_id')->whereNotNull('position');
 
-            if ($rootTags->find($parentId)) {
+            if ($parentId === 0) {
+                $tag->position = $rootTags->max('position') + 1;
+            } elseif ($rootTags->find($parentId)) {
                 $position = Tag::where('parent_id', $parentId)->max('position');
 
                 $tag->parent()->associate($parentId);
