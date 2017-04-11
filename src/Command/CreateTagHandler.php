@@ -51,6 +51,17 @@ class CreateTagHandler
             array_get($data, 'attributes.isHidden')
         );
 
+        if ($parentId = array_get($data, 'relationships.parent.data.id')) {
+            $rootTags = Tag::whereNull('parent_id')->whereNotNull('position');
+
+            if ($rootTags->find($parentId)) {
+                $position = Tag::where('parent_id', $parentId)->max('position');
+
+                $tag->parent()->associate($parentId);
+                $tag->position = $position === null ? 0 : $position + 1;
+            }
+        }
+
         $this->validator->assertValid($tag->getAttributes());
 
         $tag->save();
