@@ -45,7 +45,7 @@ export default function() {
   override(DiscussionComposer.prototype, 'onsubmit', function(original) {
     if (!this.tags.length
       || (!this.tags.filter(tag => tag.position() !== null && !tag.isChild()).length < app.forum.attribute('minPrimaryTags'))
-      || (!this.tags.filter(tag => tag.position() === null || tag.isChild()).length < app.forum.attribute('minSecondaryTags'))) {
+      || (!this.tags.filter(tag => tag.position() === null).length < app.forum.attribute('minSecondaryTags'))) {
       app.modal.show(
         new TagDiscussionModal({
           selectedTags: this.tags,

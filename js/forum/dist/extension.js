@@ -52,7 +52,7 @@ System.register('flarum/tags/addTagComposer', ['flarum/extend', 'flarum/componen
       if (!this.tags.length || !this.tags.filter(function (tag) {
         return tag.position() !== null && !tag.isChild();
       }).length < app.forum.attribute('minPrimaryTags') || !this.tags.filter(function (tag) {
-        return tag.position() === null || tag.isChild();
+        return tag.position() === null;
       }).length < app.forum.attribute('minSecondaryTags')) {
         app.modal.show(new TagDiscussionModal({
           selectedTags: this.tags,
