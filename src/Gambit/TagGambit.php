@@ -46,7 +46,7 @@ class TagGambit extends AbstractRegexGambit
         $search->getQuery()->where(function ($query) use ($slugs, $negate) {
             foreach ($slugs as $slug) {
                 if ($slug === 'untagged') {
-                    if (!$negate) {
+                    if (! $negate) {
                         $query->orWhereNotExists(function ($query) {
                             $query->select(new Expression(1))
                                 ->from('discussions_tags')
@@ -61,7 +61,7 @@ class TagGambit extends AbstractRegexGambit
                     }
                 } else {
                     $id = $this->tags->getIdForSlug($slug);
-                    if (!$negate) {
+                    if (! $negate) {
                         $query->orWhereExists(function ($query) use ($id) {
                             $query->select(new Expression(1))
                                 ->from('discussions_tags')
