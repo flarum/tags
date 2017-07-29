@@ -204,10 +204,10 @@ System.register('flarum/tags/addTagFilter', ['flarum/extend', 'flarum/components
 });;
 'use strict';
 
-System.register('flarum/tags/addTagLabels', ['flarum/extend', 'flarum/components/DiscussionListItem', 'flarum/components/DiscussionPage', 'flarum/components/DiscussionHero', 'flarum/tags/helpers/tagsLabel', 'flarum/tags/utils/sortTags'], function (_export, _context) {
+System.register('flarum/tags/addTagLabels', ['flarum/extend', 'flarum/components/DiscussionListItem', 'flarum/components/DiscussionPage', 'flarum/components/DiscussionHeader', 'flarum/tags/helpers/tagsLabel'], function (_export, _context) {
   "use strict";
 
-  var extend, DiscussionListItem, DiscussionPage, DiscussionHero, tagsLabel, sortTags;
+  var extend, DiscussionListItem, DiscussionPage, DiscussionHeader, tagsLabel;
 
   _export('default', function () {
     // Add tag labels to each discussion in the discussion list.
@@ -224,26 +224,13 @@ System.register('flarum/tags/addTagLabels', ['flarum/extend', 'flarum/components
       params.include.push('tags');
     });
 
-    // Restyle a discussion's hero to use its first tag's color.
-    extend(DiscussionHero.prototype, 'view', function (view) {
-      var tags = sortTags(this.props.discussion.tags());
-
-      if (tags && tags.length) {
-        var color = tags[0].color();
-        if (color) {
-          view.attrs.style = { backgroundColor: color };
-          view.attrs.className += ' DiscussionHero--colored';
-        }
-      }
-    });
-
     // Add a list of a discussion's tags to the discussion hero, displayed
     // before the title. Put the title on its own line.
-    extend(DiscussionHero.prototype, 'items', function (items) {
+    extend(DiscussionHeader.prototype, 'items', function (items) {
       var tags = this.props.discussion.tags();
 
       if (tags && tags.length) {
-        items.add('tags', tagsLabel(tags, { link: true }), 5);
+        items.add('tags', tagsLabel(tags, { link: true }), 20);
       }
     });
   });
@@ -255,12 +242,10 @@ System.register('flarum/tags/addTagLabels', ['flarum/extend', 'flarum/components
       DiscussionListItem = _flarumComponentsDiscussionListItem.default;
     }, function (_flarumComponentsDiscussionPage) {
       DiscussionPage = _flarumComponentsDiscussionPage.default;
-    }, function (_flarumComponentsDiscussionHero) {
-      DiscussionHero = _flarumComponentsDiscussionHero.default;
+    }, function (_flarumComponentsDiscussionHeader) {
+      DiscussionHeader = _flarumComponentsDiscussionHeader.default;
     }, function (_flarumTagsHelpersTagsLabel) {
       tagsLabel = _flarumTagsHelpersTagsLabel.default;
-    }, function (_flarumTagsUtilsSortTags) {
-      sortTags = _flarumTagsUtilsSortTags.default;
     }],
     execute: function () {}
   };
@@ -1148,11 +1133,9 @@ System.register('flarum/tags/helpers/tagLabel', ['flarum/utils/extract'], functi
       attrs.className += ' untagged';
     }
 
-    return m(link ? 'a' : 'span', attrs, m(
-      'span',
-      { className: 'TagLabel-text' },
-      tag ? tag.name() : app.translator.trans('flarum-tags.lib.deleted_tag_text')
-    ));
+    var name = tag ? tag.name() : app.translator.trans('flarum-tags.lib.deleted_tag_text');
+
+    return m(link ? 'a' : 'span', attrs, name);
   }
 
   _export('default', tagLabel);

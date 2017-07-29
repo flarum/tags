@@ -6,7 +6,6 @@
   border-radius: @border-radius;
   background: @control-bg;
   color: @control-color;
-  text-transform: none;
 
   &.untagged {
     background: transparent;
@@ -15,30 +14,7 @@
   }
 
   &.colored {
-    .TagLabel-text {
-      color: @body-bg !important;
-    }
-  }
-
-  .DiscussionHero .TagsLabel & {
-    background: transparent;
-    border-radius: @border-radius !important;
-    font-size: 14px;
-
-    &.colored {
-      margin-right: 5px;
-      background: @body-bg !important;
-      color: @muted-color;
-
-      .TagLabel-text {
-        color: inherit !important;
-      }
-    }
-  }
-}
-.DiscussionHero--colored {
-  &, a {
-    color: @body-bg;
+    color: @body-bg !important;
   }
 }
 .TagsLabel {
