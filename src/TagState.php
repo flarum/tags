@@ -11,8 +11,8 @@
 
 namespace Flarum\Tags;
 
-use Flarum\Foundation\EventGeneratorTrait;
 use Flarum\Database\AbstractModel;
+use Flarum\Foundation\EventGeneratorTrait;
 use Flarum\User\User;
 use Illuminate\Database\Eloquent\Builder;
 

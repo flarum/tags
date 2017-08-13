@@ -14,10 +14,10 @@ namespace Flarum\Tags\Listener;
 use Flarum\Api\Controller;
 use Flarum\Api\Serializer\DiscussionSerializer;
 use Flarum\Discussion\Discussion;
-use Flarum\Event\WillGetData;
 use Flarum\Event\GetApiRelationship;
 use Flarum\Event\GetModelRelationship;
 use Flarum\Event\Serializing;
+use Flarum\Event\WillGetData;
 use Flarum\Tags\Tag;
 use Illuminate\Contracts\Events\Dispatcher;
 
