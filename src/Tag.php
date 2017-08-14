@@ -82,7 +82,7 @@ class Tag extends AbstractModel
      */
     public function lastDiscussion()
     {
-        return $this->belongsTo('Flarum\Discussion\Discussion', 'last_discussion_id');
+        return $this->belongsTo(Discussion::class, 'last_discussion_id');
     }
 
     /**
@@ -90,7 +90,7 @@ class Tag extends AbstractModel
      */
     public function discussions()
     {
-        return $this->belongsToMany('Flarum\Discussion\Discussion', 'discussions_tags');
+        return $this->belongsToMany(Discussion::class, 'discussions_tags');
     }
 
     /**
