@@ -46,36 +46,20 @@ class TagGambit extends AbstractRegexGambit
         $search->getQuery()->where(function ($query) use ($slugs, $negate) {
             foreach ($slugs as $slug) {
                 if ($slug === 'untagged') {
-                    if (! $negate) {
-                        $query->orWhereNotExists(function ($query) {
-                            $query->select(new Expression(1))
-                                ->from('discussions_tags')
-                                ->where('discussions.id', new Expression('discussion_id'));
-                        });
-                    } else {
-                        $query->orWhereExists(function ($query) {
-                            $query->select(new Expression(1))
-                                ->from('discussions_tags')
-                                ->where('discussions.id', new Expression('discussion_id'));
-                        });
-                    }
+                    $query->orWhereNotExists(function ($query) {
+                        $query->select(new Expression(1))
+                            ->from('discussions_tags')
+                            ->where('discussions.id', new Expression('discussion_id'));
+                    }, $negate);
                 } else {
                     $id = $this->tags->getIdForSlug($slug);
-                    if (! $negate) {
-                        $query->orWhereExists(function ($query) use ($id) {
-                            $query->select(new Expression(1))
-                                ->from('discussions_tags')
-                                ->where('discussions.id', new Expression('discussion_id'))
-                                ->where('tag_id', $id);
-                        });
-                    } else {
-                        $query->orWhereNotExists(function ($query) use ($id) {
-                            $query->select(new Expression(1))
-                                ->from('discussions_tags')
-                                ->where('discussions.id', new Expression('discussion_id'))
-                                ->where('tag_id', $id);
-                        });
-                    }
+
+                    $query->orWhereExists(function ($query) use ($id) {
+                        $query->select(new Expression(1))
+                            ->from('discussions_tags')
+                            ->where('discussions.id', new Expression('discussion_id'))
+                            ->where('tag_id', $id);
+                    }, $negate);
                 }
             }
         });
