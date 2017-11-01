@@ -43,24 +43,23 @@ class TagGambit extends AbstractRegexGambit
     {
         $slugs = explode(',', trim($matches[1], '"'));
 
-        // TODO: implement $negate
-        $search->getQuery()->where(function ($query) use ($slugs) {
+        $search->getQuery()->where(function ($query) use ($slugs, $negate) {
             foreach ($slugs as $slug) {
                 if ($slug === 'untagged') {
                     $query->orWhereNotExists(function ($query) {
                         $query->select(new Expression(1))
-                              ->from('discussions_tags')
-                              ->where('discussions.id', new Expression('discussion_id'));
-                    });
+                            ->from('discussions_tags')
+                            ->where('discussions.id', new Expression('discussion_id'));
+                    }, $negate);
                 } else {
                     $id = $this->tags->getIdForSlug($slug);
 
                     $query->orWhereExists(function ($query) use ($id) {
                         $query->select(new Expression(1))
-                              ->from('discussions_tags')
-                              ->where('discussions.id', new Expression('discussion_id'))
-                              ->where('tag_id', $id);
-                    });
+                            ->from('discussions_tags')
+                            ->where('discussions.id', new Expression('discussion_id'))
+                            ->where('tag_id', $id);
+                    }, $negate);
                 }
             }
         });
