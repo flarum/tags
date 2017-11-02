@@ -4,7 +4,7 @@ export default class TagHero extends Component {
   view() {
     const tag = this.props.tag;
     const color = tag.color();
-
+    
     return (
       <header className={'Hero TagHero' + (color ? ' TagHero--colored' : '')}
         style={color ? {color: '#fff', backgroundColor: color} : ''}>
@@ -16,5 +16,9 @@ export default class TagHero extends Component {
         </div>
       </header>
     );
+  }
+  config() {
+    const tag = this.props.tag;
+    app.setTitle(tag.name());
   }
 }
