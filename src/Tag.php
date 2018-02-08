@@ -100,7 +100,7 @@ class Tag extends AbstractModel
      */
     public function refreshLastDiscussion()
     {
-        if ($lastDiscussion = $this->discussions()->latest('last_time')->first()) {
+        if ($lastDiscussion = $this->discussions()->latest('last_posted_at')->first()) {
             $this->setLastDiscussion($lastDiscussion);
         }
 
@@ -115,7 +115,7 @@ class Tag extends AbstractModel
      */
     public function setLastDiscussion(Discussion $discussion)
     {
-        $this->last_time = $discussion->last_time;
+        $this->last_time = $discussion->last_posted_at;
         $this->last_discussion_id = $discussion->id;
 
         return $this;
