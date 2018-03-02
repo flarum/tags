@@ -22,11 +22,7 @@ export default function tagLabel(tag, attrs = {}) {
     attrs.className += ' untagged';
   }
 
-  return (
-    m((link ? 'a' : 'span'), attrs,
-      <span className="TagLabel-text">
-        {tag ? tag.name() : app.translator.trans('flarum-tags.lib.deleted_tag_text')}
-      </span>
-    )
-  );
+  const name = tag ? tag.name() : app.translator.trans('flarum-tags.lib.deleted_tag_text');
+
+  return m((link ? 'a' : 'span'), attrs, name);
 }
