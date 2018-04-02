@@ -4,6 +4,12 @@ export default class TagHero extends Component {
   view() {
     const tag = this.props.tag;
     const color = tag.color();
+    app.setTitle(tag.name());
+    let description = tag.description();
+    if (!description) {
+      description = app.translator.trans('flarum-tags.forum.meta_description.discussions_tagged_text', { tag: tag.name() }).join('');
+    }
+    app.setDescription(description);
 
     return (
       <header className={'Hero TagHero' + (color ? ' TagHero--colored' : '')}

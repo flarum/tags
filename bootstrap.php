@@ -13,6 +13,7 @@ use Flarum\Extend;
 use Flarum\Forum\Controller\FrontendController;
 use Flarum\Tags\Access;
 use Flarum\Tags\Api\Controller;
+use Flarum\Tags\Forum\Controller\TagController;
 use Flarum\Tags\Listener;
 use Illuminate\Contracts\Events\Dispatcher;
 
@@ -26,7 +27,7 @@ return [
         ->asset(__DIR__.'/less/admin/extension.less')
         ->bootstrapper('flarum/tags/main'),
     (new Extend\Routes('forum'))
-        ->get('/t/{slug}', 'tag', FrontendController::class)
+        ->get('/t/{slug}', 'tag', TagController::class)
         ->get('/tags', 'tags', FrontendController::class),
     (new Extend\Routes('api'))
         ->get('/tags', 'tags.index', Controller\ListTagsController::class)

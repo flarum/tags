@@ -220,4 +220,19 @@ class Tag extends AbstractModel
     {
         return static::getIdsWherePermission($user, $permission, false);
     }
+
+    /**
+     * Get the description.
+     *
+     * Returns the stored description (if any).
+     *
+     * @param string $description
+     * @return string
+     */
+    protected function getDescriptionAttribute($description)
+    {
+        $description = ($description == null) ? '' : $description;
+
+        return $description;
+    }
 }

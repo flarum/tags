@@ -67,7 +67,7 @@ class TagRepository
     {
         $query = Tag::where('slug', 'like', $slug);
 
-        return $this->scopeVisibleTo($query, $user)->pluck('id');
+        return $this->scopeVisibleTo($query, $user)->value('id');
     }
 
     /**

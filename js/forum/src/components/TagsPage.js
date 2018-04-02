@@ -20,6 +20,8 @@ export default class TagsPage extends Component {
   view() {
     const pinned = this.tags.filter(tag => tag.position() !== null);
     const cloud = this.tags.filter(tag => tag.position() === null);
+    app.setTitle('');
+    app.setDescription('');
 
     return (
       <div className="TagsPage">
