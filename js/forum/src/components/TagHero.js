@@ -7,7 +7,10 @@ export default class TagHero extends Component {
     app.setTitle(tag.name());
     let description = tag.description();
     if (!description) {
-      description = app.translator.trans('flarum-tags.forum.meta_description.discussions_tagged_text', { tag: tag.name() }).join('');
+      description = app.translator.trans('flarum-tags.forum.meta_description.discussions_tagged_text', { tag: tag.name() });
+      if (description.constructor === Array) {
+        description = description.join('');
+      }
     }
     app.setDescription(description);
 
