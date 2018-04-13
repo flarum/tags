@@ -4,9 +4,9 @@ import PermissionDropdown from 'flarum/components/PermissionDropdown';
 import Dropdown from 'flarum/components/Dropdown';
 import Button from 'flarum/components/Button';
 
-import tagLabel from 'flarum/tags/helpers/tagLabel';
-import tagIcon from 'flarum/tags/helpers/tagIcon';
-import sortTags from 'flarum/tags/utils/sortTags';
+import tagLabel from '../../lib/helpers/tagLabel';
+import tagIcon from '../../lib/helpers/tagIcon';
+import sortTags from '../../lib/utils/sortTags';
 
 export default function() {
   override(app, 'getRequiredPermissions', (original, permission) => {

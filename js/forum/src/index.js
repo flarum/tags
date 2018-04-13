@@ -2,15 +2,15 @@ import Model from 'flarum/Model';
 import Discussion from 'flarum/models/Discussion';
 import IndexPage from 'flarum/components/IndexPage';
 
-import Tag from 'flarum/tags/models/Tag';
-import TagsPage from 'flarum/tags/components/TagsPage';
-import DiscussionTaggedPost from 'flarum/tags/components/DiscussionTaggedPost';
+import Tag from '../../lib/models/Tag';
+import TagsPage from './components/TagsPage';
+import DiscussionTaggedPost from './components/DiscussionTaggedPost';
 
-import addTagList from 'flarum/tags/addTagList';
-import addTagFilter from 'flarum/tags/addTagFilter';
-import addTagLabels from 'flarum/tags/addTagLabels';
-import addTagControl from 'flarum/tags/addTagControl';
-import addTagComposer from 'flarum/tags/addTagComposer';
+import addTagList from './addTagList';
+import addTagFilter from './addTagFilter';
+import addTagLabels from './addTagLabels';
+import addTagControl from './addTagControl';
+import addTagComposer from './addTagComposer';
 
 app.initializers.add('flarum-tags', function(app) {
   app.routes.tags = {path: '/tags', component: TagsPage.component()};
@@ -31,3 +31,10 @@ app.initializers.add('flarum-tags', function(app) {
   addTagControl();
   addTagComposer();
 });
+
+
+// Expose compat API
+import tagsCompat from './compat';
+import { compat } from 'flarum';
+
+Object.assign(compat, tagsCompat);

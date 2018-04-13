@@ -4,8 +4,8 @@ import listItems from 'flarum/helpers/listItems';
 import humanTime from 'flarum/helpers/humanTime';
 import icon from 'flarum/helpers/icon';
 
-import tagLabel from 'flarum/tags/helpers/tagLabel';
-import sortTags from 'flarum/tags/utils/sortTags';
+import tagLabel from '../../../lib/helpers/tagLabel';
+import sortTags from '../../../lib/utils/sortTags';
 
 export default class TagsPage extends Component {
   init() {
