@@ -5,7 +5,7 @@ import LinkButton from 'flarum/components/LinkButton';
 
 import TagLinkButton from './components/TagLinkButton';
 import TagsPage from './components/TagsPage';
-import sortTags from '../../lib/utils/sortTags';
+import sortTags from '../common/utils/sortTags';
 
 export default function() {
   // Add a link to the tags page, as well as a list of all the tags,

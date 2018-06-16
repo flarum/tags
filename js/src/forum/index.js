@@ -2,7 +2,7 @@ import Model from 'flarum/Model';
 import Discussion from 'flarum/models/Discussion';
 import IndexPage from 'flarum/components/IndexPage';
 
-import Tag from '../../lib/models/Tag';
+import Tag from '../common/models/Tag';
 import TagsPage from './components/TagsPage';
 import DiscussionTaggedPost from './components/DiscussionTaggedPost';
 
@@ -35,6 +35,6 @@ app.initializers.add('flarum-tags', function(app) {
 
 // Expose compat API
 import tagsCompat from './compat';
-import { compat } from 'flarum';
+import { compat } from '@flarum/core/forum';
 
 Object.assign(compat, tagsCompat);

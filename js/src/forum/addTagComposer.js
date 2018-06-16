@@ -3,7 +3,7 @@ import IndexPage from 'flarum/components/IndexPage';
 import DiscussionComposer from 'flarum/components/DiscussionComposer';
 
 import TagDiscussionModal from './components/TagDiscussionModal';
-import tagsLabel from '../../lib/helpers/tagsLabel';
+import tagsLabel from '../common/helpers/tagsLabel';
 
 export default function() {
   extend(IndexPage.prototype, 'composeNewDiscussion', function(promise) {

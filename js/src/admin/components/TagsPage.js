@@ -1,10 +1,12 @@
+import 'html5sortable';
+
 import Page from 'flarum/components/Page';
 import Button from 'flarum/components/Button';
 
 import EditTagModal from './EditTagModal';
 import TagSettingsModal from './TagSettingsModal';
-import tagIcon from '../../../lib/helpers/tagIcon';
-import sortTags from '../../../lib/utils/sortTags';
+import tagIcon from '../../common/helpers/tagIcon';
+import sortTags from '../../common/utils/sortTags';
 
 function tagItem(tag) {
   return (

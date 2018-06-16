@@ -18,12 +18,12 @@ use Illuminate\Contracts\Events\Dispatcher;
 
 return [
     (new Extend\Assets('forum'))
-        ->js(__DIR__.'/js/forum/dist/main.js')
-        ->asset(__DIR__.'/less/forum/extension.less'),
+        ->js(__DIR__.'/js/dist/forum.js')
+        ->asset(__DIR__.'/less/forum.less'),
 
     (new Extend\Assets('admin'))
-        ->js(__DIR__.'/js/admin/dist/main.js')
-        ->asset(__DIR__.'/less/admin/extension.less'),
+        ->js(__DIR__.'/js/dist/admin.js')
+        ->asset(__DIR__.'/less/admin.less'),
 
     (new Extend\Routes('forum'))
         ->get('/t/{slug}', 'tag', FrontendController::class)

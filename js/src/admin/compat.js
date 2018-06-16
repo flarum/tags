@@ -1,4 +1,4 @@
-import compat from '../../lib/compat';
+import compat from '../common/compat';
 
 import addTagsHomePageOption from './addTagsHomePageOption';
 import addTagChangePermission from './addTagChangePermission';

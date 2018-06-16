@@ -2,7 +2,7 @@ import Modal from 'flarum/components/Modal';
 import Button from 'flarum/components/Button';
 import { slug } from 'flarum/utils/string';
 
-import tagLabel from '../../../lib/helpers/tagLabel';
+import tagLabel from '../../common/helpers/tagLabel';
 
 /**
  * The `EditTagModal` component shows a modal dialog which allows the user

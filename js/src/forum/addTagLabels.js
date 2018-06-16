@@ -3,8 +3,8 @@ import DiscussionListItem from 'flarum/components/DiscussionListItem';
 import DiscussionPage from 'flarum/components/DiscussionPage';
 import DiscussionHero from 'flarum/components/DiscussionHero';
 
-import tagsLabel from '../../lib/helpers/tagsLabel';
-import sortTags from '../../lib/utils/sortTags';
+import tagsLabel from '../common/helpers/tagsLabel';
+import sortTags from '../common/utils/sortTags';
 
 export default function() {
   // Add tag labels to each discussion in the discussion list.
