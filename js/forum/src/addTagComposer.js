@@ -6,7 +6,7 @@ import TagDiscussionModal from 'flarum/tags/components/TagDiscussionModal';
 import tagsLabel from 'flarum/tags/helpers/tagsLabel';
 
 export default function() {
-  extend(IndexPage.prototype, 'composeNewDiscussion', function(promise) {
+  extend(IndexPage.prototype, 'newDiscussionAction', function(promise) {
     const tag = app.store.getBy('tags', 'slug', this.params().tags);
 
     if (tag) {
