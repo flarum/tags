@@ -1,0 +1,25 @@
+language: generic
+
+sudo: false
+
+env:
+  # Define GH_USER_EMAIL & GH_USER_NAME env variables used by travis-scripts package
+  - secure: "FwrDVdBJhETIiMe8Qnn5k4l5mgWgiakSFyGlcGbw1hF2AnF0V9nIlQ6sExUj6il/uVt3/l869qamd/gspwwXgbqLqcRA4b6ruat1lL+9FvwnVQkwoS1nJYLe5I9REj3OFo1w+2WT+OgquSt/VytFjakgsAKnpAkubKMCxABJpiPcaerFIS6XZhvvTK1cqwEhUzEd7l++PJK+A2mEWQ4yZcep8MFtuBr0vWev4UqQdiGl9PVN++92fbY3Aopsg9o3SUjwbXoXH+Q4WCfnb/vB7Vg14LpQH0TBCE6WI9Mhe6sqs/0G6Rw3UkrUV0hT4vLwE1rh7nkC2PiTL8g6l5gFN+dKAJ07qVhYbbcrFV+GCie/XV7bY7ESn3nn+32SdR/M+HtFPQpFDiSYkqYkWO5JAFGapA98UE2DlRdtLpp86CrBR9MHZ3hJm1SfJwc66gRLJnQsDFHB9dSiVN1fx6RLa7bYGZxvdl1PSZXYnvbY7iLV25LIiJTkHmg085CgGdFKibUJq7Q06ntNdT1et3Vn+cn05RWGW9wM571gTig/AHwJJUX8vvUJZY5TnearJBy3v0kvpgfQjiMIx/L/Da9ys0nOnzGXSplB44RuRVcwRyLoWOlS8oluN55q19ticfTx4HrhG2K7SLXnCS+DS+FPD4313OfOf+XHFZwM+uZYmyo="
+
+cache:
+  directories:
+    - $HOME/.npm
+
+jobs:
+  include:
+    # Bundle and commit JS
+    - stage: build
+      if: branch = master AND type = push
+      install:
+        - npm i -g npm@6.1.0
+        - cd js && npm ci
+      script:
+        - npm run build -- --progress=false
+      after_success:
+        - $(npm bin)/set-up-ssh --key "$encrypted_e0713a64e02e_key" --iv "$encrypted_e0713a64e02e_iv" --path-encrypted-key "../.deploy.enc"
+        - $(npm bin)/commit-changes --commands "true" --commit-message "Bundled output for commit $TRAVIS_COMMIT [skip ci]" --branch "master"
