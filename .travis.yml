@@ -25,3 +25,5 @@ jobs:
         keep-history: true
         committer-from-gh: true
         verbose: true
+        on:
+          branch: webpack
