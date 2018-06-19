@@ -1,4 +1,4 @@
-language: generic
+language: minimal
 
 sudo: false
 
@@ -10,20 +10,6 @@ jobs:
   include:
     - stage: build
       if: branch = webpack AND type = push
-      install:
-        - npm i -g npm@6.1.0
-        - cd js && npm ci
-      script:
-        - npm run build
-      after_success:
-        - cd ..
-      deploy:
-        provider: pages
-        skip-cleanup: true
-        github-token: $GITHUB_TOKEN
-        target-branch: webpack
-        keep-history: true
-        committer-from-gh: true
-        verbose: true
-        on:
-          branch: webpack
+      script: curl -s https://raw.githubusercontent.com/flarum/core/webpack/.travis/build.sh | sh \
+        -k $encrypted_e0713a64e02e_key \
+        -i $encrypted_e0713a64e02e_iv
