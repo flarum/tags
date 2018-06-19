@@ -10,6 +10,6 @@ jobs:
   include:
     - stage: build
       if: branch = webpack AND type = push
-      script: curl -s https://raw.githubusercontent.com/flarum/core/webpack/.travis/build.sh | sh \
+      script: curl -s https://raw.githubusercontent.com/flarum/core/webpack/.travis/build.sh | bash -s - \
         -k $encrypted_e0713a64e02e_key \
         -i $encrypted_e0713a64e02e_iv
