@@ -34,12 +34,12 @@ class TagSerializer extends AbstractSerializer
             'backgroundUrl'      => $tag->background_path,
             'backgroundMode'     => $tag->background_mode,
             'iconUrl'            => $tag->icon_path,
-            'discussionsCount'   => (int) $tag->discussions_count,
+            'discussionsCount'   => (int) $tag->discussion_count,
             'position'           => $tag->position === null ? null : (int) $tag->position,
             'defaultSort'        => $tag->default_sort,
             'isChild'            => (bool) $tag->parent_id,
             'isHidden'           => (bool) $tag->is_hidden,
-            'lastTime'           => $this->formatDate($tag->last_time),
+            'lastTime'           => $this->formatDate($tag->last_posted_at),
             'canStartDiscussion' => $this->actor->can('startDiscussion', $tag),
             'canAddToDiscussion' => $this->actor->can('addToDiscussion', $tag)
         ];

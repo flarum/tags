@@ -122,9 +122,9 @@ class UpdateTagMetadata
         foreach ($tags as $tag) {
             $tag->discussions_count += $delta;
 
-            if ($discussion->last_time > $tag->last_time) {
+            if ($discussion->last_posted_at > $tag->last_posted_at) {
                 $tag->setLastDiscussion($discussion);
-            } elseif ($discussion->id == $tag->last_discussion_id) {
+            } elseif ($discussion->id == $tag->last_posted_discussion_id) {
                 $tag->refreshLastDiscussion();
             }
 
