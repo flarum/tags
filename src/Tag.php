@@ -72,7 +72,7 @@ class Tag extends AbstractModel
      */
     public function parent()
     {
-        return $this->belongsTo(Tag::class, 'parent_id');
+        return $this->belongsTo(self::class, 'parent_id');
     }
 
     /**
