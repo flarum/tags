@@ -11,7 +11,6 @@
 
 namespace Flarum\Tags\Access;
 
-use Carbon\Carbon;
 use Flarum\Discussion\Discussion;
 use Flarum\Settings\SettingsRepositoryInterface;
 use Flarum\Tags\Tag;
