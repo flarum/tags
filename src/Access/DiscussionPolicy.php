@@ -11,7 +11,6 @@
 
 namespace Flarum\Tags\Access;
 
-use Carbon\Carbon;
 use Flarum\Discussion\Discussion;
 use Flarum\Settings\SettingsRepositoryInterface;
 use Flarum\Tags\Tag;
@@ -43,10 +42,21 @@ class DiscussionPolicy extends AbstractPolicy
      * @param User $actor
      * @param string $ability
      * @param Discussion $discussion
-     * @return bool
+     * @return bool|void
      */
     public function can(User $actor, $ability, Discussion $discussion)
     {
+        // Permissions for the 'editOwnPosts' ability are not configurable, so
+        // we will respect the global interpretation regardless of what the
+        // discussion's tags are.
+        if ($ability === 'editOwnPosts') {
+            return;
+        }
+
+        if ($actor->id === $discussion->start_user_id && $actor->hasPermission('discussion.own.'.$ability)) {
+            return true;
+        }
+
         // Wrap all discussion permission checks with some logic pertaining to
         // the discussion's tags. If the discussion has a tag that has been
         // restricted, the user must have the permission for that tag.
@@ -123,11 +133,9 @@ class DiscussionPolicy extends AbstractPolicy
         if ($discussion->start_user_id == $actor->id) {
             $allowEditTags = $this->settings->get('allow_tag_change');
 
-            if ($allowEditTags === '-1'
-                || ($allowEditTags === 'reply' && $discussion->participants_count <= 1)
-                || ($discussion->start_time->diffInMinutes(new Carbon) < $allowEditTags)
-            ) {
-                return true;
+            if (($allowEditTags === 'reply' && $discussion->participants_count > 1)
+                || ($allowEditTags !== '-1' && $discussion->start_time->diffInMinutes() > $allowEditTags)) {
+                return false;
             }
         }
     }
