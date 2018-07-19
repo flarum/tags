@@ -11,9 +11,11 @@
 
 use Flarum\Extend;
 use Flarum\Forum\Controller\FrontendController;
+use Flarum\Group\Group;
 use Flarum\Tags\Access;
 use Flarum\Tags\Api\Controller;
 use Flarum\Tags\Listener;
+use Flarum\User\User;
 use Illuminate\Contracts\Events\Dispatcher;
 
 return [
@@ -49,5 +51,7 @@ return [
         $events->subscribe(Access\DiscussionPolicy::class);
         $events->subscribe(Access\TagPolicy::class);
         $events->subscribe(Access\FlagPolicy::class);
+
+        User::$basePermissions['discussion.own.tag'] = [Group::MEMBER_ID];
     },
 ];
