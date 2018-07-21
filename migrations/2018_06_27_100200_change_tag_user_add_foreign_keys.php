@@ -19,10 +19,10 @@ return [
         $schema->getConnection()
             ->table('tag_user')
             ->whereNotExists(function ($query) {
-                $query->selectRaw(1)->from('tags')->whereRaw('id = tag_id');
+                $query->selectRaw(1)->from('tags')->whereColumn('id', 'tag_id');
             })
             ->orWhereNotExists(function ($query) {
-                $query->selectRaw(1)->from('users')->whereRaw('id = user_id');
+                $query->selectRaw(1)->from('users')->whereColumn('id', 'user_id');
             })
             ->delete();
 

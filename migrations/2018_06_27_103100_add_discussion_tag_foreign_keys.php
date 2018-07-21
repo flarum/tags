@@ -19,10 +19,10 @@ return [
         $schema->getConnection()
             ->table('discussion_tag')
             ->whereNotExists(function ($query) {
-                $query->selectRaw(1)->from('discussions')->whereRaw('id = discussion_id');
+                $query->selectRaw(1)->from('discussions')->whereColumn('id', 'discussion_id');
             })
             ->orWhereNotExists(function ($query) {
-                $query->selectRaw(1)->from('tags')->whereRaw('id = tag_id');
+                $query->selectRaw(1)->from('tags')->whereColumn('id', 'tag_id');
             })
             ->delete();
 

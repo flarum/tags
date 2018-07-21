@@ -21,7 +21,7 @@ return [
 
         $select = function ($id, $table, $column) use ($connection) {
             return new Expression(
-                '('.$connection->table($table)->whereRaw("id = $column")->select($id)->toSql().')'
+                '('.$connection->table($table)->whereColumn('id', $column)->select($id)->toSql().')'
             );
         };
 
