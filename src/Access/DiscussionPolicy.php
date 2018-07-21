@@ -120,12 +120,12 @@ class DiscussionPolicy extends AbstractPolicy
      */
     public function tag(User $actor, Discussion $discussion)
     {
-        if ($discussion->start_user_id == $actor->id) {
+        if ($discussion->user_id == $actor->id) {
             $allowEditTags = $this->settings->get('allow_tag_change');
 
             if ($allowEditTags === '-1'
-                || ($allowEditTags === 'reply' && $discussion->participants_count <= 1)
-                || (is_numeric($allowEditTags) && $discussion->start_time->diffInMinutes(new Carbon) < $allowEditTags)
+                || ($allowEditTags === 'reply' && $discussion->participant_count <= 1)
+                || (is_numeric($allowEditTags) && $discussion->created_at->diffInMinutes(new Carbon) < $allowEditTags)
             ) {
                 return true;
             }
