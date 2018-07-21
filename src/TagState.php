@@ -31,7 +31,7 @@ class TagState extends AbstractModel
     /**
      * {@inheritdoc}
      */
-    protected $table = 'tags_users';
+    protected $table = 'tag_user';
 
     /**
      * {@inheritdoc}
