@@ -14,19 +14,27 @@ use Illuminate\Database\Schema\Builder;
 
 return [
     'up' => function (Builder $schema) {
-        $schema->table('tags_users', function (Blueprint $table) {
-            $table->renameColumn('read_time', 'marked_as_read_at');
+        // Delete rows with non-existent entities so that we will be able to create
+        // foreign keys without any issues.
+        $schema->getConnection()
+            ->table('tag_user')
+            ->whereNotExists(function ($query) {
+                $query->selectRaw(1)->from('tags')->whereRaw('id = tag_id');
+            })
+            ->orWhereNotExists(function ($query) {
+                $query->selectRaw(1)->from('users')->whereRaw('id = user_id');
+            })
+            ->delete();
 
+        $schema->table('tag_user', function (Blueprint $table) {
             $table->foreign('tag_id')->references('id')->on('tags')->onDelete('cascade');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     },
 
     'down' => function (Builder $schema) {
-        $schema->table('tags_users', function (Blueprint $table) {
+        $schema->table('tag_user', function (Blueprint $table) {
             $table->dropForeign(['tag_id', 'user_id']);
-
-            $table->renameColumn('marked_as_read_at', 'read_time');
         });
     }
 ];

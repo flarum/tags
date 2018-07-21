@@ -11,4 +11,4 @@
 
 use Flarum\Database\Migration;
 
-return Migration::renameTable('users_tags', 'tags_users');
+return Migration::renameTable('users_tags', 'tag_user');

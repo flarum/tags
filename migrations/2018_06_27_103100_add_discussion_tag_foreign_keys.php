@@ -14,22 +14,26 @@ use Illuminate\Database\Schema\Builder;
 
 return [
     'up' => function (Builder $schema) {
-        // Make sure the entities exist so that we will be able to create
+        // Delete rows with non-existent entities so that we will be able to create
         // foreign keys without any issues.
-        $connection = $schema->getConnection();
-        $prefix = $connection->getTablePrefix();
-        $connection->statement("delete from {$prefix}discussions_tags
-            where not exists (select 1 from {$prefix}discussions where id = discussion_id)
-            or not exists (select 1 from {$prefix}tags where id = tag_id)");
+        $schema->getConnection()
+            ->table('discussion_tag')
+            ->whereNotExists(function ($query) {
+                $query->selectRaw(1)->from('discussions')->whereRaw('id = discussion_id');
+            })
+            ->orWhereNotExists(function ($query) {
+                $query->selectRaw(1)->from('tags')->whereRaw('id = tag_id');
+            })
+            ->delete();
 
-        $schema->table('discussions_tags', function (Blueprint $table) {
+        $schema->table('discussion_tag', function (Blueprint $table) {
             $table->foreign('discussion_id')->references('id')->on('discussions')->onDelete('cascade');
             $table->foreign('tag_id')->references('id')->on('tags')->onDelete('cascade');
         });
     },
 
     'down' => function (Builder $schema) {
-        $schema->table('discussions_tags', function (Blueprint $table) {
+        $schema->table('discussion_tag', function (Blueprint $table) {
             $table->dropForeign(['discussion_id', 'tag_id']);
         });
     }
