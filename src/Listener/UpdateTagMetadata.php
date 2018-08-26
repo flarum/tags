@@ -123,9 +123,9 @@ class UpdateTagMetadata
             $tag->discussion_count += $delta;
 
             if ($discussion->last_posted_at > $tag->last_posted_at) {
-                $tag->setLastDiscussion($discussion);
+                $tag->setLastPostedDiscussion($discussion);
             } elseif ($discussion->id == $tag->last_posted_discussion_id) {
-                $tag->refreshLastDiscussion();
+                $tag->refreshLastPostedDiscussion();
             }
 
             $tag->save();
