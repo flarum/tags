@@ -61,7 +61,7 @@ export default class TagsPage extends Page {
                           href={app.route.discussion(lastDiscussion, lastDiscussion.lastPostNumber())}
                           config={m.route}>
                           <span className="TagTile-lastDiscussion-title">{lastDiscussion.title()}</span>
-                          {humanTime(lastDiscussion.lastTime())}
+                          {humanTime(lastDiscussion.lastPostedAt())}
                         </a>
                       ) : (
                         <span className="TagTile-lastDiscussion"/>

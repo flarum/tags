@@ -17,7 +17,7 @@ export default class Tag extends mixin(Model, {
   isChild: Model.attribute('isChild'),
   isHidden: Model.attribute('isHidden'),
 
-  discussionsCount: Model.attribute('discussionsCount'),
+  discussionCount: Model.attribute('discussionCount'),
   lastTime: Model.attribute('lastTime', Model.transformDate),
   lastDiscussion: Model.hasOne('lastDiscussion'),
 
