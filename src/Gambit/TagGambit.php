@@ -52,11 +52,7 @@ class TagGambit extends AbstractRegexGambit
                     }, ! $negate);
                 } else {
                     $id = $this->tags->getIdForSlug($slug);
-                    
-                    if($id->isEmpty() == true) {
-                            $id = -1;
-                    }
-                    
+
                     $query->orWhereExists(function ($query) use ($id) {
                         $query->selectRaw('1')
                               ->from('discussion_tag')
