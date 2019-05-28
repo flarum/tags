@@ -63,11 +63,15 @@ class TagRepository
      * @param User|null $user
      * @return int
      */
-    public function getIdForSlug($slug, User $user = null)
+    public function getIdForSlug($slug, User $user = null) : ?int
     {
         $query = Tag::where('slug', 'like', $slug);
-
-        return $this->scopeVisibleTo($query, $user)->pluck('id');
+        
+        if ($query->get()->isEmpty()) {
+            return null;
+        }
+        
+        return $this->scopeVisibleTo($query, $user)->value('id');
     }
 
     /**
