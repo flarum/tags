@@ -80,7 +80,13 @@ export default class TagsPage extends Page {
   }
 
   config() {
-    const cb = el => el.addEventListener('sortupdate', (e) => {
+    sortable(this.$('ol, ul'), {
+      acceptFrom: 'ol,ul'
+    }).forEach(this.onSortUpdate.bind(this));
+  }
+
+  onSortUpdate(el) {
+    el.addEventListener('sortupdate', (e) => {
       // If we've moved a tag from 'primary' to 'secondary', then we'll update
       // its attributes in our local store so that when we redraw the change
       // will be made.
@@ -143,9 +149,5 @@ export default class TagsPage extends Page {
       m.redraw.strategy('all');
       m.redraw();
     });
-
-    sortable(this.$('ol, ul'), {
-      acceptFrom: 'ol,ul'
-    }).forEach(cb);
   }
 }
