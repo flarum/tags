@@ -80,72 +80,72 @@ export default class TagsPage extends Page {
   }
 
   config() {
+    const cb = el => el.addEventListener('sortupdate', (e) => {
+      // If we've moved a tag from 'primary' to 'secondary', then we'll update
+      // its attributes in our local store so that when we redraw the change
+      // will be made.
+      if (e.detail.origin.container instanceof HTMLOListElement && e.detail.destination.container instanceof HTMLUListElement) {
+        app.store.getById('tags', e.detail.item.getAttribute('data-id')).pushData({
+          attributes: {
+            position: null,
+            isChild: false
+          },
+          relationships: {parent: null}
+        });
+      }
+
+      // Construct an array of primary tag IDs and their children, in the same
+      // order that they have been arranged in.
+      const order = this.$('.TagList--primary > li')
+        .map(function() {
+          return {
+            id: $(this).data('id'),
+            children: $(this).find('li')
+              .map(function() {
+                return $(this).data('id');
+              }).get()
+          };
+        }).get();
+
+      // Now that we have an accurate representation of the order which the
+      // primary tags are in, we will update the tag attributes in our local
+      // store to reflect this order.
+      order.forEach((tag, i) => {
+        const parent = app.store.getById('tags', tag.id);
+        parent.pushData({
+          attributes: {
+            position: i,
+            isChild: false
+          },
+          relationships: {parent: null}
+        });
+
+        tag.children.forEach((child, j) => {
+          app.store.getById('tags', child).pushData({
+            attributes: {
+              position: j,
+              isChild: true
+            },
+            relationships: {parent}
+          });
+        });
+      });
+
+      app.request({
+        url: app.forum.attribute('apiUrl') + '/tags/order',
+        method: 'POST',
+        data: {order}
+      });
+
+      // A diff redraw won't work here, because sortable has mucked around
+      // with the DOM which will confuse Mithril's diffing algorithm. Instead
+      // we force a full reconstruction of the DOM.
+      m.redraw.strategy('all');
+      m.redraw();
+    });
+
     sortable(this.$('ol, ul'), {
       acceptFrom: 'ol,ul'
-    }).forEach(el =>
-      el.addEventListener('sortupdate', (e) => {
-        // If we've moved a tag from 'primary' to 'secondary', then we'll update
-        // its attributes in our local store so that when we redraw the change
-        // will be made.
-        if (e.detail.origin.container instanceof HTMLOListElement && e.detail.destination.container instanceof HTMLUListElement) {
-          app.store.getById('tags', e.detail.item.getAttribute('data-id')).pushData({
-            attributes: {
-              position: null,
-              isChild: false
-            },
-            relationships: {parent: null}
-          });
-        }
-
-        // Construct an array of primary tag IDs and their children, in the same
-        // order that they have been arranged in.
-        const order = this.$('.TagList--primary > li')
-          .map(function() {
-            return {
-              id: $(this).data('id'),
-              children: $(this).find('li')
-                .map(function() {
-                  return $(this).data('id');
-                }).get()
-            };
-          }).get();
-
-        // Now that we have an accurate representation of the order which the
-        // primary tags are in, we will update the tag attributes in our local
-        // store to reflect this order.
-        order.forEach((tag, i) => {
-          const parent = app.store.getById('tags', tag.id);
-          parent.pushData({
-            attributes: {
-              position: i,
-              isChild: false
-            },
-            relationships: {parent: null}
-          });
-
-          tag.children.forEach((child, j) => {
-            app.store.getById('tags', child).pushData({
-              attributes: {
-                position: j,
-                isChild: true
-              },
-              relationships: {parent}
-            });
-          });
-        });
-
-        app.request({
-          url: app.forum.attribute('apiUrl') + '/tags/order',
-          method: 'POST',
-          data: {order}
-        });
-
-        // A diff redraw won't work here, because sortable has mucked around
-        // with the DOM which will confuse Mithril's diffing algorithm. Instead
-        // we force a full reconstruction of the DOM.
-        m.redraw.strategy('all');
-        m.redraw();
-      })
-    );
+    }).forEach(cb);
   }
 }
