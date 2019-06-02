@@ -1,4 +1,4 @@
-import 'html5sortable';
+import sortable from 'html5sortable/dist/html5sortable.es.js';
 
 import Page from 'flarum/components/Page';
 import Button from 'flarum/components/Button';
@@ -80,14 +80,15 @@ export default class TagsPage extends Page {
   }
 
   config() {
-    this.$('ol, ul')
-      .sortable({connectWith: 'primary'})
-      .on('sortupdate', (e, ui) => {
+    sortable(this.$('ol, ul'), {
+      acceptFrom: 'ol,ul'
+    }).forEach(el =>
+      el.addEventListener('sortupdate', (e) => {
         // If we've moved a tag from 'primary' to 'secondary', then we'll update
         // its attributes in our local store so that when we redraw the change
         // will be made.
-        if (ui.startparent.is('ol') && ui.endparent.is('ul')) {
-          app.store.getById('tags', ui.item.data('id')).pushData({
+        if (e.detail.origin.container instanceof HTMLOListElement && e.detail.destination.container instanceof HTMLUListElement) {
+          app.store.getById('tags', e.detail.item.getAttribute('data-id')).pushData({
             attributes: {
               position: null,
               isChild: false
@@ -144,6 +145,7 @@ export default class TagsPage extends Page {
         // we force a full reconstruction of the DOM.
         m.redraw.strategy('all');
         m.redraw();
-      });
+      })
+    );
   }
 }
