@@ -1,6 +1,6 @@
 export default function tagIcon(tag, attrs = {}, settings = {}) {
   const hasIcon = tag && tag.icon();
-  const useColor = settings.useColor || true;
+  const useColor = settings.useColor != null ? settings.useColor : true;
 
   attrs.className = hasIcon ? 'icon ' + tag.icon() + ' ' + (attrs.className || '') : 'icon TagIcon ' + (attrs.className || '');
 
