@@ -24,7 +24,7 @@ return [
         ->js(__DIR__.'/js/dist/forum.js')
         ->css(__DIR__.'/less/forum.less')
         ->route('/t/{slug}', 'tag', Content\Tag::class)
-        ->route('/tags', 'tags'),
+        ->route('/tags', 'tags', Content\Tags::class),
 
     (new Extend\Frontend('admin'))
         ->js(__DIR__.'/js/dist/admin.js')
