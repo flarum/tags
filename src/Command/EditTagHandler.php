@@ -9,6 +9,7 @@
 
 namespace Flarum\Tags\Command;
 
+use Flarum\Group\Permission;
 use Flarum\Tags\Event\TagWillBeSaved;
 use Flarum\Tags\TagRepository;
 use Flarum\Tags\TagValidator;
@@ -85,6 +86,10 @@ class EditTagHandler
         event(new TagWillBeSaved($tag, $actor, $data));
 
         $this->validator->assertValid($tag->getDirty());
+
+        if ($tag->isDirty('is_restricted') && ! $tag->is_restricted) {
+            Permission::where('permission', 'like', 'tag'.$tag->id.'.%')->delete();
+        }
 
         $tag->save();
 
