@@ -66,8 +66,8 @@ class Tags
     {
         $tags = collect($document->payload['resources'])->where('type', 'tags');
         $childTags = $tags->where('attributes.isChild', true);
-        $primaryTags = $tags->where('attributes.isChild', false)->where('attributes.position', '!==', NULL)->sortBy('attributes.position');
-        $secondaryTags = $tags->where('attributes.isChild', false)->where('attributes.position', '===', NULL)->sortBy('attributes.name');
+        $primaryTags = $tags->where('attributes.isChild', false)->where('attributes.position', '!==', null)->sortBy('attributes.position');
+        $secondaryTags = $tags->where('attributes.isChild', false)->where('attributes.position', '===', null)->sortBy('attributes.name');
         $defaultRoute = $this->settings->get('default_route');
 
         $document->content = $this->view->make('tags::frontend.content.tags', compact('primaryTags', 'secondaryTags', 'childTags'));
