@@ -3,10 +3,7 @@
 <div class="container">
     <h2>{{ $translator->trans('flarum-tags.forum.index.tags_link') }}</h2>
 
-    @php($primaryTags = $tags->where('attributes.isChild', false)->where('attributes.position', '!==', NULL)->sortBy('attributes.position'))
-    @php($secondaryTags = $tags->where('attributes.isChild', false)->where('attributes.position', '===', NULL)->sortBy('attributes.name'))
-
-    @foreach (array($primaryTags, $secondaryTags) as $category)
+    @foreach ([$primaryTags, $secondaryTags] as $category)
         <ul>
             @foreach ($category->pluck('attributes', 'id') as $id => $tag)
                 <li>
@@ -16,7 +13,7 @@
                         {{ $tag['name'] }}
                     </a>
 
-                    @php($children = $tags->where('attributes.isChild', true)->where('relationships.parent.data.id', $id))
+                    @php($children = $childTags->where('relationships.parent.data.id', $id))
 
                     @if (!$children->isEmpty())
                         <ul>
