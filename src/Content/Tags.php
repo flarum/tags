@@ -17,6 +17,7 @@ use Flarum\Http\UrlGenerator;
 use Flarum\Settings\SettingsRepositoryInterface;
 use Flarum\Tags\TagRepository;
 use Illuminate\Contracts\View\Factory;
+use Illuminate\Support\Arr;
 use Psr\Http\Message\ServerRequestInterface as Request;
 
 class Tags
@@ -70,7 +71,15 @@ class Tags
         $secondaryTags = $tags->where('attributes.isChild', false)->where('attributes.position', '===', null)->sortBy('attributes.name');
         $defaultRoute = $this->settings->get('default_route');
 
-        $document->content = $this->view->make('tags::frontend.content.tags', compact('primaryTags', 'secondaryTags', 'childTags'));
+        $children = $primaryTags->mapWithKeys(function ($tag) use ($childTags) {
+            $id = Arr::get($tag, 'id');
+
+            return [
+                $id => $childTags->where('relationships.parent.data.id', $id)->pluck('attributes')->sortBy('position')
+            ];
+        });
+
+        $document->content = $this->view->make('tags::frontend.content.tags', compact('primaryTags', 'secondaryTags', 'children'));
         $document->canonicalUrl = $defaultRoute === '/tags' ? $this->url->to('forum')->base() : $request->getUri()->withQuery('');
 
         return $document;

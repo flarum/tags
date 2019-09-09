@@ -13,11 +13,9 @@
                         {{ $tag['name'] }}
                     </a>
 
-                    @php($children = $childTags->where('relationships.parent.data.id', $id))
-
-                    @if (!$children->isEmpty())
+                    @if ($children->has($id))
                         <ul>
-                            @foreach ($children->sortBy('attributes.position')->pluck('attributes') as $child)
+                            @foreach ($children->get($id) as $child)
                                 <li>
                                     <a href="{{ $url->to('forum')->route('tag', [
                                                 'slug' => $child['slug']
