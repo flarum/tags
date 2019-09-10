@@ -14,11 +14,9 @@ namespace Flarum\Tags\Content;
 use Flarum\Api\Client;
 use Flarum\Api\Controller\ListDiscussionsController;
 use Flarum\Frontend\Document;
-use Flarum\Http\Exception\RouteNotFoundException;
 use Flarum\Tags\TagRepository;
 use Flarum\User\User;
 use Illuminate\Contracts\View\Factory;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Arr;
 use Psr\Http\Message\ServerRequestInterface as Request;
 
