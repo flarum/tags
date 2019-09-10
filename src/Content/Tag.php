@@ -62,12 +62,8 @@ class Tag
 
         $sortMap = $this->getSortMap();
 
-        try {
-            $tagId = $this->tags->getIdForSlug($slug);
-            $tag = $this->tags->findOrFail($tagId, $actor);
-        } catch (ModelNotFoundException $e) {
-            throw new RouteNotFoundException;
-        }
+        $tagId = $this->tags->getIdForSlug($slug);
+        $tag = $this->tags->findOrFail($tagId, $actor);
 
         $params = [
             'sort' => $sort && isset($sortMap[$sort]) ? $sortMap[$sort] : '',
