@@ -55,7 +55,7 @@ class OrderTagsController implements RequestHandlerInterface
         $tag->parent_id = optional($parent)->id;
         $tag->save();
 
-        foreach($children as $j => $child) {
+        foreach ($children as $j => $child) {
             $this->orderTag($child['id'], $j, $tag, Arr::get($child, 'children'));
         }
     }
