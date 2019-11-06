@@ -13,6 +13,7 @@ namespace Flarum\Tags\Api\Controller;
 
 use Flarum\Tags\Tag;
 use Flarum\User\AssertPermissionTrait;
+use Illuminate\Support\Arr;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
@@ -40,21 +41,22 @@ class OrderTagsController implements RequestHandlerInterface
             'parent_id' => null
         ]);
 
-        foreach ($order as $i => $parent) {
-            $parentId = array_get($parent, 'id');
-
-            Tag::where('id', $parentId)->update(['position' => $i]);
-
-            if (isset($parent['children']) && is_array($parent['children'])) {
-                foreach ($parent['children'] as $j => $childId) {
-                    Tag::where('id', $childId)->update([
-                        'position' => $j,
-                        'parent_id' => $parentId
-                    ]);
-                }
-            }
+        foreach ($order as $i => $tag) {
+            $this->orderTag(Arr::get($tag, 'id'), $i, null, Arr::get($tag, 'children'));
         }
 
         return new EmptyResponse(204);
+    }
+
+    private function orderTag(int $tagId, int $position, Tag $parent = null, array $children = [])
+    {
+        $tag = Tag::findOrFail($tagId);
+        $tag->position = $position;
+        $tag->parent_id = optional($parent)->id;
+        $tag->save();
+
+        foreach($children as $j => $child) {
+            $this->orderTag($child['id'], $j, $tag, Arr::get($child, 'children'));
+        }
     }
 }

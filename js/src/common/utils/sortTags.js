@@ -22,6 +22,11 @@ export default function sortTags(tags) {
     // so we can compare them directly.
     if (aParent === bParent) return aPos - bPos;
 
+    // If the parent of either tag is the other, move them after the childs
+    // parent.
+    else if (aParent === b || bParent === a)
+      return aParent === b ? +1 : -1;
+
     // If they are both child tags, then we will compare the positions of their
     // parents.
     else if (aParent && bParent)

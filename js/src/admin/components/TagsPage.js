@@ -20,7 +20,7 @@ function tagItem(tag) {
           onclick: () => app.modal.show(new EditTagModal({tag}))
         })}
       </div>
-      {!tag.isChild() && tag.position() !== null ? (
+      {tag.position() !== null ? (
         <ol className="TagListItem-children">
           {sortTags(app.store.all('tags'))
             .filter(child => child.parent() === tag)
@@ -85,6 +85,34 @@ export default class TagsPage extends Page {
     }).forEach(this.onSortUpdate.bind(this));
   }
 
+  sortedList(el) {
+    let that = this;
+    return el.map(function() {
+      return {
+        id: $(this).data('id'),
+        children: that.sortedList($(this).find('> .TagListItem-children > li'))
+      };
+    }).get();
+  }
+
+  saveSortedTag(tag, i, parent) {
+    parent = parent || null;
+
+    let existing = app.store.getById('tags', tag.id);
+
+    existing.pushData({
+      attributes: {
+        position: i,
+        isChild: parent !== null
+      },
+      relationships: {parent: parent}
+    });
+
+    tag.children.forEach((child, j) => {
+      this.saveSortedTag(child, j, existing);
+    });
+  }
+
   onSortUpdate(el) {
     el.addEventListener('sortupdate', (e) => {
       // If we've moved a tag from 'primary' to 'secondary', then we'll update
@@ -102,39 +130,13 @@ export default class TagsPage extends Page {
 
       // Construct an array of primary tag IDs and their children, in the same
       // order that they have been arranged in.
-      const order = this.$('.TagList--primary > li')
-        .map(function() {
-          return {
-            id: $(this).data('id'),
-            children: $(this).find('li')
-              .map(function() {
-                return $(this).data('id');
-              }).get()
-          };
-        }).get();
+      const order = this.sortedList(this.$('.TagList--primary > li'));
 
       // Now that we have an accurate representation of the order which the
       // primary tags are in, we will update the tag attributes in our local
       // store to reflect this order.
       order.forEach((tag, i) => {
-        const parent = app.store.getById('tags', tag.id);
-        parent.pushData({
-          attributes: {
-            position: i,
-            isChild: false
-          },
-          relationships: {parent: null}
-        });
-
-        tag.children.forEach((child, j) => {
-          app.store.getById('tags', child).pushData({
-            attributes: {
-              position: j,
-              isChild: true
-            },
-            relationships: {parent}
-          });
-        });
+        this.saveSortedTag(tag, i);
       });
 
       app.request({
