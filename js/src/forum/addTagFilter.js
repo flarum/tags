@@ -15,7 +15,11 @@ export default function() {
   override(IndexPage.prototype, 'hero', function(original) {
     const tag = this.currentTag();
 
-    if (tag) return TagHero.component({tag});
+    if (tag) {
+      app.setTitle(tag.name());
+      app.setDescription(tag.description());
+      return TagHero.component({tag});
+    }
 
     return original();
   });
