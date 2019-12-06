@@ -72,7 +72,8 @@ class Tag
         $apiDocument = $this->getApiDocument($actor, $params);
 
         $document->title = $tag->name;
-        $document->meta['description'] = $tag->description;
+        $description = trim(preg_replace('/\s+/', ' ', $tag->description));
+        $document->meta['description'] = mb_strlen($description) > 160 ? mb_substr($description, 0, 157) . '...' : mb_substr($description, 0, 160);
         $document->content = $this->view->make('tags::frontend.content.tag', compact('apiDocument', 'page', 'tag'));
         $document->payload['apiDocument'] = $apiDocument;
 
