@@ -52,8 +52,8 @@ class Tag extends AbstractModel
     {
         parent::boot();
 
-        static::deleted(function ($tag) {
-            Permission::where('permission', 'like', "tag{$tag->id}.%")->delete();
+        static::deleted(function (Tag $tag) {
+            $tag->deletePermissions();
         });
     }
 
@@ -162,6 +162,14 @@ class Tag extends AbstractModel
                 $query->where('user_id', $user->id);
             }
         ]);
+    }
+
+    /**
+     * Delete all permissions belonging to this tag.
+     */
+    public function deletePermissions()
+    {
+        Permission::where('permission', 'like', "tag{$this->id}.%")->delete();
     }
 
     protected static function getIdsWherePermission(User $user, string $permission, bool $condition = true): array
