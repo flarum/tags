@@ -86,10 +86,6 @@ class EditTagHandler
 
         $this->validator->assertValid($tag->getDirty());
 
-        if ($tag->isDirty('is_restricted') && ! $tag->is_restricted) {
-            $tag->deletePermissions();
-        }
-
         $tag->save();
 
         return $tag;
