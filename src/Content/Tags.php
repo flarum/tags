@@ -55,6 +55,7 @@ class Tags
      * @param Client $api
      * @param Factory $view
      * @param TagRepository $tags
+     * @param Translator $translator
      * @param SettingsRepositoryInterface $settings
      * @param UrlGenerator $url
      */
@@ -91,6 +92,7 @@ class Tags
         });
 
         $document->title = $this->translator->trans('flarum-tags.forum.meta.tags_title');
+        $document->meta['description'] = $this->translator->trans('flarum-tags.forum.meta.tags_description');
         $document->content = $this->view->make('tags::frontend.content.tags', compact('primaryTags', 'secondaryTags', 'children'));
         $document->canonicalUrl = $defaultRoute === '/tags' ? $this->url->to('forum')->base() : $request->getUri()->withQuery('');
 
