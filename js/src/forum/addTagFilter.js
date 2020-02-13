@@ -23,8 +23,16 @@ export default function() {
   extend(IndexPage.prototype, 'view', function(vdom) {
     const tag = this.currentTag();
 
+    if (tag) vdom.attrs.className += ' IndexPage--tag'+tag.id();
+  });
+
+  extend(IndexPage.prototype, 'config', function () {
+    const tag = this.currentTag();
+
     if (tag) {
-      vdom.attrs.className += ' IndexPage--tag'+tag.id();
+      app.setTitle(tag.name());
+    } else {
+      app.setTitle("");
     }
   });
 
@@ -44,8 +52,12 @@ export default function() {
 
   // Add a parameter for the IndexPage to pass on to the DiscussionList that
   // will let us filter discussions by tag.
-  extend(IndexPage.prototype, 'params', function(params) {
-    params.tags = m.route.param('tags');
+  extend(IndexPage.prototype, 'params', function (params) {
+    if (m.route.param('tags')) {
+      params.tags = m.route.param('tags');
+    } else {
+      params.tags = "";
+    }
   });
 
   // Translate that parameter into a gambit appended to the search query.

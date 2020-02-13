@@ -71,6 +71,7 @@ class Tag
 
         $apiDocument = $this->getApiDocument($actor, $params);
 
+        $document->title = $tag->name;
         $document->content = $this->view->make('tags::frontend.content.tag', compact('apiDocument', 'page', 'tag'));
         $document->payload['apiDocument'] = $apiDocument;
 
