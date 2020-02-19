@@ -35,12 +35,14 @@ export default function() {
 
     if (tag) {
       const color = tag.color();
+      const canStartDiscussion = tag.canStartDiscussion();
 
       if (color) {
         items.get('newDiscussion').props.style = {backgroundColor: color};
       }
     
-      items.get('newDiscussion').props.disabled = !tag.canStartDiscussion();
+      items.get('newDiscussion').props.disabled = !canStartDiscussion;
+      items.get('newDiscussion').props.children = app.translator.trans(canStartDiscussion ? 'core.forum.index.start_discussion_button' : 'core.forum.index.cannot_start_discussion_button');
     
     }
   });
