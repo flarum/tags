@@ -50,7 +50,7 @@ class TagGambit extends AbstractRegexGambit
             ->join('tags', 'tag_user.tag_id', '=', 'tags.id')
             ->where('tag_user.user_id', '=', $userId)
             ->where('tag_user.subscription', 'hide')
-            ->whereNotNull("tags.parent_id");
+            ->whereNotNull('tags.parent_id');
 
         if ($excludeTags !== null) {
             $query->whereNotIn('tags.slug', $excludeTags);

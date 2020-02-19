@@ -100,7 +100,7 @@ class DiscussionPolicy extends AbstractPolicy
         // visible, then we can check if the user has been granted that
         // permission for any of the discussion's tags.
         $query->whereIn('discussions.id', function ($query) use ($actor, $ability) {
-            return $query->select('discussion.id')
+            return $query->select('discussion_id')
                 ->from('discussion_tag')
                 ->whereIn('tag_id', Tag::getIdsWhereCan($actor, 'discussion.'.$ability));
         });
