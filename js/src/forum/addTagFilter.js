@@ -29,7 +29,7 @@ export default function() {
   });
 
   // If currently viewing a tag, restyle the 'new discussion' button to use
-  // the tag's color.
+  // the tag's color, and disable if the user isn't allowed to edit.
   extend(IndexPage.prototype, 'sidebarItems', function(items) {
     const tag = this.currentTag();
 
@@ -39,6 +39,9 @@ export default function() {
       if (color) {
         items.get('newDiscussion').props.style = {backgroundColor: color};
       }
+    
+      items.get('newDiscussion').props.disabled = !tag.canStartDiscussion();
+    
     }
   });
 
