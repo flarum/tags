@@ -46,7 +46,7 @@ class TagGambit extends AbstractRegexGambit
                     $query->orWhereIn('discussions.id', function ($query) {
                         $query->select('discussion_id')
                             ->from('discussion_tag');
-                    }, !$negate);
+                    }, ! $negate);
                 } else {
                     $id = $this->tags->getIdForSlug($slug);
 
