@@ -34,62 +34,29 @@ class TagGambit extends AbstractRegexGambit
     }
 
     /**
-     * Returns a single column query with all discussion IDs which belongs to a child tag the
-     * user has hidden.
-     *
-     * @param int $userId
-     * @param array|null $excludeTags
-     * @return \Illuminate\Database\Eloquent\Builder
-     */
-    private function getDiscussionIdsWithHiddenSubscriptionChildTagsQry(int $userId, array $excludeTags = null)
-    {
-        $query = $this->tags->query();
-        $query->select('discussion_tag.discussion_id')
-            ->from('discussion_tag')
-            ->join('tag_user', 'tag_user.tag_id', '=', 'discussion_tag.tag_id')
-            ->join('tags', 'tag_user.tag_id', '=', 'tags.id')
-            ->where('tag_user.user_id', '=', $userId)
-            ->where('tag_user.subscription', 'hide')
-            ->whereNotNull('tags.parent_id');
-
-        if ($excludeTags !== null) {
-            $query->whereNotIn('tags.slug', $excludeTags);
-        }
-
-        return $query;
-    }
-
-    /**
      * {@inheritdoc}
      */
     protected function conditions(AbstractSearch $search, array $matches, $negate)
     {
         $slugs = explode(',', trim($matches[1], '"'));
 
-        $actor = $search->getActor();
+        $search->getQuery()->where(function ($query) use ($slugs, $negate) {
+            foreach ($slugs as $slug) {
+                if ($slug === 'untagged') {
+                    $query->orWhereIn('discussions.id', function ($query) {
+                        $query->select('discussion_id')
+                            ->from('discussion_tag');
+                    }, !$negate);
+                } else {
+                    $id = $this->tags->getIdForSlug($slug);
 
-        $discussionsWithHiddenSubChildTags = $this->getDiscussionIdsWithHiddenSubscriptionChildTagsQry($actor->id, $slugs);
-
-        $query = $search->getQuery();
-
-        $query->whereNotIn('discussions.id', $discussionsWithHiddenSubChildTags)
-            ->where(function ($query) use ($slugs, $negate) {
-                foreach ($slugs as $slug) {
-                    if ($slug === 'untagged') {
-                        $query->orWhereIn('discussions.id', function ($query) {
-                            $query->selectRaw('discussion_id')
-                                ->from('discussion_tag');
-                        }, ! $negate);
-                    } else {
-                        $id = $this->tags->getIdForSlug($slug);
-
-                        $query->orWhereIn('discussions.id', function ($query) use ($id) {
-                            $query->selectRaw('discussion_id')
-                                ->from('discussion_tag')
-                                ->where('tag_id', $id);
-                        }, $negate);
-                    }
+                    $query->orWhereIn('discussions.id', function ($query) use ($id) {
+                        $query->select('discussion_id')
+                            ->from('discussion_tag')
+                            ->where('tag_id', $id);
+                    }, $negate);
                 }
-            });
+            }
+        });
     }
 }
