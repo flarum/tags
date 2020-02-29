@@ -26,7 +26,7 @@ export default function() {
     if (tag) vdom.attrs.className += ' IndexPage--tag'+tag.id();
   });
 
-  extend(IndexPage.prototype, 'config', function () {
+  extend(IndexPage.prototype, 'config', function() {
     const tag = this.currentTag();
 
     if (tag) {
@@ -50,7 +50,7 @@ export default function() {
 
   // Add a parameter for the IndexPage to pass on to the DiscussionList that
   // will let us filter discussions by tag.
-  extend(IndexPage.prototype, 'params', function (params) {
+  extend(IndexPage.prototype, 'params', function(params) {
     params.tags = m.route.param('tags');
   });
 
