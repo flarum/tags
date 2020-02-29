@@ -53,11 +53,7 @@ export default function() {
   // Add a parameter for the IndexPage to pass on to the DiscussionList that
   // will let us filter discussions by tag.
   extend(IndexPage.prototype, 'params', function (params) {
-    if (m.route.param('tags')) {
-      params.tags = m.route.param('tags');
-    } else {
-      params.tags = "";
-    }
+    params.tags = m.route.param('tags');
   });
 
   // Translate that parameter into a gambit appended to the search query.
