@@ -31,8 +31,6 @@ export default function() {
 
     if (tag) {
       app.setTitle(tag.name());
-    } else {
-      app.setTitle("");
     }
   });
 
