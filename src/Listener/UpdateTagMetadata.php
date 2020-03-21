@@ -20,6 +20,7 @@ use Flarum\Post\Event\Restored as PostRestored;
 use Flarum\Tags\Event\DiscussionWasTagged;
 use Flarum\Tags\Tag;
 use Illuminate\Contracts\Events\Dispatcher;
+use Illuminate\Support\Arr;
 
 class UpdateTagMetadata
 {
@@ -53,7 +54,7 @@ class UpdateTagMetadata
      */
     public function whenDiscussionWasTagged(DiscussionWasTagged $event)
     {
-        $oldTags = Tag::whereIn('id', array_pluck($event->oldTags, 'id'));
+        $oldTags = Tag::whereIn('id', array_pluck($event->oldTags, 'id'))->get();
 
         $this->updateTags($event->discussion, -1, $oldTags);
         $this->updateTags($event->discussion, 1);
