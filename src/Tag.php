@@ -108,20 +108,22 @@ class Tag extends AbstractModel
         return $this->belongsToMany(Discussion::class);
     }
 
-    public function refreshLastPostedDiscussion()
+    public function refreshLastPostedDiscussion($blacklistedIds = [])
     {
-        if ($lastPostedDiscussion = $this->discussions()->where('is_private', false)->where('hidden_at', null)->latest('last_posted_at')->first()) {
+        if ($lastPostedDiscussion = $this->discussions()->where('is_private', false)->where('hidden_at', null)->whereNotIn('id', $blacklistedIds)->latest('last_posted_at')->first()) {
             $this->setLastPostedDiscussion($lastPostedDiscussion);
+        } else {
+            $this->setLastPostedDiscussion(null);
         }
 
         return $this;
     }
 
-    public function setLastPostedDiscussion(Discussion $discussion)
+    public function setLastPostedDiscussion(Discussion $discussion = null)
     {
-        $this->last_posted_at = $discussion->last_posted_at;
-        $this->last_posted_discussion_id = $discussion->id;
-        $this->last_posted_user_id = $discussion->last_posted_user_id;
+        $this->last_posted_at = $discussion ? $discussion->last_posted_at : null;
+        $this->last_posted_discussion_id = $discussion ? $discussion->id : null;
+        $this->last_posted_user_id = $discussion ? $discussion->last_posted_user_id : null;
 
         return $this;
     }

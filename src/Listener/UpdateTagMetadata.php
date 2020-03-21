@@ -10,11 +10,13 @@
 namespace Flarum\Tags\Listener;
 
 use Flarum\Discussion\Event\Deleted;
+use Flarum\Discussion\Event\Hidden;
+use Flarum\Discussion\Event\Restored;
 use Flarum\Discussion\Event\Started;
 use Flarum\Post\Event\Deleted as PostDeleted;
-use Flarum\Post\Event\Hidden;
+use Flarum\Post\Event\Hidden as PostHidden;
 use Flarum\Post\Event\Posted;
-use Flarum\Post\Event\Restored;
+use Flarum\Post\Event\Restored as PostRestored;
 use Flarum\Tags\Event\DiscussionWasTagged;
 use Flarum\Tags\Tag;
 use Illuminate\Contracts\Events\Dispatcher;
@@ -29,11 +31,13 @@ class UpdateTagMetadata
         $events->listen(Started::class, [$this, 'whenDiscussionIsStarted']);
         $events->listen(DiscussionWasTagged::class, [$this, 'whenDiscussionWasTagged']);
         $events->listen(Deleted::class, [$this, 'whenDiscussionIsDeleted']);
+        $events->listen(Hidden::class, [$this, 'whenDiscussionIsHidden']);
+        $events->listen(Restored::class, [$this, 'whenDiscussionIsRestored']);
 
         $events->listen(Posted::class, [$this, 'whenPostIsPosted']);
         $events->listen(PostDeleted::class, [$this, 'whenPostIsDeleted']);
-        $events->listen(Hidden::class, [$this, 'whenPostIsHidden']);
-        $events->listen(Restored::class, [$this, 'whenPostIsRestored']);
+        $events->listen(PostHidden::class, [$this, 'whenPostIsHidden']);
+        $events->listen(PostRestored::class, [$this, 'whenPostIsRestored']);
     }
 
     /**
@@ -66,6 +70,23 @@ class UpdateTagMetadata
     }
 
     /**
+     * @param Hidden $event
+     */
+    public function whenDiscussionIsHidden(Hidden $event)
+    {
+        $this->updateTags($event->discussion, -1);
+    }
+
+    /**
+     * @param Restored $event
+     */
+    public function whenDiscussionIsRestored(Restored $event)
+    {
+        $this->updateTags($event->discussion, 1);
+    }
+
+
+    /**
      * @param Posted $event
      */
     public function whenPostIsPosted(Posted $event)
@@ -74,7 +95,7 @@ class UpdateTagMetadata
     }
 
     /**
-     * @param Deleted $event
+     * @param PostDeleted $event
      */
     public function whenPostIsDeleted(PostDeleted $event)
     {
@@ -82,17 +103,17 @@ class UpdateTagMetadata
     }
 
     /**
-     * @param Hidden $event
+     * @param PostHidden $event
      */
-    public function whenPostIsHidden(Hidden $event)
+    public function whenPostIsHidden(PostHidden $event)
     {
         $this->updateTags($event->post->discussion);
     }
 
     /**
-     * @param Restored $event
+     * @param PostRestored $event
      */
-    public function whenPostIsRestored(Restored $event)
+    public function whenPostIsRestored(PostRestored $event)
     {
         $this->updateTags($event->post->discussion);
     }
@@ -108,22 +129,20 @@ class UpdateTagMetadata
             return;
         }
 
-        // We do not count private discussions in tags
-        if ($discussion->is_private) {
-            return;
-        }
-
         if (! $tags) {
             $tags = $discussion->tags;
         }
 
         foreach ($tags as $tag) {
-            $tag->discussion_count += $delta;
+            // We do not count private discussions or hidden discussions in tags
+            if (!$discussion->is_private) {
+                $tag->discussion_count += $delta;
+            }
 
-            if ($discussion->last_posted_at > $tag->last_posted_at) {
+            if ($delta >= 0 && !$discussion->is_private && $discussion->hidden_at == null && ($discussion->last_posted_at > $tag->last_posted_at)) {
                 $tag->setLastPostedDiscussion($discussion);
             } elseif ($discussion->id == $tag->last_posted_discussion_id) {
-                $tag->refreshLastPostedDiscussion();
+                $tag->refreshLastPostedDiscussion([$discussion->id]);
             }
 
             $tag->save();
