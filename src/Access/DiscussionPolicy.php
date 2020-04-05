@@ -56,7 +56,7 @@ class DiscussionPolicy extends AbstractPolicy
 
             foreach ($tags as $tag) {
                 if ($tag->is_restricted) {
-                    if (!$actor->hasPermission('tag' . $tag->id . '.discussion.' . $ability)) {
+                    if (!$actor->hasPermission('tag'.$tag->id.'.discussion.'.$ability)) {
                         return false;
                     }
 
@@ -76,7 +76,7 @@ class DiscussionPolicy extends AbstractPolicy
      */
     public function find(User $actor, Builder $query)
     {
-        // Hide discussions which have tags that the user is not allowed to see.
+        // Hide discussions which have tags that the user is not allowed to see, unless an extension overrides this.
         $query
             ->whereNotIn('discussions.id', function ($query) use ($actor) {
                 return $query->select('discussion_id')
@@ -91,7 +91,7 @@ class DiscussionPolicy extends AbstractPolicy
 
         // Hide discussions with no tags if the user doesn't have that global
         // permission.
-        if (!$actor->hasPermission('viewDiscussions')) {
+        if (! $actor->hasPermission('viewDiscussions')) {
             $query->has('tags');
         }
     }
@@ -109,7 +109,7 @@ class DiscussionPolicy extends AbstractPolicy
         $query->whereIn('discussions.id', function ($query) use ($actor, $ability) {
             return $query->select('discussion_id')
                 ->from('discussion_tag')
-                ->whereIn('tag_id', Tag::getIdsWhereCan($actor, 'discussion.' . $ability));
+                ->whereIn('tag_id', Tag::getIdsWhereCan($actor, 'discussion.'.$ability));
         });
     }
 
