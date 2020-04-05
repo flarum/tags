@@ -77,17 +77,19 @@ class DiscussionPolicy extends AbstractPolicy
     public function find(User $actor, Builder $query)
     {
         // Hide discussions which have tags that the user is not allowed to see, unless an extension overrides this.
-        $query
-            ->whereNotIn('discussions.id', function ($query) use ($actor) {
-                return $query->select('discussion_id')
-                    ->from('discussion_tag')
-                    ->whereIn('tag_id', Tag::getIdsWhereCannot($actor, 'viewDiscussions'));
-            })
-            ->orWhere(function ($query) use ($actor) {
-                $this->events->dispatch(
-                    new ScopeModelVisibility($query, $actor, 'viewDiscussionsInRestrictedTags')
-                );
-            });
+        $query->where(function ($query) use ($actor) {
+            $query
+                ->whereNotIn('discussions.id', function ($query) use ($actor) {
+                    return $query->select('discussion_id')
+                        ->from('discussion_tag')
+                        ->whereIn('tag_id', Tag::getIdsWhereCannot($actor, 'viewDiscussions'));
+                })
+                ->orWhere(function ($query) use ($actor) {
+                    $this->events->dispatch(
+                        new ScopeModelVisibility($query, $actor, 'viewDiscussionsInRestrictedTags')
+                    );
+                });
+        });
 
         // Hide discussions with no tags if the user doesn't have that global
         // permission.
