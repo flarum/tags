@@ -11,6 +11,7 @@ namespace Flarum\Tags\Access;
 
 use Carbon\Carbon;
 use Flarum\Discussion\Discussion;
+use Flarum\Event\ScopeModelVisibility;
 use Flarum\Settings\SettingsRepositoryInterface;
 use Flarum\Tags\Tag;
 use Flarum\User\AbstractPolicy;
@@ -55,7 +56,7 @@ class DiscussionPolicy extends AbstractPolicy
 
             foreach ($tags as $tag) {
                 if ($tag->is_restricted) {
-                    if (! $actor->hasPermission('tag'.$tag->id.'.discussion.'.$ability)) {
+                    if (!$actor->hasPermission('tag' . $tag->id . '.discussion.' . $ability)) {
                         return false;
                     }
 
@@ -76,15 +77,21 @@ class DiscussionPolicy extends AbstractPolicy
     public function find(User $actor, Builder $query)
     {
         // Hide discussions which have tags that the user is not allowed to see.
-        $query->whereNotIn('discussions.id', function ($query) use ($actor) {
-            return $query->select('discussion_id')
-                ->from('discussion_tag')
-                ->whereIn('tag_id', Tag::getIdsWhereCannot($actor, 'viewDiscussions'));
-        });
+        $query
+            ->whereNotIn('discussions.id', function ($query) use ($actor) {
+                return $query->select('discussion_id')
+                    ->from('discussion_tag')
+                    ->whereIn('tag_id', Tag::getIdsWhereCannot($actor, 'viewDiscussions'));
+            })
+            ->orWhere(function ($query) use ($actor) {
+                $this->events->dispatch(
+                    new ScopeModelVisibility($query, $actor, 'viewDiscussionsInRestrictedTags')
+                );
+            });
 
         // Hide discussions with no tags if the user doesn't have that global
         // permission.
-        if (! $actor->hasPermission('viewDiscussions')) {
+        if (!$actor->hasPermission('viewDiscussions')) {
             $query->has('tags');
         }
     }
@@ -102,7 +109,7 @@ class DiscussionPolicy extends AbstractPolicy
         $query->whereIn('discussions.id', function ($query) use ($actor, $ability) {
             return $query->select('discussion_id')
                 ->from('discussion_tag')
-                ->whereIn('tag_id', Tag::getIdsWhereCan($actor, 'discussion.'.$ability));
+                ->whereIn('tag_id', Tag::getIdsWhereCan($actor, 'discussion.' . $ability));
         });
     }
 
@@ -119,7 +126,8 @@ class DiscussionPolicy extends AbstractPolicy
         if ($discussion->user_id == $actor->id && $actor->can('reply', $discussion)) {
             $allowEditTags = $this->settings->get('allow_tag_change');
 
-            if ($allowEditTags === '-1'
+            if (
+                $allowEditTags === '-1'
                 || ($allowEditTags === 'reply' && $discussion->participant_count <= 1)
                 || (is_numeric($allowEditTags) && $discussion->created_at->diffInMinutes(new Carbon) < $allowEditTags)
             ) {
