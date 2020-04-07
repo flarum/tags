@@ -16,6 +16,7 @@ use Flarum\Settings\SettingsRepositoryInterface;
 use Flarum\Tags\Tag;
 use Flarum\User\AbstractPolicy;
 use Flarum\User\User;
+use Illuminate\Contracts\Events\Dispatcher;
 use Illuminate\Database\Eloquent\Builder;
 
 class DiscussionPolicy extends AbstractPolicy
@@ -31,10 +32,12 @@ class DiscussionPolicy extends AbstractPolicy
     protected $settings;
 
     /**
+     * @param Dispatcher $events
      * @param SettingsRepositoryInterface $settings
      */
-    public function __construct(SettingsRepositoryInterface $settings)
+    public function __construct(Dispatcher $events, SettingsRepositoryInterface $settings)
     {
+        $this->events = $events;
         $this->settings = $settings;
     }
 
