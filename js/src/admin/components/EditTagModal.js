@@ -21,6 +21,7 @@ export default class EditTagModal extends Modal {
     this.color = m.prop(this.tag.color() || '');
     this.icon = m.prop(this.tag.icon() || '');
     this.isHidden = m.prop(this.tag.isHidden() || false);
+    this.defaultSort = m.prop(this.tag.defaultSort() || '');
   }
 
   className() {
@@ -114,7 +115,8 @@ export default class EditTagModal extends Modal {
       description: this.description(),
       color: this.color(),
       icon: this.icon(),
-      isHidden: this.isHidden()
+      isHidden: this.isHidden(),
+      defaultSort: this.defaultSort()
     };
   }
 

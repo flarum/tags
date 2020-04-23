@@ -82,6 +82,10 @@ class EditTagHandler
             $tag->is_restricted = (bool) $attributes['isRestricted'];
         }
 
+        if (isset($attributes['defaultSort'])) {
+            $tag->is_restricted = $attributes['defaultSort'];
+        }
+
         event(new TagWillBeSaved($tag, $actor, $data));
 
         $this->validator->assertValid($tag->getDirty());
