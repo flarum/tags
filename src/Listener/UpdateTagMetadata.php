@@ -20,7 +20,6 @@ use Flarum\Post\Event\Restored as PostRestored;
 use Flarum\Tags\Event\DiscussionWasTagged;
 use Flarum\Tags\Tag;
 use Illuminate\Contracts\Events\Dispatcher;
-use Illuminate\Support\Arr;
 
 class UpdateTagMetadata
 {
@@ -86,7 +85,6 @@ class UpdateTagMetadata
         $this->updateTags($event->discussion, 1);
     }
 
-
     /**
      * @param Posted $event
      */
@@ -136,11 +134,11 @@ class UpdateTagMetadata
 
         foreach ($tags as $tag) {
             // We do not count private discussions or hidden discussions in tags
-            if (!$discussion->is_private) {
+            if (! $discussion->is_private) {
                 $tag->discussion_count += $delta;
             }
 
-            if ($delta >= 0 && !$discussion->is_private && $discussion->hidden_at == null && ($discussion->last_posted_at > $tag->last_posted_at)) {
+            if ($delta >= 0 && ! $discussion->is_private && $discussion->hidden_at == null && ($discussion->last_posted_at > $tag->last_posted_at)) {
                 $tag->setLastPostedDiscussion($discussion);
             } elseif ($discussion->id == $tag->last_posted_discussion_id) {
                 $tag->refreshLastPostedDiscussion([$discussion->id]);
