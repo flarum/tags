@@ -27,6 +27,11 @@ class DiscussionPolicy extends AbstractPolicy
     protected $model = Discussion::class;
 
     /**
+     * @var Dispatcher
+     */
+    protected $events;
+
+    /**
      * @var SettingsRepositoryInterface
      */
     protected $settings;
