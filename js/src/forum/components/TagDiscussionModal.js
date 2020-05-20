@@ -148,11 +148,15 @@ export default class TagDiscussionModal extends Modal {
 
     if (tags.indexOf(this.index) === -1) this.index = tags[0];
 
+    const inputWidth = Math.max(extractText(this.getInstruction(primaryCount, secondaryCount)).length, this.filter().length);
+
     return [
       <div className="Modal-body">
         <div className="TagDiscussionModal-form">
           <div className="TagDiscussionModal-form-input">
-            <div className={'TagsInput FormControl ' + (this.focused ? 'focus' : '')}>
+            <div className={'TagsInput FormControl ' + (this.focused ? 'focus' : '')}
+              onclick={() => [].forEach.call(document.getElementsByClassName("TagsInput-input"), (element) => element.focus())}
+            >
               <span className="TagsInput-selected">
                 {this.selected.map(tag =>
                   <span className="TagsInput-tag" onclick={() => {
@@ -163,9 +167,10 @@ export default class TagDiscussionModal extends Modal {
                   </span>
                 )}
               </span>
-              <input className="FormControl"
+              <input className="FormControl TagsInput-input"
                 placeholder={extractText(this.getInstruction(primaryCount, secondaryCount))}
                 value={this.filter()}
+                style={{ width: inputWidth + 'ch' }}
                 oninput={m.withAttr('value', this.filter)}
                 onkeydown={this.navigator.navigate.bind(this.navigator)}
                 onfocus={() => this.focused = true}
