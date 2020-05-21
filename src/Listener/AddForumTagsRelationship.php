@@ -51,7 +51,6 @@ class AddForumTagsRelationship
         // assign the tags data to it using an event listener.
         if ($event->isController(ShowForumController::class)) {
             $event->data['tags'] = Tag::whereVisibleTo($event->actor)
-                ->withStateFor($event->actor)
                 ->with(['parent', 'lastPostedDiscussion'])
                 ->get();
         }

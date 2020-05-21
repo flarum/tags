@@ -57,7 +57,7 @@ class ListTagsController extends AbstractListController
         $actor = $request->getAttribute('actor');
         $include = $this->extractInclude($request);
 
-        $tags = $this->tags->whereVisibleTo($actor)->withStateFor($actor)->get();
+        $tags = $this->tags->whereVisibleTo($actor)->get();
 
         return $tags->load($include);
     }
