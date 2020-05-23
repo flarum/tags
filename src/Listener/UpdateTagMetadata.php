@@ -138,9 +138,14 @@ class UpdateTagMetadata
                 $tag->discussion_count += $delta;
             }
 
+            // If this is a new / restored discussion, it isn't private, it isn't null,
+            // and it's more recent than what we have now, set it as last posted discussion.
             if ($delta >= 0 && ! $discussion->is_private && $discussion->hidden_at == null && ($discussion->last_posted_at > $tag->last_posted_at)) {
                 $tag->setLastPostedDiscussion($discussion);
             } elseif ($discussion->id == $tag->last_posted_discussion_id) {
+                // This discussion is currently the last posted discussion, but since it didn't qualify for the above check,
+                // it should not be the last posted discussion. Therefore, we should refresh the last posted discussion,
+                // but make sure this discussion is not set so by accident, hence, we blacklist it.
                 $tag->refreshLastPostedDiscussion([$discussion->id]);
             }
 
