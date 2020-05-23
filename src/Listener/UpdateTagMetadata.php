@@ -140,7 +140,7 @@ class UpdateTagMetadata
 
             // If this is a new / restored discussion, it isn't private, it isn't null,
             // and it's more recent than what we have now, set it as last posted discussion.
-            if ($delta >= 0 && ! $discussion->is_private && $discussion->hidden_at == null && ($discussion->last_posted_at > $tag->last_posted_at)) {
+            if ($delta >= 0 && ! $discussion->is_private && $discussion->hidden_at == null && ($discussion->last_posted_at >= $tag->last_posted_at)) {
                 $tag->setLastPostedDiscussion($discussion);
             } elseif ($discussion->id == $tag->last_posted_discussion_id) {
                 // This discussion is currently the last posted discussion, but since it didn't qualify for the above check,
