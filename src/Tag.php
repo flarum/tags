@@ -110,7 +110,7 @@ class Tag extends AbstractModel
 
     public function refreshLastPostedDiscussion($blacklistedIds = [])
     {
-        if ($lastPostedDiscussion = $this->discussions()->where('is_private', false)->where('hidden_at', null)->whereNotIn('id', $blacklistedIds)->latest('last_posted_at')->first()) {
+        if ($lastPostedDiscussion = $this->discussions()->where('is_private', false)->whereNull('hidden_at')->whereNotIn('id', $blacklistedIds)->latest('last_posted_at')->first()) {
             $this->setLastPostedDiscussion($lastPostedDiscussion);
         } else {
             $this->setLastPostedDiscussion(null);
