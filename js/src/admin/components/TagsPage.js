@@ -85,6 +85,7 @@ export default class TagsPage extends Page {
               group: 'tags',
               animation: 150,
               swapThreshold: 0.65,
+			  dragClass: 'sortable-dragging',
               ghostClass: 'sortable-placeholder',
               onSort: (e) => this.onSortUpdate(e)
           })
