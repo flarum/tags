@@ -155,7 +155,7 @@ export default class TagDiscussionModal extends Modal {
         <div className="TagDiscussionModal-form">
           <div className="TagDiscussionModal-form-input">
             <div className={'TagsInput FormControl ' + (this.focused ? 'focus' : '')}
-              onclick={() => this.$('.TagsInput input').first().focus()}
+              onclick={() => this.$('.TagsInput input').focus()}
             >
               <span className="TagsInput-selected">
                 {this.selected.map(tag =>
@@ -167,7 +167,7 @@ export default class TagDiscussionModal extends Modal {
                   </span>
                 )}
               </span>
-              <input className="FormControl TagsInput-input"
+              <input className="FormControl"
                 placeholder={extractText(this.getInstruction(primaryCount, secondaryCount))}
                 value={this.filter()}
                 style={{ width: inputWidth + 'ch' }}
