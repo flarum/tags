@@ -155,7 +155,7 @@ export default class TagDiscussionModal extends Modal {
         <div className="TagDiscussionModal-form">
           <div className="TagDiscussionModal-form-input">
             <div className={'TagsInput FormControl ' + (this.focused ? 'focus' : '')}
-              onclick={() => [].forEach.call(document.getElementsByClassName("TagsInput-input"), (element) => element.focus())}
+              onclick={() => this.$('.TagsInput input').first().focus()}
             >
               <span className="TagsInput-selected">
                 {this.selected.map(tag =>
