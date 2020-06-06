@@ -108,9 +108,9 @@ class Tag extends AbstractModel
         return $this->belongsToMany(Discussion::class);
     }
 
-    public function refreshLastPostedDiscussion($blacklistedIds = [])
+    public function refreshLastPostedDiscussion()
     {
-        if ($lastPostedDiscussion = $this->discussions()->where('is_private', false)->whereNull('hidden_at')->whereNotIn('id', $blacklistedIds)->latest('last_posted_at')->first()) {
+        if ($lastPostedDiscussion = $this->discussions()->where('is_private', false)->whereNull('hidden_at')->latest('last_posted_at')->first()) {
             $this->setLastPostedDiscussion($lastPostedDiscussion);
         } else {
             $this->setLastPostedDiscussion(null);

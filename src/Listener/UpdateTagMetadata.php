@@ -106,7 +106,7 @@ class UpdateTagMetadata
      */
     public function whenPostIsHidden(PostHidden $event)
     {
-        $this->updateTags($event->post->discussion);
+        $this->updateTags($event->post->discussion, 0, null, $event->post);
     }
 
     /**
@@ -114,15 +114,16 @@ class UpdateTagMetadata
      */
     public function whenPostIsRestored(PostRestored $event)
     {
-        $this->updateTags($event->post->discussion);
+        $this->updateTags($event->post->discussion, 0, null, $event->post);
     }
 
     /**
      * @param \Flarum\Discussion\Discussion $discussion
      * @param int $delta
      * @param Tag[]|null $tags
+     * @param Post $post: This is only used when a post has been hidden
      */
-    protected function updateTags($discussion, $delta = 0, $tags = null)
+    protected function updateTags($discussion, $delta = 0, $tags = null, $post = null)
     {
         if (! $discussion) {
             return;
@@ -138,15 +139,21 @@ class UpdateTagMetadata
                 $tag->discussion_count += $delta;
             }
 
+            // If we've just hidden or restored a post, the discussion's last posted at metadata might not have updated yet.
+            // Therefore, we must refresh the last post, even though that might be repeated in the future.
+            if ($post) {
+                $discussion->refreshLastPost();
+                $discussion->save();
+            }
+
             // If this is a new / restored discussion, it isn't private, it isn't null,
             // and it's more recent than what we have now, set it as last posted discussion.
             if ($delta >= 0 && ! $discussion->is_private && $discussion->hidden_at == null && ($discussion->last_posted_at >= $tag->last_posted_at)) {
                 $tag->setLastPostedDiscussion($discussion);
             } elseif ($discussion->id == $tag->last_posted_discussion_id) {
                 // This discussion is currently the last posted discussion, but since it didn't qualify for the above check,
-                // it should not be the last posted discussion. Therefore, we should refresh the last posted discussion,
-                // but make sure this discussion is not set so by accident, hence, we blacklist it.
-                $tag->refreshLastPostedDiscussion([$discussion->id]);
+                // it should not be the last posted discussion. Therefore, we should refresh the last posted discussion..
+                $tag->refreshLastPostedDiscussion();
             }
 
             $tag->save();
