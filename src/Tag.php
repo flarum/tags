@@ -121,9 +121,9 @@ class Tag extends AbstractModel
 
     public function setLastPostedDiscussion(Discussion $discussion = null)
     {
-        $this->last_posted_at = $discussion ? $discussion->last_posted_at : null;
-        $this->last_posted_discussion_id = $discussion ? $discussion->id : null;
-        $this->last_posted_user_id = $discussion ? $discussion->last_posted_user_id : null;
+        $this->last_posted_at = optional($discussion)->last_posted_at;
+        $this->last_posted_discussion_id = optional($discussion)->id;
+        $this->last_posted_user_id = optional($discussion)->last_posted_user_id;
 
         return $this;
     }
