@@ -9,7 +9,7 @@
 
 namespace Flarum\Tags\Command;
 
-use Flarum\Tags\Event\TagWillBeDeleted;
+use Flarum\Tags\Event\Deleting;
 use Flarum\Tags\TagRepository;
 use Flarum\User\AssertPermissionTrait;
 
@@ -43,7 +43,7 @@ class DeleteTagHandler
 
         $this->assertCan($actor, 'delete', $tag);
 
-        event(new TagWillBeDeleted($tag, $actor));
+        event(new Deleting($tag, $actor));
 
         $tag->delete();
 

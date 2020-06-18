@@ -12,7 +12,7 @@ namespace Flarum\Tags\Event;
 use Flarum\Tags\Tag;
 use Flarum\User\User;
 
-class TagWillBeCreated
+class Creating
 {
     /**
      * @var Tag
