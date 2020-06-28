@@ -147,7 +147,7 @@ class UpdateTagMetadata
             if ($delta >= 0 && ! $discussion->is_private && $discussion->hidden_at == null && ($discussion->last_posted_at >= $tag->last_posted_at)) {
                 $tag->setLastPostedDiscussion($discussion);
             } elseif ($discussion->id == $tag->last_posted_discussion_id) {
-                // This is to persist the refresh made in line 136. It is here instead of there so that
+                // This is to persist refreshLastPost above. It is here instead of there so that
                 // if it's not necessary, we save a DB query.
                 if ($post) {
                     $discussion->save();
