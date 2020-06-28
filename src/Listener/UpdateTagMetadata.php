@@ -130,17 +130,16 @@ class UpdateTagMetadata
             $tags = $discussion->tags;
         }
 
+        // If we've just hidden or restored a post, the discussion's last posted at metadata might not have updated yet.
+        // Therefore, we must refresh the last post, even though that might be repeated in the future.
+        if ($post) {
+            $discussion->refreshLastPost();
+        }
+
         foreach ($tags as $tag) {
             // We do not count private discussions or hidden discussions in tags
             if (! $discussion->is_private) {
                 $tag->discussion_count += $delta;
-            }
-
-            // If we've just hidden or restored a post, the discussion's last posted at metadata might not have updated yet.
-            // Therefore, we must refresh the last post, even though that might be repeated in the future.
-            if ($post) {
-                $discussion->refreshLastPost();
-                $discussion->save();
             }
 
             // If this is a new / restored discussion, it isn't private, it isn't null,
@@ -148,6 +147,11 @@ class UpdateTagMetadata
             if ($delta >= 0 && ! $discussion->is_private && $discussion->hidden_at == null && ($discussion->last_posted_at >= $tag->last_posted_at)) {
                 $tag->setLastPostedDiscussion($discussion);
             } elseif ($discussion->id == $tag->last_posted_discussion_id) {
+                // This is to persist the refresh made in line 136. It is here instead of there so that
+                // if it's not necessary, we save a DB query.
+                if ($post) {
+                    $discussion->save();
+                }
                 // This discussion is currently the last posted discussion, but since it didn't qualify for the above check,
                 // it should not be the last posted discussion. Therefore, we should refresh the last posted discussion..
                 $tag->refreshLastPostedDiscussion();
