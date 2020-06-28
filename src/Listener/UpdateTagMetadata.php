@@ -9,6 +9,7 @@
 
 namespace Flarum\Tags\Listener;
 
+use Flarum\Discussion\Discussion;
 use Flarum\Discussion\Event\Deleted;
 use Flarum\Discussion\Event\Hidden;
 use Flarum\Discussion\Event\Restored;
@@ -123,12 +124,8 @@ class UpdateTagMetadata
      * @param Tag[]|null $tags
      * @param Post $post: This is only used when a post has been hidden
      */
-    protected function updateTags($discussion, $delta = 0, $tags = null, $post = null)
+    protected function updateTags(Discussion $discussion, $delta = 0, $tags = null, $post = null)
     {
-        if (! $discussion) {
-            return;
-        }
-
         if (! $tags) {
             $tags = $discussion->tags;
         }
