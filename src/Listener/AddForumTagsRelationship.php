@@ -47,23 +47,7 @@ class AddForumTagsRelationship
     {
         if ($event->isController(ShowForumController::class)) {
             $event->data['tags'] = Tag::query()
-                ->where(function ($query) use ($event) {
-                    $query
-                        ->where(function ($query) {
-                            $query
-                                ->whereNull('parent_id')
-                                ->whereNotNull('position');
-                        })
-                        ->orWhereIn(
-                            Tag::whereVisibleTo($event->actor)
-                                ->select('id')
-                                ->withCount('discussions')
-                                ->whereNull('parent_id')
-                                ->whereNull('position')
-                                ->orderBy('discussions_count', 'desc')
-                                ->limit(3)
-                        );
-                })
+                ->whereNull('parent_id')
                 ->whereVisibleTo($event->actor)
                 ->withStateFor($event->actor)
                 ->with(['parent', 'lastPostedDiscussion'])
