@@ -48,7 +48,8 @@ class CreateTagHandler
             array_get($data, 'attributes.description'),
             array_get($data, 'attributes.color'),
             array_get($data, 'attributes.icon'),
-            array_get($data, 'attributes.isHidden')
+            array_get($data, 'attributes.isHidden'),
+            array_get($data, 'attributes.defaultSort')
         );
 
         $parentId = array_get($data, 'relationships.parent.data.id');
