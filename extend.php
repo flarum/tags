@@ -45,6 +45,7 @@ return [
         ->get('/tags', 'tags.index', Controller\ListTagsController::class)
         ->post('/tags', 'tags.create', Controller\CreateTagController::class)
         ->post('/tags/order', 'tags.order', Controller\OrderTagsController::class)
+        ->get('/tags/{slug}', 'tags.show', Controller\ShowTagController::class)
         ->patch('/tags/{id}', 'tags.update', Controller\UpdateTagController::class)
         ->delete('/tags/{id}', 'tags.delete', Controller\DeleteTagController::class),
 

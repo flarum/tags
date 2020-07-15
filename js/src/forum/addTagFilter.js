@@ -6,10 +6,31 @@ import GlobalSearchState from 'flarum/states/GlobalSearchState';
 import TagHero from './components/TagHero';
 
 export default function() {
-  IndexPage.prototype.currentTag = function() {
-    const slug = app.search.params().tags;
+  IndexPage.prototype.currentActiveTag = null;
 
-    if (slug) return app.store.getBy('tags', 'slug', slug);
+  IndexPage.prototype.currentTag = function() {
+    if (this.currentActiveTag) {
+      return this.currentActiveTag;
+    }
+
+    const slug = this.params().tags;
+    let tag = null;
+
+    if (slug) {
+      tag = app.store.getBy('tags', 'slug', slug);
+    }
+
+    if (slug && (!tag || !tag.children())) {
+      app.store.find('tags', slug, {include: 'children'}).then(() => {
+        this.currentActiveTag = app.store.getBy('tags', 'slug', slug);
+
+        m.redraw()
+      });
+    }
+
+    if (tag) {
+      this.currentActiveTag = tag;
+    }
   };
 
   // If currently viewing a tag, insert a tag hero at the top of the view.
