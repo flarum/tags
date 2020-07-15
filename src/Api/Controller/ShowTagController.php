@@ -1,5 +1,12 @@
 <?php
 
+/*
+ * This file is part of Flarum.
+ *
+ * For detailed copyright and license information, please view the
+ * LICENSE file that was distributed with this source code.
+ */
+
 namespace Flarum\Tags\Api\Controller;
 
 use Flarum\Api\Controller\AbstractShowController;
@@ -24,7 +31,7 @@ class ShowTagController extends AbstractShowController
     }
 
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
     protected function data(ServerRequestInterface $request, Document $document)
     {
