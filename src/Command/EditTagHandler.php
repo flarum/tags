@@ -47,7 +47,7 @@ class EditTagHandler
 
         $tag = $this->tags->findOrFail($command->tagId, $actor);
 
-        $actor->can('edit', $tag);
+        $actor->assertCan('edit', $tag);
 
         $attributes = array_get($data, 'attributes', []);
 

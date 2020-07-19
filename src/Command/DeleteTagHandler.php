@@ -38,7 +38,7 @@ class DeleteTagHandler
 
         $tag = $this->tags->findOrFail($command->tagId, $actor);
 
-        $actor->can('delete', $tag);
+        $actor->assertCan('delete', $tag);
 
         event(new Deleting($tag, $actor));
 

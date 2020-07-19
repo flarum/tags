@@ -37,7 +37,7 @@ class CreateTagHandler
         $actor = $command->actor;
         $data = $command->data;
 
-        $actor->can('createTag');
+        $actor->assertCan('createTag');
 
         $tag = Tag::build(
             array_get($data, 'attributes.name'),

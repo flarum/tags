@@ -23,7 +23,7 @@ class OrderTagsController implements RequestHandlerInterface
      */
     public function handle(ServerRequestInterface $request): ResponseInterface
     {
-        $request->getAttribute('actor')->isAdmin();
+        $request->getAttribute('actor')->assertAdmin();
 
         $order = array_get($request->getParsedBody(), 'order');
 
