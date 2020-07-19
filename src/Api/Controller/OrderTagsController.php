@@ -17,7 +17,6 @@ use Psr\Http\Server\RequestHandlerInterface;
 
 class OrderTagsController implements RequestHandlerInterface
 {
-
     /**
      * {@inheritdoc}
      */
