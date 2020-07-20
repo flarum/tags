@@ -13,7 +13,10 @@ use Flarum\Api\Client;
 use Flarum\Frontend\Document;
 use Flarum\Http\UrlGenerator;
 use Flarum\Settings\SettingsRepositoryInterface;
+use Flarum\Tags\Api\Controller\ListTagsController;
+use Flarum\Tags\Api\Controller\ShowTagController;
 use Flarum\Tags\TagRepository;
+use Flarum\User\User;
 use Illuminate\Contracts\Translation\Translator;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Support\Arr;
@@ -77,7 +80,9 @@ class Tags
 
     public function __invoke(Document $document, Request $request)
     {
-        $tags = collect($document->payload['resources'])->where('type', 'tags');
+        $tags = Arr::get($this->getTagsDocument($request->getAttribute('actor')), 'data', []);
+        $tags = collect($tags);
+
         $childTags = $tags->where('attributes.isChild', true);
         $primaryTags = $tags->where('attributes.isChild', false)->where('attributes.position', '!==', null)->sortBy('attributes.position');
         $secondaryTags = $tags->where('attributes.isChild', false)->where('attributes.position', '===', null)->sortBy('attributes.name');
@@ -97,5 +102,10 @@ class Tags
         $document->canonicalUrl = $this->url->to('forum')->base().($defaultRoute === '/tags' ? '' : $request->getUri()->getPath());
 
         return $document;
+    }
+
+    private function getTagsDocument(User $actor)
+    {
+        return json_decode($this->api->send(ListTagsController::class, $actor)->getBody(), true);
     }
 }

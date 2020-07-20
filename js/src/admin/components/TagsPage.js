@@ -40,6 +40,16 @@ export default class TagsPage extends ExtensionPage {
     // we force a full reconstruction of the DOM by changing the key, which
     // makes mithril completely re-render the component on redraw.
     this.forcedRefreshKey = 0;
+
+    this.tags = [];
+
+    app.store.find('tags').then(() => {
+      let tags = app.store.all('tags').filter(tag => !tag.parent());
+
+      this.tags = sortTags(tags);
+
+      m.redraw();
+    });
   }
 
   content() {
@@ -49,6 +59,7 @@ export default class TagsPage extends ExtensionPage {
     const minSecondaryTags = this.setting('flarum-tags.min_secondary_tags', 0);
     const maxSecondaryTags = this.setting('flarum-tags.max_secondary_tags', 0);
 
+  view() {
     return (
       <div className="TagsContent">
         <div className="TagsContent-list">
@@ -56,8 +67,8 @@ export default class TagsPage extends ExtensionPage {
             <div className="TagGroup">
               <label>{app.translator.trans('flarum-tags.admin.tags.primary_heading')}</label>
               <ol className="TagList TagList--primary">
-                {sortTags(app.store.all('tags'))
-                  .filter((tag) => tag.position() !== null && !tag.isChild())
+                {this.tags
+                  .filter(tag => tag.position() !== null && !tag.isChild())
                   .map(tagItem)}
               </ol>
               {Button.component(
@@ -73,9 +84,8 @@ export default class TagsPage extends ExtensionPage {
             <div className="TagGroup TagGroup--secondary">
               <label>{app.translator.trans('flarum-tags.admin.tags.secondary_heading')}</label>
               <ul className="TagList">
-                {app.store
-                  .all('tags')
-                  .filter((tag) => tag.position() === null)
+                {this.tags
+                  .filter(tag => tag.position() === null)
                   .sort((a, b) => a.name().localeCompare(b.name()))
                   .map(tagItem)}
               </ul>

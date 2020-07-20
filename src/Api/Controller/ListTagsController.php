@@ -27,14 +27,14 @@ class ListTagsController extends AbstractListController
      * {@inheritdoc}
      */
     public $include = [
-        'parent',
+        'parent'
     ];
 
     /**
      * {@inheritdoc}
      */
     public $optionalInclude = [
-        'lastPostedDiscussion',
+        'lastPostedDiscussion'
     ];
 
     /**

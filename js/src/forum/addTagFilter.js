@@ -24,7 +24,7 @@ export default function() {
       app.store.find('tags', slug, {include: 'children'}).then(() => {
         this.currentActiveTag = app.store.getBy('tags', 'slug', slug);
 
-        m.redraw()
+        m.redraw();
       });
     }
 
