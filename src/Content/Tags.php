@@ -14,7 +14,6 @@ use Flarum\Frontend\Document;
 use Flarum\Http\UrlGenerator;
 use Flarum\Settings\SettingsRepositoryInterface;
 use Flarum\Tags\Api\Controller\ListTagsController;
-use Flarum\Tags\Api\Controller\ShowTagController;
 use Flarum\Tags\TagRepository;
 use Flarum\User\User;
 use Illuminate\Contracts\Translation\Translator;
