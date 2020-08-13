@@ -13,6 +13,8 @@ export default function () {
       const parent = tag.parent();
       const tags = parent ? [parent, tag] : [tag];
       promise.then(composer => composer.fields.tags = tags);
+    } else {
+      app.composer.fields.tags = [];
     }
   });
 
