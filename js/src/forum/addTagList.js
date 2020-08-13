@@ -10,12 +10,11 @@ import sortTags from '../common/utils/sortTags';
 export default function() {
   // Add a link to the tags page, as well as a list of all the tags,
   // to the index page's sidebar.
-  extend(IndexPage.prototype, 'navItems', function(items) {
-    items.add('tags', LinkButton.component({
-      icon: 'fas fa-th-large',
-      children: app.translator.trans('flarum-tags.forum.index.tags_link'),
-      href: app.route('tags')
-    }), -10);
+  extend(IndexPage.prototype, 'navItems', function (items) {
+    items.add('tags', <LinkButton icon="fas fa-th-large" href={app.route('tags')}>
+      {app.translator.trans('flarum-tags.forum.index.tags_link')}
+    </LinkButton>
+      , -10);
 
     if (app.current.matches(TagsPage)) return;
 
@@ -32,7 +31,7 @@ export default function() {
         active = currentTag.parent() === tag;
       }
 
-      items.add('tag' + tag.id(), TagLinkButton.component({tag, params, active}), -14);
+      items.add('tag' + tag.id(), <TagLinkButton hello="there" model={tag} params={params} active={active} />, -14);
     };
 
     sortTags(tags)
@@ -46,10 +45,9 @@ export default function() {
     more.splice(0, 3).forEach(addTag);
 
     if (more.length) {
-      items.add('moreTags', LinkButton.component({
-        children: app.translator.trans('flarum-tags.forum.index.more_link'),
-        href: app.route('tags')
-      }), -16);
+      items.add('moreTags', <LinkButton href={app.route('tags')}>
+        {app.translator.trans('flarum-tags.forum.index.more_link')}
+      </LinkButton>, -16)
     }
   });
 }
