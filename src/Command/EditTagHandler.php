@@ -9,7 +9,7 @@
 
 namespace Flarum\Tags\Command;
 
-use Flarum\Tags\Event\TagWillBeSaved;
+use Flarum\Tags\Event\Saving;
 use Flarum\Tags\TagRepository;
 use Flarum\Tags\TagValidator;
 use Flarum\User\AssertPermissionTrait;
@@ -82,7 +82,7 @@ class EditTagHandler
             $tag->is_restricted = (bool) $attributes['isRestricted'];
         }
 
-        event(new TagWillBeSaved($tag, $actor, $data));
+        event(new Saving($tag, $actor, $data));
 
         $this->validator->assertValid($tag->getDirty());
 
