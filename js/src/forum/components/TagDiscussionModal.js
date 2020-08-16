@@ -205,12 +205,12 @@ export default class TagDiscussionModal extends Modal {
                 <span className="SelectTagListItem-name">
                   {highlight(tag.name(), filter)}
                 </span>
-                {!!tag.description()
-                  && (
+                {tag.description()
+                  ? (
                     <span className="SelectTagListItem-description">
                       {tag.description()}
                     </span>
-                  )}
+                  ) : ''}
               </li>
             ))}
         </ul>
