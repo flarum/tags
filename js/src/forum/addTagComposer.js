@@ -33,7 +33,7 @@ export default function () {
   // Add a tag-selection menu to the discussion composer's header, after the
   // title.
   extend(DiscussionComposer.prototype, 'headerItems', function (items) {
-    const tags = this.composer.fields.tags;
+    const tags = this.composer.fields.tags || [];
 
     items.add('tags', (
       <a className="DiscussionComposer-changeTags" onclick={this.chooseTags.bind(this)}>
