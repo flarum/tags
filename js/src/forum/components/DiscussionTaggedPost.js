@@ -2,7 +2,7 @@ import EventPost from 'flarum/components/EventPost';
 import tagsLabel from '../../common/helpers/tagsLabel';
 
 export default class DiscussionTaggedPost extends EventPost {
-  initAttrs(attrs) {
+  static initAttrs(attrs) {
     super.initAttrs(attrs);
 
     const oldTags = attrs.post.content()[0];

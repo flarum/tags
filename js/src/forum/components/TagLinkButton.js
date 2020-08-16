@@ -24,7 +24,7 @@ export default class TagLinkButton extends LinkButton {
     );
   }
 
-  initAttrs(attrs) {
+  static initAttrs(attrs) {
     super.initAttrs(attrs);
 
     const tag = attrs.model;
