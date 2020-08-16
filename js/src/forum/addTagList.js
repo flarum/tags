@@ -31,7 +31,7 @@ export default function() {
         active = currentTag.parent() === tag;
       }
 
-      items.add('tag' + tag.id(), <TagLinkButton hello="there" model={tag} params={params} active={active} />, -14);
+      items.add('tag' + tag.id(), TagLinkButton.component({model: tag, params, active}), -14);
     };
 
     sortTags(tags)
