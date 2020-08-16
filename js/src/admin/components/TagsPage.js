@@ -35,7 +35,11 @@ export default class TagsPage extends Page {
   oninit(vnode) {
     super.oninit(vnode);
 
-    this.key = 0;
+    // A regular redraw won't work here, because sortable has mucked around
+    // with the DOM which will confuse Mithril's diffing algorithm. Instead
+    // we force a full reconstruction of the DOM by changing the key, which
+    // makes mithril completely re-render the component on redraw.
+    this.forcedRefreshKey = 0;
   }
 
   view() {
@@ -58,7 +62,7 @@ export default class TagsPage extends Page {
           </div>
         </div>
         <div className="TagsPage-list">
-          <div className="container" key={this.key} oncreate={this.onListOnCreate.bind(this)}>
+          <div className="container" key={this.forcedRefreshKey} oncreate={this.onListOnCreate.bind(this)}>
             <div className="TagGroup">
               <label>{app.translator.trans('flarum-tags.admin.tags.primary_heading')}</label>
               <ol className="TagList TagList--primary">
@@ -153,11 +157,7 @@ export default class TagsPage extends Page {
       body: { order }
     });
 
-    // A regular redraw won't work here, because sortable has mucked around
-    // with the DOM which will confuse Mithril's diffing algorithm. Instead
-    // we force a full reconstruction of the DOM by changing the key, which
-    // makes mithril completely re-render the component on redraw.
-    this.key++;
+    this.forcedRefreshKey++;
     m.redraw();
   }
 }
