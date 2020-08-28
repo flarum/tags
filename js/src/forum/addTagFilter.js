@@ -27,13 +27,11 @@ export default function() {
     if (tag) vdom.attrs.className += ' IndexPage--tag'+tag.id();
   });
 
-  override(IndexPage.prototype, 'setTitle', function(original) {
+  extend(IndexPage.prototype, 'setTitle', function() {
     const tag = this.currentTag();
 
     if (tag) {
       app.setTitle(tag.name());
-    } else {
-      original();
     }
   });
 
