@@ -17,7 +17,7 @@ function tagItem(tag) {
         {Button.component({
           className: 'Button Button--link',
           icon: 'fas fa-pencil-alt',
-          onclick: () => app.modal.show(EditTagModal, { tag })
+          onclick: () => app.modal.show(EditTagModal, { model: tag })
         })}
       </div>
       {!tag.isChild() && tag.position() !== null ? (

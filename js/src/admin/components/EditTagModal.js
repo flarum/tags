@@ -13,7 +13,7 @@ export default class EditTagModal extends Modal {
   oninit(vnode) {
     super.oninit(vnode);
 
-    this.tag = this.attrs.tag || app.store.createRecord('tags');
+    this.tag = this.attrs.model || app.store.createRecord('tags');
 
     this.name = m.stream(this.tag.name() || '');
     this.slug = m.stream(this.tag.slug() || '');
