@@ -22,7 +22,7 @@ export default function () {
   DiscussionComposer.prototype.tags = [];
   DiscussionComposer.prototype.chooseTags = function () {
     app.modal.show(TagDiscussionModal, {
-      selectedTags: this.composer.fields.tags.slice(0),
+      selectedTags: (this.composer.fields.tags || []).slice(0),
       onsubmit: tags => {
         this.composer.fields.tags = tags;
         this.$('textarea').focus();
