@@ -45,7 +45,7 @@ export default function () {
   });
 
   override(DiscussionComposer.prototype, 'onsubmit', function (original) {
-    const chosenTags = this.composer.fields.tags;
+    const chosenTags = this.composer.fields.tags || [];
     const chosenPrimaryTags = chosenTags.filter(tag => tag.position() !== null && !tag.isChild());
     const chosenSecondaryTags = chosenTags.filter(tag => tag.position() === null);
     if (!chosenTags.length
