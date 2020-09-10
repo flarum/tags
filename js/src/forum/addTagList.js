@@ -31,7 +31,12 @@ export default function() {
         active = currentTag.parent() === tag;
       }
 
-      items.add('tag' + tag.id(), TagLinkButton.component({model: tag, params, active}), -14);
+      // tag.name() is passed here as children even though it isn't used directly
+      // because when we need to get the active child in SelectDropdown, we need to
+      // use its children to populate the dropdown. The problem here is that `view`
+      // on TagLinkButton is only called AFTER SelectDropdown, so no children are available
+      // for SelectDropdown to use at the time.
+      items.add('tag' + tag.id(), TagLinkButton.component({model: tag, params, active}, tag?.name()), -14);
     };
 
     sortTags(tags)
