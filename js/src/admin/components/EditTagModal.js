@@ -125,10 +125,7 @@ export default class EditTagModal extends Modal {
 
     this.tag.save(this.submitData()).then(
       () => this.hide(),
-      response => {
-        this.loading = false;
-        this.handleErrors(response);
-      }
+      () => this.loading = false
     );
   }
 
