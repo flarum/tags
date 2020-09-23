@@ -123,6 +123,8 @@ export default class EditTagModal extends Modal {
 
     this.loading = true;
 
+    // Errors aren't passed to the modal onerror handler here. 
+    // This is done for better error visibility on smaller screen heights.
     this.tag.save(this.submitData()).then(
       () => this.hide(),
       () => this.loading = false
