@@ -14,12 +14,15 @@ use Flarum\Foundation\ValidationException;
 use Flarum\Settings\SettingsRepositoryInterface;
 use Flarum\Tags\Event\DiscussionWasTagged;
 use Flarum\Tags\Tag;
+use Flarum\User\AssertPermissionTrait;
 use Flarum\User\Exception\PermissionDeniedException;
 use Illuminate\Contracts\Validation\Factory;
 use Symfony\Component\Translation\TranslatorInterface;
 
 class SaveTagsToDatabase
 {
+    use AssertPermissionTrait;
+
     /**
      * @var SettingsRepositoryInterface
      */
@@ -60,7 +63,7 @@ class SaveTagsToDatabase
         // TODO: clean up, prevent discussion from being created without tags
         if (isset($event->data['relationships']['tags']['data'])) {
             if ($discussion->exists) {
-                $actor->assertCan('tag', $discussion);
+                $this->assertCan($actor, 'tag', $discussion);
             }
 
             $linkage = (array) $event->data['relationships']['tags']['data'];
