@@ -48,7 +48,7 @@ export default function() {
         items.get('newDiscussion').attrs.style = {backgroundColor: color};
       }
 
-      items.get('newDiscussion').attrs.disabled = !canStartDiscussion;
+      items.get('newDiscussion').attrs.disabled = !canStartDiscussion || !app.session.user;
       items.get('newDiscussion').children = app.translator.trans(canStartDiscussion ? 'core.forum.index.start_discussion_button' : 'core.forum.index.cannot_start_discussion_button');
     }
   });
