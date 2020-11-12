@@ -22,6 +22,10 @@
         },
         "flarum-extension": {
             "title": "Tags",
+	    "category": "feature",
+            "info": {
+                "donate": "https://flarum.org/donate/"
+            },
             "icon": {
                 "name": "fas fa-tags",
                 "backgroundColor": "#F28326",
