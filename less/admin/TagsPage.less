@@ -1,34 +1,26 @@
-.TagsPage-header {
-  background: @control-bg;
+.TagsContent-footer {
   color: @control-color;
   padding: 20px 0;
 
-  .container {
-    max-width: 600px;
-  }
   p {
-    margin-bottom: 20px;
-  }
-  .Button {
-    margin-right: 10px;
+    margin-top: 10px;
   }
 }
-.TagsPage-list {
-  padding: 20px 0;
+.TagsContent-list {
+  padding: 20px 0 0;
 
-  .container {
-    max-width: 600px;
-  }
 }
 .TagList, .TagList ol {
   list-style: none;
-  padding: 10px 0;
-  margin: 0;
+  padding: 0;
   color: @muted-color;
   font-size: 13px;
 
   > li {
+    display: inline-block;
+    max-height: 40px;
     cursor: move;
+    width: 100%;
   }
 
   .TagIcon, .icon {
@@ -36,8 +28,9 @@
   }
 }
 .TagListItem-info {
-  padding: 5px 10px;
   border-radius: @border-radius;
+  padding: 5px;
+  max-width: max-content;
 
   &:hover {
     background: @control-bg;
@@ -46,7 +39,7 @@
   .Button {
     float: right;
     visibility: hidden;
-    margin: -8px -10px -8px 10px;
+    margin: -8px -16px -8px 16px;
   }
 }
 li:not(.sortable-dragging) > .TagListItem-info:hover > .Button {
@@ -56,7 +49,7 @@ li:not(.sortable-dragging) > .TagListItem-info:hover > .Button {
   font-size: 16px;
 
   > .sortable-placeholder {
-    height: 34px;
+    height: 38px;
     margin-bottom: 10px;
   }
 }
@@ -72,19 +65,65 @@ li:not(.sortable-dragging) > .TagListItem-info:hover > .Button {
 .sortable-placeholder {
   border: 2px dashed @control-bg;
   border-radius: @border-radius;
-  height: 29px;
+  height: 34px;
+  max-width: max-content;
 }
 
-.TagGroup {
-  padding-left: 150px;
+.SettingsGroups {
+  display: flex;
+  column-count: 3;
+  column-gap: 30px;
+  flex-wrap: wrap;
 
-  &:first-child {
-    border-bottom: 2px solid @control-bg;
+  .Form {
+    min-width: 300px;
+    > label {
+      margin-bottom: 10px;
+    }
   }
-  > label {
-    margin-left: -150px;
-    float: left;
-    font-weight: bold;
-    margin-top: 14px;
+
+  .TagGroup, .Form {
+    display: inline-grid;
+    padding: 10px 20px;
+    min-height: 20vh;
+    max-width: 400px;
+    grid-template-rows: min-content;
+    border: 1px solid @control-bg;
+    border-radius: @border-radius;
+    flex: 1 1 160px;
+
+    @media (max-width: 1209px) {
+        margin-bottom: 20px;
+    }
+
+
+    > ol {
+      > li {
+        margin-top: 8px;
+
+        .Button {
+          float: right;
+          visibility: hidden;
+          margin: -8px -16px -8px 16px;
+        }
+      }
+    }
+
+    .TagList-button {
+      background: none;
+      border: 1px dashed @control-bg;
+      height: 40px;
+      margin: auto auto 0 0;
+    }
+
+    > label {
+      float: left;
+      font-weight: bold;
+      color: @muted-color;
+    }
+  }
+
+  .TagGroup--secondary {
+    max-width: 250px;
   }
 }
