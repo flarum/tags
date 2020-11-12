@@ -16,6 +16,7 @@ export default class EditTagModal extends Modal {
 
     this.tag = this.attrs.model || app.store.createRecord('tags');
 
+    this.primary = Stream(this.attrs.primary || false);
     this.name = Stream(this.tag.name() || '');
     this.slug = Stream(this.tag.slug() || '');
     this.description = Stream(this.tag.description() || '');
@@ -114,7 +115,8 @@ export default class EditTagModal extends Modal {
       description: this.description(),
       color: this.color(),
       icon: this.icon(),
-      isHidden: this.isHidden()
+      isHidden: this.isHidden(),
+      primary: this.primary()
     };
   }
 
