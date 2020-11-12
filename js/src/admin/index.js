@@ -1,14 +1,17 @@
-import Tag from '../common/models/Tag';
-import addTagsPermissionScope from './addTagsPermissionScope';
-import addTagPermission from './addTagPermission';
-import addTagsHomePageOption from './addTagsHomePageOption';
-import addTagChangePermission from './addTagChangePermission';
+import Tag from "../common/models/Tag";
+import addTagsPermissionScope from "./addTagsPermissionScope";
+import addTagPermission from "./addTagPermission";
+import addTagsHomePageOption from "./addTagsHomePageOption";
+import addTagChangePermission from "./addTagChangePermission";
 import TagsPage from "./components/TagsPage";
 
-app.initializers.add('flarum-tags', app => {
+app.initializers.add("flarum-tags", (app) => {
   app.store.models.tags = Tag;
 
-  app.routes['flarum-tags'] = {path: '/extension/flarum-tags', component: TagsPage};
+  app.routes["flarum-tags"] = {
+    path: "/extension/flarum-tags",
+    component: TagsPage,
+  };
 
   addTagsPermissionScope();
   addTagPermission();
@@ -16,9 +19,8 @@ app.initializers.add('flarum-tags', app => {
   addTagChangePermission();
 });
 
-
 // Expose compat API
-import tagsCompat from './compat';
-import { compat } from '@flarum/core/admin';
+import tagsCompat from "./compat";
+import { compat } from "@flarum/core/admin";
 
 Object.assign(compat, tagsCompat);

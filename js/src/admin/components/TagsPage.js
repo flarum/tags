@@ -1,34 +1,35 @@
-import sortable from 'sortablejs';
+import sortable from "sortablejs";
 
-import Page from 'flarum/components/Page';
+import Page from "flarum/components/Page";
 import ExtensionPage from "flarum/components/ExtensionPage";
-import Button from 'flarum/components/Button';
-import withAttr from 'flarum/utils/withAttr';
+import Button from "flarum/components/Button";
+import withAttr from "flarum/utils/withAttr";
 
-import EditTagModal from './EditTagModal';
-import TagSettingsModal from './TagSettingsModal';
-import tagIcon from '../../common/helpers/tagIcon';
-import sortTags from '../../common/utils/sortTags';
+import EditTagModal from "./EditTagModal";
+import tagIcon from "../../common/helpers/tagIcon";
+import sortTags from "../../common/utils/sortTags";
 
 function tagItem(tag) {
   return (
-    <li data-id={tag.id()} style={{color: tag.color()}}>
+    <li data-id={tag.id()} style={{ color: tag.color() }}>
       <div className="TagListItem-info">
         {tagIcon(tag)}
         <span className="TagListItem-name">{tag.name()}</span>
         {Button.component({
-          className: 'Button Button--link',
-          icon: 'fas fa-pencil-alt',
-          onclick: () => app.modal.show(EditTagModal, {model: tag})
+          className: "Button Button--link",
+          icon: "fas fa-pencil-alt",
+          onclick: () => app.modal.show(EditTagModal, { model: tag }),
         })}
       </div>
       {!tag.isChild() && tag.position() !== null ? (
         <ol className="TagListItem-children TagList">
-          {sortTags(app.store.all('tags'))
-            .filter(child => child.parent() === tag)
+          {sortTags(app.store.all("tags"))
+            .filter((child) => child.parent() === tag)
             .map(tagItem)}
         </ol>
-      ) : ''}
+      ) : (
+        ""
+      )}
     </li>
   );
 }
@@ -45,89 +46,156 @@ export default class TagsPage extends ExtensionPage {
   }
 
   content() {
-    const minPrimaryTags = this.setting('flarum-tags.min_primary_tags', 0);
-    const maxPrimaryTags = this.setting('flarum-tags.max_primary_tags', 0);
+    const minPrimaryTags = this.setting("flarum-tags.min_primary_tags", 0);
+    const maxPrimaryTags = this.setting("flarum-tags.max_primary_tags", 0);
 
-    const minSecondaryTags = this.setting('flarum-tags.min_secondary_tags', 0);
-    const maxSecondaryTags = this.setting('flarum-tags.max_secondary_tags', 0);
+    const minSecondaryTags = this.setting("flarum-tags.min_secondary_tags", 0);
+    const maxSecondaryTags = this.setting("flarum-tags.max_secondary_tags", 0);
 
     return (
       <div className="TagsContent">
         <div className="TagsContent-list">
-          <div className="container" key={this.forcedRefreshKey} oncreate={this.onListOnCreate.bind(this)}>
+          <div
+            className="container"
+            key={this.forcedRefreshKey}
+            oncreate={this.onListOnCreate.bind(this)}
+          >
             <div className="SettingsGroups">
               <div className="TagGroup">
-                <label>{app.translator.trans('flarum-tags.admin.tags.primary_heading')}</label>
+                <label>
+                  {app.translator.trans(
+                    "flarum-tags.admin.tags.primary_heading"
+                  )}
+                </label>
                 <ol className="TagList TagList--primary">
-                  {sortTags(app.store.all('tags'))
-                    .filter(tag => tag.position() !== null && !tag.isChild())
+                  {sortTags(app.store.all("tags"))
+                    .filter((tag) => tag.position() !== null && !tag.isChild())
                     .map(tagItem)}
                 </ol>
-                {Button.component({
-                  className: 'Button TagList-button',
-                  icon: 'fas fa-plus',
-                  onclick: () => app.modal.show(EditTagModal, {primary: true})
-                }, app.translator.trans('flarum-tags.admin.tags.create_primary_tag_button'))}
+                {Button.component(
+                  {
+                    className: "Button TagList-button",
+                    icon: "fas fa-plus",
+                    onclick: () =>
+                      app.modal.show(EditTagModal, { primary: true }),
+                  },
+                  app.translator.trans(
+                    "flarum-tags.admin.tags.create_primary_tag_button"
+                  )
+                )}
               </div>
 
               <div className="TagGroup TagGroup--secondary">
-                <label>{app.translator.trans('flarum-tags.admin.tags.secondary_heading')}</label>
+                <label>
+                  {app.translator.trans(
+                    "flarum-tags.admin.tags.secondary_heading"
+                  )}
+                </label>
                 <ul className="TagList">
-                  {app.store.all('tags')
-                    .filter(tag => tag.position() === null)
+                  {app.store
+                    .all("tags")
+                    .filter((tag) => tag.position() === null)
                     .sort((a, b) => a.name().localeCompare(b.name()))
                     .map(tagItem)}
                 </ul>
-                {Button.component({
-                  className: 'Button TagList-button',
-                  icon: 'fas fa-plus',
-                  onclick: () => app.modal.show(EditTagModal, {primary: false})
-                }, app.translator.trans('flarum-tags.admin.tags.create_secondary_tag_button'))}
+                {Button.component(
+                  {
+                    className: "Button TagList-button",
+                    icon: "fas fa-plus",
+                    onclick: () =>
+                      app.modal.show(EditTagModal, { primary: false }),
+                  },
+                  app.translator.trans(
+                    "flarum-tags.admin.tags.create_secondary_tag_button"
+                  )
+                )}
               </div>
               <div className="Form">
-                <label>{app.translator.trans('flarum-tags.admin.tags.settings_heading')}</label>
+                <label>
+                  {app.translator.trans(
+                    "flarum-tags.admin.tags.settings_heading"
+                  )}
+                </label>
                 <div className="Form-group">
-                  <label>{app.translator.trans('flarum-tags.admin.tag_settings.required_primary_heading')}</label>
+                  <label>
+                    {app.translator.trans(
+                      "flarum-tags.admin.tag_settings.required_primary_heading"
+                    )}
+                  </label>
                   <div className="helpText">
-                    {app.translator.trans('flarum-tags.admin.tag_settings.required_primary_text')}
+                    {app.translator.trans(
+                      "flarum-tags.admin.tag_settings.required_primary_text"
+                    )}
                   </div>
-                  <div className="TagSettingsModal-rangeInput">
-                    <input className="FormControl"
-                           type="number"
-                           min="0"
-                           value={minPrimaryTags()}
-                           onInput={withAttr('value', this.setMinTags.bind(this, minPrimaryTags, maxPrimaryTags))}/>
-                    {app.translator.trans('flarum-tags.admin.tag_settings.range_separator_text')}
-                    <input className="FormControl"
-                           type="number"
-                           min={minPrimaryTags()}
-                           bidi={maxPrimaryTags}/>
+                  <div className="TagSettings-rangeInput">
+                    <input
+                      className="FormControl"
+                      type="number"
+                      min="0"
+                      value={minPrimaryTags()}
+                      onInput={withAttr(
+                        "value",
+                        this.setMinTags.bind(
+                          this,
+                          minPrimaryTags,
+                          maxPrimaryTags
+                        )
+                      )}
+                    />
+                    {app.translator.trans(
+                      "flarum-tags.admin.tag_settings.range_separator_text"
+                    )}
+                    <input
+                      className="FormControl"
+                      type="number"
+                      min={minPrimaryTags()}
+                      bidi={maxPrimaryTags}
+                    />
                   </div>
                 </div>
 
                 <div className="Form-group">
-                  <label>{app.translator.trans('flarum-tags.admin.tag_settings.required_secondary_heading')}</label>
+                  <label>
+                    {app.translator.trans(
+                      "flarum-tags.admin.tag_settings.required_secondary_heading"
+                    )}
+                  </label>
                   <div className="helpText">
-                    {app.translator.trans('flarum-tags.admin.tag_settings.required_secondary_text')}
+                    {app.translator.trans(
+                      "flarum-tags.admin.tag_settings.required_secondary_text"
+                    )}
                   </div>
-                  <div className="TagSettingsModal-rangeInput">
-                    <input className="FormControl"
-                           type="number"
-                           min="0"
-                           value={minSecondaryTags()}
-                           onInput={withAttr('value', this.setMinTags.bind(this, minSecondaryTags, maxSecondaryTags))}/>
-                    {app.translator.trans('flarum-tags.admin.tag_settings.range_separator_text')}
-                    <input className="FormControl"
-                           type="number"
-                           min={minSecondaryTags()}
-                           bidi={maxSecondaryTags}/>
+                  <div className="TagSettings-rangeInput">
+                    <input
+                      className="FormControl"
+                      type="number"
+                      min="0"
+                      value={minSecondaryTags()}
+                      onInput={withAttr(
+                        "value",
+                        this.setMinTags.bind(
+                          this,
+                          minSecondaryTags,
+                          maxSecondaryTags
+                        )
+                      )}
+                    />
+                    {app.translator.trans(
+                      "flarum-tags.admin.tag_settings.range_separator_text"
+                    )}
+                    <input
+                      className="FormControl"
+                      type="number"
+                      min={minSecondaryTags()}
+                      bidi={maxSecondaryTags}
+                    />
                   </div>
                 </div>
               </div>
             </div>
             <div className="TagsContent-footer">
               <p>
-                {app.translator.trans('flarum-tags.admin.tags.about_tags_text')}
+                {app.translator.trans("flarum-tags.admin.tags.about_tags_text")}
               </p>
             </div>
           </div>
@@ -137,16 +205,18 @@ export default class TagsPage extends ExtensionPage {
   }
 
   onListOnCreate(vnode) {
-    this.$('.TagList').get().map(e => {
-      sortable.create(e, {
-        group: 'tags',
-        animation: 150,
-        swapThreshold: 0.65,
-        dragClass: 'sortable-dragging',
-        ghostClass: 'sortable-placeholder',
-        onSort: (e) => this.onSortUpdate(e)
-      })
-    });
+    this.$(".TagList")
+      .get()
+      .map((e) => {
+        sortable.create(e, {
+          group: "tags",
+          animation: 150,
+          swapThreshold: 0.65,
+          dragClass: "sortable-dragging",
+          ghostClass: "sortable-placeholder",
+          onSort: (e) => this.onSortUpdate(e),
+        });
+      });
   }
 
   setMinTags(minTags, maxTags, value) {
@@ -158,57 +228,63 @@ export default class TagsPage extends ExtensionPage {
     // If we've moved a tag from 'primary' to 'secondary', then we'll update
     // its attributes in our local store so that when we redraw the change
     // will be made.
-    if (e.from instanceof HTMLOListElement && e.to instanceof HTMLUListElement) {
-      app.store.getById('tags', e.item.getAttribute('data-id')).pushData({
+    if (
+      e.from instanceof HTMLOListElement &&
+      e.to instanceof HTMLUListElement
+    ) {
+      app.store.getById("tags", e.item.getAttribute("data-id")).pushData({
         attributes: {
           position: null,
-          isChild: false
+          isChild: false,
         },
-        relationships: {parent: null}
+        relationships: { parent: null },
       });
     }
 
     // Construct an array of primary tag IDs and their children, in the same
     // order that they have been arranged in.
-    const order = this.$('.TagList--primary > li')
+    const order = this.$(".TagList--primary > li")
       .map(function () {
         return {
-          id: $(this).data('id'),
-          children: $(this).find('li')
+          id: $(this).data("id"),
+          children: $(this)
+            .find("li")
             .map(function () {
-              return $(this).data('id');
-            }).get()
+              return $(this).data("id");
+            })
+            .get(),
         };
-      }).get();
+      })
+      .get();
 
     // Now that we have an accurate representation of the order which the
     // primary tags are in, we will update the tag attributes in our local
     // store to reflect this order.
     order.forEach((tag, i) => {
-      const parent = app.store.getById('tags', tag.id);
+      const parent = app.store.getById("tags", tag.id);
       parent.pushData({
         attributes: {
           position: i,
-          isChild: false
+          isChild: false,
         },
-        relationships: {parent: null}
+        relationships: { parent: null },
       });
 
       tag.children.forEach((child, j) => {
-        app.store.getById('tags', child).pushData({
+        app.store.getById("tags", child).pushData({
           attributes: {
             position: j,
-            isChild: true
+            isChild: true,
           },
-          relationships: {parent}
+          relationships: { parent },
         });
       });
     });
 
     app.request({
-      url: app.forum.attribute('apiUrl') + '/tags/order',
-      method: 'POST',
-      body: {order}
+      url: app.forum.attribute("apiUrl") + "/tags/order",
+      method: "POST",
+      body: { order },
     });
 
     this.forcedRefreshKey++;
