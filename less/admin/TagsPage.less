@@ -10,10 +10,12 @@
     margin-top: 10px;
   }
 }
+
 .TagsContent-list {
   padding: 20px 0 0;
 
 }
+
 .TagList, .TagList ol {
   list-style: none;
   padding: 0;
@@ -31,6 +33,7 @@
     margin-right: 10px;
   }
 }
+
 .TagListItem-info {
   border-radius: @border-radius;
   padding: 5px;
@@ -46,9 +49,11 @@
     margin: -8px -16px -8px 16px;
   }
 }
+
 li:not(.sortable-dragging) > .TagListItem-info:hover > .Button {
   visibility: visible;
 }
+
 .TagList--primary {
   font-size: 16px;
 
@@ -57,6 +62,7 @@ li:not(.sortable-dragging) > .TagListItem-info:hover > .Button {
     margin-bottom: 10px;
   }
 }
+
 .TagList ol {
   margin-left: 27px;
   min-height: 10px;
@@ -66,6 +72,7 @@ li:not(.sortable-dragging) > .TagListItem-info:hover > .Button {
     margin-bottom: 10px;
   }
 }
+
 .sortable-placeholder {
   border: 2px dashed @control-bg;
   border-radius: @border-radius;
@@ -79,8 +86,15 @@ li:not(.sortable-dragging) > .TagListItem-info:hover > .Button {
   column-gap: 30px;
   flex-wrap: wrap;
 
+  @media (@tablet-up) {
+    .TagGroup--secondary {
+      max-width: 250px !important;
+    }
+  }
+
   .Form {
     min-width: 300px;
+
     > label {
       margin-bottom: 10px;
     }
@@ -109,9 +123,8 @@ li:not(.sortable-dragging) > .TagListItem-info:hover > .Button {
     flex: 1 1 160px;
 
     @media (max-width: 1209px) {
-        margin-bottom: 20px;
+      margin-bottom: 20px;
     }
-
 
     > ol {
       > li {
@@ -137,9 +150,5 @@ li:not(.sortable-dragging) > .TagListItem-info:hover > .Button {
       font-weight: bold;
       color: @muted-color;
     }
-  }
-
-  .TagGroup--secondary {
-    max-width: 250px;
   }
 }
