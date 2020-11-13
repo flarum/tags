@@ -1,8 +1,5 @@
-import ExtensionData from "flarum/utils/ExtensionData";
-
 export default function () {
-  new ExtensionData("flarum-tags").registerData(
-    "permissions",
+  app.extensionData.load('flarum-tags').registerPermission(
     {
       icon: "fas fa-tag",
       label: app.translator.trans(

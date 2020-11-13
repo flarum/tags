@@ -1,4 +1,5 @@
 import Tag from "../common/models/Tag";
+import ExtensionData from "flarum/utils/ExtensionData";
 import addTagsPermissionScope from "./addTagsPermissionScope";
 import addTagPermission from "./addTagPermission";
 import addTagsHomePageOption from "./addTagsHomePageOption";
@@ -8,10 +9,8 @@ import TagsPage from "./components/TagsPage";
 app.initializers.add("flarum-tags", (app) => {
   app.store.models.tags = Tag;
 
-  app.routes["flarum-tags"] = {
-    path: "/extension/flarum-tags",
-    component: TagsPage,
-  };
+  app.extensionData.load('flarum-tags')
+    .registerPage(TagsPage);
 
   addTagsPermissionScope();
   addTagPermission();
