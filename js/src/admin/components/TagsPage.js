@@ -133,7 +133,7 @@ export default class TagsPage extends ExtensionPage {
                       type="number"
                       min="0"
                       value={minPrimaryTags()}
-                      onInput={withAttr(
+                      oninput={withAttr(
                         "value",
                         this.setMinTags.bind(
                           this,
@@ -171,7 +171,7 @@ export default class TagsPage extends ExtensionPage {
                       type="number"
                       min="0"
                       value={minSecondaryTags()}
-                      onInput={withAttr(
+                      oninput={withAttr(
                         "value",
                         this.setMinTags.bind(
                           this,
@@ -190,6 +190,7 @@ export default class TagsPage extends ExtensionPage {
                       bidi={maxSecondaryTags}
                     />
                   </div>
+                  <div className="Form-group">{this.submitButton()}</div>
                 </div>
               </div>
             </div>
