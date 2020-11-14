@@ -1,5 +1,5 @@
 export default function () {
-  app.extensionData.for('flarum-tags').registerPermission(
+  app.extensionData.for("flarum-tags").registerPermission(
     {
       icon: "fas fa-tag",
       label: app.translator.trans(
