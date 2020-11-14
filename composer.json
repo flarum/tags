@@ -22,7 +22,7 @@
         },
         "flarum-extension": {
             "title": "Tags",
-	          "category": "feature",
+	    "category": "feature",
             "info": {
                 "donate": "https://flarum.org/donate/"
             },
