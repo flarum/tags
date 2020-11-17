@@ -8,11 +8,14 @@
  */
 
 use Flarum\Api\Event\Serializing;
+use Flarum\Api\Serializer\DiscussionSerializer;
+use Flarum\Api\Serializer\ForumSerializer;
 use Flarum\Discussion\Discussion;
 use Flarum\Discussion\Event\Saving;
 use Flarum\Extend;
 use Flarum\Tags\Access;
 use Flarum\Tags\Api\Controller;
+use Flarum\Tags\Api\Serializer\TagSerializer;
 use Flarum\Tags\Content;
 use Flarum\Tags\Listener;
 use Flarum\Tags\Tag;
@@ -38,6 +41,15 @@ return [
 
     (new Extend\Model(Discussion::class))
         ->belongsToMany('tags', Tag::class, 'discussion_tag'),
+
+    (new Extend\ApiSerializer(ForumSerializer::class))
+        ->hasMany('tags', TagSerializer::class),
+
+    (new Extend\ApiSerializer(DiscussionSerializer::class))
+        ->hasMany('tags', TagSerializer::class)
+        ->attribute('canTag', function (array $attributes, $model, DiscussionSerializer $serializer) {
+            return $serializer->getActor()->can('tag', $model);
+        }),
 
     new Extend\Locales(__DIR__.'/locale'),
 
