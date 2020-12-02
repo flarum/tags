@@ -71,6 +71,12 @@ return [
         ->serializeToForum('minSecondaryTags', 'flarum-tags.min_secondary_tags')
         ->serializeToForum('maxSecondaryTags', 'flarum-tags.max_secondary_tags'),
 
+    (new Extend\Policy(Discussion::class))
+        ->add(Access\DiscussionPolicy::class),
+
+    (new Extend\Policy(Tag::class))
+        ->add(Access\TagPolicy::class),
+
     new Extend\Locales(__DIR__.'/locale'),
 
     (new Extend\View)
@@ -83,9 +89,9 @@ return [
         $events->listen(Saving::class, Listener\SaveTagsToDatabase::class);
         $events->subscribe(Listener\UpdateTagMetadata::class);
 
+        $events->subscribe(Access\DiscussionScopePolicy::class);
+        $events->subscribe(Access\TagScopePolicy::class);
+        $events->subscribe(Access\FlagScopePolicy::class);
         $events->subscribe(Access\GlobalPolicy::class);
-        $events->subscribe(Access\DiscussionPolicy::class);
-        $events->subscribe(Access\TagPolicy::class);
-        $events->subscribe(Access\FlagPolicy::class);
     },
 ];

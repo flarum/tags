@@ -15,7 +15,7 @@ use Flarum\User\AbstractPolicy;
 use Flarum\User\User;
 use Illuminate\Database\Eloquent\Builder;
 
-class FlagPolicy extends AbstractPolicy
+class FlagScopePolicy extends AbstractPolicy
 {
     /**
      * {@inheritdoc}
