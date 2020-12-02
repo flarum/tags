@@ -44,20 +44,20 @@ class DiscussionPolicy extends AbstractPolicy
         $tags = $discussion->tags;
 
         if (count($tags)) {
-            $restricted = false;
+            $restrictedButHasAccess = false;
 
             foreach ($tags as $tag) {
                 if ($tag->is_restricted) {
                     if (! $actor->hasPermission('tag'.$tag->id.'.discussion.'.$ability)) {
-                        return false;
+                        return $this->deny();
                     }
 
-                    $restricted = true;
+                    $restrictedButHasAccess = true;
                 }
             }
 
-            if ($restricted) {
-                return true;
+            if ($restrictedButHasAccess) {
+                return $this->allow();
             }
         }
     }
