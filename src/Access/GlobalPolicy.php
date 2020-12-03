@@ -21,12 +21,10 @@ class GlobalPolicy
      */
     protected $settings;
 
-
     public function __construct(SettingsRepositoryInterface $settings)
     {
         $this->settings = $settings;
     }
-
 
     /**
      * @param Dispatcher $events

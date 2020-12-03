@@ -23,7 +23,7 @@ class TagPolicy extends AbstractPolicy
     public function startDiscussion(User $actor, Tag $tag)
     {
         if ($tag->is_restricted) {
-            return $actor->hasPermission('tag' . $tag->id . '.startDiscussion') ? $this->allow() : $this->deny();
+            return $actor->hasPermission('tag'.$tag->id.'.startDiscussion') ? $this->allow() : $this->deny();
         }
     }
 
