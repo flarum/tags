@@ -10,11 +10,24 @@
 namespace Flarum\Tags\Access;
 
 use Flarum\Event\GetPermission;
+use Flarum\Settings\SettingsRepositoryInterface;
 use Flarum\Tags\Tag;
 use Illuminate\Contracts\Events\Dispatcher;
 
 class GlobalPolicy
 {
+    /**
+     * @var SettingsRepositoryInterface
+     */
+    protected $settings;
+
+
+    public function __construct(SettingsRepositoryInterface $settings)
+    {
+        $this->settings = $settings;
+    }
+
+
     /**
      * @param Dispatcher $events
      */
@@ -30,7 +43,8 @@ class GlobalPolicy
     public function grantGlobalDiscussionPermissions(GetPermission $event)
     {
         if (in_array($event->ability, ['viewDiscussions', 'startDiscussion']) && is_null($event->model)) {
-            return ! empty(Tag::getIdsWhereCan($event->actor, $event->ability));
+            return count(Tag::getIdsWhereCan($event->actor, $event->ability, true, false)) >= $this->settings->get('min_primary_tags')
+                || count(Tag::getIdsWhereCan($event->actor, $event->ability, false, true)) >= $this->settings->get('min_secondary_tags');
         }
     }
 }
