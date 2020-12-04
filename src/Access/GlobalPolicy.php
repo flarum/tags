@@ -9,12 +9,11 @@
 
 namespace Flarum\Tags\Access;
 
-use Flarum\Event\GetPermission;
-use Flarum\Settings\SettingsRepositoryInterface;
 use Flarum\Tags\Tag;
-use Illuminate\Contracts\Events\Dispatcher;
+use Flarum\User\Access\AbstractPolicy;
+use Flarum\User\User;
 
-class GlobalPolicy
+class GlobalPolicy extends AbstractPolicy
 {
     /**
      * @var SettingsRepositoryInterface
@@ -27,22 +26,16 @@ class GlobalPolicy
     }
 
     /**
-     * @param Dispatcher $events
+     *
+     * @param Flarum\User\User $actor
+     * @param string $ability
+     * @return bool|void
      */
-    public function subscribe(Dispatcher $events)
+    public function can(User $actor, string $ability)
     {
-        $events->listen(GetPermission::class, [$this, 'grantGlobalDiscussionPermissions']);
-    }
-
-    /**
-     * @param GetPermission $event
-     * @return bool
-     */
-    public function grantGlobalDiscussionPermissions(GetPermission $event)
-    {
-        if (in_array($event->ability, ['viewDiscussions', 'startDiscussion']) && is_null($event->model)) {
-            return count(Tag::getIdsWhereCan($event->actor, $event->ability, true, false)) >= $this->settings->get('min_primary_tags')
-                || count(Tag::getIdsWhereCan($event->actor, $event->ability, false, true)) >= $this->settings->get('min_secondary_tags');
+        if (in_array($ability, ['viewDiscussions', 'startDiscussion'])) {
+            return count(Tag::getIdsWhereCan($actor, $ability, true, false)) >= $this->settings->get('min_primary_tags')
+                || count(Tag::getIdsWhereCan($actor, $ability, false, true)) >= $this->settings->get('min_secondary_tags');
         }
     }
 }

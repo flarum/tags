@@ -76,6 +76,10 @@ return [
 
     (new Extend\Policy(Tag::class))
         ->add(Access\TagPolicy::class),
+    (new Extend\Policy())
+        ->modelPolicy(Discussion::class, Access\DiscussionPolicy::class)
+        ->modelPolicy(Tag::class, Access\TagPolicy::class)
+        ->globalPolicy(Access\GlobalPolicy::class)
 
     new Extend\Locales(__DIR__.'/locale'),
 
@@ -92,6 +96,5 @@ return [
         $events->subscribe(Access\DiscussionScopePolicy::class);
         $events->subscribe(Access\TagScopePolicy::class);
         $events->subscribe(Access\FlagScopePolicy::class);
-        $events->subscribe(Access\GlobalPolicy::class);
     },
 ];
