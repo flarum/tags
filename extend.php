@@ -7,7 +7,6 @@
  * LICENSE file that was distributed with this source code.
  */
 
-use Flarum\Api\Event\Serializing;
 use Flarum\Api\Serializer\DiscussionSerializer;
 use Flarum\Api\Serializer\ForumSerializer;
 use Flarum\Discussion\Discussion;
@@ -47,9 +46,15 @@ return [
 
     (new Extend\ApiSerializer(DiscussionSerializer::class))
         ->hasMany('tags', TagSerializer::class)
-        ->attribute('canTag', function (array $attributes, $model, DiscussionSerializer $serializer) {
+        ->attribute('canTag', function (DiscussionSerializer $serializer, $model) {
             return $serializer->getActor()->can('tag', $model);
         }),
+
+    (new Extend\Settings())
+        ->serializeToForum('minPrimaryTags', 'flarum-tags.min_primary_tags')
+        ->serializeToForum('maxPrimaryTags', 'flarum-tags.max_primary_tags')
+        ->serializeToForum('minSecondaryTags', 'flarum-tags.min_secondary_tags')
+        ->serializeToForum('maxSecondaryTags', 'flarum-tags.max_secondary_tags'),
 
     new Extend\Locales(__DIR__.'/locale'),
 
@@ -60,7 +65,6 @@ return [
         $events->subscribe(Listener\AddDiscussionTagsRelationship::class);
 
         $events->subscribe(Listener\AddForumTagsRelationship::class);
-        $events->listen(Serializing::class, Listener\PrepareForumTagsApiAttributes::class);
 
         $events->subscribe(Listener\CreatePostWhenTagsAreChanged::class);
         $events->subscribe(Listener\FilterDiscussionListByTags::class);
