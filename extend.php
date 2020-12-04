@@ -7,6 +7,7 @@
  * LICENSE file that was distributed with this source code.
  */
 
+use Flarum\Api\Controller as FlarumController;
 use Flarum\Api\Serializer\DiscussionSerializer;
 use Flarum\Api\Serializer\ForumSerializer;
 use Flarum\Discussion\Discussion;
@@ -17,6 +18,7 @@ use Flarum\Tags\Api\Controller;
 use Flarum\Tags\Api\Serializer\TagSerializer;
 use Flarum\Tags\Content;
 use Flarum\Tags\Listener;
+use Flarum\Tags\LoadForumTagsRelationship;
 use Flarum\Tags\Tag;
 use Illuminate\Contracts\Events\Dispatcher;
 
@@ -50,6 +52,19 @@ return [
             return $serializer->getActor()->can('tag', $model);
         }),
 
+    (new Extend\ApiController(FlarumController\ListDiscussionsController::class))
+        ->addInclude(['tags', 'tags.state']),
+
+    (new Extend\ApiController(FlarumController\ShowDiscussionController::class))
+        ->addInclude(['tags', 'tags.state']),
+
+    (new Extend\ApiController(FlarumController\CreateDiscussionController::class))
+        ->addInclude(['tags', 'tags.state']),
+
+    (new Extend\ApiController(FlarumController\ShowForumController::class))
+        ->addInclude(['tags', 'tags.lastPostedDiscussion', 'tags.parent'])
+        ->prepareDataForSerialization(LoadForumTagsRelationship::class),
+
     (new Extend\Settings())
         ->serializeToForum('minPrimaryTags', 'flarum-tags.min_primary_tags')
         ->serializeToForum('maxPrimaryTags', 'flarum-tags.max_primary_tags')
@@ -62,10 +77,6 @@ return [
         ->namespace('tags', __DIR__.'/views'),
 
     function (Dispatcher $events) {
-        $events->subscribe(Listener\AddDiscussionTagsRelationship::class);
-
-        $events->subscribe(Listener\AddForumTagsRelationship::class);
-
         $events->subscribe(Listener\CreatePostWhenTagsAreChanged::class);
         $events->subscribe(Listener\FilterDiscussionListByTags::class);
         $events->subscribe(Listener\FilterPostsQueryByTag::class);
