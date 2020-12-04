@@ -79,7 +79,7 @@ return [
     (new Extend\Policy())
         ->modelPolicy(Discussion::class, Access\DiscussionPolicy::class)
         ->modelPolicy(Tag::class, Access\TagPolicy::class)
-        ->globalPolicy(Access\GlobalPolicy::class)
+        ->globalPolicy(Access\GlobalPolicy::class),
 
     new Extend\Locales(__DIR__.'/locale'),
 

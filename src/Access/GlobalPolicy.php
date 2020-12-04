@@ -10,6 +10,7 @@
 namespace Flarum\Tags\Access;
 
 use Flarum\Tags\Tag;
+use Flarum\Settings\SettingsRepositoryInterface;
 use Flarum\User\Access\AbstractPolicy;
 use Flarum\User\User;
 
@@ -33,8 +34,14 @@ class GlobalPolicy extends AbstractPolicy
     public function can(User $actor, string $ability)
     {
         if (in_array($ability, ['viewDiscussions', 'startDiscussion'])) {
-            return count(Tag::getIdsWhereCan($actor, $ability, true, false)) >= $this->settings->get('min_primary_tags')
-                || count(Tag::getIdsWhereCan($actor, $ability, false, true)) >= $this->settings->get('min_secondary_tags');
+            $enoughPrimary = count(Tag::getIdsWhereCan($actor, $ability, true, false)) >= $this->settings->get('min_primary_tags');
+            $enoughSecondary = count(Tag::getIdsWhereCan($actor, $ability, false, true)) >= $this->settings->get('min_secondary_tags');
+
+            if ($enoughPrimary && $enoughSecondary) {
+                return $this->allow();
+            } else {
+                return $this->deny();
+            }
         }
     }
 }
