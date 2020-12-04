@@ -9,8 +9,8 @@
 
 namespace Flarum\Tags\Access;
 
-use Flarum\Tags\Tag;
 use Flarum\Settings\SettingsRepositoryInterface;
+use Flarum\Tags\Tag;
 use Flarum\User\Access\AbstractPolicy;
 use Flarum\User\User;
 
