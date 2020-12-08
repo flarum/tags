@@ -13,6 +13,7 @@ use Flarum\Api\Serializer\ForumSerializer;
 use Flarum\Discussion\Discussion;
 use Flarum\Discussion\Event\Saving;
 use Flarum\Extend;
+use Flarum\Flags\Flag;
 use Flarum\Tags\Access;
 use Flarum\Tags\Api\Controller;
 use Flarum\Tags\Api\Serializer\TagSerializer;
@@ -71,15 +72,20 @@ return [
         ->serializeToForum('minSecondaryTags', 'flarum-tags.min_secondary_tags')
         ->serializeToForum('maxSecondaryTags', 'flarum-tags.max_secondary_tags'),
 
-    (new Extend\Policy(Discussion::class))
-        ->add(Access\DiscussionPolicy::class),
-
-    (new Extend\Policy(Tag::class))
-        ->add(Access\TagPolicy::class),
     (new Extend\Policy())
         ->modelPolicy(Discussion::class, Access\DiscussionPolicy::class)
         ->modelPolicy(Tag::class, Access\TagPolicy::class)
         ->globalPolicy(Access\GlobalPolicy::class),
+
+    (new Extend\ModelVisibility(Discussion::class))
+        ->scope(Access\ScopeDiscussionVisibility::class)
+        ->scopeAll(Access\ScopeDiscussionVisibilityForAbility::class),
+
+    (new Extend\ModelVisibility(Flag::class))
+        ->scope(Access\ScopeFlagVisibility::class),
+
+    (new Extend\ModelVisibility(Tag::class))
+        ->scope(Access\ScopeTagVisibility::class),
 
     new Extend\Locales(__DIR__.'/locale'),
 
@@ -92,9 +98,5 @@ return [
         $events->subscribe(Listener\FilterPostsQueryByTag::class);
         $events->listen(Saving::class, Listener\SaveTagsToDatabase::class);
         $events->subscribe(Listener\UpdateTagMetadata::class);
-
-        $events->subscribe(Access\DiscussionScopePolicy::class);
-        $events->subscribe(Access\TagScopePolicy::class);
-        $events->subscribe(Access\FlagScopePolicy::class);
     },
 ];
