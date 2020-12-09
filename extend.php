@@ -18,8 +18,10 @@ use Flarum\Tags\Access;
 use Flarum\Tags\Api\Controller;
 use Flarum\Tags\Api\Serializer\TagSerializer;
 use Flarum\Tags\Content;
+use Flarum\Tags\Event\DiscussionWasTagged;
 use Flarum\Tags\Listener;
 use Flarum\Tags\LoadForumTagsRelationship;
+use Flarum\Tags\Post\DiscussionTaggedPost;
 use Flarum\Tags\Tag;
 use Illuminate\Contracts\Events\Dispatcher;
 
@@ -92,11 +94,16 @@ return [
     (new Extend\View)
         ->namespace('tags', __DIR__.'/views'),
 
+    (new Extend\Post)
+        ->type(DiscussionTaggedPost::class),
+
+    (new Extend\Event())
+        ->listen(Saving::class, Listener\SaveTagsToDatabase::class)
+        ->listen(DiscussionWasTagged::class, Listener\CreatePostWhenTagsAreChanged::class),
+
     function (Dispatcher $events) {
-        $events->subscribe(Listener\CreatePostWhenTagsAreChanged::class);
         $events->subscribe(Listener\FilterDiscussionListByTags::class);
         $events->subscribe(Listener\FilterPostsQueryByTag::class);
-        $events->listen(Saving::class, Listener\SaveTagsToDatabase::class);
         $events->subscribe(Listener\UpdateTagMetadata::class);
     },
 ];
