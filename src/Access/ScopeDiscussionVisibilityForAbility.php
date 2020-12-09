@@ -22,7 +22,9 @@ class ScopeDiscussionVisibilityForAbility
      */
     public function __invoke(User $actor, Builder $query, $ability)
     {
-        if (substr($ability, 0, 4) === 'view') return;
+        if (substr($ability, 0, 4) === 'view') {
+            return;
+        }
 
         // If a discussion requires a certain permission in order for it to be
         // visible, then we can check if the user has been granted that

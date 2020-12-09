@@ -16,7 +16,6 @@ use Illuminate\Support\Arr;
 class CreatePostWhenTagsAreChanged
 {
     /**
-     *
      * @param DiscussionWasTagged $event
      * @return void
      */
