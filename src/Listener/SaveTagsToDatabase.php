@@ -115,7 +115,7 @@ class SaveTagsToDatabase
             });
         }
 
-        if ($primaryCount === 0 && $secondaryCount === 0 && ! $actor->hasPermission('startDiscussion')) {
+        if (! $discussion->exists && $primaryCount === 0 && $secondaryCount === 0 && ! $actor->hasPermission('startDiscussion')) {
             throw new PermissionDeniedException;
         }
     }
