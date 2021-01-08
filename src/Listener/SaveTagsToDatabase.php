@@ -86,8 +86,10 @@ class SaveTagsToDatabase
                 }
             }
 
-            $this->validateTagCount('primary', $primaryCount);
-            $this->validateTagCount('secondary', $secondaryCount);
+            if (! $actor->can('bypassTagCounts', $discussion)) {
+                $this->validateTagCount('primary', $primaryCount);
+                $this->validateTagCount('secondary', $secondaryCount);
+            }
 
             if ($discussion->exists) {
                 $oldTags = $discussion->tags()->get();
