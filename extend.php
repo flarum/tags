@@ -105,8 +105,9 @@ $extenders = [
     },
 ];
 
-if (class_exists(Flag::class)) $extenders[] = (new Extend\ModelVisibility(Flag::class))
+if (class_exists(Flag::class)) {
+    $extenders[] = (new Extend\ModelVisibility(Flag::class))
         ->scope(Access\ScopeFlagVisibility::class);
+}
 
 return $extenders;
-
