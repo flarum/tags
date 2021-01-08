@@ -10,5 +10,5 @@ export default function () {
       icon: 'fas fa-tags',
       label: app.translator.trans('flarum-tags.admin.permissions.bypass_tag_counts_label'),
       permission: 'bypassTagCounts',
-    }, 'moderate', 95);
+    }, 'start', 89);
 }
