@@ -25,7 +25,7 @@ use Flarum\Tags\Post\DiscussionTaggedPost;
 use Flarum\Tags\Tag;
 use Illuminate\Contracts\Events\Dispatcher;
 
-return [
+$extenders = [
     (new Extend\Frontend('forum'))
         ->js(__DIR__.'/js/dist/forum.js')
         ->css(__DIR__.'/less/forum.less')
@@ -83,9 +83,6 @@ return [
         ->scope(Access\ScopeDiscussionVisibility::class)
         ->scopeAll(Access\ScopeDiscussionVisibilityForAbility::class),
 
-    (new Extend\ModelVisibility(Flag::class))
-        ->scope(Access\ScopeFlagVisibility::class),
-
     (new Extend\ModelVisibility(Tag::class))
         ->scope(Access\ScopeTagVisibility::class),
 
@@ -107,3 +104,9 @@ return [
         $events->subscribe(Listener\UpdateTagMetadata::class);
     },
 ];
+
+if (class_exists(Flag::class)) $extenders[] = (new Extend\ModelVisibility(Flag::class))
+        ->scope(Access\ScopeFlagVisibility::class);
+
+return $extenders;
+
