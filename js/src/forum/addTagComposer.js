@@ -4,6 +4,7 @@ import DiscussionComposer from 'flarum/components/DiscussionComposer';
 
 import TagDiscussionModal from './components/TagDiscussionModal';
 import tagsLabel from '../common/helpers/tagsLabel';
+import getSelectableTags from './utils/getSelectableTags';
 
 export default function () {
   extend(IndexPage.prototype, 'newDiscussionAction', function (promise) {
@@ -20,6 +21,10 @@ export default function () {
 
   // Add tag-selection abilities to the discussion composer.
   DiscussionComposer.prototype.chooseTags = function () {
+    const selectableTags = getSelectableTags();
+
+    if (!selectableTags.length) return;
+
     app.modal.show(TagDiscussionModal, {
       selectedTags: (this.composer.fields.tags || []).slice(0),
       onsubmit: tags => {
@@ -33,9 +38,10 @@ export default function () {
   // title.
   extend(DiscussionComposer.prototype, 'headerItems', function (items) {
     const tags = this.composer.fields.tags || [];
+    const selectableTags = getSelectableTags();
 
     items.add('tags', (
-      <a className="DiscussionComposer-changeTags" onclick={this.chooseTags.bind(this)}>
+      <a className={["DiscussionComposer-changeTags", !selectableTags.length ? "disabled" : ""].join(" ")} onclick={this.chooseTags.bind(this)}>
         {tags.length
           ? tagsLabel(tags)
           : <span className="TagLabel untagged">{app.translator.trans('flarum-tags.forum.composer_discussion.choose_tags_link')}</span>}
@@ -47,9 +53,12 @@ export default function () {
     const chosenTags = this.composer.fields.tags || [];
     const chosenPrimaryTags = chosenTags.filter(tag => tag.position() !== null && !tag.isChild());
     const chosenSecondaryTags = chosenTags.filter(tag => tag.position() === null);
-    if (!chosenTags.length
-      || (chosenPrimaryTags.length < app.forum.attribute('minPrimaryTags'))
-      || (chosenSecondaryTags.length < app.forum.attribute('minSecondaryTags'))) {
+    const selectableTags = getSelectableTags();
+
+    if ((!chosenTags.length
+          || (chosenPrimaryTags.length < app.forum.attribute('minPrimaryTags'))
+          || (chosenSecondaryTags.length < app.forum.attribute('minSecondaryTags'))
+        ) && selectableTags.length) {
       app.modal.show(TagDiscussionModal, {
           selectedTags: chosenTags,
           onsubmit: tags => {
