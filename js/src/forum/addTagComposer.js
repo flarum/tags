@@ -42,7 +42,7 @@ export default function () {
     const selectableTags = getSelectableTags();
 
     items.add('tags', (
-      <a className={classList(["DiscussionComposer-changeTags", !selectableTags.length ? "disabled" : ""])} onclick={this.chooseTags.bind(this)}>
+      <a className={classList(['DiscussionComposer-changeTags', !selectableTags.length && 'disabled'])} onclick={this.chooseTags.bind(this)}>
         {tags.length
           ? tagsLabel(tags)
           : <span className="TagLabel untagged">{app.translator.trans('flarum-tags.forum.composer_discussion.choose_tags_link')}</span>}
