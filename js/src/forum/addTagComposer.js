@@ -1,6 +1,7 @@
 import { extend, override } from 'flarum/extend';
 import IndexPage from 'flarum/components/IndexPage';
 import DiscussionComposer from 'flarum/components/DiscussionComposer';
+import classList from 'flarum/utils/classList';
 
 import TagDiscussionModal from './components/TagDiscussionModal';
 import tagsLabel from '../common/helpers/tagsLabel';
@@ -41,7 +42,7 @@ export default function () {
     const selectableTags = getSelectableTags();
 
     items.add('tags', (
-      <a className={["DiscussionComposer-changeTags", !selectableTags.length ? "disabled" : ""].join(" ")} onclick={this.chooseTags.bind(this)}>
+      <a className={classList(["DiscussionComposer-changeTags", !selectableTags.length ? "disabled" : ""])} onclick={this.chooseTags.bind(this)}>
         {tags.length
           ? tagsLabel(tags)
           : <span className="TagLabel untagged">{app.translator.trans('flarum-tags.forum.composer_discussion.choose_tags_link')}</span>}
