@@ -7,10 +7,10 @@
  * LICENSE file that was distributed with this source code.
  */
 
-use Flarum\Testing\integration\ConfigureSetup;
+use Flarum\Testing\integration\Setup\SetupScript;
 
 require __DIR__.'/../../vendor/autoload.php';
 
-$setup = new ConfigureSetup();
+$setup = new SetupScript();
 
 $setup->run();
