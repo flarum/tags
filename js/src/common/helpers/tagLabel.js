@@ -22,7 +22,7 @@ export default function tagLabel(tag, attrs = {}) {
     }
 
     if (tag.isChild()) {
-      attrs.className += ' TagLabel--child'
+      attrs.className += ' TagLabel--child';
     }
   } else {
     attrs.className += ' untagged';
