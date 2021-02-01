@@ -5,7 +5,7 @@ import addTagsHomePageOption from './addTagsHomePageOption';
 import addTagChangePermission from './addTagChangePermission';
 import TagsPage from './components/TagsPage';
 
-app.initializers.add('flarum-tags', app => {
+app.initializers.add('flarum-tags', (app) => {
   app.store.models.tags = Tag;
 
   app.extensionData.for('flarum-tags').registerPage(TagsPage);
@@ -15,7 +15,6 @@ app.initializers.add('flarum-tags', app => {
   addTagsHomePageOption();
   addTagChangePermission();
 });
-
 
 // Expose compat API
 import tagsCompat from './compat';

@@ -32,19 +32,17 @@ export default class EditTagModal extends Modal {
   title() {
     return this.name()
       ? tagLabel({
-        name: this.name,
-        color: this.color,
-        icon: this.icon,
-      })
+          name: this.name,
+          color: this.color,
+          icon: this.icon,
+        })
       : app.translator.trans('flarum-tags.admin.edit_tag.title');
   }
 
   content() {
     return (
       <div className="Modal-body">
-        <div className="Form">
-          {this.fields().toArray()}
-        </div>
+        <div className="Form">{this.fields().toArray()}</div>
       </div>
     );
   }
@@ -52,58 +50,96 @@ export default class EditTagModal extends Modal {
   fields() {
     const items = new ItemList();
 
-    items.add('name', <div className="Form-group">
-      <label>{app.translator.trans('flarum-tags.admin.edit_tag.name_label')}</label>
-      <input className="FormControl" placeholder={app.translator.trans('flarum-tags.admin.edit_tag.name_placeholder')} value={this.name()} oninput={e => {
-        this.name(e.target.value);
-        this.slug(slug(e.target.value));
-      }}/>
-    </div>, 50);
+    items.add(
+      'name',
+      <div className="Form-group">
+        <label>{app.translator.trans('flarum-tags.admin.edit_tag.name_label')}</label>
+        <input
+          className="FormControl"
+          placeholder={app.translator.trans('flarum-tags.admin.edit_tag.name_placeholder')}
+          value={this.name()}
+          oninput={(e) => {
+            this.name(e.target.value);
+            this.slug(slug(e.target.value));
+          }}
+        />
+      </div>,
+      50
+    );
 
-    items.add('slug', <div className="Form-group">
-      <label>{app.translator.trans('flarum-tags.admin.edit_tag.slug_label')}</label>
-      <input className="FormControl" bidi={this.slug}/>
-    </div>, 40);
+    items.add(
+      'slug',
+      <div className="Form-group">
+        <label>{app.translator.trans('flarum-tags.admin.edit_tag.slug_label')}</label>
+        <input className="FormControl" bidi={this.slug} />
+      </div>,
+      40
+    );
 
-    items.add('description', <div className="Form-group">
-      <label>{app.translator.trans('flarum-tags.admin.edit_tag.description_label')}</label>
-      <textarea className="FormControl" bidi={this.description}/>
-    </div>, 30);
+    items.add(
+      'description',
+      <div className="Form-group">
+        <label>{app.translator.trans('flarum-tags.admin.edit_tag.description_label')}</label>
+        <textarea className="FormControl" bidi={this.description} />
+      </div>,
+      30
+    );
 
-    items.add('color', <div className="Form-group">
-      <label>{app.translator.trans('flarum-tags.admin.edit_tag.color_label')}</label>
-      <input className="FormControl" placeholder="#aaaaaa" bidi={this.color}/>
-    </div>, 20);
+    items.add(
+      'color',
+      <div className="Form-group">
+        <label>{app.translator.trans('flarum-tags.admin.edit_tag.color_label')}</label>
+        <input className="FormControl" placeholder="#aaaaaa" bidi={this.color} />
+      </div>,
+      20
+    );
 
-    items.add('icon', <div className="Form-group">
-      <label>{app.translator.trans('flarum-tags.admin.edit_tag.icon_label')}</label>
-      <div className="helpText">
-        {app.translator.trans('flarum-tags.admin.edit_tag.icon_text', {a: <a href="https://fontawesome.com/icons?m=free" tabindex="-1"/>})}
-      </div>
-      <input className="FormControl" placeholder="fas fa-bolt" bidi={this.icon}/>
-    </div>, 10);
+    items.add(
+      'icon',
+      <div className="Form-group">
+        <label>{app.translator.trans('flarum-tags.admin.edit_tag.icon_label')}</label>
+        <div className="helpText">
+          {app.translator.trans('flarum-tags.admin.edit_tag.icon_text', { a: <a href="https://fontawesome.com/icons?m=free" tabindex="-1" /> })}
+        </div>
+        <input className="FormControl" placeholder="fas fa-bolt" bidi={this.icon} />
+      </div>,
+      10
+    );
 
-    items.add('hidden', <div className="Form-group">
-      <div>
-        <label className="checkbox">
-          <input type="checkbox" bidi={this.isHidden}/>
-          {app.translator.trans('flarum-tags.admin.edit_tag.hide_label')}
-        </label>
-      </div>
-    </div>, 10);
+    items.add(
+      'hidden',
+      <div className="Form-group">
+        <div>
+          <label className="checkbox">
+            <input type="checkbox" bidi={this.isHidden} />
+            {app.translator.trans('flarum-tags.admin.edit_tag.hide_label')}
+          </label>
+        </div>
+      </div>,
+      10
+    );
 
-    items.add('submit', <div className="Form-group">
-      {Button.component({
-        type: 'submit',
-        className: 'Button Button--primary EditTagModal-save',
-        loading: this.loading,
-      }, app.translator.trans('flarum-tags.admin.edit_tag.submit_button'))}
-      {this.tag.exists ? (
-        <button type="button" className="Button EditTagModal-delete" onclick={this.delete.bind(this)}>
-          {app.translator.trans('flarum-tags.admin.edit_tag.delete_tag_button')}
-        </button>
-      ) : ''}
-    </div>, -10);
+    items.add(
+      'submit',
+      <div className="Form-group">
+        {Button.component(
+          {
+            type: 'submit',
+            className: 'Button Button--primary EditTagModal-save',
+            loading: this.loading,
+          },
+          app.translator.trans('flarum-tags.admin.edit_tag.submit_button')
+        )}
+        {this.tag.exists ? (
+          <button type="button" className="Button EditTagModal-delete" onclick={this.delete.bind(this)}>
+            {app.translator.trans('flarum-tags.admin.edit_tag.delete_tag_button')}
+          </button>
+        ) : (
+          ''
+        )}
+      </div>,
+      -10
+    );
 
     return items;
   }
@@ -129,19 +165,21 @@ export default class EditTagModal extends Modal {
     // This is done for better error visibility on smaller screen heights.
     this.tag.save(this.submitData()).then(
       () => this.hide(),
-      () => this.loading = false
+      () => (this.loading = false)
     );
   }
 
   delete() {
     if (confirm(app.translator.trans('flarum-tags.admin.edit_tag.delete_tag_confirmation'))) {
-      const children = app.store.all('tags').filter(tag => tag.parent() === this.tag);
+      const children = app.store.all('tags').filter((tag) => tag.parent() === this.tag);
 
       this.tag.delete().then(() => {
-        children.forEach(tag => tag.pushData({
-          attributes: {isChild: false},
-          relationships: {parent: null}
-        }));
+        children.forEach((tag) =>
+          tag.pushData({
+            attributes: { isChild: false },
+            relationships: { parent: null },
+          })
+        );
         m.redraw();
       });
 

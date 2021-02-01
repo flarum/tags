@@ -26,5 +26,5 @@ export default class Tag extends mixin(Model, {
   canStartDiscussion: Model.attribute('canStartDiscussion'),
   canAddToDiscussion: Model.attribute('canAddToDiscussion'),
 
-  isPrimary: computed('position', 'parent', (position, parent) => position !== null && parent === false)
+  isPrimary: computed('position', 'parent', (position, parent) => position !== null && parent === false),
 }) {}

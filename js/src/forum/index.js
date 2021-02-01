@@ -12,11 +12,11 @@ import addTagLabels from './addTagLabels';
 import addTagControl from './addTagControl';
 import addTagComposer from './addTagComposer';
 
-app.initializers.add('flarum-tags', function(app) {
-  app.routes.tags = {path: '/tags', component: TagsPage };
-  app.routes.tag = {path: '/t/:tags', component: IndexPage };
+app.initializers.add('flarum-tags', function (app) {
+  app.routes.tags = { path: '/tags', component: TagsPage };
+  app.routes.tag = { path: '/t/:tags', component: IndexPage };
 
-  app.route.tag = tag => app.route('tag', {tags: tag.slug()});
+  app.route.tag = (tag) => app.route('tag', { tags: tag.slug() });
 
   app.postComponents.discussionTagged = DiscussionTaggedPost;
 
@@ -31,7 +31,6 @@ app.initializers.add('flarum-tags', function(app) {
   addTagControl();
   addTagComposer();
 });
-
 
 // Expose compat API
 import tagsCompat from './compat';

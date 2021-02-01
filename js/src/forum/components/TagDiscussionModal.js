@@ -18,9 +18,9 @@ export default class TagDiscussionModal extends Modal {
     this.tags = app.store.all('tags');
 
     if (this.attrs.discussion) {
-      this.tags = this.tags.filter(tag => tag.canAddToDiscussion() || this.attrs.discussion.tags().indexOf(tag) !== -1);
+      this.tags = this.tags.filter((tag) => tag.canAddToDiscussion() || this.attrs.discussion.tags().indexOf(tag) !== -1);
     } else {
-      this.tags = this.tags.filter(tag => tag.canStartDiscussion());
+      this.tags = this.tags.filter((tag) => tag.canStartDiscussion());
     }
 
     this.tags = sortTags(this.tags);
@@ -50,11 +50,11 @@ export default class TagDiscussionModal extends Modal {
   }
 
   primaryCount() {
-    return this.selected.filter(tag => tag.isPrimary()).length;
+    return this.selected.filter((tag) => tag.isPrimary()).length;
   }
 
   secondaryCount() {
-    return this.selected.filter(tag => !tag.isPrimary()).length;
+    return this.selected.filter((tag) => !tag.isPrimary()).length;
   }
 
   /**
@@ -89,9 +89,7 @@ export default class TagDiscussionModal extends Modal {
 
       // Look through the list of selected tags for any tags which have the tag
       // we just removed as their parent. We'll need to remove them too.
-      this.selected
-        .filter(selected => selected.parent() === tag)
-        .forEach(this.removeTag.bind(this));
+      this.selected.filter((selected) => selected.parent() === tag).forEach(this.removeTag.bind(this));
     }
   }
 
@@ -101,17 +99,17 @@ export default class TagDiscussionModal extends Modal {
 
   title() {
     return this.attrs.discussion
-      ? app.translator.trans('flarum-tags.forum.choose_tags.edit_title', {title: <em>{this.attrs.discussion.title()}</em>})
+      ? app.translator.trans('flarum-tags.forum.choose_tags.edit_title', { title: <em>{this.attrs.discussion.title()}</em> })
       : app.translator.trans('flarum-tags.forum.choose_tags.title');
   }
 
   getInstruction(primaryCount, secondaryCount) {
     if (primaryCount < this.minPrimary) {
       const remaining = this.minPrimary - primaryCount;
-      return app.translator.transChoice('flarum-tags.forum.choose_tags.choose_primary_placeholder', remaining, {count: remaining});
+      return app.translator.transChoice('flarum-tags.forum.choose_tags.choose_primary_placeholder', remaining, { count: remaining });
     } else if (secondaryCount < this.minSecondary) {
       const remaining = this.minSecondary - secondaryCount;
-      return app.translator.transChoice('flarum-tags.forum.choose_tags.choose_secondary_placeholder', remaining, {count: remaining});
+      return app.translator.transChoice('flarum-tags.forum.choose_tags.choose_secondary_placeholder', remaining, { count: remaining });
     }
 
     return '';
@@ -125,7 +123,7 @@ export default class TagDiscussionModal extends Modal {
 
     // Filter out all child tags whose parents have not been selected. This
     // makes it impossible to select a child if its parent hasn't been selected.
-    tags = tags.filter(tag => {
+    tags = tags.filter((tag) => {
       const parent = tag.parent();
       return parent === false || this.selected.indexOf(parent) !== -1;
     });
@@ -133,17 +131,17 @@ export default class TagDiscussionModal extends Modal {
     // If the number of selected primary/secondary tags is at the maximum, then
     // we'll filter out all other tags of that type.
     if (primaryCount >= this.maxPrimary) {
-      tags = tags.filter(tag => !tag.isPrimary() || this.selected.indexOf(tag) !== -1);
+      tags = tags.filter((tag) => !tag.isPrimary() || this.selected.indexOf(tag) !== -1);
     }
 
     if (secondaryCount >= this.maxSecondary) {
-      tags = tags.filter(tag => tag.isPrimary() || this.selected.indexOf(tag) !== -1);
+      tags = tags.filter((tag) => tag.isPrimary() || this.selected.indexOf(tag) !== -1);
     }
 
     // If the user has entered text in the filter input, then filter by tags
     // whose name matches what they've entered.
     if (filter) {
-      tags = tags.filter(tag => tag.name().substr(0, filter.length).toLowerCase() === filter);
+      tags = tags.filter((tag) => tag.name().substr(0, filter.length).toLowerCase() === filter);
     }
 
     if (tags.indexOf(this.index) === -1) this.index = tags[0];
@@ -154,30 +152,38 @@ export default class TagDiscussionModal extends Modal {
       <div className="Modal-body">
         <div className="TagDiscussionModal-form">
           <div className="TagDiscussionModal-form-input">
-            <div className={'TagsInput FormControl ' + (this.focused ? 'focus' : '')}
-              onclick={() => this.$('.TagsInput input').focus()}
-            >
+            <div className={'TagsInput FormControl ' + (this.focused ? 'focus' : '')} onclick={() => this.$('.TagsInput input').focus()}>
               <span className="TagsInput-selected">
-                {this.selected.map(tag =>
-                  <span className="TagsInput-tag" onclick={() => {
-                    this.removeTag(tag);
-                    this.onready();
-                  }}>
+                {this.selected.map((tag) => (
+                  <span
+                    className="TagsInput-tag"
+                    onclick={() => {
+                      this.removeTag(tag);
+                      this.onready();
+                    }}
+                  >
                     {tagLabel(tag)}
                   </span>
-                )}
+                ))}
               </span>
-              <input className="FormControl"
+              <input
+                className="FormControl"
                 placeholder={extractText(this.getInstruction(primaryCount, secondaryCount))}
                 bidi={this.filter}
                 style={{ width: inputWidth + 'ch' }}
                 onkeydown={this.navigator.navigate.bind(this.navigator)}
-                onfocus={() => this.focused = true}
-                onblur={() => this.focused = false}/>
+                onfocus={() => (this.focused = true)}
+                onblur={() => (this.focused = false)}
+              />
             </div>
           </div>
           <div className="TagDiscussionModal-form-submit App-primaryControl">
-            <Button type="submit" className="Button Button--primary" disabled={!this.meetsRequirements(primaryCount, secondaryCount)} icon="fas fa-check">
+            <Button
+              type="submit"
+              className="Button Button--primary"
+              disabled={!this.meetsRequirements(primaryCount, secondaryCount)}
+              icon="fas fa-check"
+            >
               {app.translator.trans('flarum-tags.forum.choose_tags.submit_button')}
             </Button>
           </div>
@@ -187,34 +193,28 @@ export default class TagDiscussionModal extends Modal {
       <div className="Modal-footer">
         <ul className="TagDiscussionModal-list SelectTagList">
           {tags
-            .filter(tag => filter || !tag.parent() || this.selected.indexOf(tag.parent()) !== -1)
-            .map(tag => (
-              <li data-index={tag.id()}
+            .filter((tag) => filter || !tag.parent() || this.selected.indexOf(tag.parent()) !== -1)
+            .map((tag) => (
+              <li
+                data-index={tag.id()}
                 className={classList({
                   pinned: tag.position() !== null,
                   child: !!tag.parent(),
                   colored: !!tag.color(),
                   selected: this.selected.indexOf(tag) !== -1,
-                  active: this.index === tag
+                  active: this.index === tag,
                 })}
-                style={{color: tag.color()}}
-                onmouseover={() => this.index = tag}
+                style={{ color: tag.color() }}
+                onmouseover={() => (this.index = tag)}
                 onclick={this.toggleTag.bind(this, tag)}
               >
                 {tagIcon(tag)}
-                <span className="SelectTagListItem-name">
-                  {highlight(tag.name(), filter)}
-                </span>
-                {tag.description()
-                  ? (
-                    <span className="SelectTagListItem-description">
-                      {tag.description()}
-                    </span>
-                  ) : ''}
+                <span className="SelectTagListItem-name">{highlight(tag.name(), filter)}</span>
+                {tag.description() ? <span className="SelectTagListItem-description">{tag.description()}</span> : ''}
               </li>
             ))}
         </ul>
-      </div>
+      </div>,
     ];
   }
 
@@ -259,9 +259,7 @@ export default class TagDiscussionModal extends Modal {
   }
 
   getCurrentNumericIndex() {
-    return this.selectableItems().index(
-      this.getItem(this.index)
-    );
+    return this.selectableItems().index(this.getItem(this.index));
   }
 
   getItem(index) {
@@ -299,7 +297,7 @@ export default class TagDiscussionModal extends Modal {
       }
 
       if (typeof scrollTop !== 'undefined') {
-        $dropdown.stop(true).animate({scrollTop}, 100);
+        $dropdown.stop(true).animate({ scrollTop }, 100);
       }
     }
   }
@@ -311,13 +309,12 @@ export default class TagDiscussionModal extends Modal {
     const tags = this.selected;
 
     if (discussion) {
-      discussion.save({relationships: {tags}})
-        .then(() => {
-          if (app.current.matches(DiscussionPage)) {
-            app.current.get('stream').update();
-          }
-          m.redraw();
-        });
+      discussion.save({ relationships: { tags } }).then(() => {
+        if (app.current.matches(DiscussionPage)) {
+          app.current.get('stream').update();
+        }
+        m.redraw();
+      });
     }
 
     if (this.attrs.onsubmit) this.attrs.onsubmit(tags);
