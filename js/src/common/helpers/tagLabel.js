@@ -22,7 +22,6 @@ export default function tagLabel(tag, attrs = {}) {
     }
 
     attrs["data-is-child"] = tag.data.attributes.isChild ? "true" : "false";
-    console.log(tag);
   } else {
     attrs.className += ' untagged';
   }
