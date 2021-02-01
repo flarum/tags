@@ -20,6 +20,8 @@ export default function tagLabel(tag, attrs = {}) {
       attrs.title = tag.description() || '';
       attrs.href = app.route('tag', {tags: tag.slug()});
     }
+    
+    attrs["data-is-secondary"] = tag.data.attributes.isChild;
   } else {
     attrs.className += ' untagged';
   }
