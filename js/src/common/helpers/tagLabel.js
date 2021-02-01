@@ -21,7 +21,7 @@ export default function tagLabel(tag, attrs = {}) {
       attrs.href = app.route('tag', {tags: tag.slug()});
     }
     
-    attrs["data-is-secondary"] = tag.data.attributes.isChild;
+    attrs["data-is-child"] = tag.data.attributes.isChild;
   } else {
     attrs.className += ' untagged';
   }
