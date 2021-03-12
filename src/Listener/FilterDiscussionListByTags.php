@@ -10,7 +10,6 @@
 namespace Flarum\Tags\Listener;
 
 use Flarum\Discussion\Event\Searching;
-use Flarum\Event\ConfigureDiscussionGambits;
 use Flarum\Tags\Tag;
 use Illuminate\Contracts\Events\Dispatcher;
 
