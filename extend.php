@@ -11,6 +11,8 @@ use Flarum\Api\Controller as FlarumController;
 use Flarum\Api\Serializer\DiscussionSerializer;
 use Flarum\Api\Serializer\ForumSerializer;
 use Flarum\Discussion\Discussion;
+use Flarum\Discussion\Filter\DiscussionFilterer;
+use Flarum\Discussion\Search\DiscussionSearcher;
 use Flarum\Discussion\Event\Saving;
 use Flarum\Extend;
 use Flarum\Flags\Flag;
@@ -22,6 +24,7 @@ use Flarum\Tags\Event\DiscussionWasTagged;
 use Flarum\Tags\Listener;
 use Flarum\Tags\LoadForumTagsRelationship;
 use Flarum\Tags\Post\DiscussionTaggedPost;
+use Flarum\Tags\Query\TagFilterGambit;
 use Flarum\Tags\Tag;
 use Illuminate\Contracts\Events\Dispatcher;
 
@@ -103,6 +106,12 @@ return [
     (new Extend\Event())
         ->listen(Saving::class, Listener\SaveTagsToDatabase::class)
         ->listen(DiscussionWasTagged::class, Listener\CreatePostWhenTagsAreChanged::class),
+
+    (new Extend\Filter(DiscussionFilterer::class))
+        ->addFilter(TagFilterGambit::class),
+
+    (new Extend\SimpleFlarumSearch(DiscussionSearcher::class))
+        ->addGambit(TagFilterGambit::class),
 
     function (Dispatcher $events) {
         $events->subscribe(Listener\FilterDiscussionListByTags::class);
