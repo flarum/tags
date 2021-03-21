@@ -62,8 +62,12 @@ return [
             return $serializer->getActor()->can('tag', $model);
         }),
 
+    (new Extend\ApiController(FlarumController\ListPostsController::class))
+        ->load('discussion.tags'),
+
     (new Extend\ApiController(FlarumController\ListDiscussionsController::class))
-        ->addInclude(['tags', 'tags.state']),
+        ->addInclude(['tags', 'tags.state'])
+        ->load('tags'),
 
     (new Extend\ApiController(FlarumController\ShowDiscussionController::class))
         ->addInclude(['tags', 'tags.state']),
