@@ -6,8 +6,6 @@ import GlobalSearchState from 'flarum/states/GlobalSearchState';
 import TagHero from './components/TagHero';
 
 export default function() {
-  IndexPage.prototype.currentActiveTag = null;
-
   IndexPage.prototype.currentTag = function() {
     if (this.currentActiveTag) {
       return this.currentActiveTag;
