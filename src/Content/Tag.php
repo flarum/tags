@@ -84,12 +84,9 @@ class Tag
 
         $tagsDocument = $this->getTagsDocument($actor, $slug);
 
-        foreach ($tagsDocument['data'] as $tag) {
-            // $apiDocument['data'][] = $tag;
-        }
-
+        $apiDocument['included'][] = $tagsDocument['data'];
         foreach ($tagsDocument['included'] as $tag) {
-            // $apiDocument['included'][] = $tag;
+            $apiDocument['included'][] = $tag;
         }
 
         $document->title = $tag->name;
