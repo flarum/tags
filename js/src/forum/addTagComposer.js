@@ -23,12 +23,7 @@ export default function () {
 
 
   extend(DiscussionComposer.prototype, 'oninit', function () {
-    this.tagsLoading = true;
-
-    app.tagList.load(['parent']).then(() => {
-      this.tagsLoading = false;
-      m.redraw();
-    })
+    app.tagList.load(['parent']).then(() => m.redraw())
   });
 
   // Add tag-selection abilities to the discussion composer.
