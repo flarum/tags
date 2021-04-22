@@ -12,6 +12,7 @@
                             ]) }}">
                         {{ $tag['name'] }}
                     </a>
+
                     @if ($children->has($id))
                         <ul>
                             @foreach ($children->get($id) as $child)
