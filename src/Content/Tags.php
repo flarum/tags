@@ -16,7 +16,7 @@ use Flarum\Settings\SettingsRepositoryInterface;
 use Flarum\Tags\Api\Controller\ListTagsController;
 use Flarum\Tags\TagRepository;
 use Flarum\User\User;
-use Illuminate\Contracts\Translation\Translator;
+use Symfony\Contracts\Translation\TranslatorInterface;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Support\Arr;
 use Psr\Http\Message\ServerRequestInterface as Request;
@@ -39,7 +39,7 @@ class Tags
     protected $tags;
 
     /**
-     * @var Translator
+     * @var TranslatorInterface
      */
     protected $translator;
 
@@ -57,7 +57,7 @@ class Tags
      * @param Client $api
      * @param Factory $view
      * @param TagRepository $tags
-     * @param Translator $translator
+     * @param TranslatorInterface $translator
      * @param SettingsRepositoryInterface $settings
      * @param UrlGenerator $url
      */
@@ -65,7 +65,7 @@ class Tags
         Client $api,
         Factory $view,
         TagRepository $tags,
-        Translator $translator,
+        TranslatorInterface $translator,
         SettingsRepositoryInterface $settings,
         UrlGenerator $url
     ) {
@@ -79,8 +79,8 @@ class Tags
 
     public function __invoke(Document $document, Request $request)
     {
-        $tags = Arr::get($this->getTagsDocument($request->getAttribute('actor')), 'data', []);
-        $tags = collect($tags);
+        $apiDocument = $this->getTagsDocument($request->getAttribute('actor'));
+        $tags = collect(Arr::get($apiDocument, 'data', []));
 
         $childTags = $tags->where('attributes.isChild', true);
         $primaryTags = $tags->where('attributes.isChild', false)->where('attributes.position', '!==', null)->sortBy('attributes.position');
@@ -99,12 +99,15 @@ class Tags
         $document->meta['description'] = $this->translator->trans('flarum-tags.forum.all_tags.meta_description_text');
         $document->content = $this->view->make('tags::frontend.content.tags', compact('primaryTags', 'secondaryTags', 'children'));
         $document->canonicalUrl = $this->url->to('forum')->base().($defaultRoute === '/tags' ? '' : $request->getUri()->getPath());
+        $document->payload['apiDocument'] = $apiDocument;
 
         return $document;
     }
 
     private function getTagsDocument(User $actor)
     {
-        return json_decode($this->api->send(ListTagsController::class, $actor)->getBody(), true);
+        return json_decode($this->api->send(ListTagsController::class, $actor, [
+            'include' => 'parent,children,lastPostedDiscussion'
+        ])->getBody(), true);
     }
 }

@@ -1,6 +1,7 @@
 import Page from 'flarum/components/Page';
 import IndexPage from 'flarum/components/IndexPage';
 import Link from 'flarum/components/Link';
+import LoadingIndicator from 'flarum/components/LoadingIndicator';
 import listItems from 'flarum/helpers/listItems';
 import humanTime from 'flarum/helpers/humanTime';
 
@@ -12,21 +13,33 @@ export default class TagsPage extends Page {
   oninit(vnode) {
     super.oninit(vnode);
 
+    app.history.push('tags', app.translator.trans('flarum-tags.forum.header.back_to_tags_tooltip'));
+
     this.tags = [];
 
-    app.store.find('tags').then(() => {
-      let tags = app.store.all('tags').filter(tag => !tag.parent());
+    const preloaded = app.preloadedApiDocument();
 
-      this.tags = sortTags(tags);
+    if (preloaded) {
+      this.tags = sortTags(preloaded.filter(tag => !tag.parent()));
+      return;
+    }    
+
+    this.loading = true;
+
+    app.store.find('tags', { include: 'parent,lastPostedDiscussion' }).then(() => {
+      this.tags = sortTags(app.store.all('tags').filter(tag => !tag.parent()));
+
+      this.loading = false;
 
       m.redraw();
     });
-    // this.tags = sortTags(app.store.all('tags').filter(tag => !tag.parent()));
-
-    app.history.push('tags', app.translator.trans('flarum-tags.forum.header.back_to_tags_tooltip'));
   }
 
   view() {
+    if (this.loading) {
+      return <LoadingIndicator />;
+    }
+
     const pinned = this.tags.filter(tag => tag.position() !== null);
     const cloud = this.tags.filter(tag => tag.position() === null);
 

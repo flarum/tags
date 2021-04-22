@@ -13,7 +13,7 @@ export default function() {
       return this.currentActiveTag;
     }
 
-    const slug = this.params().tags;
+    const slug = app.search.params().tags;
     let tag = null;
 
     if (slug) {

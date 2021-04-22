@@ -34,7 +34,9 @@ class ListTagsController extends AbstractListController
      * {@inheritdoc}
      */
     public $optionalInclude = [
-        'lastPostedDiscussion'
+        'children',
+        'lastPostedDiscussion',
+        'state'
     ];
 
     /**

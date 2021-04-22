@@ -2,6 +2,7 @@ import sortable from 'sortablejs';
 
 import ExtensionPage from 'flarum/components/ExtensionPage';
 import Button from 'flarum/components/Button';
+import LoadingIndicator from 'flarum/components/LoadingIndicator';
 import withAttr from 'flarum/utils/withAttr';
 
 import EditTagModal from './EditTagModal';
@@ -41,25 +42,28 @@ export default class TagsPage extends ExtensionPage {
     // makes mithril completely re-render the component on redraw.
     this.forcedRefreshKey = 0;
 
-    this.tags = [];
+    this.loading = true;
 
-    app.store.find('tags').then(() => {
-      let tags = app.store.all('tags').filter(tag => !tag.parent());
-
-      this.tags = sortTags(tags);
+    app.store.find('tags', { include: 'parent,lastPostedDiscussion' }).then(() => {
+      this.loading = false;
 
       m.redraw();
     });
   }
 
   content() {
+    if (this.loading) {
+      return <LoadingIndicator />;
+    }
+
     const minPrimaryTags = this.setting('flarum-tags.min_primary_tags', 0);
     const maxPrimaryTags = this.setting('flarum-tags.max_primary_tags', 0);
 
     const minSecondaryTags = this.setting('flarum-tags.min_secondary_tags', 0);
     const maxSecondaryTags = this.setting('flarum-tags.max_secondary_tags', 0);
 
-  view() {
+    const tags = sortTags(app.store.all('tags').filter(tag => !tag.parent()));
+    
     return (
       <div className="TagsContent">
         <div className="TagsContent-list">
@@ -67,7 +71,7 @@ export default class TagsPage extends ExtensionPage {
             <div className="TagGroup">
               <label>{app.translator.trans('flarum-tags.admin.tags.primary_heading')}</label>
               <ol className="TagList TagList--primary">
-                {this.tags
+                {tags
                   .filter(tag => tag.position() !== null && !tag.isChild())
                   .map(tagItem)}
               </ol>
@@ -84,7 +88,7 @@ export default class TagsPage extends ExtensionPage {
             <div className="TagGroup TagGroup--secondary">
               <label>{app.translator.trans('flarum-tags.admin.tags.secondary_heading')}</label>
               <ul className="TagList">
-                {this.tags
+                {tags
                   .filter(tag => tag.position() === null)
                   .sort((a, b) => a.name().localeCompare(b.name()))
                   .map(tagItem)}

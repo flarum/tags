@@ -81,7 +81,7 @@ return [
         ->addInclude(['tags', 'tags.state']),
 
     (new Extend\ApiController(FlarumController\ShowForumController::class))
-        ->addInclude(['tags', 'tags.lastPostedDiscussion', 'tags.parent'])
+        ->addInclude(['tags', 'tags.parent'])
         ->prepareDataForSerialization(LoadForumTagsRelationship::class),
 
     (new Extend\Settings())

@@ -12,6 +12,7 @@ namespace Flarum\Tags\Api\Controller;
 use Flarum\Api\Controller\AbstractShowController;
 use Flarum\Tags\Api\Serializer\TagSerializer;
 use Flarum\Tags\Tag;
+use Illuminate\Support\Arr;
 use Psr\Http\Message\ServerRequestInterface;
 use Tobscure\JsonApi\Document;
 
@@ -19,7 +20,13 @@ class ShowTagController extends AbstractShowController
 {
     public $serializer = TagSerializer::class;
 
-    public $optionalInclude = ['parent', 'children'];
+    public $optionalInclude = [
+        'parent',
+        'children',
+        'lastPostedDiscussion',
+        'state'
+    ];
+    
     /**
      * @var Tag
      */
@@ -35,7 +42,7 @@ class ShowTagController extends AbstractShowController
      */
     protected function data(ServerRequestInterface $request, Document $document)
     {
-        $slug = array_get($request->getQueryParams(), 'slug');
+        $slug = Arr::get($request->getQueryParams(), 'slug');
         $actor = $request->getAttribute('actor');
         $include = $this->extractInclude($request);
 
