@@ -16,10 +16,10 @@ use Flarum\Settings\SettingsRepositoryInterface;
 use Flarum\Tags\Api\Controller\ListTagsController;
 use Flarum\Tags\TagRepository;
 use Flarum\User\User;
-use Symfony\Contracts\Translation\TranslatorInterface;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Support\Arr;
 use Psr\Http\Message\ServerRequestInterface as Request;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 class Tags
 {

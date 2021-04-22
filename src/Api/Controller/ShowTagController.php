@@ -26,7 +26,7 @@ class ShowTagController extends AbstractShowController
         'lastPostedDiscussion',
         'state'
     ];
-    
+
     /**
      * @var Tag
      */
