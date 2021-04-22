@@ -26,7 +26,7 @@ export default class TagsPage extends Page {
 
     this.loading = true;
 
-    app.store.find('tags', { include: 'parent,lastPostedDiscussion' }).then(() => {
+    app.tagList.load(['parent', 'lastPostedDiscussion']).then(() => {
       this.tags = sortTags(app.store.all('tags').filter(tag => !tag.parent()));
 
       this.loading = false;

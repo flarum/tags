@@ -21,7 +21,7 @@ export default function() {
     }
 
     if (slug && (!tag || !tag.children())) {
-      app.store.find('tags', slug, {include: 'children'}).then(() => {
+      app.store.find('tags', slug, {include: 'children,state'}).then(() => {
         this.currentActiveTag = app.store.getBy('tags', 'slug', slug);
 
         m.redraw();
