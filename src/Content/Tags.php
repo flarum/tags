@@ -85,16 +85,14 @@ class Tags
         $childTags = $tags->where('attributes.isChild', true);
         $primaryTags = $tags->where('attributes.isChild', false)->where('attributes.position', '!==', null)->sortBy('attributes.position');
         $secondaryTags = $tags->where('attributes.isChild', false)->where('attributes.position', '===', null)->sortBy('attributes.name');
-        $defaultRoute = $this->settings->get('default_route');
 
         $children = $primaryTags->mapWithKeys(function ($tag) use ($childTags) {
-            $id = Arr::get($tag, 'id');
+            $childIds = collect(Arr::get($tag, 'relationships.children.data'))->pluck('id');
 
-            return [
-                $id => $childTags->where('relationships.parent.data.id', $id)->pluck('attributes')->sortBy('position')
-            ];
+            return [$tag['id'] => $childTags->whereIn('id', $childIds)->sortBy('position')];
         });
 
+        $defaultRoute = $this->settings->get('default_route');
         $document->title = $this->translator->trans('flarum-tags.forum.all_tags.meta_title_text');
         $document->meta['description'] = $this->translator->trans('flarum-tags.forum.all_tags.meta_description_text');
         $document->content = $this->view->make('tags::frontend.content.tags', compact('primaryTags', 'secondaryTags', 'children'));
@@ -107,7 +105,7 @@ class Tags
     private function getTagsDocument(User $actor)
     {
         return json_decode($this->api->send(ListTagsController::class, $actor, [
-            'include' => 'parent,children,lastPostedDiscussion'
+            'include' => 'children,lastPostedDiscussion'
         ])->getBody(), true);
     }
 }

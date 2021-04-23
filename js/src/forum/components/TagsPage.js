@@ -20,14 +20,14 @@ export default class TagsPage extends Page {
     const preloaded = app.preloadedApiDocument();
 
     if (preloaded) {
-      this.tags = sortTags(preloaded.filter(tag => !tag.parent()));
+      this.tags = sortTags(preloaded.filter(tag => !tag.isChild()));
       return;
     }    
 
     this.loading = true;
 
-    app.tagList.load(['parent', 'lastPostedDiscussion']).then(() => {
-      this.tags = sortTags(app.store.all('tags').filter(tag => !tag.parent()));
+    app.tagList.load(['children', 'lastPostedDiscussion']).then(() => {
+      this.tags = sortTags(app.store.all('tags').filter(tag => !tag.isChild()));
 
       this.loading = false;
 
@@ -55,7 +55,7 @@ export default class TagsPage extends Page {
             <ul className="TagTiles">
               {pinned.map(tag => {
                 const lastPostedDiscussion = tag.lastPostedDiscussion();
-                const children = sortTags(app.store.all('tags').filter(child => child.parent() === tag));
+                const children = sortTags(tag.children());
 
                 return (
                   <li className={'TagTile ' + (tag.color() ? 'colored' : '')}
