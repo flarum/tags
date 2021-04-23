@@ -38,8 +38,8 @@ class GlobalPolicy extends AbstractPolicy
                 return $this->allow();
             }
 
-            $enoughPrimary = count(Tag::getIdsWhereCan($actor, $ability, true, false)) >= $this->settings->get('flarum-tags.min_primary_tags');
-            $enoughSecondary = count(Tag::getIdsWhereCan($actor, $ability, false, true)) >= $this->settings->get('flarum-tags.min_secondary_tags');
+            $enoughPrimary = Tag::queryIdsWhereCan(Tag::query(), $actor, $ability, true, false) >= $this->settings->get('flarum-tags.min_primary_tags');
+            $enoughSecondary = Tag::queryIdsWhereCan(Tag::query(), $actor, $ability, false, true) >= $this->settings->get('flarum-tags.min_secondary_tags');
 
             if ($enoughPrimary && $enoughSecondary) {
                 return $this->allow();

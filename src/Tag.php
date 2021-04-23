@@ -190,45 +190,62 @@ class Tag extends AbstractModel
         Permission::where('permission', 'like', "tag{$this->id}.%")->delete();
     }
 
-    protected static function getIdsWherePermission(User $user, string $permission, bool $condition = true, bool $includePrimary = true, bool $includeSecondary = true): array
+    protected static function buildPermissionSubquery($base, $hasGlobalPermission, $tagIdsWithPermission)
     {
-        static $tags;
+        $base
+            ->from('tags as perm_tags')
+            ->select('perm_tags.id')
+            ->where(function ($query) use ($tagIdsWithPermission) {
+                $query
+                    ->where('perm_tags.is_restricted', true)
+                    ->whereIn('perm_tags.id', $tagIdsWithPermission);
+            });
 
-        if (! $tags) {
-            $tags = static::with('parent')->get();
+        if ($hasGlobalPermission) {
+            $base->orWhere('perm_tags.is_restricted', false);
         }
-
-        $ids = [];
-        $hasGlobalPermission = $user->hasPermission($permission);
-
-        $canForTag = function (self $tag) use ($user, $permission, $hasGlobalPermission) {
-            return ($hasGlobalPermission && ! $tag->is_restricted) || ($tag->is_restricted && $user->hasPermission('tag'.$tag->id.'.'.$permission));
-        };
-
-        foreach ($tags as $tag) {
-            $can = $canForTag($tag);
-
-            if ($can && $tag->parent) {
-                $can = $canForTag($tag->parent);
-            }
-
-            $isPrimary = $tag->position !== null && ! $tag->parent;
-
-            if ($can === $condition && ($includePrimary && $isPrimary || $includeSecondary && ! $isPrimary)) {
-                $ids[] = $tag->id;
-            }
-        }
-
-        return $ids;
     }
 
-    public static function getIdsWhereCan(User $user, string $permission, bool $includePrimary = true, bool $includeSecondary = true): array
+    protected static function queryIdsWhereCan($base, User $user, string $currPermission, bool $includePrimary = true, bool $includeSecondary = true)
     {
-        return static::getIdsWherePermission($user, $permission, true, $includePrimary, $includeSecondary);
-    }
+        $allPermissions = $user->getPermissions();
 
-    public static function getIdsWhereCannot(User $user, string $permission, bool $includePrimary = true, bool $includeSecondary = true): array
-    {
-        return static::getIdsWherePermission($user, $permission, false, $includePrimary, $includeSecondary);
+        $tagIdsWithPermission = collect($allPermissions)
+            ->filter(function ($permission) use ($currPermission) {
+                return substr($permission, 0, 3) === 'tag' && strpos($permission, $currPermission) !== false;
+            })
+            ->map(function ($permission) {
+                $scopeFragment = explode(".", $permission, 2)[0];
+                return substr($scopeFragment, 3);
+            })
+            ->values();
+
+        $hasGlobalPermission = $user->hasPermission($currPermission);
+
+        $validTags = $base
+            ->from('tags as s_tags')
+            ->where(function ($query) use ($hasGlobalPermission, $tagIdsWithPermission) {
+                $query
+                    ->whereIn('s_tags.id', function ($query) use ($hasGlobalPermission, $tagIdsWithPermission) {
+                        static::buildPermissionSubquery($query, $hasGlobalPermission, $tagIdsWithPermission);
+                    })
+                    ->where(function ($query) use ($hasGlobalPermission, $tagIdsWithPermission) {
+                        $query
+                            ->whereIn('s_tags.parent_id', function ($query) use ($hasGlobalPermission, $tagIdsWithPermission) {
+                                static::buildPermissionSubquery($query, $hasGlobalPermission, $tagIdsWithPermission);
+                            })
+                            ->orWhere('s_tags.parent_id', null);
+                    });
+            })
+            ->where(function ($query) use ($includePrimary, $includeSecondary) {
+                if (!$includePrimary) {
+                    $query->where('s_tags.position', '==', null);
+                }
+                if (!$includeSecondary) {
+                    $query->orWhere('s_tags.position', '!=', null);
+                }
+            });
+
+        return $validTags->select('s_tags.id');
     }
 }
