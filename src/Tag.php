@@ -149,7 +149,7 @@ class Tag extends AbstractModel
     {
         $state = $this->state()->where('user_id', $user->id)->first();
 
-        if (! $state) {
+        if (!$state) {
             $state = new TagState;
             $state->tag_id = $this->id;
             $state->user_id = $user->id;
@@ -179,7 +179,7 @@ class Tag extends AbstractModel
      */
     public function wasUnrestricted()
     {
-        return ! $this->is_restricted && $this->wasChanged('is_restricted');
+        return !$this->is_restricted && $this->wasChanged('is_restricted');
     }
 
     /**
@@ -190,16 +190,21 @@ class Tag extends AbstractModel
         Permission::where('permission', 'like', "tag{$this->id}.%")->delete();
     }
 
-    protected static function buildPermissionSubquery($base, $hasGlobalPermission, $tagIdsWithPermission)
+    protected static function buildPermissionSubquery($base, $isAdmin, $hasGlobalPermission, $tagIdsWithPermission)
     {
         $base
             ->from('tags as perm_tags')
-            ->select('perm_tags.id')
-            ->where(function ($query) use ($tagIdsWithPermission) {
-                $query
-                    ->where('perm_tags.is_restricted', true)
-                    ->whereIn('perm_tags.id', $tagIdsWithPermission);
-            });
+            ->select('perm_tags.id');
+
+        // This needs to be a special case, as `tagIdsWithPermissions`
+        // won't include admin perms (which are all perms by default).
+        if ($isAdmin) return;
+
+        $base->where(function ($query) use ($tagIdsWithPermission) {
+            $query
+                ->where('perm_tags.is_restricted', true)
+                ->whereIn('perm_tags.id', $tagIdsWithPermission);
+        });
 
         if ($hasGlobalPermission) {
             $base->orWhere('perm_tags.is_restricted', false);
@@ -208,6 +213,8 @@ class Tag extends AbstractModel
 
     protected static function queryIdsWhereCan($base, User $user, string $currPermission, bool $includePrimary = true, bool $includeSecondary = true)
     {
+        $hasGlobalPermission = $user->hasPermission($currPermission);
+        $isAdmin = $user->isAdmin();
         $allPermissions = $user->getPermissions();
 
         $tagIdsWithPermission = collect($allPermissions)
@@ -220,29 +227,28 @@ class Tag extends AbstractModel
             })
             ->values();
 
-        $hasGlobalPermission = $user->hasPermission($currPermission);
 
         $validTags = $base
             ->from('tags as s_tags')
-            ->where(function ($query) use ($hasGlobalPermission, $tagIdsWithPermission) {
+            ->where(function ($query) use ($isAdmin, $hasGlobalPermission, $tagIdsWithPermission) {
                 $query
-                    ->whereIn('s_tags.id', function ($query) use ($hasGlobalPermission, $tagIdsWithPermission) {
-                        static::buildPermissionSubquery($query, $hasGlobalPermission, $tagIdsWithPermission);
+                    ->whereIn('s_tags.id', function ($query) use ($isAdmin, $hasGlobalPermission, $tagIdsWithPermission) {
+                        static::buildPermissionSubquery($query, $isAdmin, $hasGlobalPermission, $tagIdsWithPermission);
                     })
-                    ->where(function ($query) use ($hasGlobalPermission, $tagIdsWithPermission) {
+                    ->where(function ($query) use ($isAdmin, $hasGlobalPermission, $tagIdsWithPermission) {
                         $query
-                            ->whereIn('s_tags.parent_id', function ($query) use ($hasGlobalPermission, $tagIdsWithPermission) {
-                                static::buildPermissionSubquery($query, $hasGlobalPermission, $tagIdsWithPermission);
+                            ->whereIn('s_tags.parent_id', function ($query) use ($isAdmin, $hasGlobalPermission, $tagIdsWithPermission) {
+                                static::buildPermissionSubquery($query, $isAdmin, $hasGlobalPermission, $tagIdsWithPermission);
                             })
                             ->orWhere('s_tags.parent_id', null);
                     });
             })
             ->where(function ($query) use ($includePrimary, $includeSecondary) {
                 if (!$includePrimary) {
-                    $query->where('s_tags.position', '==', null);
+                    $query->where('s_tags.position', '=', null);
                 }
                 if (!$includeSecondary) {
-                    $query->orWhere('s_tags.position', '!=', null);
+                    $query->where('s_tags.position', '!=', null);
                 }
             });
 
