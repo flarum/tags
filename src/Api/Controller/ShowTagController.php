@@ -21,9 +21,12 @@ class ShowTagController extends AbstractShowController
     public $serializer = TagSerializer::class;
 
     public $optionalInclude = [
-        'parent',
         'children',
+        'children.parent',
         'lastPostedDiscussion',
+        'parent',
+        'parent.children',
+        'parent.children.parent',
         'state'
     ];
 

@@ -84,9 +84,9 @@ class Tag
 
         $tagsDocument = $this->getTagsDocument($actor, $slug);
 
-        $apiDocument['included'][] = $tagsDocument['data'];
-        foreach ($tagsDocument['included'] as $tag) {
-            $apiDocument['included'][] = $tag;
+        $apiDocument->included[] = $tagsDocument->data;
+        foreach ((array) $tagsDocument->included as $tag) {
+            $apiDocument->included[] = $tag;
         }
 
         $document->title = $tag->name;
@@ -125,14 +125,14 @@ class Tag
      */
     private function getApiDocument(User $actor, array $params)
     {
-        return json_decode($this->api->send(ListDiscussionsController::class, $actor, $params)->getBody(), true);
+        return json_decode($this->api->send(ListDiscussionsController::class, $actor, $params)->getBody());
     }
 
     private function getTagsDocument(User $actor, string $slug)
     {
         return json_decode($this->api->send(ShowTagController::class, $actor, [
             'slug' => $slug,
-            'include' => 'children'
-        ])->getBody(), true);
+            'include' => 'children,parent,parent.children,parent.children.parent,state'
+        ])->getBody());
     }
 }

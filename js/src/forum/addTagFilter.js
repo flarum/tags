@@ -19,7 +19,11 @@ export default function() {
     }
 
     if (slug && (!tag || !tag.children())) {
-      app.store.find('tags', slug, {include: 'children,state'}).then(() => {
+      // Unlike the backend, no need to fetch parent.children because if we're on
+      // a child tag page, then either:
+      //    - We loaded in that child tag (and its siblings) in the API document
+      //    - We first navigated to the current tag's parent, which would have loaded in the current tag's siblings.
+      app.store.find('tags', slug, { include: 'children,parent,state'}).then(() => {
         this.currentActiveTag = app.store.getBy('tags', 'slug', slug);
 
         m.redraw();
