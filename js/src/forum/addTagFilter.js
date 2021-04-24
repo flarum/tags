@@ -23,7 +23,7 @@ export default function() {
       // a child tag page, then either:
       //    - We loaded in that child tag (and its siblings) in the API document
       //    - We first navigated to the current tag's parent, which would have loaded in the current tag's siblings.
-      app.store.find('tags', slug, { include: 'children,parent,state'}).then(() => {
+      app.store.find('tags', slug, { include: 'children,children.parent,parent,state'}).then(() => {
         this.currentActiveTag = app.store.getBy('tags', 'slug', slug);
 
         m.redraw();

@@ -132,7 +132,7 @@ class Tag
     {
         return json_decode($this->api->send(ShowTagController::class, $actor, [
             'slug' => $slug,
-            'include' => 'children,parent,parent.children,parent.children.parent,state'
+            'include' => 'children,children.parent,parent,parent.children.parent,state'
         ])->getBody());
     }
 }
