@@ -18,7 +18,7 @@ export default function() {
       tag = app.store.getBy('tags', 'slug', slug);
     }
 
-    if (slug && !tag || (!tag.isChild() && !tag.children())) {
+    if (slug && !tag || (tag && !tag.isChild() && !tag.children())) {
       // Unlike the backend, no need to fetch parent.children because if we're on
       // a child tag page, then either:
       //    - We loaded in that child tag (and its siblings) in the API document
