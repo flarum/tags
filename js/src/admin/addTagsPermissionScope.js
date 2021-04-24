@@ -30,6 +30,8 @@ export default function() {
         label: tagLabel(tag),
         onremove: () => tag.save({isRestricted: false}),
         render: item => {
+          if (item.tagScoped !== undefined) return item.tagScoped;
+          
           if (item.permission === 'viewDiscussions'
             || item.permission === 'startDiscussion'
             || (item.permission && item.permission.indexOf('discussion.') === 0)) {
