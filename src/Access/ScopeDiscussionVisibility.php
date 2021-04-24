@@ -27,7 +27,7 @@ class ScopeDiscussionVisibility
                 ->whereNotIn('discussions.id', function ($query) use ($actor) {
                     return $query->select('discussion_id')
                         ->from('discussion_tag')
-                        ->whereNotIn('tag_id', function($query) use ($actor) {
+                        ->whereNotIn('tag_id', function ($query) use ($actor) {
                             Tag::queryIdsWhereCan($query->from('tags'), $actor, 'viewDiscussions');
                         });
                 })

@@ -14,7 +14,8 @@ use Flarum\Tags\Tests\integration\RetrievesRepresentativeTags;
 use Flarum\Testing\integration\RetrievesAuthorizedUsers;
 use Flarum\Testing\integration\TestCase;
 
-class CreateTest  extends TestCase{
+class CreateTest extends TestCase
+{
     use RetrievesAuthorizedUsers;
     use RetrievesRepresentativeTags;
 

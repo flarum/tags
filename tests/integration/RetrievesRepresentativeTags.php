@@ -9,8 +9,10 @@
 
 namespace Flarum\Tags\Tests\integration;
 
-trait RetrievesRepresentativeTags {
-    protected function tags() {
+trait RetrievesRepresentativeTags
+{
+    protected function tags()
+    {
         return [
             ['id' => 1, 'name' => 'Primary 1', 'slug' => 'primary-1', 'position' => 0, 'parent_id' => null],
             ['id' => 2, 'name' => 'Primary 2', 'slug' => 'primary-2', 'position' => 1, 'parent_id' => null],

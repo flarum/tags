@@ -149,7 +149,7 @@ class Tag extends AbstractModel
     {
         $state = $this->state()->where('user_id', $user->id)->first();
 
-        if (!$state) {
+        if (! $state) {
             $state = new TagState;
             $state->tag_id = $this->id;
             $state->user_id = $user->id;
@@ -179,7 +179,7 @@ class Tag extends AbstractModel
      */
     public function wasUnrestricted()
     {
-        return !$this->is_restricted && $this->wasChanged('is_restricted');
+        return ! $this->is_restricted && $this->wasChanged('is_restricted');
     }
 
     /**
@@ -198,7 +198,9 @@ class Tag extends AbstractModel
 
         // This needs to be a special case, as `tagIdsWithPermissions`
         // won't include admin perms (which are all perms by default).
-        if ($isAdmin) return;
+        if ($isAdmin) {
+            return;
+        }
 
         $base->where(function ($query) use ($tagIdsWithPermission) {
             $query
@@ -222,11 +224,11 @@ class Tag extends AbstractModel
                 return substr($permission, 0, 3) === 'tag' && strpos($permission, $currPermission) !== false;
             })
             ->map(function ($permission) {
-                $scopeFragment = explode(".", $permission, 2)[0];
+                $scopeFragment = explode('.', $permission, 2)[0];
+
                 return substr($scopeFragment, 3);
             })
             ->values();
-
 
         $validTags = $base
             ->from('tags as s_tags')
@@ -244,10 +246,10 @@ class Tag extends AbstractModel
                     });
             })
             ->where(function ($query) use ($includePrimary, $includeSecondary) {
-                if (!$includePrimary) {
+                if (! $includePrimary) {
                     $query->where('s_tags.position', '=', null);
                 }
-                if (!$includeSecondary) {
+                if (! $includeSecondary) {
                     $query->where('s_tags.position', '!=', null);
                 }
             });
