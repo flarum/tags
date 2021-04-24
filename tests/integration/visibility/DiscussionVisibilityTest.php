@@ -83,7 +83,7 @@ class DiscussionVisibilityTest extends TestCase
         $data = json_decode($response->getBody()->getContents(), true)['data'];
 
         $ids = Arr::pluck($data, 'id');
-        $this->assertEquals(['1', '2', '3', '4', '5'], $ids);
+        $this->assertEqualsCanonicalizing(['1', '2', '3', '4', '5'], $ids);
     }
 
     /**
@@ -105,7 +105,7 @@ class DiscussionVisibilityTest extends TestCase
         // 6, 7, 8 aren't included because child access shouldnt work unless parent
         // access is also given.
         $ids = Arr::pluck($data, 'id');
-        $this->assertEquals(['1', '2', '3', '4'], $ids);
+        $this->assertEqualsCanonicalizing(['1', '2', '3', '4'], $ids);
     }
 
     /**
@@ -122,6 +122,6 @@ class DiscussionVisibilityTest extends TestCase
         $data = json_decode($response->getBody()->getContents(), true)['data'];
 
         $ids = Arr::pluck($data, 'id');
-        $this->assertEquals(['1', '2'], $ids);
+        $this->assertEqualsCanonicalizing(['1', '2'], $ids);
     }
 }
