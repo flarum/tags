@@ -15,7 +15,6 @@ use Flarum\Discussion\Discussion;
 use Flarum\Group\Permission;
 use Flarum\User\User;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Query\Builder as QueryBuilder;
 
 /**
  * @property int $id
@@ -214,7 +213,7 @@ class Tag extends AbstractModel
         }
     }
 
-    protected static function queryIdsWhereCan($base, User $user, string $currPermission, bool $includePrimary = true, bool $includeSecondary = true): QueryBuilder
+    protected static function queryIdsWhereCan($base, User $user, string $currPermission, bool $includePrimary = true, bool $includeSecondary = true)
     {
         $hasGlobalPermission = $user->hasPermission($currPermission);
         $isAdmin = $user->isAdmin();
