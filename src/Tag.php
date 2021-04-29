@@ -213,7 +213,7 @@ class Tag extends AbstractModel
         }
     }
 
-    protected static function queryIdsWhereCan($base, User $user, string $currPermission, bool $includePrimary = true, bool $includeSecondary = true)
+    protected static function queryIdsWhereCan($base, User $user, string $currPermission, bool $includePrimary = true, bool $includeSecondary = true): Builder
     {
         $hasGlobalPermission = $user->hasPermission($currPermission);
         $isAdmin = $user->isAdmin();
