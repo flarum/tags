@@ -60,6 +60,10 @@ class ListTagsController extends AbstractListController
         $actor = RequestUtil::getActor($request);
         $include = $this->extractInclude($request);
 
+        if (in_array('lastPostedDiscussion', $include)) {
+            $include = array_merge($include, ['lastPostedDiscussion.tags', 'lastPostedDiscussion.state']);
+        }
+
         $tags = $this->tags->whereVisibleTo($actor)->withStateFor($actor)->get();
 
         return $tags->load($include);
