@@ -31,11 +31,8 @@ class LoadForumTagsRelationship
         $data['tags'] = Tag::query()
             ->where(function ($query) {
                 $query
-                    ->where(function ($query) {
-                        $query
-                            ->whereNull('parent_id')
-                            ->whereNotNull('position');
-                    });
+                    ->whereNull('parent_id')
+                    ->whereNotNull('position');
             })
             ->union(
                 Tag::whereVisibleTo($actor)
