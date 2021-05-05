@@ -33,7 +33,7 @@ class ScopeDiscussionVisibilityForAbility
             return $query->select('discussion_id')
                 ->from('discussion_tag')
                 ->whereIn('tag_id', function ($query) use ($actor, $ability) {
-                    Tag::queryIdsWhereCan($query->from('tags'), $actor, 'discussion.'.$ability);
+                    Tag::queryIdsWhereHasPermission($actor, 'discussion.'.$ability, $query->from('tags'));
                 });
         });
     }

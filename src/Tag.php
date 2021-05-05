@@ -219,8 +219,12 @@ class Tag extends AbstractModel
         }
     }
 
-    public static function queryIdsWhereCan(QueryBuilder $base, User $user, string $currPermission, bool $includePrimary = true, bool $includeSecondary = true): QueryBuilder
+    public static function queryIdsWhereHasPermission(User $user, string $currPermission, QueryBuilder $base = null, bool $includePrimary = true, bool $includeSecondary = true): QueryBuilder
     {
+        if ($base == null) {
+            $base = Tag::query()->getQuery();
+        }
+
         $hasGlobalPermission = $user->hasPermission($currPermission);
         $isAdmin = $user->isAdmin();
         $allPermissions = $user->getPermissions();
