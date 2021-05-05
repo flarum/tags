@@ -73,7 +73,6 @@ class TagPolicyTest extends TestCase
     {
         $this->app();
 
-
         $this->database()->table('group_permission')->where('permission', 'tag6.arbitraryAbility!')->delete();
 
         $tag = Tag::find(8);
