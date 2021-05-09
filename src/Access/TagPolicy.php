@@ -23,6 +23,7 @@ class TagPolicy extends AbstractPolicy
 
         if ($tag->is_restricted) {
             $id = $tag->id;
+
             return $actor->hasPermission("tag$id.$ability");
         }
     }
