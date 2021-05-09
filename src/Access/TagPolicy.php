@@ -21,4 +21,9 @@ class TagPolicy extends AbstractPolicy
             return Tag::queryIdsWhereHasPermission($actor, $ability)->where('id', $tag->id)->count() !== 0;
         }
     }
+
+    public function addToDiscussion(User $actor, Tag $tag)
+    {
+        return $actor->can('startDiscussion', $tag);
+    }
 }
