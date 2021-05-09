@@ -221,8 +221,8 @@ class CreateTest extends TestCase
                         'relationships' => [
                             'tags' => [
                                 'data' => [
-                                    ['type' => 'tags', 'id' => 3],
-                                    ['type' => 'tags', 'id' => 4]
+                                    ['type' => 'tags', 'id' => 2],
+                                    ['type' => 'tags', 'id' => 3]
                                 ]
                             ]
                         ]
@@ -231,7 +231,7 @@ class CreateTest extends TestCase
             ])
         );
 
-        $this->assertEquals(422, $response->getStatusCode());
+        $this->assertEquals(201, $response->getStatusCode());
     }
 
     /**
