@@ -17,8 +17,13 @@ class TagPolicy extends AbstractPolicy
 {
     public function can(User $actor, string $ability, Tag $tag)
     {
+        if ($tag->parent_id !== null && !$actor->can($ability, $tag->parent)) {
+            return $this->deny();
+        }
+
         if ($tag->is_restricted) {
-            return Tag::queryIdsWhereHasPermission($actor, $ability)->where('id', $tag->id)->count() !== 0;
+            $id = $tag->id;
+            $actor->hasPermission("tag$id.$ability");
         }
     }
 
