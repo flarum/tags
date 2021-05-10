@@ -79,7 +79,7 @@ class ListTest extends TestCase
         $data = json_decode($response->getBody()->getContents(), true);
 
         $ids = Arr::pluck($data['data'], 'id');
-        $this->assertEquals(['1', '2', '3', '4'], $ids);
+        $this->assertEqualsCanonicalizing(['1', '2', '3', '4'], $ids);
     }
 
     /**
@@ -97,6 +97,6 @@ class ListTest extends TestCase
         $data = json_decode($response->getBody()->getContents(), true);
 
         $ids = Arr::pluck($data['data'], 'id');
-        $this->assertEquals(['1'], $ids);
+        $this->assertEqualsCanonicalizing(['1'], $ids);
     }
 }
