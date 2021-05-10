@@ -29,12 +29,11 @@ export default function() {
       .forEach(tag => items.add('tag' + tag.id(), {
         label: tagLabel(tag),
         onremove: () => tag.save({isRestricted: false}),
-        render: item => {
-          if (item.tagScoped !== undefined) return item.tagScoped;
-          
-          if (item.permission === 'viewDiscussions'
+        render: item => {          
+          if (item.permission === 'viewForum'
             || item.permission === 'startDiscussion'
-            || (item.permission && item.permission.indexOf('discussion.') === 0)) {
+            || (item.permission && item.permission.indexOf('discussion.') === 0)
+            || item.tagScoped) {
             return PermissionDropdown.component({
               permission: 'tag' + tag.id() + '.' + item.permission,
               allowGuest: item.allowGuest
