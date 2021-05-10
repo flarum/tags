@@ -71,7 +71,7 @@ return [
         ->load('post.discussion.tags'),
 
     (new Extend\ApiController(FlarumController\ListDiscussionsController::class))
-        ->addInclude(['tags', 'tags.state'])
+        ->addInclude(['tags', 'tags.state', 'tags.parent'])
         ->load('tags'),
 
     (new Extend\ApiController(FlarumController\ShowDiscussionController::class))
