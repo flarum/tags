@@ -15,7 +15,6 @@ use Flarum\Discussion\Discussion;
 use Flarum\Group\Permission;
 use Flarum\User\User;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Query\Builder as QueryBuilder;
 
 /**
  * @property int $id

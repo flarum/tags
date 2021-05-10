@@ -29,10 +29,10 @@ class ScopeDiscussionVisibilityForAbility
         // If a discussion requires a certain permission in order for it to be
         // visible, then we can check if the user has been granted that
         // permission for any of the discussion's tags.
-        $query->whereIn('discussions.id', function ($query) use ($actor, $ability) {
+        $query->whereIn('discussions.id', function ($query) use ($actor) {
             return $query->select('discussion_id')
                 ->from('discussion_tag')
-                ->whereIn('tag_id', function ($query) use ($actor, $ability) {
+                ->whereIn('tag_id', function ($query) use ($actor) {
                     Tag::query()->setQuery($query->from('tags'))->whereHasPermission($actor, 'viewDiscussions')->select('tags.id');
                 });
         });
