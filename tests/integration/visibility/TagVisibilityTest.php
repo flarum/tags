@@ -57,7 +57,7 @@ class TagVisibilityTest extends TestCase
         $data = json_decode($response->getBody()->getContents(), true)['data'];
 
         $ids = Arr::pluck($data, 'id');
-        $this->assertEquals(['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11'], $ids);
+        $this->assertEquals(['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13'], $ids);
     }
 
     /**
