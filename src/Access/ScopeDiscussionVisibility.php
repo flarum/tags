@@ -28,7 +28,7 @@ class ScopeDiscussionVisibility
                     return $query->select('discussion_id')
                         ->from('discussion_tag')
                         ->whereNotIn('tag_id', function ($query) use ($actor) {
-                            Tag::queryIdsWhereHasPermission($actor, 'viewDiscussions', $query->from('tags'));
+                            Tag::query()->setQuery($query->from('tags'))->whereHasPermission($actor, 'viewDiscussions')->select('tags.id');
                         });
                 })
                 ->orWhere(function ($query) use ($actor) {
