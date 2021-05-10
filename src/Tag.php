@@ -235,7 +235,7 @@ class Tag extends AbstractModel
             })
             ->values();
 
-        $validTags = $query
+        return $query
             ->where(function ($query) use ($isAdmin, $hasGlobalPermission, $tagIdsWithPermission) {
                 $query
                     ->whereIn('tags.id', function ($query) use ($isAdmin, $hasGlobalPermission, $tagIdsWithPermission) {
@@ -249,7 +249,5 @@ class Tag extends AbstractModel
                             ->orWhere('tags.parent_id', null);
                     });
             });
-
-        return $validTags;
     }
 }
