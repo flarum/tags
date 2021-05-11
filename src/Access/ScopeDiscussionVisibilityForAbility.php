@@ -61,7 +61,7 @@ class ScopeDiscussionVisibilityForAbility
 
         // Hide discussions with no tags if the user doesn't have that global
         // permission.
-        if (!$actor->hasPermission($permission)) {
+        if (! $actor->hasPermission($permission)) {
             $query->has('tags');
         }
     }
