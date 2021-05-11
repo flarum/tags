@@ -7,7 +7,7 @@
  * LICENSE file that was distributed with this source code.
  */
 
-namespace Flarum\Tags\Tests\integration\visibility;
+namespace Flarum\Tags\Tests\integration\api\tags;
 
 use Flarum\Group\Group;
 use Flarum\Tags\Tests\integration\RetrievesRepresentativeTags;
@@ -15,7 +15,7 @@ use Flarum\Testing\integration\RetrievesAuthorizedUsers;
 use Flarum\Testing\integration\TestCase;
 use Illuminate\Support\Arr;
 
-class TagVisibilityTest extends TestCase
+class ListTest extends TestCase
 {
     use RetrievesAuthorizedUsers;
     use RetrievesRepresentativeTags;
@@ -57,7 +57,7 @@ class TagVisibilityTest extends TestCase
         $data = json_decode($response->getBody()->getContents(), true)['data'];
 
         $ids = Arr::pluck($data, 'id');
-        $this->assertEquals(['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13'], $ids);
+        $this->assertEquals(['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14'], $ids);
     }
 
     /**

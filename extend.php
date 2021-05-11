@@ -96,7 +96,6 @@ return [
         ->globalPolicy(Access\GlobalPolicy::class),
 
     (new Extend\ModelVisibility(Discussion::class))
-        ->scope(Access\ScopeDiscussionVisibility::class)
         ->scopeAll(Access\ScopeDiscussionVisibilityForAbility::class),
 
     (new Extend\ModelVisibility(Flag::class))
