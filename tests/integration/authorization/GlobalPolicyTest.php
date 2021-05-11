@@ -152,7 +152,6 @@ class GlobalPolicyTest extends TestCase
     public function can_start_discussion_globally_if_sufficient_tags_and_allows_regardless_of_start_discussion_and_bypass()
     {
         $this->database()->table('group_permission')->where('permission', 'bypassTagCounts')->delete();
-        $this->database()->table('group_permission')->where('permission', 'startDiscussion')->delete();
 
         $this->setting('flarum-tags.min_primary_tags', 0);
         $this->setting('flarum-tags.min_secondary_tags', 1);
