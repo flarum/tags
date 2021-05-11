@@ -29,7 +29,7 @@ export default function() {
       .forEach(tag => items.add('tag' + tag.id(), {
         label: tagLabel(tag),
         onremove: () => tag.save({isRestricted: false}),
-        render: item => {          
+        render: item => {
           if (item.permission === 'viewForum'
             || item.permission === 'startDiscussion'
             || (item.permission && item.permission.indexOf('discussion.') === 0 && item.tagScoped !== false)
