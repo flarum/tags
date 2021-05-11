@@ -38,6 +38,7 @@ class ListTest extends TestCase
                 ['group_id' => Group::MEMBER_ID, 'permission' => 'tag5.viewDiscussions'],
                 ['group_id' => Group::MEMBER_ID, 'permission' => 'tag8.viewDiscussions'],
                 ['group_id' => Group::MEMBER_ID, 'permission' => 'tag11.viewDiscussions'],
+                ['group_id' => Group::MEMBER_ID, 'permission' => 'tag13.viewDiscussions'],
             ],
             'discussions' => [
                 ['id' => 1, 'title' => 'no tags', 'user_id' => 1, 'comment_count' => 1],
@@ -45,6 +46,7 @@ class ListTest extends TestCase
                 ['id' => 3, 'title' => 'open tag, restricted child tag', 'user_id' => 1, 'comment_count' => 1],
                 ['id' => 4, 'title' => 'open tag, one restricted secondary tag',  'user_id' => 1, 'comment_count' => 1],
                 ['id' => 5, 'title' => 'all closed',  'user_id' => 1, 'comment_count' => 1],
+                ['id' => 6, 'title' => 'closed parent, open child tag',  'user_id' => 1, 'comment_count' => 1],
             ],
             'posts' => [
                 ['id' => 1, 'discussion_id' => 1, 'user_id' => 1, 'type' => 'comment', 'content' => '<t><p></p></t>'],
@@ -52,6 +54,7 @@ class ListTest extends TestCase
                 ['id' => 3, 'discussion_id' => 3, 'user_id' => 1, 'type' => 'comment', 'content' => '<t><p></p></t>'],
                 ['id' => 4, 'discussion_id' => 4, 'user_id' => 1, 'type' => 'comment', 'content' => '<t><p></p></t>'],
                 ['id' => 5, 'discussion_id' => 5, 'user_id' => 1, 'type' => 'comment', 'content' => '<t><p></p></t>'],
+                ['id' => 6, 'discussion_id' => 6, 'user_id' => 1, 'type' => 'comment', 'content' => '<t><p></p></t>'],
             ],
             'discussion_tag' => [
                 ['discussion_id' => 2, 'tag_id' => 1],
@@ -62,6 +65,8 @@ class ListTest extends TestCase
                 ['discussion_id' => 5, 'tag_id' => 6],
                 ['discussion_id' => 5, 'tag_id' => 7],
                 ['discussion_id' => 5, 'tag_id' => 8],
+                ['discussion_id' => 6, 'tag_id' => 12],
+                ['discussion_id' => 6, 'tag_id' => 13],
             ],
         ]);
     }
@@ -82,7 +87,7 @@ class ListTest extends TestCase
         $data = json_decode($response->getBody()->getContents(), true)['data'];
 
         $ids = Arr::pluck($data, 'id');
-        $this->assertEqualsCanonicalizing(['1', '2', '3', '4', '5'], $ids);
+        $this->assertEqualsCanonicalizing(['1', '2', '3', '4', '5', '6'], $ids);
     }
 
     /**
@@ -100,9 +105,6 @@ class ListTest extends TestCase
 
         $data = json_decode($response->getBody()->getContents(), true)['data'];
 
-        // 5 isnt included because parent access doesnt necessarily give child access
-        // 6, 7, 8 aren't included because child access shouldnt work unless parent
-        // access is also given.
         $ids = Arr::pluck($data, 'id');
         $this->assertEqualsCanonicalizing(['1', '2', '3', '4'], $ids);
     }
@@ -110,7 +112,7 @@ class ListTest extends TestCase
     /**
      * @test
      */
-    public function guest_cant_see_restricted_or_children_of_restricted()
+    public function guest_can_see_where_allowed()
     {
         $response = $this->send(
             $this->request('GET', '/api/discussions')
