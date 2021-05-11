@@ -117,7 +117,7 @@ class GlobalPolicyTest extends TestCase
     /**
      * @test
      */
-    public function cant_start_discussion_globally_if_permission_not_granted_with_granted_bypass_permission()
+    public function cant_start_discussion_globally_if_permission_in_insufficient_tags_requires_start_discussion_regardless_of_bypass()
     {
         $this->prepareDatabase([
             'group_permission' => [
@@ -133,7 +133,7 @@ class GlobalPolicyTest extends TestCase
     /**
      * @test
      */
-    public function can_start_discussion_globally_if_permission_granted_with_granted_bypass_permission()
+    public function can_start_discussion_globally_if_start_discussion_and_bypass_allows_regardless_of_tag_count()
     {
         $this->prepareDatabase([
             'group_permission' => [
@@ -149,9 +149,10 @@ class GlobalPolicyTest extends TestCase
     /**
      * @test
      */
-    public function cant_start_discussion_globally_if_permission_granted_without_granted_bypass_permission()
+    public function can_start_discussion_globally_if_sufficient_tags_and_allows_regardless_of_start_discussion_and_bypass()
     {
         $this->database()->table('group_permission')->where('permission', 'bypassTagCounts')->delete();
+        $this->database()->table('group_permission')->where('permission', 'startDiscussion')->delete();
 
         $this->setting('flarum-tags.min_primary_tags', 0);
         $this->setting('flarum-tags.min_secondary_tags', 1);
