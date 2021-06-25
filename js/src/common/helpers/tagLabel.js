@@ -24,6 +24,10 @@ export default function tagLabel(tag, attrs = {}) {
     if (tag.isChild()) {
       attrs.className += ' TagLabel--child';
     }
+
+    if (tag.isPrimary()) {
+      attrs.className += ' TagLabel--primary';
+    }
   } else {
     attrs.className += ' untagged';
   }
