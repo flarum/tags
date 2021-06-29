@@ -17,22 +17,29 @@ export default class TagsPage extends Page {
 
     this.tags = [];
 
-    const preloaded = app.preloadedApiDocument();
-
-    if (preloaded) {
-      this.tags = sortTags(preloaded.filter(tag => !tag.isChild()));
-      return;
-    }
-
     this.loading = true;
 
     app.tagList.load(['children', 'lastPostedDiscussion', 'parent']).then(() => {
-      this.tags = sortTags(app.store.all('tags').filter(tag => !tag.isChild()));
+      this.tags = this.items();
 
       this.loading = false;
 
       m.redraw();
     });
+  }
+  
+  items() {
+    if (this.tags.length > 0) {
+      return this.tags;
+    }
+    
+    const preloaded = app.preloadedApiDocument();
+
+    if (preloaded) {
+      return sortTags(preloaded.filter(tag => !tag.isChild()));
+    }
+    
+    return sortTags(app.store.all('tags').filter(tag => !tag.isChild()));
   }
 
   view() {
@@ -40,8 +47,8 @@ export default class TagsPage extends Page {
       return <LoadingIndicator />;
     }
 
-    const pinned = this.tags.filter(tag => tag.position() !== null);
-    const cloud = this.tags.filter(tag => tag.position() === null);
+    const pinned = this.items().filter(tag => tag.position() !== null);
+    const cloud = this.items().filter(tag => tag.position() === null);
 
     return (
       <div className="TagsPage">
