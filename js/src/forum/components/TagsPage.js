@@ -47,8 +47,9 @@ export default class TagsPage extends Page {
       return <LoadingIndicator />;
     }
 
-    const pinned = this.items().filter(tag => tag.position() !== null);
-    const cloud = this.items().filter(tag => tag.position() === null);
+    const items = this.items()
+    const pinned = items.filter(tag => tag.position() !== null);
+    const cloud = items.filter(tag => tag.position() === null);
 
     return (
       <div className="TagsPage">
