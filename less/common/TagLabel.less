@@ -16,6 +16,10 @@
 
   &.colored {
     --tag-color: @body-bg;
+
+    .TagLabel-text {
+      color: var(--tag-color) !important;
+    }
   }
 
   .DiscussionHero .TagsLabel & {
@@ -24,9 +28,9 @@
     font-size: 14px;
 
     &.colored {
+      --tag-color: var(--tag-bg);
       margin-right: 5px;
       background: @body-bg !important;
-      color: var(--tag-bg);
     }
   }
 }
