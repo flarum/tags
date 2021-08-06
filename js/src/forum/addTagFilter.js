@@ -69,7 +69,8 @@ export default function() {
       const canStartDiscussion = tag.canStartDiscussion() || !app.session.user;
 
       if (color) {
-        items.get('newDiscussion').attrs.style = {backgroundColor: color};
+        items.get('newDiscussion').attrs.className += ' Button--tagColored';
+        items.get('newDiscussion').attrs.style = { '--color': color };
       }
 
       items.get('newDiscussion').attrs.disabled = !canStartDiscussion;
