@@ -63,6 +63,7 @@ class Tag
         $sort = Arr::pull($queryParams, 'sort');
         $q = Arr::pull($queryParams, 'q', '');
         $page = Arr::pull($queryParams, 'page', 1);
+        $filters = Arr::pull($queryParams, 'filter', []);
 
         $sortMap = $this->getSortMap();
 
@@ -76,6 +77,8 @@ class Tag
             ],
             'page' => ['offset' => ($page - 1) * 20, 'limit' => 20]
         ];
+
+        $params['filter'] = array_merge($params['filter'], $filters);
 
         $apiDocument = $this->getApiDocument($request, $params);
 
