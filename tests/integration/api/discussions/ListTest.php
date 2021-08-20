@@ -125,4 +125,53 @@ class ListTest extends TestCase
         $ids = Arr::pluck($data, 'id');
         $this->assertEqualsCanonicalizing(['1', '2'], $ids);
     }
+
+    /**
+     * @test
+     */
+    public function admin_can_see_where_allowed_when_no_secondary_tags_are_available_and_more_than_zero_required()
+    {
+        $this->actor_can_see_where_allowed_when_no_secondary_tags_are_available_and_more_than_zero_required(1, ['1', '2', '3', '4', '5', '6']);
+    }
+
+    /**
+     * @test
+     */
+    public function user_can_see_where_allowed_when_no_secondary_tags_are_available_and_more_than_zero_required()
+    {
+        $this->actor_can_see_where_allowed_when_no_secondary_tags_are_available_and_more_than_zero_required(2, ['1', '2', '3', '4']);
+    }
+
+    /**
+     * @test
+     */
+    public function guest_can_see_where_allowed_when_no_secondary_tags_are_available_and_more_than_zero_required()
+    {
+        $this->actor_can_see_where_allowed_when_no_secondary_tags_are_available_and_more_than_zero_required(0, ['1', '2']);
+    }
+
+    public function actor_can_see_where_allowed_when_no_secondary_tags_are_available_and_more_than_zero_required(int $actorId, array $expectedTags)
+    {
+        $this->setting('flarum-tags.min_secondary_tags', 1);
+        $this->database()->table('tags')
+            ->where(['position' => null, 'parent_id' => null])
+            ->update(['position' => 200]);
+
+        if ($actorId) {
+            $reqParams = [
+                'authenticatedAs' => $actorId
+            ];
+        }
+
+        $response = $this->send(
+            $this->request('GET', '/api/discussions', $reqParams ?? [])
+        );
+
+        $this->assertEquals(200, $response->getStatusCode());
+
+        $data = json_decode($response->getBody()->getContents(), true)['data'];
+
+        $ids = Arr::pluck($data, 'id');
+        $this->assertEqualsCanonicalizing($expectedTags, $ids);
+    }
 }
