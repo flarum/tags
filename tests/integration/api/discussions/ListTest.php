@@ -129,28 +129,77 @@ class ListTest extends TestCase
     /**
      * @test
      */
-    public function admin_can_see_where_allowed_when_no_secondary_tags_are_available_and_more_than_zero_required()
+    public function admin_can_see_where_allowed_when_more_primary_tags_are_required_than_available()
     {
-        $this->actor_can_see_where_allowed_when_no_secondary_tags_are_available_and_more_than_zero_required(1, ['1', '2', '3', '4', '5', '6']);
+        $this->actor_can_see_where_allowed_when_more_primary_tags_are_required_than_available(1, ['1', '2', '3', '4', '5', '6']);
     }
 
     /**
      * @test
      */
-    public function user_can_see_where_allowed_when_no_secondary_tags_are_available_and_more_than_zero_required()
+    public function user_can_see_where_allowed_when_more_primary_tags_are_required_than_available()
     {
-        $this->actor_can_see_where_allowed_when_no_secondary_tags_are_available_and_more_than_zero_required(2, ['1', '2', '3', '4']);
+        $this->actor_can_see_where_allowed_when_more_primary_tags_are_required_than_available(2, ['1', '2', '3', '4']);
     }
 
     /**
      * @test
      */
-    public function guest_can_see_where_allowed_when_no_secondary_tags_are_available_and_more_than_zero_required()
+    public function guest_can_see_where_allowed_when_more_primary_tags_are_required_than_available()
     {
-        $this->actor_can_see_where_allowed_when_no_secondary_tags_are_available_and_more_than_zero_required(0, ['1', '2']);
+        $this->actor_can_see_where_allowed_when_more_primary_tags_are_required_than_available(0, ['1', '2']);
     }
 
-    public function actor_can_see_where_allowed_when_no_secondary_tags_are_available_and_more_than_zero_required(int $actorId, array $expectedTags)
+    /**
+     * @test
+     */
+    public function admin_can_see_where_allowed_when_more_secondary_tags_are_required_than_available()
+    {
+        $this->actor_can_see_where_allowed_when_more_secondary_tags_are_required_than_available(1, ['1', '2', '3', '4', '5', '6']);
+    }
+
+    /**
+     * @test
+     */
+    public function user_can_see_where_allowed_when_more_secondary_tags_are_required_than_available()
+    {
+        $this->actor_can_see_where_allowed_when_more_secondary_tags_are_required_than_available(2, ['1', '2', '3', '4']);
+    }
+
+    /**
+     * @test
+     */
+    public function guest_can_see_where_allowed_when_more_secondary_tags_are_required_than_available()
+    {
+        $this->actor_can_see_where_allowed_when_more_secondary_tags_are_required_than_available(0, ['1', '2']);
+    }
+
+    public function actor_can_see_where_allowed_when_more_primary_tags_are_required_than_available(int $actorId, array $expectedDiscussions)
+    {
+        $this->setting('flarum-tags.min_primary_tags', 100);
+        $this->database()->table('tags')
+            ->where('position', '!=', null)
+            ->update(['position' => null]);
+
+        if ($actorId) {
+            $reqParams = [
+                'authenticatedAs' => $actorId
+            ];
+        }
+
+        $response = $this->send(
+            $this->request('GET', '/api/discussions', $reqParams ?? [])
+        );
+
+        $this->assertEquals(200, $response->getStatusCode());
+
+        $data = json_decode($response->getBody()->getContents(), true)['data'];
+
+        $ids = Arr::pluck($data, 'id');
+        $this->assertEqualsCanonicalizing($expectedDiscussions, $ids);
+    }
+
+    public function actor_can_see_where_allowed_when_more_secondary_tags_are_required_than_available(int $actorId, array $expectedDiscussions)
     {
         $this->setting('flarum-tags.min_secondary_tags', 1);
         $this->database()->table('tags')
@@ -172,6 +221,6 @@ class ListTest extends TestCase
         $data = json_decode($response->getBody()->getContents(), true)['data'];
 
         $ids = Arr::pluck($data, 'id');
-        $this->assertEqualsCanonicalizing($expectedTags, $ids);
+        $this->assertEqualsCanonicalizing($expectedDiscussions, $ids);
     }
 }
