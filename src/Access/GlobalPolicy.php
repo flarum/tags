@@ -44,19 +44,23 @@ class GlobalPolicy extends AbstractPolicy
 
         if (in_array($ability, ['viewForum', 'startDiscussion'])) {
             if (! isset($enoughPrimary[$actor->id][$ability])) {
-                $enoughPrimary[$actor->id][$ability] = Tag::whereHasPermission($actor, $ability)
+                $primaryTagsCount = Tag::query()->where('position', '!=', null)->count();
+                $primaryTagsWhereNeedsPermission = $this->settings->get('flarum-tags.min_primary_tags');
+                $primaryTagsWhereHasPermission = Tag::whereHasPermission($actor, $ability)
                     ->where('tags.position', '!=', null)
-                    ->count() >= $this->settings->get('flarum-tags.min_primary_tags');
+                    ->count();
+
+                $enoughPrimary[$actor->id][$ability] = $primaryTagsWhereHasPermission >= min($primaryTagsCount, $primaryTagsWhereNeedsPermission);
             }
 
             if (! isset($enoughSecondary[$actor->id][$ability])) {
                 $secondaryTagsCount = Tag::query()->where(['position' => null, 'parent_id' => null])->count();
-
-                $hasPermission = Tag::whereHasPermission($actor, $ability)
+                $secondaryTagsWhereNeedsPermission = $this->settings->get('flarum-tags.min_secondary_tags');
+                $secondaryTagsWhereHasPermission = Tag::whereHasPermission($actor, $ability)
                     ->where('tags.position', '=', null)
-                    ->count() >= $this->settings->get('flarum-tags.min_secondary_tags');
+                    ->count();
 
-                $enoughSecondary[$actor->id][$ability] = ($ability === 'viewForum' && $secondaryTagsCount === 0) || $hasPermission;
+                $enoughSecondary[$actor->id][$ability] = $secondaryTagsWhereHasPermission >= min($secondaryTagsCount, $secondaryTagsWhereNeedsPermission);
             }
 
             if ($enoughPrimary[$actor->id][$ability] && $enoughSecondary[$actor->id][$ability]) {
