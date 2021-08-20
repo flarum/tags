@@ -50,9 +50,13 @@ class GlobalPolicy extends AbstractPolicy
             }
 
             if (! isset($enoughSecondary[$actor->id][$ability])) {
-                $enoughSecondary[$actor->id][$ability] = Tag::whereHasPermission($actor, $ability)
+                $secondaryTagsCount = Tag::query()->where(['position' => null, 'parent_id' => null])->count();
+
+                $hasPermission = Tag::whereHasPermission($actor, $ability)
                     ->where('tags.position', '=', null)
                     ->count() >= $this->settings->get('flarum-tags.min_secondary_tags');
+
+                $enoughSecondary[$actor->id][$ability] = ($ability === 'viewForum' && $secondaryTagsCount === 0) || $hasPermission;
             }
 
             if ($enoughPrimary[$actor->id][$ability] && $enoughSecondary[$actor->id][$ability]) {
