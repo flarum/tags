@@ -78,7 +78,7 @@ class Tag
             'page' => ['offset' => ($page - 1) * 20, 'limit' => 20]
         ];
 
-        $params['filter'] = array_merge($params['filter'], $filters);
+        $params['filter'] = array_merge($filters, $params['filter']);
 
         $apiDocument = $this->getApiDocument($request, $params);
 
