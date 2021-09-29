@@ -35,9 +35,9 @@ class TagRepository
     {
         $relationsArray = is_string($relations) ? explode(',', $relations) : $relations;
 
-        foreach (self::TAG_RELATIONS as $relation) {
+        foreach (self::TAG_RELATIONS as $k => $relation) {
             if (in_array($relation, $relationsArray, true)) {
-                $relationsArray = array_diff($relationsArray, [$relation]);
+                unset($relationsArray[$k]);
 
                 $relationsArray[$relation] = function ($query) use ($actor) {
                     $query->whereVisibleTo($actor);
