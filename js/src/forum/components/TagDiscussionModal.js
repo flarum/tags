@@ -109,7 +109,10 @@ export default class TagDiscussionModal extends Modal {
   }
 
   getInstruction(primaryCount, secondaryCount) {
-    if (primaryCount < this.minPrimary) {
+    if (app.forum.attribute('canBypassTagCounts')) {
+      return '';
+    }
+    else if (primaryCount < this.minPrimary) {
       const remaining = this.minPrimary - primaryCount;
       return app.translator.trans('flarum-tags.forum.choose_tags.choose_primary_placeholder', {count: remaining});
     } else if (secondaryCount < this.minSecondary) {
@@ -139,11 +142,11 @@ export default class TagDiscussionModal extends Modal {
 
     // If the number of selected primary/secondary tags is at the maximum, then
     // we'll filter out all other tags of that type.
-    if (primaryCount >= this.maxPrimary) {
+    if (primaryCount >= this.maxPrimary && !app.forum.attribute('canBypassTagCounts')) {
       tags = tags.filter(tag => !tag.isPrimary() || this.selected.includes(tag));
     }
 
-    if (secondaryCount >= this.maxSecondary) {
+    if (secondaryCount >= this.maxSecondary && !app.forum.attribute('canBypassTagCounts')) {
       tags = tags.filter(tag => tag.isPrimary() || this.selected.includes(tag));
     }
 
