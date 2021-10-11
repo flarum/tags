@@ -53,7 +53,10 @@ class ShowTagController extends AbstractShowController
         return $this->tags
             ->with($include, $actor)
             ->whereVisibleTo($actor)
-            ->where('slug', $slug)
+            ->where(function($query) use ($slug) {
+                $query->where('slug', $slug)
+                ->orWhere('id', $slug);
+            })
             ->firstOrFail();
     }
 }

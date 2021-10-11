@@ -1,4 +1,5 @@
-import EventPost from 'flarum/components/EventPost';
+import LoadingIndicator from 'flarum/common/components/LoadingIndicator';
+import EventPost from 'flarum/forum/components/EventPost';
 import tagsLabel from '../../common/helpers/tagsLabel';
 
 export default class DiscussionTaggedPost extends EventPost {
@@ -10,12 +11,32 @@ export default class DiscussionTaggedPost extends EventPost {
 
     function diffTags(tags1, tags2) {
       return tags1
-        .filter(tag => tags2.indexOf(tag) === -1)
-        .map(id => app.store.getById('tags', id));
+        .filter(tag => !tags2.includes(tag));
     }
 
-    attrs.tagsAdded = diffTags(newTags, oldTags);
-    attrs.tagsRemoved = diffTags(oldTags, newTags);
+    attrs.tagsAddedIds = diffTags(newTags, oldTags);
+    attrs.tagsRemovedIds = diffTags(oldTags, newTags);
+  }
+
+  oninit(vnode) {
+    super.oninit(vnode);
+
+    this.loading = true;
+
+    const neededIds = new Set([...this.attrs.tagsAddedIds, ...this.attrs.tagsRemovedIds]);
+
+    Promise.all(Array.from(neededIds).map((id => {
+      if (app.store.getById('tags', id)) {
+        return Promise.resolve();
+      }
+
+      return app.store.find('tags', id).catch(() => { });
+    }))).then(() => {
+      this.tagsAdded = this.attrs.tagsAddedIds.map((id) => app.store.getById('tags', id)).filter(Boolean);
+      this.tagsRemoved = this.attrs.tagsRemovedIds.map((id) => app.store.getById('tags', id)).filter(Boolean);
+      this.loading = false;
+      m.redraw();
+    })
   }
 
   icon() {
@@ -23,8 +44,8 @@ export default class DiscussionTaggedPost extends EventPost {
   }
 
   descriptionKey() {
-    if (this.attrs.tagsAdded.length) {
-      if (this.attrs.tagsRemoved.length) {
+    if (this.tagsAdded.length) {
+      if (this.tagsRemoved.length) {
         return 'flarum-tags.forum.post_stream.added_and_removed_tags_text';
       }
 
@@ -37,17 +58,17 @@ export default class DiscussionTaggedPost extends EventPost {
   descriptionData() {
     const data = {};
 
-    if (this.attrs.tagsAdded.length) {
+    if (this.tagsAdded.length) {
       data.tagsAdded = app.translator.trans('flarum-tags.forum.post_stream.tags_text', {
-        tags: tagsLabel(this.attrs.tagsAdded, {link: true}),
-        count: this.attrs.tagsAdded.length
+        tags: tagsLabel(this.tagsAdded, {link: true}),
+        count: this.tagsAdded.length
       });
     }
 
-    if (this.attrs.tagsRemoved.length) {
+    if (this.tagsRemoved.length) {
       data.tagsRemoved = app.translator.trans('flarum-tags.forum.post_stream.tags_text', {
-        tags: tagsLabel(this.attrs.tagsRemoved, {link: true}),
-        count: this.attrs.tagsRemoved.length
+        tags: tagsLabel(this.tagsRemoved, {link: true}),
+        count: this.tagsRemoved.length
       });
     }
 
