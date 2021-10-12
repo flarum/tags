@@ -112,7 +112,8 @@ export default class TagDiscussionModal extends Modal {
     if (app.forum.attribute('canBypassTagCounts')) {
       return '';
     }
-    else if (primaryCount < this.minPrimary) {
+
+    if (primaryCount < this.minPrimary) {
       const remaining = this.minPrimary - primaryCount;
       return app.translator.trans('flarum-tags.forum.choose_tags.choose_primary_placeholder', {count: remaining});
     } else if (secondaryCount < this.minSecondary) {
