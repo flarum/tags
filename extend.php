@@ -16,6 +16,7 @@ use Flarum\Discussion\Filter\DiscussionFilterer;
 use Flarum\Discussion\Search\DiscussionSearcher;
 use Flarum\Extend;
 use Flarum\Flags\Api\Controller\ListFlagsController;
+use Flarum\Http\RequestUtil;
 use Flarum\Tags\Access;
 use Flarum\Tags\Api\Controller;
 use Flarum\Tags\Api\Serializer\TagSerializer;
@@ -71,7 +72,9 @@ return [
 
     (new Extend\ApiController(FlarumController\ListDiscussionsController::class))
         ->addInclude(['tags', 'tags.state', 'tags.parent'])
-        ->load('tags'),
+        ->load(['tags', 'tags.state' => function ($query, $request) {
+            $query->where('user_id', RequestUtil::getActor($request)->id);
+        }]),
 
     (new Extend\ApiController(FlarumController\ShowDiscussionController::class))
         ->addInclude(['tags', 'tags.state', 'tags.parent']),
