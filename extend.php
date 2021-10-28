@@ -29,6 +29,7 @@ use Flarum\Tags\LoadForumTagsRelationship;
 use Flarum\Tags\Post\DiscussionTaggedPost;
 use Flarum\Tags\Query\TagFilterGambit;
 use Flarum\Tags\Tag;
+use Psr\Http\Message\ServerRequestInterface;
 
 return [
     (new Extend\Frontend('forum'))
@@ -72,9 +73,11 @@ return [
 
     (new Extend\ApiController(FlarumController\ListDiscussionsController::class))
         ->addInclude(['tags', 'tags.state', 'tags.parent'])
-        ->load(['tags', 'tags.state' => function ($query, $request) {
-            $query->where('user_id', RequestUtil::getActor($request)->id);
-        }]),
+        ->loadWhere('tags', function ($query, ?ServerRequestInterface $request, array $relations) {
+            if ($request && in_array('tags.state', $relations, true)) {
+                $query->withStateFor(RequestUtil::getActor($request));
+            }
+        }),
 
     (new Extend\ApiController(FlarumController\ShowDiscussionController::class))
         ->addInclude(['tags', 'tags.state', 'tags.parent']),
