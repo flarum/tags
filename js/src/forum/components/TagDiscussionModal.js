@@ -228,13 +228,13 @@ export default class TagDiscussionModal extends Modal {
               </li>
             ))}
         </ul>
-        {app.forum.attribute('canBypassTagCounts') ? (
+        {!!app.forum.attribute('canBypassTagCounts') && (
           <div className="TagDiscussionModal-controls">
             <ToggleButton className="Button" onclick={() => this.bypassReqs = !this.bypassReqs} isToggled={this.bypassReqs}>
               {app.translator.trans('flarum-tags.forum.choose_tags.bypass_requirements')}
             </ToggleButton>
           </div>
-        ) : null}
+        )}
       </div>
     ];
   }
