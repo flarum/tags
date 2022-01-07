@@ -102,7 +102,7 @@ class UpdateTagMetadata
     {
         $discussion = $event->post->discussion;
         $delta = ! $discussion->exists && $discussion->hidden_at === null ? -1 : 0;
-        $this->updateTags($event->post->discussion, $delta);
+        $this->updateTags($discussion, $delta);
     }
 
     /**
