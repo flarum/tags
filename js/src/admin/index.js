@@ -5,6 +5,8 @@ import addTagsHomePageOption from './addTagsHomePageOption';
 import addTagChangePermission from './addTagChangePermission';
 import TagsPage from './components/TagsPage';
 
+export * from './components';
+
 app.initializers.add('flarum-tags', app => {
   app.store.models.tags = Tag;
 

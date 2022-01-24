@@ -14,6 +14,8 @@ import addTagLabels from './addTagLabels';
 import addTagControl from './addTagControl';
 import addTagComposer from './addTagComposer';
 
+export * from './components';
+
 app.initializers.add('flarum-tags', function(app) {
   app.routes.tags = {path: '/tags', component: TagsPage };
   app.routes.tag = {path: '/t/:tags', component: IndexPage };
