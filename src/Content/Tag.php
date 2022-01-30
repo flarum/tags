@@ -17,9 +17,11 @@ use Illuminate\Contracts\View\Factory;
 use Illuminate\Support\Arr;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Symfony\Contracts\Translation\TranslatorInterface;
+use Flarum\Forum\Content\Index;
 
 class Tag
 {
+
     /**
      * @var Client
      */
@@ -41,46 +43,41 @@ class Tag
     protected $translator;
 
     /**
+     * @var Index
+     */
+    protected $params;
+
+    /**
      * @param Client $api
      * @param Factory $view
      * @param TagRepository $tags
      * @param TranslatorInterface $translator
      */
-    public function __construct(Client $api, Factory $view, TagRepository $tags, TranslatorInterface $translator)
+    public function __construct(Client $api, Factory $view, TagRepository $tags, TranslatorInterface $translator, Index $params)
     {
         $this->api = $api;
         $this->view = $view;
         $this->tags = $tags;
         $this->translator = $translator;
+        $this->params = $params;
+
     }
 
     public function __invoke(Document $document, Request $request)
     {
         $queryParams = $request->getQueryParams();
-        $actor = RequestUtil::getActor($request);
-
-        $slug = Arr::pull($queryParams, 'slug');
-        $sort = Arr::pull($queryParams, 'sort');
-        $q = Arr::pull($queryParams, 'q', '');
-        $page = Arr::pull($queryParams, 'page', 1);
-        $filters = Arr::pull($queryParams, 'filter', []);
-
-        $sortMap = $this->getSortMap();
-
         $tagId = $this->tags->getIdForSlug($slug);
         $tag = $this->tags->findOrFail($tagId, $actor);
+        $actor = RequestUtil::getActor($request);
+        $page = max(1, intval(Arr::pull($queryParams, 'page')));
 
-        $params = [
-            'sort' => $sort && isset($sortMap[$sort]) ? $sortMap[$sort] : '',
-            'filter' => [
-                'tag' => "$slug"
-            ],
-            'page' => ['offset' => ($page - 1) * 20, 'limit' => 20]
-        ];
+        $slug = Arr::pull($queryParams, 'slug');
 
-        $params['filter'] = array_merge($filters, $params['filter']);
+        $paramArray = $this->params->generateParams($queryParams); # return array of paramters in herited from index
+        $paramArray['filter']['tag'] = $slug;
 
-        $apiDocument = $this->getApiDocument($request, $params);
+
+        $apiDocument = $this->params->getApiDocument($request, $paramArray); # calls protected method in index
 
         $tagsDocument = $this->getTagsDocument($request, $slug);
 
@@ -117,13 +114,7 @@ class Tag
         ];
     }
 
-    /**
-     * Get the result of an API request to list discussions.
-     */
-    private function getApiDocument(Request $request, array $params)
-    {
-        return json_decode($this->api->withParentRequest($request)->withQueryParams($params)->get('/discussions')->getBody());
-    }
+  
 
     private function getTagsDocument(Request $request, string $slug)
     {

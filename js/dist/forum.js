@@ -1,2 +1,3111 @@
-(()=>{var t={195:(t,e,r)=>{t.exports=r(236)},236:t=>{var e=function(t){"use strict";var e,r=Object.prototype,n=r.hasOwnProperty,a="function"==typeof Symbol?Symbol:{},s=a.iterator||"@@iterator",o=a.asyncIterator||"@@asyncIterator",i=a.toStringTag||"@@toStringTag";function c(t,e,r){return Object.defineProperty(t,e,{value:r,enumerable:!0,configurable:!0,writable:!0}),t[e]}try{c({},"")}catch(t){c=function(t,e,r){return t[e]=r}}function u(t,e,r,n){var a=e&&e.prototype instanceof g?e:g,s=Object.create(a.prototype),o=new C(n||[]);return s._invoke=function(t,e,r){var n=p;return function(a,s){if(n===m)throw new Error("Generator is already running");if(n===f){if("throw"===a)throw s;return D()}for(r.method=a,r.arg=s;;){var o=r.delegate;if(o){var i=L(o,r);if(i){if(i===h)continue;return i}}if("next"===r.method)r.sent=r._sent=r.arg;else if("throw"===r.method){if(n===p)throw n=f,r.arg;r.dispatchException(r.arg)}else"return"===r.method&&r.abrupt("return",r.arg);n=m;var c=l(t,e,r);if("normal"===c.type){if(n=r.done?f:d,c.arg===h)continue;return{value:c.arg,done:r.done}}"throw"===c.type&&(n=f,r.method="throw",r.arg=c.arg)}}}(t,r,o),s}function l(t,e,r){try{return{type:"normal",arg:t.call(e,r)}}catch(t){return{type:"throw",arg:t}}}t.wrap=u;var p="suspendedStart",d="suspendedYield",m="executing",f="completed",h={};function g(){}function v(){}function y(){}var b={};c(b,s,(function(){return this}));var T=Object.getPrototypeOf,x=T&&T(T(k([])));x&&x!==r&&n.call(x,s)&&(b=x);var w=y.prototype=g.prototype=Object.create(b);function N(t){["next","throw","return"].forEach((function(e){c(t,e,(function(t){return this._invoke(e,t)}))}))}function _(t,e){function r(a,s,o,i){var c=l(t[a],t,s);if("throw"!==c.type){var u=c.arg,p=u.value;return p&&"object"==typeof p&&n.call(p,"__await")?e.resolve(p.__await).then((function(t){r("next",t,o,i)}),(function(t){r("throw",t,o,i)})):e.resolve(p).then((function(t){u.value=t,o(u)}),(function(t){return r("throw",t,o,i)}))}i(c.arg)}var a;this._invoke=function(t,n){function s(){return new e((function(e,a){r(t,n,e,a)}))}return a=a?a.then(s,s):s()}}function L(t,r){var n=t.iterator[r.method];if(n===e){if(r.delegate=null,"throw"===r.method){if(t.iterator.return&&(r.method="return",r.arg=e,L(t,r),"throw"===r.method))return h;r.method="throw",r.arg=new TypeError("The iterator does not provide a 'throw' method")}return h}var a=l(n,t.iterator,r.arg);if("throw"===a.type)return r.method="throw",r.arg=a.arg,r.delegate=null,h;var s=a.arg;return s?s.done?(r[t.resultName]=s.value,r.next=t.nextLoc,"return"!==r.method&&(r.method="next",r.arg=e),r.delegate=null,h):s:(r.method="throw",r.arg=new TypeError("iterator result is not an object"),r.delegate=null,h)}function P(t){var e={tryLoc:t[0]};1 in t&&(e.catchLoc=t[1]),2 in t&&(e.finallyLoc=t[2],e.afterLoc=t[3]),this.tryEntries.push(e)}function I(t){var e=t.completion||{};e.type="normal",delete e.arg,t.completion=e}function C(t){this.tryEntries=[{tryLoc:"root"}],t.forEach(P,this),this.reset(!0)}function k(t){if(t){var r=t[s];if(r)return r.call(t);if("function"==typeof t.next)return t;if(!isNaN(t.length)){var a=-1,o=function r(){for(;++a<t.length;)if(n.call(t,a))return r.value=t[a],r.done=!1,r;return r.value=e,r.done=!0,r};return o.next=o}}return{next:D}}function D(){return{value:e,done:!0}}return v.prototype=y,c(w,"constructor",y),c(y,"constructor",v),v.displayName=c(y,i,"GeneratorFunction"),t.isGeneratorFunction=function(t){var e="function"==typeof t&&t.constructor;return!!e&&(e===v||"GeneratorFunction"===(e.displayName||e.name))},t.mark=function(t){return Object.setPrototypeOf?Object.setPrototypeOf(t,y):(t.__proto__=y,c(t,i,"GeneratorFunction")),t.prototype=Object.create(w),t},t.awrap=function(t){return{__await:t}},N(_.prototype),c(_.prototype,o,(function(){return this})),t.AsyncIterator=_,t.async=function(e,r,n,a,s){void 0===s&&(s=Promise);var o=new _(u(e,r,n,a),s);return t.isGeneratorFunction(r)?o:o.next().then((function(t){return t.done?t.value:o.next()}))},N(w),c(w,i,"Generator"),c(w,s,(function(){return this})),c(w,"toString",(function(){return"[object Generator]"})),t.keys=function(t){var e=[];for(var r in t)e.push(r);return e.reverse(),function r(){for(;e.length;){var n=e.pop();if(n in t)return r.value=n,r.done=!1,r}return r.done=!0,r}},t.values=k,C.prototype={constructor:C,reset:function(t){if(this.prev=0,this.next=0,this.sent=this._sent=e,this.done=!1,this.delegate=null,this.method="next",this.arg=e,this.tryEntries.forEach(I),!t)for(var r in this)"t"===r.charAt(0)&&n.call(this,r)&&!isNaN(+r.slice(1))&&(this[r]=e)},stop:function(){this.done=!0;var t=this.tryEntries[0].completion;if("throw"===t.type)throw t.arg;return this.rval},dispatchException:function(t){if(this.done)throw t;var r=this;function a(n,a){return i.type="throw",i.arg=t,r.next=n,a&&(r.method="next",r.arg=e),!!a}for(var s=this.tryEntries.length-1;s>=0;--s){var o=this.tryEntries[s],i=o.completion;if("root"===o.tryLoc)return a("end");if(o.tryLoc<=this.prev){var c=n.call(o,"catchLoc"),u=n.call(o,"finallyLoc");if(c&&u){if(this.prev<o.catchLoc)return a(o.catchLoc,!0);if(this.prev<o.finallyLoc)return a(o.finallyLoc)}else if(c){if(this.prev<o.catchLoc)return a(o.catchLoc,!0)}else{if(!u)throw new Error("try statement without catch or finally");if(this.prev<o.finallyLoc)return a(o.finallyLoc)}}}},abrupt:function(t,e){for(var r=this.tryEntries.length-1;r>=0;--r){var a=this.tryEntries[r];if(a.tryLoc<=this.prev&&n.call(a,"finallyLoc")&&this.prev<a.finallyLoc){var s=a;break}}s&&("break"===t||"continue"===t)&&s.tryLoc<=e&&e<=s.finallyLoc&&(s=null);var o=s?s.completion:{};return o.type=t,o.arg=e,s?(this.method="next",this.next=s.finallyLoc,h):this.complete(o)},complete:function(t,e){if("throw"===t.type)throw t.arg;return"break"===t.type||"continue"===t.type?this.next=t.arg:"return"===t.type?(this.rval=this.arg=t.arg,this.method="return",this.next="end"):"normal"===t.type&&e&&(this.next=e),h},finish:function(t){for(var e=this.tryEntries.length-1;e>=0;--e){var r=this.tryEntries[e];if(r.finallyLoc===t)return this.complete(r.completion,r.afterLoc),I(r),h}},catch:function(t){for(var e=this.tryEntries.length-1;e>=0;--e){var r=this.tryEntries[e];if(r.tryLoc===t){var n=r.completion;if("throw"===n.type){var a=n.arg;I(r)}return a}}throw new Error("illegal catch attempt")},delegateYield:function(t,r,n){return this.delegate={iterator:k(t),resultName:r,nextLoc:n},"next"===this.method&&(this.arg=e),h}},t}(t.exports);try{regeneratorRuntime=e}catch(t){"object"==typeof globalThis?globalThis.regeneratorRuntime=e:Function("r","regeneratorRuntime = r")(e)}},656:()=>{},464:(t,e,r)=>{"use strict";const n=flarum.core.compat.Model;var a=r.n(n);const s=flarum.core.compat["models/Discussion"];var o=r.n(s);const i=flarum.core.compat["components/IndexPage"];var c=r.n(i);function u(t,e){return u=Object.setPrototypeOf||function(t,e){return t.__proto__=e,t},u(t,e)}function l(t,e){t.prototype=Object.create(e.prototype),t.prototype.constructor=t,u(t,e)}const p=flarum.core.compat["utils/mixin"];var d=r.n(p);const f=flarum.core.compat["utils/computed"];var h=r.n(f),g=function(t){function e(){return t.apply(this,arguments)||this}return l(e,t),e}(d()(a(),{name:a().attribute("name"),slug:a().attribute("slug"),description:a().attribute("description"),color:a().attribute("color"),backgroundUrl:a().attribute("backgroundUrl"),backgroundMode:a().attribute("backgroundMode"),icon:a().attribute("icon"),position:a().attribute("position"),parent:a().hasOne("parent"),children:a().hasMany("children"),defaultSort:a().attribute("defaultSort"),isChild:a().attribute("isChild"),isHidden:a().attribute("isHidden"),discussionCount:a().attribute("discussionCount"),lastPostedAt:a().attribute("lastPostedAt",a().transformDate),lastPostedDiscussion:a().hasOne("lastPostedDiscussion"),isRestricted:a().attribute("isRestricted"),canStartDiscussion:a().attribute("canStartDiscussion"),canAddToDiscussion:a().attribute("canAddToDiscussion"),isPrimary:h()("position","parent",(function(t,e){return null!==t&&!1===e}))}));const v=flarum.core.compat["components/Page"];var y=r.n(v);const b=flarum.core.compat["components/Link"];var T=r.n(b);const x=flarum.core.compat["components/LoadingIndicator"];var w=r.n(x);const N=flarum.core.compat["helpers/listItems"];var _=r.n(N);const L=flarum.core.compat["helpers/humanTime"];var P=r.n(L);const I=flarum.core.compat["utils/classList"];var C=r.n(I);function k(t,e,r){void 0===e&&(e={}),void 0===r&&(r={});var n=t&&t.icon(),a=r.useColor,s=void 0===a||a;return e.className=C()([e.className,"icon",n?t.icon():"TagIcon"]),t&&s?(e.style=e.style||{},e.style["--color"]=t.color(),n&&(e.style.color=t.color())):t||(e.className+=" untagged"),n?m("i",e):m("span",e)}const D=flarum.core.compat["utils/extract"];var S=r.n(D);function O(t,e){void 0===e&&(e={}),e.style=e.style||{},e.className="TagLabel "+(e.className||"");var r=S()(e,"link"),n=t?t.name():app.translator.trans("flarum-tags.lib.deleted_tag_text");if(t){var a=t.color();a&&(e.style["--tag-bg"]=a,e.className+=" colored"),r&&(e.title=t.description()||"",e.href=app.route("tag",{tags:t.slug()})),t.isChild()&&(e.className+=" TagLabel--child")}else e.className+=" untagged";return m(r?T():"span",e,m("span",{className:"TagLabel-text"},t&&t.icon()&&k(t,{},{useColor:!1})," ",n))}function E(t){return t.slice(0).sort((function(t,e){var r=t.position(),n=e.position();if(null===r&&null===n)return e.discussionCount()-t.discussionCount();if(null===n)return-1;if(null===r)return 1;var a=t.parent(),s=e.parent();return a===s?r-n:a&&s?a.position()-s.position():a?a===e?1:a.position()-n:s?s===t?-1:r-s.position():0}))}var A=function(t){function e(){return t.apply(this,arguments)||this}l(e,t);var r=e.prototype;return r.oninit=function(e){var r=this;t.prototype.oninit.call(this,e),app.history.push("tags",app.translator.trans("flarum-tags.forum.header.back_to_tags_tooltip")),this.tags=[];var n=app.preloadedApiDocument();n?this.tags=E(n.filter((function(t){return!t.isChild()}))):(this.loading=!0,app.tagList.load(["children","lastPostedDiscussion","parent"]).then((function(){r.tags=E(app.store.all("tags").filter((function(t){return!t.isChild()}))),r.loading=!1,m.redraw()})))},r.view=function(){if(this.loading)return m(w(),null);var t=this.tags.filter((function(t){return null!==t.position()})),e=this.tags.filter((function(t){return null===t.position()}));return m("div",{className:"TagsPage"},c().prototype.hero(),m("div",{className:"container"},m("nav",{className:"TagsPage-nav IndexPage-nav sideNav"},m("ul",null,_()(c().prototype.sidebarItems().toArray()))),m("div",{className:"TagsPage-content sideNavOffset"},m("ul",{className:"TagTiles"},t.map((function(t){var e=t.lastPostedDiscussion(),r=E(t.children()||[]);return m("li",{className:"TagTile "+(t.color()?"colored":""),style:{"--tag-bg":t.color()}},m(T(),{className:"TagTile-info",href:app.route.tag(t)},t.icon()&&k(t,{},{useColor:!1}),m("h3",{className:"TagTile-name"},t.name()),m("p",{className:"TagTile-description"},t.description()),r?m("div",{className:"TagTile-children"},r.map((function(t){return[m(T(),{href:app.route.tag(t)},t.name())," "]}))):""),e?m(T(),{className:"TagTile-lastPostedDiscussion",href:app.route.discussion(e,e.lastPostNumber())},m("span",{className:"TagTile-lastPostedDiscussion-title"},e.title()),P()(e.lastPostedAt())):m("span",{className:"TagTile-lastPostedDiscussion"}))}))),e.length?m("div",{className:"TagCloud"},e.map((function(t){return[O(t,{link:!0})," "]}))):"")))},r.oncreate=function(e){t.prototype.oncreate.call(this,e),app.setTitle(app.translator.trans("flarum-tags.forum.all_tags.meta_title_text")),app.setTitleCount(0)},e}(y());const j=flarum.core.compat["components/EventPost"];function R(t,e){void 0===e&&(e={});var r=[],n=S()(e,"link");return e.className="TagsLabel "+(e.className||""),t?E(t).forEach((function(e){(e||1===t.length)&&r.push(O(e,{link:n}))})):r.push(O()),m("span",e,r)}var M=function(t){function e(){return t.apply(this,arguments)||this}l(e,t),e.initAttrs=function(e){t.initAttrs.call(this,e);var r=e.post.content()[0],n=e.post.content()[1];function a(t,e){return t.filter((function(t){return-1===e.indexOf(t)})).map((function(t){return app.store.getById("tags",t)}))}e.tagsAdded=a(n,r),e.tagsRemoved=a(r,n)};var r=e.prototype;return r.icon=function(){return"fas fa-tag"},r.descriptionKey=function(){return this.attrs.tagsAdded.length?this.attrs.tagsRemoved.length?"flarum-tags.forum.post_stream.added_and_removed_tags_text":"flarum-tags.forum.post_stream.added_tags_text":"flarum-tags.forum.post_stream.removed_tags_text"},r.descriptionData=function(){var t={};return this.attrs.tagsAdded.length&&(t.tagsAdded=app.translator.trans("flarum-tags.forum.post_stream.tags_text",{tags:R(this.attrs.tagsAdded,{link:!0}),count:this.attrs.tagsAdded.length})),this.attrs.tagsRemoved.length&&(t.tagsRemoved=app.translator.trans("flarum-tags.forum.post_stream.tags_text",{tags:R(this.attrs.tagsRemoved,{link:!0}),count:this.attrs.tagsRemoved.length})),t},e}(r.n(j)());function B(t,e,r,n,a,s,o){try{var i=t[s](o),c=i.value}catch(t){return void r(t)}i.done?e(c):Promise.resolve(c).then(n,a)}var q=r(195),H=r.n(q),F=function(){function t(){this.loadedIncludes=new Set}return t.prototype.load=function(){var t,e=(t=H().mark((function t(e){var r,n=this;return H().wrap((function(t){for(;;)switch(t.prev=t.next){case 0:if(void 0===e&&(e=[]),0!==(r=e.filter((function(t){return!n.loadedIncludes.has(t)}))).length){t.next=4;break}return t.abrupt("return",Promise.resolve(app.store.all("tags")));case 4:return t.abrupt("return",app.store.find("tags",{include:r.join(",")}).then((function(t){return r.forEach((function(t){return n.loadedIncludes.add(t)})),t})));case 5:case"end":return t.stop()}}),t)})),function(){var e=this,r=arguments;return new Promise((function(n,a){var s=t.apply(e,r);function o(t){B(s,n,a,o,i,"next",t)}function i(t){B(s,n,a,o,i,"throw",t)}o(void 0)}))});return function(t){return e.apply(this,arguments)}}(),t}();const G=flarum.core.compat.extend,K=flarum.core.compat["components/Separator"];var $=r.n(K);const U=flarum.core.compat["components/LinkButton"];var Y=r.n(U),z=function(t){function e(){return t.apply(this,arguments)||this}return l(e,t),e.prototype.view=function(t){var e=this.attrs.model,r=(this.constructor.isActive(this.attrs),e&&e.description()),n=C()(["TagLinkButton","hasIcon",this.attrs.className,e.isChild()&&"child"]);return m(T(),{className:n,href:this.attrs.route,style:e?{"--color":e.color()}:"",title:r||""},k(e,{className:"Button-icon"}),m("span",{className:"Button-label"},e?e.name():app.translator.trans("flarum-tags.forum.index.untagged_link")))},e.initAttrs=function(e){t.initAttrs.call(this,e);var r=e.model;e.params.tags=r?r.slug():"untagged",e.route=app.route("tag",e.params)},e}(Y());function J(){(0,G.extend)(c().prototype,"navItems",(function(t){if(t.add("tags",m(Y(),{icon:"fas fa-th-large",href:app.route("tags")},app.translator.trans("flarum-tags.forum.index.tags_link")),-10),!app.current.matches(A)){t.add("separator",$().component(),-12);var e=app.search.stickyParams(),r=app.store.all("tags"),n=this.currentTag(),a=function(r){var a=n===r;!a&&n&&(a=n.parent()===r),t.add("tag"+r.id(),z.component({model:r,params:e,active:a},null==r?void 0:r.name()),-14)};E(r).filter((function(t){return null!==t.position()&&(!t.isChild()||n&&(t.parent()===n||t.parent()===n.parent()))})).forEach(a);var s=r.filter((function(t){return null===t.position()})).sort((function(t,e){return e.discussionCount()-t.discussionCount()}));s.splice(0,3).forEach(a),s.length&&t.add("moreTags",m(Y(),{href:app.route("tags")},app.translator.trans("flarum-tags.forum.index.more_link")),-16)}}))}const Q=flarum.core.compat["states/DiscussionListState"];var V=r.n(Q);const W=flarum.core.compat["states/GlobalSearchState"];var X=r.n(W);const Z=flarum.core.compat.Component;var tt=function(t){function e(){return t.apply(this,arguments)||this}return l(e,t),e.prototype.view=function(){var t=this.attrs.model,e=t.color();return m("header",{className:"Hero TagHero"+(e?" TagHero--colored":""),style:e?{"--hero-bg":e}:""},m("div",{className:"container"},m("div",{className:"containerNarrow"},m("h2",{className:"Hero-title"},t.icon()&&k(t,{},{useColor:!1})," ",t.name()),m("div",{className:"Hero-subtitle"},t.description()))))},e}(r.n(Z)());function et(){c().prototype.currentTag=function(){var t=this;if(this.currentActiveTag)return this.currentActiveTag;var e=app.search.params().tags,r=null;return e&&(r=app.store.getBy("tags","slug",e)),(e&&!r||r&&!r.isChild()&&!r.children())&&app.store.find("tags",e,{include:"children,children.parent,parent,state"}).then((function(){t.currentActiveTag=app.store.getBy("tags","slug",e),m.redraw()})),r?(this.currentActiveTag=r,this.currentActiveTag):void 0},(0,G.override)(c().prototype,"hero",(function(t){var e=this.currentTag();return e?m(tt,{model:e}):t()})),(0,G.extend)(c().prototype,"view",(function(t){var e=this.currentTag();e&&(t.attrs.className+=" IndexPage--tag"+e.id())})),(0,G.extend)(c().prototype,"setTitle",(function(){var t=this.currentTag();t&&app.setTitle(t.name())})),(0,G.extend)(c().prototype,"sidebarItems",(function(t){var e=this.currentTag();if(e){var r=e.color(),n=e.canStartDiscussion()||!app.session.user,a=t.get("newDiscussion");r&&(a.attrs.className=C()([a.attrs.className,"Button--tagColored"]),a.attrs.style={"--color":r}),a.attrs.disabled=!n,a.children=app.translator.trans(n?"core.forum.index.start_discussion_button":"core.forum.index.cannot_start_discussion_button")}})),(0,G.extend)(X().prototype,"params",(function(t){t.tags=m.route.param("tags")})),(0,G.extend)(V().prototype,"requestParams",(function(t){if(t.include.push("tags","tags.parent"),this.params.tags){t.filter.tag=this.params.tags;var e=t.filter.q;e&&(t.filter.q=e+" tag:"+this.params.tags)}}))}const rt=flarum.core.compat["components/DiscussionListItem"];var nt=r.n(rt);const at=flarum.core.compat["components/DiscussionHero"];var st=r.n(at);function ot(){(0,G.extend)(nt().prototype,"infoItems",(function(t){var e=this.attrs.discussion.tags();e&&e.length&&t.add("tags",R(e),10)})),(0,G.extend)(st().prototype,"view",(function(t){var e=E(this.attrs.discussion.tags());if(e&&e.length){var r=e[0].color();r&&(t.attrs.style={"--hero-bg":r},t.attrs.className+=" DiscussionHero--colored")}})),(0,G.extend)(st().prototype,"items",(function(t){var e=this.attrs.discussion.tags();e&&e.length&&t.add("tags",R(e,{link:!0}),5)}))}const it=flarum.core.compat["utils/DiscussionControls"];var ct=r.n(it);const ut=flarum.core.compat["components/Button"];var lt=r.n(ut);const pt=flarum.core.compat["components/Modal"];var dt=r.n(pt);const mt=flarum.core.compat["components/DiscussionPage"];var ft=r.n(mt);const ht=flarum.core.compat["helpers/highlight"];var gt=r.n(ht);const vt=flarum.core.compat["utils/extractText"];var yt=r.n(vt);const bt=flarum.core.compat["utils/KeyboardNavigatable"];var Tt=r.n(bt);const xt=flarum.core.compat["utils/Stream"];var wt=r.n(xt);function Nt(t){var e=app.store.all("tags");return t?e.filter((function(e){return e.canAddToDiscussion()||-1!==t.tags().indexOf(e)})):e.filter((function(t){return t.canStartDiscussion()}))}const _t=flarum.core.compat["common/Component"];var Lt=r.n(_t);const Pt=flarum.core.compat["common/components/Button"];var It=r.n(Pt);const Ct=flarum.core.compat["common/utils/classList"];var kt=r.n(Ct),Dt=["className","isToggled"],St=function(t){function e(){return t.apply(this,arguments)||this}return l(e,t),e.prototype.view=function(t){var e=this.attrs,r=e.className,n=e.isToggled,a=function(t,e){if(null==t)return{};var r,n,a={},s=Object.keys(t);for(n=0;n<s.length;n++)r=s[n],e.indexOf(r)>=0||(a[r]=t[r]);return a}(e,Dt),s=n?"far fa-check-circle":"far fa-circle";return m(It(),Object.assign({},a,{icon:s,className:kt()([r,n&&"Button--toggled"])}),t.children)},e}(Lt()),Ot=function(t){function e(){return t.apply(this,arguments)||this}l(e,t);var r=e.prototype;return r.oninit=function(e){var r=this;t.prototype.oninit.call(this,e),this.tagsLoading=!0,this.selected=[],this.filter=wt()(""),this.focused=!1,this.minPrimary=app.forum.attribute("minPrimaryTags"),this.maxPrimary=app.forum.attribute("maxPrimaryTags"),this.minSecondary=app.forum.attribute("minSecondaryTags"),this.maxSecondary=app.forum.attribute("maxSecondaryTags"),this.bypassReqs=!1,this.navigator=new(Tt()),this.navigator.onUp((function(){return r.setIndex(r.getCurrentNumericIndex()-1,!0)})).onDown((function(){return r.setIndex(r.getCurrentNumericIndex()+1,!0)})).onSelect(this.select.bind(this)).onRemove((function(){return r.selected.splice(r.selected.length-1,1)})),app.tagList.load(["parent"]).then((function(){r.tagsLoading=!1,r.tags=E(Nt(r.attrs.discussion)),r.attrs.selectedTags?r.attrs.selectedTags.map(r.addTag.bind(r)):r.attrs.discussion&&r.attrs.discussion.tags().map(r.addTag.bind(r)),r.index=r.tags[0].id(),m.redraw()}))},r.primaryCount=function(){return this.selected.filter((function(t){return t.isPrimary()})).length},r.secondaryCount=function(){return this.selected.filter((function(t){return!t.isPrimary()})).length},r.addTag=function(t){if(t.canStartDiscussion()){var e=t.parent();e&&!this.selected.includes(e)&&this.selected.push(e),this.selected.includes(t)||this.selected.push(t)}},r.removeTag=function(t){var e=this.selected.indexOf(t);-1!==e&&(this.selected.splice(e,1),this.selected.filter((function(e){return e.parent()===t})).forEach(this.removeTag.bind(this)))},r.className=function(){return"TagDiscussionModal"},r.title=function(){return this.attrs.discussion?app.translator.trans("flarum-tags.forum.choose_tags.edit_title",{title:m("em",null,this.attrs.discussion.title())}):app.translator.trans("flarum-tags.forum.choose_tags.title")},r.getInstruction=function(t,e){if(this.bypassReqs)return"";if(t<this.minPrimary){var r=this.minPrimary-t;return app.translator.trans("flarum-tags.forum.choose_tags.choose_primary_placeholder",{count:r})}if(e<this.minSecondary){var n=this.minSecondary-e;return app.translator.trans("flarum-tags.forum.choose_tags.choose_secondary_placeholder",{count:n})}return""},r.content=function(){var t=this;if(this.tagsLoading)return m(w(),null);var e=this.tags,r=this.filter().toLowerCase(),n=this.primaryCount(),a=this.secondaryCount();e=e.filter((function(e){var r=e.parent();return!1===r||t.selected.includes(r)})),n>=this.maxPrimary&&!this.bypassReqs&&(e=e.filter((function(e){return!e.isPrimary()||t.selected.includes(e)}))),a>=this.maxSecondary&&!this.bypassReqs&&(e=e.filter((function(e){return e.isPrimary()||t.selected.includes(e)}))),r&&(e=e.filter((function(t){return t.name().substr(0,r.length).toLowerCase()===r}))),e.includes(this.index)||(this.index=e[0]);var s=Math.max(yt()(this.getInstruction(n,a)).length,this.filter().length);return[m("div",{className:"Modal-body"},m("div",{className:"TagDiscussionModal-form"},m("div",{className:"TagDiscussionModal-form-input"},m("div",{className:"TagsInput FormControl "+(this.focused?"focus":""),onclick:function(){return t.$(".TagsInput input").focus()}},m("span",{className:"TagsInput-selected"},this.selected.map((function(e){return m("span",{className:"TagsInput-tag",onclick:function(){t.removeTag(e),t.onready()}},O(e))}))),m("input",{className:"FormControl",placeholder:yt()(this.getInstruction(n,a)),bidi:this.filter,style:{width:s+"ch"},onkeydown:this.navigator.navigate.bind(this.navigator),onfocus:function(){return t.focused=!0},onblur:function(){return t.focused=!1}}))),m("div",{className:"TagDiscussionModal-form-submit App-primaryControl"},m(lt(),{type:"submit",className:"Button Button--primary",disabled:!this.meetsRequirements(n,a),icon:"fas fa-check"},app.translator.trans("flarum-tags.forum.choose_tags.submit_button"))))),m("div",{className:"Modal-footer"},m("ul",{className:"TagDiscussionModal-list SelectTagList"},e.filter((function(e){return r||!e.parent()||t.selected.includes(e.parent())})).map((function(e){return m("li",{"data-index":e.id(),className:C()({pinned:null!==e.position(),child:!!e.parent(),colored:!!e.color(),selected:t.selected.includes(e),active:t.index===e}),style:{color:e.color()},onmouseover:function(){return t.index=e},onclick:t.toggleTag.bind(t,e)},k(e),m("span",{className:"SelectTagListItem-name"},gt()(e.name(),r)),e.description()?m("span",{className:"SelectTagListItem-description"},e.description()):"")}))),!!app.forum.attribute("canBypassTagCounts")&&m("div",{className:"TagDiscussionModal-controls"},m(St,{className:"Button",onclick:function(){return t.bypassReqs=!t.bypassReqs},isToggled:this.bypassReqs},app.translator.trans("flarum-tags.forum.choose_tags.bypass_requirements"))))]},r.meetsRequirements=function(t,e){return!!this.bypassReqs||t>=this.minPrimary&&e>=this.minSecondary},r.toggleTag=function(t){this.selected.includes(t)?this.removeTag(t):this.addTag(t),this.filter()&&(this.filter(""),this.index=this.tags[0]),this.onready()},r.select=function(t){t.metaKey||t.ctrlKey||this.selected.includes(this.index)?this.selected.length&&this.$('button[type="submit"]').click():this.getItem(this.index)[0].dispatchEvent(new Event("click"))},r.selectableItems=function(){return this.$(".TagDiscussionModal-list > li")},r.getCurrentNumericIndex=function(){return this.selectableItems().index(this.getItem(this.index))},r.getItem=function(t){return this.selectableItems().filter('[data-index="'+t.id()+'"]')},r.setIndex=function(t,e){var r=this.selectableItems(),n=r.parent();t<0?t=r.length-1:t>=r.length&&(t=0);var a=r.eq(t);if(this.index=app.store.getById("tags",a.attr("data-index")),m.redraw(),e){var s,o=n.scrollTop(),i=n.offset().top,c=i+n.outerHeight(),u=a.offset().top,l=u+a.outerHeight();u<i?s=o-i+u-parseInt(n.css("padding-top"),10):l>c&&(s=o-c+l+parseInt(n.css("padding-bottom"),10)),void 0!==s&&n.stop(!0).animate({scrollTop:s},100)}},r.onsubmit=function(t){t.preventDefault();var e=this.attrs.discussion,r=this.selected;e&&e.save({relationships:{tags:r}}).then((function(){app.current.matches(ft())&&app.current.get("stream").update(),m.redraw()})),this.attrs.onsubmit&&this.attrs.onsubmit(r),this.hide()},e}(dt());function Et(){(0,G.extend)(ct(),"moderationControls",(function(t,e){e.canTag()&&t.add("tags",m(lt(),{icon:"fas fa-tag",onclick:function(){return app.modal.show(Ot,{discussion:e})}},app.translator.trans("flarum-tags.forum.discussion_controls.edit_tags_button")))}))}const At=flarum.core.compat["components/DiscussionComposer"];var jt=r.n(At);function Rt(){(0,G.extend)(c().prototype,"newDiscussionAction",(function(t){var e=this.currentTag();if(e){var r=e.parent(),n=r?[r,e]:[e];t.then((function(t){return t.fields.tags=n}))}else app.composer.fields.tags=[]})),(0,G.extend)(jt().prototype,"oninit",(function(){app.tagList.load(["parent"]).then((function(){return m.redraw()}))})),jt().prototype.chooseTags=function(){var t=this;Nt().length&&app.modal.show(Ot,{selectedTags:(this.composer.fields.tags||[]).slice(0),onsubmit:function(e){t.composer.fields.tags=e,t.$("textarea").focus()}})},(0,G.extend)(jt().prototype,"headerItems",(function(t){var e=this.composer.fields.tags||[],r=Nt();t.add("tags",m("a",{className:C()(["DiscussionComposer-changeTags",!r.length&&"disabled"]),onclick:this.chooseTags.bind(this)},e.length?R(e):m("span",{className:"TagLabel untagged"},app.translator.trans("flarum-tags.forum.composer_discussion.choose_tags_link"))),10)})),(0,G.override)(jt().prototype,"onsubmit",(function(t){var e=this,r=this.composer.fields.tags||[],n=r.filter((function(t){return null!==t.position()&&!t.isChild()})),a=r.filter((function(t){return null===t.position()})),s=Nt();(!r.length||n.length<app.forum.attribute("minPrimaryTags")||a.length<app.forum.attribute("minSecondaryTags"))&&s.length?app.modal.show(Ot,{selectedTags:r,onsubmit:function(r){e.composer.fields.tags=r,t()}}):t()})),(0,G.extend)(jt().prototype,"data",(function(t){t.relationships=t.relationships||{},t.relationships.tags=this.composer.fields.tags}))}const Mt={"tags/utils/sortTags":E,"tags/models/Tag":g,"tags/helpers/tagsLabel":R,"tags/helpers/tagIcon":k,"tags/helpers/tagLabel":O},Bt=Object.assign(Mt,{"tags/addTagFilter":et,"tags/addTagControl":Et,"tags/components/TagHero":tt,"tags/components/TagDiscussionModal":Ot,"tags/components/TagsPage":A,"tags/components/DiscussionTaggedPost":M,"tags/components/TagLinkButton":z,"tags/addTagList":J,"tags/addTagLabels":ot,"tags/addTagComposer":Rt,"tags/utils/getSelectableTags":Nt}),qt=flarum.core;app.initializers.add("flarum-tags",(function(t){t.routes.tags={path:"/tags",component:A},t.routes.tag={path:"/t/:tags",component:c()},t.route.tag=function(e){return t.route("tag",{tags:e.slug()})},t.postComponents.discussionTagged=M,t.store.models.tags=g,t.tagList=new F,o().prototype.tags=a().hasMany("tags"),o().prototype.canTag=a().attribute("canTag"),J(),et(),ot(),Et(),Rt()})),Object.assign(qt.compat,Bt)}},e={};function r(n){var a=e[n];if(void 0!==a)return a.exports;var s=e[n]={exports:{}};return t[n](s,s.exports,r),s.exports}r.n=t=>{var e=t&&t.__esModule?()=>t.default:()=>t;return r.d(e,{a:e}),e},r.d=(t,e)=>{for(var n in e)r.o(e,n)&&!r.o(t,n)&&Object.defineProperty(t,n,{enumerable:!0,get:e[n]})},r.o=(t,e)=>Object.prototype.hasOwnProperty.call(t,e),r.r=t=>{"undefined"!=typeof Symbol&&Symbol.toStringTag&&Object.defineProperty(t,Symbol.toStringTag,{value:"Module"}),Object.defineProperty(t,"__esModule",{value:!0})};var n={};(()=>{"use strict";r.r(n);var t=r(656),e={};for(const r in t)"default"!==r&&(e[r]=()=>t[r]);r.d(n,e),r(464)})(),module.exports=n})();
+/******/ (() => { // webpackBootstrap
+/******/ 	var __webpack_modules__ = ({
+
+/***/ "./node_modules/@babel/runtime/regenerator/index.js":
+/*!**********************************************************!*\
+  !*** ./node_modules/@babel/runtime/regenerator/index.js ***!
+  \**********************************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+module.exports = __webpack_require__(/*! regenerator-runtime */ "./node_modules/regenerator-runtime/runtime.js");
+
+/***/ }),
+
+/***/ "./node_modules/regenerator-runtime/runtime.js":
+/*!*****************************************************!*\
+  !*** ./node_modules/regenerator-runtime/runtime.js ***!
+  \*****************************************************/
+/***/ ((module) => {
+
+/**
+ * Copyright (c) 2014-present, Facebook, Inc.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+var runtime = function (exports) {
+  "use strict";
+
+  var Op = Object.prototype;
+  var hasOwn = Op.hasOwnProperty;
+  var undefined; // More compressible than void 0.
+
+  var $Symbol = typeof Symbol === "function" ? Symbol : {};
+  var iteratorSymbol = $Symbol.iterator || "@@iterator";
+  var asyncIteratorSymbol = $Symbol.asyncIterator || "@@asyncIterator";
+  var toStringTagSymbol = $Symbol.toStringTag || "@@toStringTag";
+
+  function define(obj, key, value) {
+    Object.defineProperty(obj, key, {
+      value: value,
+      enumerable: true,
+      configurable: true,
+      writable: true
+    });
+    return obj[key];
+  }
+
+  try {
+    // IE 8 has a broken Object.defineProperty that only works on DOM objects.
+    define({}, "");
+  } catch (err) {
+    define = function define(obj, key, value) {
+      return obj[key] = value;
+    };
+  }
+
+  function wrap(innerFn, outerFn, self, tryLocsList) {
+    // If outerFn provided and outerFn.prototype is a Generator, then outerFn.prototype instanceof Generator.
+    var protoGenerator = outerFn && outerFn.prototype instanceof Generator ? outerFn : Generator;
+    var generator = Object.create(protoGenerator.prototype);
+    var context = new Context(tryLocsList || []); // The ._invoke method unifies the implementations of the .next,
+    // .throw, and .return methods.
+
+    generator._invoke = makeInvokeMethod(innerFn, self, context);
+    return generator;
+  }
+
+  exports.wrap = wrap; // Try/catch helper to minimize deoptimizations. Returns a completion
+  // record like context.tryEntries[i].completion. This interface could
+  // have been (and was previously) designed to take a closure to be
+  // invoked without arguments, but in all the cases we care about we
+  // already have an existing method we want to call, so there's no need
+  // to create a new function object. We can even get away with assuming
+  // the method takes exactly one argument, since that happens to be true
+  // in every case, so we don't have to touch the arguments object. The
+  // only additional allocation required is the completion record, which
+  // has a stable shape and so hopefully should be cheap to allocate.
+
+  function tryCatch(fn, obj, arg) {
+    try {
+      return {
+        type: "normal",
+        arg: fn.call(obj, arg)
+      };
+    } catch (err) {
+      return {
+        type: "throw",
+        arg: err
+      };
+    }
+  }
+
+  var GenStateSuspendedStart = "suspendedStart";
+  var GenStateSuspendedYield = "suspendedYield";
+  var GenStateExecuting = "executing";
+  var GenStateCompleted = "completed"; // Returning this object from the innerFn has the same effect as
+  // breaking out of the dispatch switch statement.
+
+  var ContinueSentinel = {}; // Dummy constructor functions that we use as the .constructor and
+  // .constructor.prototype properties for functions that return Generator
+  // objects. For full spec compliance, you may wish to configure your
+  // minifier not to mangle the names of these two functions.
+
+  function Generator() {}
+
+  function GeneratorFunction() {}
+
+  function GeneratorFunctionPrototype() {} // This is a polyfill for %IteratorPrototype% for environments that
+  // don't natively support it.
+
+
+  var IteratorPrototype = {};
+  define(IteratorPrototype, iteratorSymbol, function () {
+    return this;
+  });
+  var getProto = Object.getPrototypeOf;
+  var NativeIteratorPrototype = getProto && getProto(getProto(values([])));
+
+  if (NativeIteratorPrototype && NativeIteratorPrototype !== Op && hasOwn.call(NativeIteratorPrototype, iteratorSymbol)) {
+    // This environment has a native %IteratorPrototype%; use it instead
+    // of the polyfill.
+    IteratorPrototype = NativeIteratorPrototype;
+  }
+
+  var Gp = GeneratorFunctionPrototype.prototype = Generator.prototype = Object.create(IteratorPrototype);
+  GeneratorFunction.prototype = GeneratorFunctionPrototype;
+  define(Gp, "constructor", GeneratorFunctionPrototype);
+  define(GeneratorFunctionPrototype, "constructor", GeneratorFunction);
+  GeneratorFunction.displayName = define(GeneratorFunctionPrototype, toStringTagSymbol, "GeneratorFunction"); // Helper for defining the .next, .throw, and .return methods of the
+  // Iterator interface in terms of a single ._invoke method.
+
+  function defineIteratorMethods(prototype) {
+    ["next", "throw", "return"].forEach(function (method) {
+      define(prototype, method, function (arg) {
+        return this._invoke(method, arg);
+      });
+    });
+  }
+
+  exports.isGeneratorFunction = function (genFun) {
+    var ctor = typeof genFun === "function" && genFun.constructor;
+    return ctor ? ctor === GeneratorFunction || // For the native GeneratorFunction constructor, the best we can
+    // do is to check its .name property.
+    (ctor.displayName || ctor.name) === "GeneratorFunction" : false;
+  };
+
+  exports.mark = function (genFun) {
+    if (Object.setPrototypeOf) {
+      Object.setPrototypeOf(genFun, GeneratorFunctionPrototype);
+    } else {
+      genFun.__proto__ = GeneratorFunctionPrototype;
+      define(genFun, toStringTagSymbol, "GeneratorFunction");
+    }
+
+    genFun.prototype = Object.create(Gp);
+    return genFun;
+  }; // Within the body of any async function, `await x` is transformed to
+  // `yield regeneratorRuntime.awrap(x)`, so that the runtime can test
+  // `hasOwn.call(value, "__await")` to determine if the yielded value is
+  // meant to be awaited.
+
+
+  exports.awrap = function (arg) {
+    return {
+      __await: arg
+    };
+  };
+
+  function AsyncIterator(generator, PromiseImpl) {
+    function invoke(method, arg, resolve, reject) {
+      var record = tryCatch(generator[method], generator, arg);
+
+      if (record.type === "throw") {
+        reject(record.arg);
+      } else {
+        var result = record.arg;
+        var value = result.value;
+
+        if (value && typeof value === "object" && hasOwn.call(value, "__await")) {
+          return PromiseImpl.resolve(value.__await).then(function (value) {
+            invoke("next", value, resolve, reject);
+          }, function (err) {
+            invoke("throw", err, resolve, reject);
+          });
+        }
+
+        return PromiseImpl.resolve(value).then(function (unwrapped) {
+          // When a yielded Promise is resolved, its final value becomes
+          // the .value of the Promise<{value,done}> result for the
+          // current iteration.
+          result.value = unwrapped;
+          resolve(result);
+        }, function (error) {
+          // If a rejected Promise was yielded, throw the rejection back
+          // into the async generator function so it can be handled there.
+          return invoke("throw", error, resolve, reject);
+        });
+      }
+    }
+
+    var previousPromise;
+
+    function enqueue(method, arg) {
+      function callInvokeWithMethodAndArg() {
+        return new PromiseImpl(function (resolve, reject) {
+          invoke(method, arg, resolve, reject);
+        });
+      }
+
+      return previousPromise = // If enqueue has been called before, then we want to wait until
+      // all previous Promises have been resolved before calling invoke,
+      // so that results are always delivered in the correct order. If
+      // enqueue has not been called before, then it is important to
+      // call invoke immediately, without waiting on a callback to fire,
+      // so that the async generator function has the opportunity to do
+      // any necessary setup in a predictable way. This predictability
+      // is why the Promise constructor synchronously invokes its
+      // executor callback, and why async functions synchronously
+      // execute code before the first await. Since we implement simple
+      // async functions in terms of async generators, it is especially
+      // important to get this right, even though it requires care.
+      previousPromise ? previousPromise.then(callInvokeWithMethodAndArg, // Avoid propagating failures to Promises returned by later
+      // invocations of the iterator.
+      callInvokeWithMethodAndArg) : callInvokeWithMethodAndArg();
+    } // Define the unified helper method that is used to implement .next,
+    // .throw, and .return (see defineIteratorMethods).
+
+
+    this._invoke = enqueue;
+  }
+
+  defineIteratorMethods(AsyncIterator.prototype);
+  define(AsyncIterator.prototype, asyncIteratorSymbol, function () {
+    return this;
+  });
+  exports.AsyncIterator = AsyncIterator; // Note that simple async functions are implemented on top of
+  // AsyncIterator objects; they just return a Promise for the value of
+  // the final result produced by the iterator.
+
+  exports.async = function (innerFn, outerFn, self, tryLocsList, PromiseImpl) {
+    if (PromiseImpl === void 0) PromiseImpl = Promise;
+    var iter = new AsyncIterator(wrap(innerFn, outerFn, self, tryLocsList), PromiseImpl);
+    return exports.isGeneratorFunction(outerFn) ? iter // If outerFn is a generator, return the full iterator.
+    : iter.next().then(function (result) {
+      return result.done ? result.value : iter.next();
+    });
+  };
+
+  function makeInvokeMethod(innerFn, self, context) {
+    var state = GenStateSuspendedStart;
+    return function invoke(method, arg) {
+      if (state === GenStateExecuting) {
+        throw new Error("Generator is already running");
+      }
+
+      if (state === GenStateCompleted) {
+        if (method === "throw") {
+          throw arg;
+        } // Be forgiving, per 25.3.3.3.3 of the spec:
+        // https://people.mozilla.org/~jorendorff/es6-draft.html#sec-generatorresume
+
+
+        return doneResult();
+      }
+
+      context.method = method;
+      context.arg = arg;
+
+      while (true) {
+        var delegate = context.delegate;
+
+        if (delegate) {
+          var delegateResult = maybeInvokeDelegate(delegate, context);
+
+          if (delegateResult) {
+            if (delegateResult === ContinueSentinel) continue;
+            return delegateResult;
+          }
+        }
+
+        if (context.method === "next") {
+          // Setting context._sent for legacy support of Babel's
+          // function.sent implementation.
+          context.sent = context._sent = context.arg;
+        } else if (context.method === "throw") {
+          if (state === GenStateSuspendedStart) {
+            state = GenStateCompleted;
+            throw context.arg;
+          }
+
+          context.dispatchException(context.arg);
+        } else if (context.method === "return") {
+          context.abrupt("return", context.arg);
+        }
+
+        state = GenStateExecuting;
+        var record = tryCatch(innerFn, self, context);
+
+        if (record.type === "normal") {
+          // If an exception is thrown from innerFn, we leave state ===
+          // GenStateExecuting and loop back for another invocation.
+          state = context.done ? GenStateCompleted : GenStateSuspendedYield;
+
+          if (record.arg === ContinueSentinel) {
+            continue;
+          }
+
+          return {
+            value: record.arg,
+            done: context.done
+          };
+        } else if (record.type === "throw") {
+          state = GenStateCompleted; // Dispatch the exception by looping back around to the
+          // context.dispatchException(context.arg) call above.
+
+          context.method = "throw";
+          context.arg = record.arg;
+        }
+      }
+    };
+  } // Call delegate.iterator[context.method](context.arg) and handle the
+  // result, either by returning a { value, done } result from the
+  // delegate iterator, or by modifying context.method and context.arg,
+  // setting context.delegate to null, and returning the ContinueSentinel.
+
+
+  function maybeInvokeDelegate(delegate, context) {
+    var method = delegate.iterator[context.method];
+
+    if (method === undefined) {
+      // A .throw or .return when the delegate iterator has no .throw
+      // method always terminates the yield* loop.
+      context.delegate = null;
+
+      if (context.method === "throw") {
+        // Note: ["return"] must be used for ES3 parsing compatibility.
+        if (delegate.iterator["return"]) {
+          // If the delegate iterator has a return method, give it a
+          // chance to clean up.
+          context.method = "return";
+          context.arg = undefined;
+          maybeInvokeDelegate(delegate, context);
+
+          if (context.method === "throw") {
+            // If maybeInvokeDelegate(context) changed context.method from
+            // "return" to "throw", let that override the TypeError below.
+            return ContinueSentinel;
+          }
+        }
+
+        context.method = "throw";
+        context.arg = new TypeError("The iterator does not provide a 'throw' method");
+      }
+
+      return ContinueSentinel;
+    }
+
+    var record = tryCatch(method, delegate.iterator, context.arg);
+
+    if (record.type === "throw") {
+      context.method = "throw";
+      context.arg = record.arg;
+      context.delegate = null;
+      return ContinueSentinel;
+    }
+
+    var info = record.arg;
+
+    if (!info) {
+      context.method = "throw";
+      context.arg = new TypeError("iterator result is not an object");
+      context.delegate = null;
+      return ContinueSentinel;
+    }
+
+    if (info.done) {
+      // Assign the result of the finished delegate to the temporary
+      // variable specified by delegate.resultName (see delegateYield).
+      context[delegate.resultName] = info.value; // Resume execution at the desired location (see delegateYield).
+
+      context.next = delegate.nextLoc; // If context.method was "throw" but the delegate handled the
+      // exception, let the outer generator proceed normally. If
+      // context.method was "next", forget context.arg since it has been
+      // "consumed" by the delegate iterator. If context.method was
+      // "return", allow the original .return call to continue in the
+      // outer generator.
+
+      if (context.method !== "return") {
+        context.method = "next";
+        context.arg = undefined;
+      }
+    } else {
+      // Re-yield the result returned by the delegate method.
+      return info;
+    } // The delegate iterator is finished, so forget it and continue with
+    // the outer generator.
+
+
+    context.delegate = null;
+    return ContinueSentinel;
+  } // Define Generator.prototype.{next,throw,return} in terms of the
+  // unified ._invoke helper method.
+
+
+  defineIteratorMethods(Gp);
+  define(Gp, toStringTagSymbol, "Generator"); // A Generator should always return itself as the iterator object when the
+  // @@iterator function is called on it. Some browsers' implementations of the
+  // iterator prototype chain incorrectly implement this, causing the Generator
+  // object to not be returned from this call. This ensures that doesn't happen.
+  // See https://github.com/facebook/regenerator/issues/274 for more details.
+
+  define(Gp, iteratorSymbol, function () {
+    return this;
+  });
+  define(Gp, "toString", function () {
+    return "[object Generator]";
+  });
+
+  function pushTryEntry(locs) {
+    var entry = {
+      tryLoc: locs[0]
+    };
+
+    if (1 in locs) {
+      entry.catchLoc = locs[1];
+    }
+
+    if (2 in locs) {
+      entry.finallyLoc = locs[2];
+      entry.afterLoc = locs[3];
+    }
+
+    this.tryEntries.push(entry);
+  }
+
+  function resetTryEntry(entry) {
+    var record = entry.completion || {};
+    record.type = "normal";
+    delete record.arg;
+    entry.completion = record;
+  }
+
+  function Context(tryLocsList) {
+    // The root entry object (effectively a try statement without a catch
+    // or a finally block) gives us a place to store values thrown from
+    // locations where there is no enclosing try statement.
+    this.tryEntries = [{
+      tryLoc: "root"
+    }];
+    tryLocsList.forEach(pushTryEntry, this);
+    this.reset(true);
+  }
+
+  exports.keys = function (object) {
+    var keys = [];
+
+    for (var key in object) {
+      keys.push(key);
+    }
+
+    keys.reverse(); // Rather than returning an object with a next method, we keep
+    // things simple and return the next function itself.
+
+    return function next() {
+      while (keys.length) {
+        var key = keys.pop();
+
+        if (key in object) {
+          next.value = key;
+          next.done = false;
+          return next;
+        }
+      } // To avoid creating an additional object, we just hang the .value
+      // and .done properties off the next function object itself. This
+      // also ensures that the minifier will not anonymize the function.
+
+
+      next.done = true;
+      return next;
+    };
+  };
+
+  function values(iterable) {
+    if (iterable) {
+      var iteratorMethod = iterable[iteratorSymbol];
+
+      if (iteratorMethod) {
+        return iteratorMethod.call(iterable);
+      }
+
+      if (typeof iterable.next === "function") {
+        return iterable;
+      }
+
+      if (!isNaN(iterable.length)) {
+        var i = -1,
+            next = function next() {
+          while (++i < iterable.length) {
+            if (hasOwn.call(iterable, i)) {
+              next.value = iterable[i];
+              next.done = false;
+              return next;
+            }
+          }
+
+          next.value = undefined;
+          next.done = true;
+          return next;
+        };
+
+        return next.next = next;
+      }
+    } // Return an iterator with no values.
+
+
+    return {
+      next: doneResult
+    };
+  }
+
+  exports.values = values;
+
+  function doneResult() {
+    return {
+      value: undefined,
+      done: true
+    };
+  }
+
+  Context.prototype = {
+    constructor: Context,
+    reset: function reset(skipTempReset) {
+      this.prev = 0;
+      this.next = 0; // Resetting context._sent for legacy support of Babel's
+      // function.sent implementation.
+
+      this.sent = this._sent = undefined;
+      this.done = false;
+      this.delegate = null;
+      this.method = "next";
+      this.arg = undefined;
+      this.tryEntries.forEach(resetTryEntry);
+
+      if (!skipTempReset) {
+        for (var name in this) {
+          // Not sure about the optimal order of these conditions:
+          if (name.charAt(0) === "t" && hasOwn.call(this, name) && !isNaN(+name.slice(1))) {
+            this[name] = undefined;
+          }
+        }
+      }
+    },
+    stop: function stop() {
+      this.done = true;
+      var rootEntry = this.tryEntries[0];
+      var rootRecord = rootEntry.completion;
+
+      if (rootRecord.type === "throw") {
+        throw rootRecord.arg;
+      }
+
+      return this.rval;
+    },
+    dispatchException: function dispatchException(exception) {
+      if (this.done) {
+        throw exception;
+      }
+
+      var context = this;
+
+      function handle(loc, caught) {
+        record.type = "throw";
+        record.arg = exception;
+        context.next = loc;
+
+        if (caught) {
+          // If the dispatched exception was caught by a catch block,
+          // then let that catch block handle the exception normally.
+          context.method = "next";
+          context.arg = undefined;
+        }
+
+        return !!caught;
+      }
+
+      for (var i = this.tryEntries.length - 1; i >= 0; --i) {
+        var entry = this.tryEntries[i];
+        var record = entry.completion;
+
+        if (entry.tryLoc === "root") {
+          // Exception thrown outside of any try block that could handle
+          // it, so set the completion value of the entire function to
+          // throw the exception.
+          return handle("end");
+        }
+
+        if (entry.tryLoc <= this.prev) {
+          var hasCatch = hasOwn.call(entry, "catchLoc");
+          var hasFinally = hasOwn.call(entry, "finallyLoc");
+
+          if (hasCatch && hasFinally) {
+            if (this.prev < entry.catchLoc) {
+              return handle(entry.catchLoc, true);
+            } else if (this.prev < entry.finallyLoc) {
+              return handle(entry.finallyLoc);
+            }
+          } else if (hasCatch) {
+            if (this.prev < entry.catchLoc) {
+              return handle(entry.catchLoc, true);
+            }
+          } else if (hasFinally) {
+            if (this.prev < entry.finallyLoc) {
+              return handle(entry.finallyLoc);
+            }
+          } else {
+            throw new Error("try statement without catch or finally");
+          }
+        }
+      }
+    },
+    abrupt: function abrupt(type, arg) {
+      for (var i = this.tryEntries.length - 1; i >= 0; --i) {
+        var entry = this.tryEntries[i];
+
+        if (entry.tryLoc <= this.prev && hasOwn.call(entry, "finallyLoc") && this.prev < entry.finallyLoc) {
+          var finallyEntry = entry;
+          break;
+        }
+      }
+
+      if (finallyEntry && (type === "break" || type === "continue") && finallyEntry.tryLoc <= arg && arg <= finallyEntry.finallyLoc) {
+        // Ignore the finally entry if control is not jumping to a
+        // location outside the try/catch block.
+        finallyEntry = null;
+      }
+
+      var record = finallyEntry ? finallyEntry.completion : {};
+      record.type = type;
+      record.arg = arg;
+
+      if (finallyEntry) {
+        this.method = "next";
+        this.next = finallyEntry.finallyLoc;
+        return ContinueSentinel;
+      }
+
+      return this.complete(record);
+    },
+    complete: function complete(record, afterLoc) {
+      if (record.type === "throw") {
+        throw record.arg;
+      }
+
+      if (record.type === "break" || record.type === "continue") {
+        this.next = record.arg;
+      } else if (record.type === "return") {
+        this.rval = this.arg = record.arg;
+        this.method = "return";
+        this.next = "end";
+      } else if (record.type === "normal" && afterLoc) {
+        this.next = afterLoc;
+      }
+
+      return ContinueSentinel;
+    },
+    finish: function finish(finallyLoc) {
+      for (var i = this.tryEntries.length - 1; i >= 0; --i) {
+        var entry = this.tryEntries[i];
+
+        if (entry.finallyLoc === finallyLoc) {
+          this.complete(entry.completion, entry.afterLoc);
+          resetTryEntry(entry);
+          return ContinueSentinel;
+        }
+      }
+    },
+    "catch": function _catch(tryLoc) {
+      for (var i = this.tryEntries.length - 1; i >= 0; --i) {
+        var entry = this.tryEntries[i];
+
+        if (entry.tryLoc === tryLoc) {
+          var record = entry.completion;
+
+          if (record.type === "throw") {
+            var thrown = record.arg;
+            resetTryEntry(entry);
+          }
+
+          return thrown;
+        }
+      } // The context.catch method must only be called with a location
+      // argument that corresponds to a known catch block.
+
+
+      throw new Error("illegal catch attempt");
+    },
+    delegateYield: function delegateYield(iterable, resultName, nextLoc) {
+      this.delegate = {
+        iterator: values(iterable),
+        resultName: resultName,
+        nextLoc: nextLoc
+      };
+
+      if (this.method === "next") {
+        // Deliberately forget the last sent value so that we don't
+        // accidentally pass it on to the delegate.
+        this.arg = undefined;
+      }
+
+      return ContinueSentinel;
+    }
+  }; // Regardless of whether this script is executing as a CommonJS module
+  // or not, return the runtime object so that we can declare the variable
+  // regeneratorRuntime in the outer scope, which allows this module to be
+  // injected easily by `bin/regenerator --include-runtime script.js`.
+
+  return exports;
+}( // If this script is executing as a CommonJS module, use module.exports
+// as the regeneratorRuntime namespace. Otherwise create a new empty
+// object. Either way, the resulting object will be used to initialize
+// the regeneratorRuntime variable at the top of this file.
+ true ? module.exports : 0);
+
+try {
+  regeneratorRuntime = runtime;
+} catch (accidentalStrictMode) {
+  // This module should not be running in strict mode, so the above
+  // assignment should always work unless something is misconfigured. Just
+  // in case runtime.js accidentally runs in strict mode, in modern engines
+  // we can explicitly access globalThis. In older engines we can escape
+  // strict mode using a global Function call. This could conceivably fail
+  // if a Content Security Policy forbids using Function, but in that case
+  // the proper solution is to fix the accidental strict mode problem. If
+  // you've misconfigured your bundler to force strict mode and applied a
+  // CSP to forbid Function, and you're not willing to fix either of those
+  // problems, please detail your unique predicament in a GitHub issue.
+  if (typeof globalThis === "object") {
+    globalThis.regeneratorRuntime = runtime;
+  } else {
+    Function("r", "regeneratorRuntime = r")(runtime);
+  }
+}
+
+/***/ }),
+
+/***/ "./src/common/compat.js":
+/*!******************************!*\
+  !*** ./src/common/compat.js ***!
+  \******************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _utils_sortTags__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./utils/sortTags */ "./src/common/utils/sortTags.js");
+/* harmony import */ var _models_Tag__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./models/Tag */ "./src/common/models/Tag.js");
+/* harmony import */ var _helpers_tagsLabel__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./helpers/tagsLabel */ "./src/common/helpers/tagsLabel.js");
+/* harmony import */ var _helpers_tagIcon__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./helpers/tagIcon */ "./src/common/helpers/tagIcon.js");
+/* harmony import */ var _helpers_tagLabel__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./helpers/tagLabel */ "./src/common/helpers/tagLabel.js");
+
+
+
+
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  'tags/utils/sortTags': _utils_sortTags__WEBPACK_IMPORTED_MODULE_0__["default"],
+  'tags/models/Tag': _models_Tag__WEBPACK_IMPORTED_MODULE_1__["default"],
+  'tags/helpers/tagsLabel': _helpers_tagsLabel__WEBPACK_IMPORTED_MODULE_2__["default"],
+  'tags/helpers/tagIcon': _helpers_tagIcon__WEBPACK_IMPORTED_MODULE_3__["default"],
+  'tags/helpers/tagLabel': _helpers_tagLabel__WEBPACK_IMPORTED_MODULE_4__["default"]
+});
+
+/***/ }),
+
+/***/ "./src/common/helpers/tagIcon.js":
+/*!***************************************!*\
+  !*** ./src/common/helpers/tagIcon.js ***!
+  \***************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ tagIcon)
+/* harmony export */ });
+/* harmony import */ var flarum_utils_classList__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! flarum/utils/classList */ "flarum/utils/classList");
+/* harmony import */ var flarum_utils_classList__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(flarum_utils_classList__WEBPACK_IMPORTED_MODULE_0__);
+
+function tagIcon(tag, attrs, settings) {
+  if (attrs === void 0) {
+    attrs = {};
+  }
+
+  if (settings === void 0) {
+    settings = {};
+  }
+
+  var hasIcon = tag && tag.icon();
+  var _settings = settings,
+      _settings$useColor = _settings.useColor,
+      useColor = _settings$useColor === void 0 ? true : _settings$useColor;
+  attrs.className = flarum_utils_classList__WEBPACK_IMPORTED_MODULE_0___default()([attrs.className, 'icon', hasIcon ? tag.icon() : 'TagIcon']);
+
+  if (tag && useColor) {
+    attrs.style = attrs.style || {};
+    attrs.style['--color'] = tag.color();
+
+    if (hasIcon) {
+      attrs.style.color = tag.color();
+    }
+  } else if (!tag) {
+    attrs.className += ' untagged';
+  }
+
+  return hasIcon ? m("i", attrs) : m("span", attrs);
+}
+
+/***/ }),
+
+/***/ "./src/common/helpers/tagLabel.js":
+/*!****************************************!*\
+  !*** ./src/common/helpers/tagLabel.js ***!
+  \****************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ tagLabel)
+/* harmony export */ });
+/* harmony import */ var flarum_utils_extract__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! flarum/utils/extract */ "flarum/utils/extract");
+/* harmony import */ var flarum_utils_extract__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(flarum_utils_extract__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var flarum_components_Link__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! flarum/components/Link */ "flarum/components/Link");
+/* harmony import */ var flarum_components_Link__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(flarum_components_Link__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _tagIcon__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./tagIcon */ "./src/common/helpers/tagIcon.js");
+
+
+
+function tagLabel(tag, attrs) {
+  if (attrs === void 0) {
+    attrs = {};
+  }
+
+  attrs.style = attrs.style || {};
+  attrs.className = 'TagLabel ' + (attrs.className || '');
+  var link = flarum_utils_extract__WEBPACK_IMPORTED_MODULE_0___default()(attrs, 'link');
+  var tagText = tag ? tag.name() : app.translator.trans('flarum-tags.lib.deleted_tag_text');
+
+  if (tag) {
+    var color = tag.color();
+
+    if (color) {
+      attrs.style['--tag-bg'] = color;
+      attrs.className += ' colored';
+    }
+
+    if (link) {
+      attrs.title = tag.description() || '';
+      attrs.href = app.route('tag', {
+        tags: tag.slug()
+      });
+    }
+
+    if (tag.isChild()) {
+      attrs.className += ' TagLabel--child';
+    }
+  } else {
+    attrs.className += ' untagged';
+  }
+
+  return m(link ? (flarum_components_Link__WEBPACK_IMPORTED_MODULE_1___default()) : 'span', attrs, m("span", {
+    className: "TagLabel-text"
+  }, tag && tag.icon() && (0,_tagIcon__WEBPACK_IMPORTED_MODULE_2__["default"])(tag, {}, {
+    useColor: false
+  }), " ", tagText));
+}
+
+/***/ }),
+
+/***/ "./src/common/helpers/tagsLabel.js":
+/*!*****************************************!*\
+  !*** ./src/common/helpers/tagsLabel.js ***!
+  \*****************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ tagsLabel)
+/* harmony export */ });
+/* harmony import */ var flarum_utils_extract__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! flarum/utils/extract */ "flarum/utils/extract");
+/* harmony import */ var flarum_utils_extract__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(flarum_utils_extract__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _tagLabel__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./tagLabel */ "./src/common/helpers/tagLabel.js");
+/* harmony import */ var _utils_sortTags__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../utils/sortTags */ "./src/common/utils/sortTags.js");
+
+
+
+function tagsLabel(tags, attrs) {
+  if (attrs === void 0) {
+    attrs = {};
+  }
+
+  var children = [];
+  var link = flarum_utils_extract__WEBPACK_IMPORTED_MODULE_0___default()(attrs, 'link');
+  attrs.className = 'TagsLabel ' + (attrs.className || '');
+
+  if (tags) {
+    (0,_utils_sortTags__WEBPACK_IMPORTED_MODULE_2__["default"])(tags).forEach(function (tag) {
+      if (tag || tags.length === 1) {
+        children.push((0,_tagLabel__WEBPACK_IMPORTED_MODULE_1__["default"])(tag, {
+          link: link
+        }));
+      }
+    });
+  } else {
+    children.push((0,_tagLabel__WEBPACK_IMPORTED_MODULE_1__["default"])());
+  }
+
+  return m("span", attrs, children);
+}
+
+/***/ }),
+
+/***/ "./src/common/index.js":
+/*!*****************************!*\
+  !*** ./src/common/index.js ***!
+  \*****************************/
+/***/ (() => {
+
+
+
+/***/ }),
+
+/***/ "./src/common/models/Tag.js":
+/*!**********************************!*\
+  !*** ./src/common/models/Tag.js ***!
+  \**********************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ Tag)
+/* harmony export */ });
+/* harmony import */ var _babel_runtime_helpers_esm_inheritsLoose__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/esm/inheritsLoose */ "./node_modules/@babel/runtime/helpers/esm/inheritsLoose.js");
+/* harmony import */ var flarum_Model__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! flarum/Model */ "flarum/Model");
+/* harmony import */ var flarum_Model__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(flarum_Model__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var flarum_utils_mixin__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! flarum/utils/mixin */ "flarum/utils/mixin");
+/* harmony import */ var flarum_utils_mixin__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(flarum_utils_mixin__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var flarum_utils_computed__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! flarum/utils/computed */ "flarum/utils/computed");
+/* harmony import */ var flarum_utils_computed__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(flarum_utils_computed__WEBPACK_IMPORTED_MODULE_3__);
+
+
+
+
+
+var Tag = /*#__PURE__*/function (_mixin) {
+  (0,_babel_runtime_helpers_esm_inheritsLoose__WEBPACK_IMPORTED_MODULE_0__["default"])(Tag, _mixin);
+
+  function Tag() {
+    return _mixin.apply(this, arguments) || this;
+  }
+
+  return Tag;
+}(flarum_utils_mixin__WEBPACK_IMPORTED_MODULE_2___default()((flarum_Model__WEBPACK_IMPORTED_MODULE_1___default()), {
+  name: flarum_Model__WEBPACK_IMPORTED_MODULE_1___default().attribute('name'),
+  slug: flarum_Model__WEBPACK_IMPORTED_MODULE_1___default().attribute('slug'),
+  description: flarum_Model__WEBPACK_IMPORTED_MODULE_1___default().attribute('description'),
+  color: flarum_Model__WEBPACK_IMPORTED_MODULE_1___default().attribute('color'),
+  backgroundUrl: flarum_Model__WEBPACK_IMPORTED_MODULE_1___default().attribute('backgroundUrl'),
+  backgroundMode: flarum_Model__WEBPACK_IMPORTED_MODULE_1___default().attribute('backgroundMode'),
+  icon: flarum_Model__WEBPACK_IMPORTED_MODULE_1___default().attribute('icon'),
+  position: flarum_Model__WEBPACK_IMPORTED_MODULE_1___default().attribute('position'),
+  parent: flarum_Model__WEBPACK_IMPORTED_MODULE_1___default().hasOne('parent'),
+  children: flarum_Model__WEBPACK_IMPORTED_MODULE_1___default().hasMany('children'),
+  defaultSort: flarum_Model__WEBPACK_IMPORTED_MODULE_1___default().attribute('defaultSort'),
+  isChild: flarum_Model__WEBPACK_IMPORTED_MODULE_1___default().attribute('isChild'),
+  isHidden: flarum_Model__WEBPACK_IMPORTED_MODULE_1___default().attribute('isHidden'),
+  discussionCount: flarum_Model__WEBPACK_IMPORTED_MODULE_1___default().attribute('discussionCount'),
+  lastPostedAt: flarum_Model__WEBPACK_IMPORTED_MODULE_1___default().attribute('lastPostedAt', (flarum_Model__WEBPACK_IMPORTED_MODULE_1___default().transformDate)),
+  lastPostedDiscussion: flarum_Model__WEBPACK_IMPORTED_MODULE_1___default().hasOne('lastPostedDiscussion'),
+  isRestricted: flarum_Model__WEBPACK_IMPORTED_MODULE_1___default().attribute('isRestricted'),
+  canStartDiscussion: flarum_Model__WEBPACK_IMPORTED_MODULE_1___default().attribute('canStartDiscussion'),
+  canAddToDiscussion: flarum_Model__WEBPACK_IMPORTED_MODULE_1___default().attribute('canAddToDiscussion'),
+  isPrimary: flarum_utils_computed__WEBPACK_IMPORTED_MODULE_3___default()('position', 'parent', function (position, parent) {
+    return position !== null && parent === false;
+  })
+}));
+
+
+
+/***/ }),
+
+/***/ "./src/common/utils/sortTags.js":
+/*!**************************************!*\
+  !*** ./src/common/utils/sortTags.js ***!
+  \**************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ sortTags)
+/* harmony export */ });
+function sortTags(tags) {
+  return tags.slice(0).sort(function (a, b) {
+    var aPos = a.position();
+    var bPos = b.position(); // If they're both secondary tags, sort them by their discussions count,
+    // descending.
+
+    if (aPos === null && bPos === null) return b.discussionCount() - a.discussionCount(); // If just one is a secondary tag, then the primary tag should
+    // come first.
+
+    if (bPos === null) return -1;
+    if (aPos === null) return 1; // If we've made it this far, we know they're both primary tags. So we'll
+    // need to see if they have parents.
+
+    var aParent = a.parent();
+    var bParent = b.parent(); // If they both have the same parent, then their positions are local,
+    // so we can compare them directly.
+
+    if (aParent === bParent) return aPos - bPos; // If they are both child tags, then we will compare the positions of their
+    // parents.
+    else if (aParent && bParent) return aParent.position() - bParent.position(); // If we are comparing a child tag with its parent, then we let the parent
+    // come first. If we are comparing an unrelated parent/child, then we
+    // compare both of the parents.
+    else if (aParent) return aParent === b ? 1 : aParent.position() - bPos;else if (bParent) return bParent === a ? -1 : aPos - bParent.position();
+    return 0;
+  });
+}
+
+/***/ }),
+
+/***/ "./src/forum/addTagComposer.js":
+/*!*************************************!*\
+  !*** ./src/forum/addTagComposer.js ***!
+  \*************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* export default binding */ __WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var flarum_extend__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! flarum/extend */ "flarum/extend");
+/* harmony import */ var flarum_extend__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(flarum_extend__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var flarum_components_IndexPage__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! flarum/components/IndexPage */ "flarum/components/IndexPage");
+/* harmony import */ var flarum_components_IndexPage__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(flarum_components_IndexPage__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var flarum_components_DiscussionComposer__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! flarum/components/DiscussionComposer */ "flarum/components/DiscussionComposer");
+/* harmony import */ var flarum_components_DiscussionComposer__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(flarum_components_DiscussionComposer__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var flarum_utils_classList__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! flarum/utils/classList */ "flarum/utils/classList");
+/* harmony import */ var flarum_utils_classList__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(flarum_utils_classList__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _components_TagDiscussionModal__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/TagDiscussionModal */ "./src/forum/components/TagDiscussionModal.js");
+/* harmony import */ var _common_helpers_tagsLabel__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../common/helpers/tagsLabel */ "./src/common/helpers/tagsLabel.js");
+/* harmony import */ var _utils_getSelectableTags__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./utils/getSelectableTags */ "./src/forum/utils/getSelectableTags.js");
+
+
+
+
+
+
+
+/* harmony default export */ function __WEBPACK_DEFAULT_EXPORT__() {
+  (0,flarum_extend__WEBPACK_IMPORTED_MODULE_0__.extend)((flarum_components_IndexPage__WEBPACK_IMPORTED_MODULE_1___default().prototype), 'newDiscussionAction', function (promise) {
+    // From `addTagFilter
+    var tag = this.currentTag();
+
+    if (tag) {
+      var parent = tag.parent();
+      var tags = parent ? [parent, tag] : [tag];
+      promise.then(function (composer) {
+        return composer.fields.tags = tags;
+      });
+    } else {
+      app.composer.fields.tags = [];
+    }
+  });
+  (0,flarum_extend__WEBPACK_IMPORTED_MODULE_0__.extend)((flarum_components_DiscussionComposer__WEBPACK_IMPORTED_MODULE_2___default().prototype), 'oninit', function () {
+    app.tagList.load(['parent']).then(function () {
+      return m.redraw();
+    });
+  }); // Add tag-selection abilities to the discussion composer.
+
+  (flarum_components_DiscussionComposer__WEBPACK_IMPORTED_MODULE_2___default().prototype.chooseTags) = function () {
+    var _this = this;
+
+    var selectableTags = (0,_utils_getSelectableTags__WEBPACK_IMPORTED_MODULE_6__["default"])();
+    if (!selectableTags.length) return;
+    app.modal.show(_components_TagDiscussionModal__WEBPACK_IMPORTED_MODULE_4__["default"], {
+      selectedTags: (this.composer.fields.tags || []).slice(0),
+      onsubmit: function onsubmit(tags) {
+        _this.composer.fields.tags = tags;
+
+        _this.$('textarea').focus();
+      }
+    });
+  }; // Add a tag-selection menu to the discussion composer's header, after the
+  // title.
+
+
+  (0,flarum_extend__WEBPACK_IMPORTED_MODULE_0__.extend)((flarum_components_DiscussionComposer__WEBPACK_IMPORTED_MODULE_2___default().prototype), 'headerItems', function (items) {
+    var tags = this.composer.fields.tags || [];
+    var selectableTags = (0,_utils_getSelectableTags__WEBPACK_IMPORTED_MODULE_6__["default"])();
+    items.add('tags', m("a", {
+      className: flarum_utils_classList__WEBPACK_IMPORTED_MODULE_3___default()(['DiscussionComposer-changeTags', !selectableTags.length && 'disabled']),
+      onclick: this.chooseTags.bind(this)
+    }, tags.length ? (0,_common_helpers_tagsLabel__WEBPACK_IMPORTED_MODULE_5__["default"])(tags) : m("span", {
+      className: "TagLabel untagged"
+    }, app.translator.trans('flarum-tags.forum.composer_discussion.choose_tags_link'))), 10);
+  });
+  (0,flarum_extend__WEBPACK_IMPORTED_MODULE_0__.override)((flarum_components_DiscussionComposer__WEBPACK_IMPORTED_MODULE_2___default().prototype), 'onsubmit', function (original) {
+    var _this2 = this;
+
+    var chosenTags = this.composer.fields.tags || [];
+    var chosenPrimaryTags = chosenTags.filter(function (tag) {
+      return tag.position() !== null && !tag.isChild();
+    });
+    var chosenSecondaryTags = chosenTags.filter(function (tag) {
+      return tag.position() === null;
+    });
+    var selectableTags = (0,_utils_getSelectableTags__WEBPACK_IMPORTED_MODULE_6__["default"])();
+
+    if ((!chosenTags.length || chosenPrimaryTags.length < app.forum.attribute('minPrimaryTags') || chosenSecondaryTags.length < app.forum.attribute('minSecondaryTags')) && selectableTags.length) {
+      app.modal.show(_components_TagDiscussionModal__WEBPACK_IMPORTED_MODULE_4__["default"], {
+        selectedTags: chosenTags,
+        onsubmit: function onsubmit(tags) {
+          _this2.composer.fields.tags = tags;
+          original();
+        }
+      });
+    } else {
+      original();
+    }
+  }); // Add the selected tags as data to submit to the server.
+
+  (0,flarum_extend__WEBPACK_IMPORTED_MODULE_0__.extend)((flarum_components_DiscussionComposer__WEBPACK_IMPORTED_MODULE_2___default().prototype), 'data', function (data) {
+    data.relationships = data.relationships || {};
+    data.relationships.tags = this.composer.fields.tags;
+  });
+}
+
+/***/ }),
+
+/***/ "./src/forum/addTagControl.js":
+/*!************************************!*\
+  !*** ./src/forum/addTagControl.js ***!
+  \************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* export default binding */ __WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var flarum_extend__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! flarum/extend */ "flarum/extend");
+/* harmony import */ var flarum_extend__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(flarum_extend__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var flarum_utils_DiscussionControls__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! flarum/utils/DiscussionControls */ "flarum/utils/DiscussionControls");
+/* harmony import */ var flarum_utils_DiscussionControls__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(flarum_utils_DiscussionControls__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var flarum_components_Button__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! flarum/components/Button */ "flarum/components/Button");
+/* harmony import */ var flarum_components_Button__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(flarum_components_Button__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _components_TagDiscussionModal__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/TagDiscussionModal */ "./src/forum/components/TagDiscussionModal.js");
+
+
+
+
+/* harmony default export */ function __WEBPACK_DEFAULT_EXPORT__() {
+  // Add a control allowing the discussion to be moved to another category.
+  (0,flarum_extend__WEBPACK_IMPORTED_MODULE_0__.extend)((flarum_utils_DiscussionControls__WEBPACK_IMPORTED_MODULE_1___default()), 'moderationControls', function (items, discussion) {
+    if (discussion.canTag()) {
+      items.add('tags', m((flarum_components_Button__WEBPACK_IMPORTED_MODULE_2___default()), {
+        icon: "fas fa-tag",
+        onclick: function onclick() {
+          return app.modal.show(_components_TagDiscussionModal__WEBPACK_IMPORTED_MODULE_3__["default"], {
+            discussion: discussion
+          });
+        }
+      }, app.translator.trans('flarum-tags.forum.discussion_controls.edit_tags_button')));
+    }
+  });
+}
+
+/***/ }),
+
+/***/ "./src/forum/addTagFilter.js":
+/*!***********************************!*\
+  !*** ./src/forum/addTagFilter.js ***!
+  \***********************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* export default binding */ __WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var flarum_extend__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! flarum/extend */ "flarum/extend");
+/* harmony import */ var flarum_extend__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(flarum_extend__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var flarum_components_IndexPage__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! flarum/components/IndexPage */ "flarum/components/IndexPage");
+/* harmony import */ var flarum_components_IndexPage__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(flarum_components_IndexPage__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var flarum_states_DiscussionListState__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! flarum/states/DiscussionListState */ "flarum/states/DiscussionListState");
+/* harmony import */ var flarum_states_DiscussionListState__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(flarum_states_DiscussionListState__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var flarum_states_GlobalSearchState__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! flarum/states/GlobalSearchState */ "flarum/states/GlobalSearchState");
+/* harmony import */ var flarum_states_GlobalSearchState__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(flarum_states_GlobalSearchState__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var flarum_utils_classList__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! flarum/utils/classList */ "flarum/utils/classList");
+/* harmony import */ var flarum_utils_classList__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(flarum_utils_classList__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _components_TagHero__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/TagHero */ "./src/forum/components/TagHero.js");
+
+
+
+
+
+
+/* harmony default export */ function __WEBPACK_DEFAULT_EXPORT__() {
+  (flarum_components_IndexPage__WEBPACK_IMPORTED_MODULE_1___default().prototype.currentTag) = function () {
+    var _this = this;
+
+    if (this.currentActiveTag) {
+      return this.currentActiveTag;
+    }
+
+    var slug = app.search.params().tags;
+    var tag = null;
+
+    if (slug) {
+      tag = app.store.getBy('tags', 'slug', slug);
+    }
+
+    if (slug && !tag || tag && !tag.isChild() && !tag.children()) {
+      // Unlike the backend, no need to fetch parent.children because if we're on
+      // a child tag page, then either:
+      //    - We loaded in that child tag (and its siblings) in the API document
+      //    - We first navigated to the current tag's parent, which would have loaded in the current tag's siblings.
+      app.store.find('tags', slug, {
+        include: 'children,children.parent,parent,state'
+      }).then(function () {
+        _this.currentActiveTag = app.store.getBy('tags', 'slug', slug);
+        m.redraw();
+      });
+    }
+
+    if (tag) {
+      this.currentActiveTag = tag;
+      return this.currentActiveTag;
+    }
+  }; // If currently viewing a tag, insert a tag hero at the top of the view.
+
+
+  (0,flarum_extend__WEBPACK_IMPORTED_MODULE_0__.override)((flarum_components_IndexPage__WEBPACK_IMPORTED_MODULE_1___default().prototype), 'hero', function (original) {
+    var tag = this.currentTag();
+    if (tag) return m(_components_TagHero__WEBPACK_IMPORTED_MODULE_5__["default"], {
+      model: tag
+    });
+    return original();
+  });
+  (0,flarum_extend__WEBPACK_IMPORTED_MODULE_0__.extend)((flarum_components_IndexPage__WEBPACK_IMPORTED_MODULE_1___default().prototype), 'view', function (vdom) {
+    var tag = this.currentTag();
+    if (tag) vdom.attrs.className += ' IndexPage--tag' + tag.id();
+  });
+  (0,flarum_extend__WEBPACK_IMPORTED_MODULE_0__.extend)((flarum_components_IndexPage__WEBPACK_IMPORTED_MODULE_1___default().prototype), 'setTitle', function () {
+    var tag = this.currentTag();
+
+    if (tag) {
+      app.setTitle(tag.name());
+    }
+  }); // If currently viewing a tag, restyle the 'new discussion' button to use
+  // the tag's color, and disable if the user isn't allowed to edit.
+
+  (0,flarum_extend__WEBPACK_IMPORTED_MODULE_0__.extend)((flarum_components_IndexPage__WEBPACK_IMPORTED_MODULE_1___default().prototype), 'sidebarItems', function (items) {
+    var tag = this.currentTag();
+
+    if (tag) {
+      var color = tag.color();
+      var canStartDiscussion = tag.canStartDiscussion() || !app.session.user;
+      var newDiscussion = items.get('newDiscussion');
+
+      if (color) {
+        newDiscussion.attrs.className = flarum_utils_classList__WEBPACK_IMPORTED_MODULE_4___default()([newDiscussion.attrs.className, 'Button--tagColored']);
+        newDiscussion.attrs.style = {
+          '--color': color
+        };
+      }
+
+      newDiscussion.attrs.disabled = !canStartDiscussion;
+      newDiscussion.children = app.translator.trans(canStartDiscussion ? 'core.forum.index.start_discussion_button' : 'core.forum.index.cannot_start_discussion_button');
+    }
+  }); // Add a parameter for the global search state to pass on to the
+  // DiscussionListState that will let us filter discussions by tag.
+
+  (0,flarum_extend__WEBPACK_IMPORTED_MODULE_0__.extend)((flarum_states_GlobalSearchState__WEBPACK_IMPORTED_MODULE_3___default().prototype), 'params', function (params) {
+    params.tags = m.route.param('tags');
+  }); // Translate that parameter into a gambit appended to the search query.
+
+  (0,flarum_extend__WEBPACK_IMPORTED_MODULE_0__.extend)((flarum_states_DiscussionListState__WEBPACK_IMPORTED_MODULE_2___default().prototype), 'requestParams', function (params) {
+    params.include.push('tags', 'tags.parent');
+
+    if (this.params.tags) {
+      params.filter.tag = this.params.tags; // TODO: replace this with a more robust system.
+
+      var q = params.filter.q;
+
+      if (q) {
+        params.filter.q = q + " tag:" + this.params.tags;
+      }
+    }
+  });
+}
+
+/***/ }),
+
+/***/ "./src/forum/addTagLabels.js":
+/*!***********************************!*\
+  !*** ./src/forum/addTagLabels.js ***!
+  \***********************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* export default binding */ __WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var flarum_extend__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! flarum/extend */ "flarum/extend");
+/* harmony import */ var flarum_extend__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(flarum_extend__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var flarum_components_DiscussionListItem__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! flarum/components/DiscussionListItem */ "flarum/components/DiscussionListItem");
+/* harmony import */ var flarum_components_DiscussionListItem__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(flarum_components_DiscussionListItem__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var flarum_components_DiscussionHero__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! flarum/components/DiscussionHero */ "flarum/components/DiscussionHero");
+/* harmony import */ var flarum_components_DiscussionHero__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(flarum_components_DiscussionHero__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _common_helpers_tagsLabel__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../common/helpers/tagsLabel */ "./src/common/helpers/tagsLabel.js");
+/* harmony import */ var _common_utils_sortTags__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../common/utils/sortTags */ "./src/common/utils/sortTags.js");
+
+
+
+
+
+/* harmony default export */ function __WEBPACK_DEFAULT_EXPORT__() {
+  // Add tag labels to each discussion in the discussion list.
+  (0,flarum_extend__WEBPACK_IMPORTED_MODULE_0__.extend)((flarum_components_DiscussionListItem__WEBPACK_IMPORTED_MODULE_1___default().prototype), 'infoItems', function (items) {
+    var tags = this.attrs.discussion.tags();
+
+    if (tags && tags.length) {
+      items.add('tags', (0,_common_helpers_tagsLabel__WEBPACK_IMPORTED_MODULE_3__["default"])(tags), 10);
+    }
+  }); // Restyle a discussion's hero to use its first tag's color.
+
+  (0,flarum_extend__WEBPACK_IMPORTED_MODULE_0__.extend)((flarum_components_DiscussionHero__WEBPACK_IMPORTED_MODULE_2___default().prototype), 'view', function (view) {
+    var tags = (0,_common_utils_sortTags__WEBPACK_IMPORTED_MODULE_4__["default"])(this.attrs.discussion.tags());
+
+    if (tags && tags.length) {
+      var color = tags[0].color();
+
+      if (color) {
+        view.attrs.style = {
+          '--hero-bg': color
+        };
+        view.attrs.className += ' DiscussionHero--colored';
+      }
+    }
+  }); // Add a list of a discussion's tags to the discussion hero, displayed
+  // before the title. Put the title on its own line.
+
+  (0,flarum_extend__WEBPACK_IMPORTED_MODULE_0__.extend)((flarum_components_DiscussionHero__WEBPACK_IMPORTED_MODULE_2___default().prototype), 'items', function (items) {
+    var tags = this.attrs.discussion.tags();
+
+    if (tags && tags.length) {
+      items.add('tags', (0,_common_helpers_tagsLabel__WEBPACK_IMPORTED_MODULE_3__["default"])(tags, {
+        link: true
+      }), 5);
+    }
+  });
+}
+
+/***/ }),
+
+/***/ "./src/forum/addTagList.js":
+/*!*********************************!*\
+  !*** ./src/forum/addTagList.js ***!
+  \*********************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* export default binding */ __WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var flarum_extend__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! flarum/extend */ "flarum/extend");
+/* harmony import */ var flarum_extend__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(flarum_extend__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var flarum_components_IndexPage__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! flarum/components/IndexPage */ "flarum/components/IndexPage");
+/* harmony import */ var flarum_components_IndexPage__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(flarum_components_IndexPage__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var flarum_components_Separator__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! flarum/components/Separator */ "flarum/components/Separator");
+/* harmony import */ var flarum_components_Separator__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(flarum_components_Separator__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var flarum_components_LinkButton__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! flarum/components/LinkButton */ "flarum/components/LinkButton");
+/* harmony import */ var flarum_components_LinkButton__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(flarum_components_LinkButton__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _components_TagLinkButton__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/TagLinkButton */ "./src/forum/components/TagLinkButton.js");
+/* harmony import */ var _components_TagsPage__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/TagsPage */ "./src/forum/components/TagsPage.js");
+/* harmony import */ var _common_utils_sortTags__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../common/utils/sortTags */ "./src/common/utils/sortTags.js");
+
+
+
+
+
+
+
+/* harmony default export */ function __WEBPACK_DEFAULT_EXPORT__() {
+  // Add a link to the tags page, as well as a list of all the tags,
+  // to the index page's sidebar.
+  (0,flarum_extend__WEBPACK_IMPORTED_MODULE_0__.extend)((flarum_components_IndexPage__WEBPACK_IMPORTED_MODULE_1___default().prototype), 'navItems', function (items) {
+    items.add('tags', m((flarum_components_LinkButton__WEBPACK_IMPORTED_MODULE_3___default()), {
+      icon: "fas fa-th-large",
+      href: app.route('tags')
+    }, app.translator.trans('flarum-tags.forum.index.tags_link')), -10);
+    if (app.current.matches(_components_TagsPage__WEBPACK_IMPORTED_MODULE_5__["default"])) return;
+    items.add('separator', flarum_components_Separator__WEBPACK_IMPORTED_MODULE_2___default().component(), -12);
+    var params = app.search.stickyParams();
+    var tags = app.store.all('tags');
+    var currentTag = this.currentTag();
+
+    var addTag = function addTag(tag) {
+      var active = currentTag === tag;
+
+      if (!active && currentTag) {
+        active = currentTag.parent() === tag;
+      } // tag.name() is passed here as children even though it isn't used directly
+      // because when we need to get the active child in SelectDropdown, we need to
+      // use its children to populate the dropdown. The problem here is that `view`
+      // on TagLinkButton is only called AFTER SelectDropdown, so no children are available
+      // for SelectDropdown to use at the time.
+
+
+      items.add('tag' + tag.id(), _components_TagLinkButton__WEBPACK_IMPORTED_MODULE_4__["default"].component({
+        model: tag,
+        params: params,
+        active: active
+      }, tag == null ? void 0 : tag.name()), -14);
+    };
+
+    (0,_common_utils_sortTags__WEBPACK_IMPORTED_MODULE_6__["default"])(tags).filter(function (tag) {
+      return tag.position() !== null && (!tag.isChild() || currentTag && (tag.parent() === currentTag || tag.parent() === currentTag.parent()));
+    }).forEach(addTag);
+    var more = tags.filter(function (tag) {
+      return tag.position() === null;
+    }).sort(function (a, b) {
+      return b.discussionCount() - a.discussionCount();
+    });
+    more.splice(0, 3).forEach(addTag);
+
+    if (more.length) {
+      items.add('moreTags', m((flarum_components_LinkButton__WEBPACK_IMPORTED_MODULE_3___default()), {
+        href: app.route('tags')
+      }, app.translator.trans('flarum-tags.forum.index.more_link')), -16);
+    }
+  });
+}
+
+/***/ }),
+
+/***/ "./src/forum/compat.js":
+/*!*****************************!*\
+  !*** ./src/forum/compat.js ***!
+  \*****************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _common_compat__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../common/compat */ "./src/common/compat.js");
+/* harmony import */ var _addTagFilter__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./addTagFilter */ "./src/forum/addTagFilter.js");
+/* harmony import */ var _addTagControl__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./addTagControl */ "./src/forum/addTagControl.js");
+/* harmony import */ var _components_TagHero__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/TagHero */ "./src/forum/components/TagHero.js");
+/* harmony import */ var _components_TagDiscussionModal__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/TagDiscussionModal */ "./src/forum/components/TagDiscussionModal.js");
+/* harmony import */ var _components_TagsPage__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/TagsPage */ "./src/forum/components/TagsPage.js");
+/* harmony import */ var _components_DiscussionTaggedPost__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./components/DiscussionTaggedPost */ "./src/forum/components/DiscussionTaggedPost.js");
+/* harmony import */ var _components_TagLinkButton__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./components/TagLinkButton */ "./src/forum/components/TagLinkButton.js");
+/* harmony import */ var _addTagList__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./addTagList */ "./src/forum/addTagList.js");
+/* harmony import */ var _addTagLabels__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./addTagLabels */ "./src/forum/addTagLabels.js");
+/* harmony import */ var _addTagComposer__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./addTagComposer */ "./src/forum/addTagComposer.js");
+/* harmony import */ var _utils_getSelectableTags__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./utils/getSelectableTags */ "./src/forum/utils/getSelectableTags.js");
+
+
+
+
+
+
+
+
+
+
+
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Object.assign(_common_compat__WEBPACK_IMPORTED_MODULE_0__["default"], {
+  'tags/addTagFilter': _addTagFilter__WEBPACK_IMPORTED_MODULE_1__["default"],
+  'tags/addTagControl': _addTagControl__WEBPACK_IMPORTED_MODULE_2__["default"],
+  'tags/components/TagHero': _components_TagHero__WEBPACK_IMPORTED_MODULE_3__["default"],
+  'tags/components/TagDiscussionModal': _components_TagDiscussionModal__WEBPACK_IMPORTED_MODULE_4__["default"],
+  'tags/components/TagsPage': _components_TagsPage__WEBPACK_IMPORTED_MODULE_5__["default"],
+  'tags/components/DiscussionTaggedPost': _components_DiscussionTaggedPost__WEBPACK_IMPORTED_MODULE_6__["default"],
+  'tags/components/TagLinkButton': _components_TagLinkButton__WEBPACK_IMPORTED_MODULE_7__["default"],
+  'tags/addTagList': _addTagList__WEBPACK_IMPORTED_MODULE_8__["default"],
+  'tags/addTagLabels': _addTagLabels__WEBPACK_IMPORTED_MODULE_9__["default"],
+  'tags/addTagComposer': _addTagComposer__WEBPACK_IMPORTED_MODULE_10__["default"],
+  'tags/utils/getSelectableTags': _utils_getSelectableTags__WEBPACK_IMPORTED_MODULE_11__["default"]
+}));
+
+/***/ }),
+
+/***/ "./src/forum/components/DiscussionTaggedPost.js":
+/*!******************************************************!*\
+  !*** ./src/forum/components/DiscussionTaggedPost.js ***!
+  \******************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ DiscussionTaggedPost)
+/* harmony export */ });
+/* harmony import */ var _babel_runtime_helpers_esm_inheritsLoose__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/esm/inheritsLoose */ "./node_modules/@babel/runtime/helpers/esm/inheritsLoose.js");
+/* harmony import */ var flarum_components_EventPost__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! flarum/components/EventPost */ "flarum/components/EventPost");
+/* harmony import */ var flarum_components_EventPost__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(flarum_components_EventPost__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _common_helpers_tagsLabel__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../common/helpers/tagsLabel */ "./src/common/helpers/tagsLabel.js");
+
+
+
+
+var DiscussionTaggedPost = /*#__PURE__*/function (_EventPost) {
+  (0,_babel_runtime_helpers_esm_inheritsLoose__WEBPACK_IMPORTED_MODULE_0__["default"])(DiscussionTaggedPost, _EventPost);
+
+  function DiscussionTaggedPost() {
+    return _EventPost.apply(this, arguments) || this;
+  }
+
+  DiscussionTaggedPost.initAttrs = function initAttrs(attrs) {
+    _EventPost.initAttrs.call(this, attrs);
+
+    var oldTags = attrs.post.content()[0];
+    var newTags = attrs.post.content()[1];
+
+    function diffTags(tags1, tags2) {
+      return tags1.filter(function (tag) {
+        return tags2.indexOf(tag) === -1;
+      }).map(function (id) {
+        return app.store.getById('tags', id);
+      });
+    }
+
+    attrs.tagsAdded = diffTags(newTags, oldTags);
+    attrs.tagsRemoved = diffTags(oldTags, newTags);
+  };
+
+  var _proto = DiscussionTaggedPost.prototype;
+
+  _proto.icon = function icon() {
+    return 'fas fa-tag';
+  };
+
+  _proto.descriptionKey = function descriptionKey() {
+    if (this.attrs.tagsAdded.length) {
+      if (this.attrs.tagsRemoved.length) {
+        return 'flarum-tags.forum.post_stream.added_and_removed_tags_text';
+      }
+
+      return 'flarum-tags.forum.post_stream.added_tags_text';
+    }
+
+    return 'flarum-tags.forum.post_stream.removed_tags_text';
+  };
+
+  _proto.descriptionData = function descriptionData() {
+    var data = {};
+
+    if (this.attrs.tagsAdded.length) {
+      data.tagsAdded = app.translator.trans('flarum-tags.forum.post_stream.tags_text', {
+        tags: (0,_common_helpers_tagsLabel__WEBPACK_IMPORTED_MODULE_2__["default"])(this.attrs.tagsAdded, {
+          link: true
+        }),
+        count: this.attrs.tagsAdded.length
+      });
+    }
+
+    if (this.attrs.tagsRemoved.length) {
+      data.tagsRemoved = app.translator.trans('flarum-tags.forum.post_stream.tags_text', {
+        tags: (0,_common_helpers_tagsLabel__WEBPACK_IMPORTED_MODULE_2__["default"])(this.attrs.tagsRemoved, {
+          link: true
+        }),
+        count: this.attrs.tagsRemoved.length
+      });
+    }
+
+    return data;
+  };
+
+  return DiscussionTaggedPost;
+}((flarum_components_EventPost__WEBPACK_IMPORTED_MODULE_1___default()));
+
+
+
+/***/ }),
+
+/***/ "./src/forum/components/TagDiscussionModal.js":
+/*!****************************************************!*\
+  !*** ./src/forum/components/TagDiscussionModal.js ***!
+  \****************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ TagDiscussionModal)
+/* harmony export */ });
+/* harmony import */ var _babel_runtime_helpers_esm_inheritsLoose__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/esm/inheritsLoose */ "./node_modules/@babel/runtime/helpers/esm/inheritsLoose.js");
+/* harmony import */ var flarum_components_Modal__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! flarum/components/Modal */ "flarum/components/Modal");
+/* harmony import */ var flarum_components_Modal__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(flarum_components_Modal__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var flarum_components_DiscussionPage__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! flarum/components/DiscussionPage */ "flarum/components/DiscussionPage");
+/* harmony import */ var flarum_components_DiscussionPage__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(flarum_components_DiscussionPage__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var flarum_components_Button__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! flarum/components/Button */ "flarum/components/Button");
+/* harmony import */ var flarum_components_Button__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(flarum_components_Button__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var flarum_components_LoadingIndicator__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! flarum/components/LoadingIndicator */ "flarum/components/LoadingIndicator");
+/* harmony import */ var flarum_components_LoadingIndicator__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(flarum_components_LoadingIndicator__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var flarum_helpers_highlight__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! flarum/helpers/highlight */ "flarum/helpers/highlight");
+/* harmony import */ var flarum_helpers_highlight__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(flarum_helpers_highlight__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var flarum_utils_classList__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! flarum/utils/classList */ "flarum/utils/classList");
+/* harmony import */ var flarum_utils_classList__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(flarum_utils_classList__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var flarum_utils_extractText__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! flarum/utils/extractText */ "flarum/utils/extractText");
+/* harmony import */ var flarum_utils_extractText__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(flarum_utils_extractText__WEBPACK_IMPORTED_MODULE_7__);
+/* harmony import */ var flarum_utils_KeyboardNavigatable__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! flarum/utils/KeyboardNavigatable */ "flarum/utils/KeyboardNavigatable");
+/* harmony import */ var flarum_utils_KeyboardNavigatable__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(flarum_utils_KeyboardNavigatable__WEBPACK_IMPORTED_MODULE_8__);
+/* harmony import */ var flarum_utils_Stream__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! flarum/utils/Stream */ "flarum/utils/Stream");
+/* harmony import */ var flarum_utils_Stream__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(flarum_utils_Stream__WEBPACK_IMPORTED_MODULE_9__);
+/* harmony import */ var _common_helpers_tagLabel__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../../common/helpers/tagLabel */ "./src/common/helpers/tagLabel.js");
+/* harmony import */ var _common_helpers_tagIcon__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../../common/helpers/tagIcon */ "./src/common/helpers/tagIcon.js");
+/* harmony import */ var _common_utils_sortTags__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../../common/utils/sortTags */ "./src/common/utils/sortTags.js");
+/* harmony import */ var _utils_getSelectableTags__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../utils/getSelectableTags */ "./src/forum/utils/getSelectableTags.js");
+/* harmony import */ var _ToggleButton__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./ToggleButton */ "./src/forum/components/ToggleButton.js");
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+var TagDiscussionModal = /*#__PURE__*/function (_Modal) {
+  (0,_babel_runtime_helpers_esm_inheritsLoose__WEBPACK_IMPORTED_MODULE_0__["default"])(TagDiscussionModal, _Modal);
+
+  function TagDiscussionModal() {
+    return _Modal.apply(this, arguments) || this;
+  }
+
+  var _proto = TagDiscussionModal.prototype;
+
+  _proto.oninit = function oninit(vnode) {
+    var _this = this;
+
+    _Modal.prototype.oninit.call(this, vnode);
+
+    this.tagsLoading = true;
+    this.selected = [];
+    this.filter = flarum_utils_Stream__WEBPACK_IMPORTED_MODULE_9___default()('');
+    this.focused = false;
+    this.minPrimary = app.forum.attribute('minPrimaryTags');
+    this.maxPrimary = app.forum.attribute('maxPrimaryTags');
+    this.minSecondary = app.forum.attribute('minSecondaryTags');
+    this.maxSecondary = app.forum.attribute('maxSecondaryTags');
+    this.bypassReqs = false;
+    this.navigator = new (flarum_utils_KeyboardNavigatable__WEBPACK_IMPORTED_MODULE_8___default())();
+    this.navigator.onUp(function () {
+      return _this.setIndex(_this.getCurrentNumericIndex() - 1, true);
+    }).onDown(function () {
+      return _this.setIndex(_this.getCurrentNumericIndex() + 1, true);
+    }).onSelect(this.select.bind(this)).onRemove(function () {
+      return _this.selected.splice(_this.selected.length - 1, 1);
+    });
+    app.tagList.load(['parent']).then(function () {
+      _this.tagsLoading = false;
+      _this.tags = (0,_common_utils_sortTags__WEBPACK_IMPORTED_MODULE_12__["default"])((0,_utils_getSelectableTags__WEBPACK_IMPORTED_MODULE_13__["default"])(_this.attrs.discussion));
+
+      if (_this.attrs.selectedTags) {
+        _this.attrs.selectedTags.map(_this.addTag.bind(_this));
+      } else if (_this.attrs.discussion) {
+        _this.attrs.discussion.tags().map(_this.addTag.bind(_this));
+      }
+
+      _this.index = _this.tags[0].id();
+      m.redraw();
+    });
+  };
+
+  _proto.primaryCount = function primaryCount() {
+    return this.selected.filter(function (tag) {
+      return tag.isPrimary();
+    }).length;
+  };
+
+  _proto.secondaryCount = function secondaryCount() {
+    return this.selected.filter(function (tag) {
+      return !tag.isPrimary();
+    }).length;
+  }
+  /**
+   * Add the given tag to the list of selected tags.
+   *
+   * @param {Tag} tag
+   */
+  ;
+
+  _proto.addTag = function addTag(tag) {
+    if (!tag.canStartDiscussion()) return; // If this tag has a parent, we'll also need to add the parent tag to the
+    // selected list if it's not already in there.
+
+    var parent = tag.parent();
+
+    if (parent && !this.selected.includes(parent)) {
+      this.selected.push(parent);
+    }
+
+    if (!this.selected.includes(tag)) {
+      this.selected.push(tag);
+    }
+  }
+  /**
+   * Remove the given tag from the list of selected tags.
+   *
+   * @param {Tag} tag
+   */
+  ;
+
+  _proto.removeTag = function removeTag(tag) {
+    var index = this.selected.indexOf(tag);
+
+    if (index !== -1) {
+      this.selected.splice(index, 1); // Look through the list of selected tags for any tags which have the tag
+      // we just removed as their parent. We'll need to remove them too.
+
+      this.selected.filter(function (selected) {
+        return selected.parent() === tag;
+      }).forEach(this.removeTag.bind(this));
+    }
+  };
+
+  _proto.className = function className() {
+    return 'TagDiscussionModal';
+  };
+
+  _proto.title = function title() {
+    return this.attrs.discussion ? app.translator.trans('flarum-tags.forum.choose_tags.edit_title', {
+      title: m("em", null, this.attrs.discussion.title())
+    }) : app.translator.trans('flarum-tags.forum.choose_tags.title');
+  };
+
+  _proto.getInstruction = function getInstruction(primaryCount, secondaryCount) {
+    if (this.bypassReqs) {
+      return '';
+    }
+
+    if (primaryCount < this.minPrimary) {
+      var remaining = this.minPrimary - primaryCount;
+      return app.translator.trans('flarum-tags.forum.choose_tags.choose_primary_placeholder', {
+        count: remaining
+      });
+    } else if (secondaryCount < this.minSecondary) {
+      var _remaining = this.minSecondary - secondaryCount;
+
+      return app.translator.trans('flarum-tags.forum.choose_tags.choose_secondary_placeholder', {
+        count: _remaining
+      });
+    }
+
+    return '';
+  };
+
+  _proto.content = function content() {
+    var _this2 = this;
+
+    if (this.tagsLoading) {
+      return m((flarum_components_LoadingIndicator__WEBPACK_IMPORTED_MODULE_4___default()), null);
+    }
+
+    var tags = this.tags;
+    var filter = this.filter().toLowerCase();
+    var primaryCount = this.primaryCount();
+    var secondaryCount = this.secondaryCount(); // Filter out all child tags whose parents have not been selected. This
+    // makes it impossible to select a child if its parent hasn't been selected.
+
+    tags = tags.filter(function (tag) {
+      var parent = tag.parent();
+      return parent === false || _this2.selected.includes(parent);
+    }); // If the number of selected primary/secondary tags is at the maximum, then
+    // we'll filter out all other tags of that type.
+
+    if (primaryCount >= this.maxPrimary && !this.bypassReqs) {
+      tags = tags.filter(function (tag) {
+        return !tag.isPrimary() || _this2.selected.includes(tag);
+      });
+    }
+
+    if (secondaryCount >= this.maxSecondary && !this.bypassReqs) {
+      tags = tags.filter(function (tag) {
+        return tag.isPrimary() || _this2.selected.includes(tag);
+      });
+    } // If the user has entered text in the filter input, then filter by tags
+    // whose name matches what they've entered.
+
+
+    if (filter) {
+      tags = tags.filter(function (tag) {
+        return tag.name().substr(0, filter.length).toLowerCase() === filter;
+      });
+    }
+
+    if (!tags.includes(this.index)) this.index = tags[0];
+    var inputWidth = Math.max(flarum_utils_extractText__WEBPACK_IMPORTED_MODULE_7___default()(this.getInstruction(primaryCount, secondaryCount)).length, this.filter().length);
+    return [m("div", {
+      className: "Modal-body"
+    }, m("div", {
+      className: "TagDiscussionModal-form"
+    }, m("div", {
+      className: "TagDiscussionModal-form-input"
+    }, m("div", {
+      className: 'TagsInput FormControl ' + (this.focused ? 'focus' : ''),
+      onclick: function onclick() {
+        return _this2.$('.TagsInput input').focus();
+      }
+    }, m("span", {
+      className: "TagsInput-selected"
+    }, this.selected.map(function (tag) {
+      return m("span", {
+        className: "TagsInput-tag",
+        onclick: function onclick() {
+          _this2.removeTag(tag);
+
+          _this2.onready();
+        }
+      }, (0,_common_helpers_tagLabel__WEBPACK_IMPORTED_MODULE_10__["default"])(tag));
+    })), m("input", {
+      className: "FormControl",
+      placeholder: flarum_utils_extractText__WEBPACK_IMPORTED_MODULE_7___default()(this.getInstruction(primaryCount, secondaryCount)),
+      bidi: this.filter,
+      style: {
+        width: inputWidth + 'ch'
+      },
+      onkeydown: this.navigator.navigate.bind(this.navigator),
+      onfocus: function onfocus() {
+        return _this2.focused = true;
+      },
+      onblur: function onblur() {
+        return _this2.focused = false;
+      }
+    }))), m("div", {
+      className: "TagDiscussionModal-form-submit App-primaryControl"
+    }, m((flarum_components_Button__WEBPACK_IMPORTED_MODULE_3___default()), {
+      type: "submit",
+      className: "Button Button--primary",
+      disabled: !this.meetsRequirements(primaryCount, secondaryCount),
+      icon: "fas fa-check"
+    }, app.translator.trans('flarum-tags.forum.choose_tags.submit_button'))))), m("div", {
+      className: "Modal-footer"
+    }, m("ul", {
+      className: "TagDiscussionModal-list SelectTagList"
+    }, tags.filter(function (tag) {
+      return filter || !tag.parent() || _this2.selected.includes(tag.parent());
+    }).map(function (tag) {
+      return m("li", {
+        "data-index": tag.id(),
+        className: flarum_utils_classList__WEBPACK_IMPORTED_MODULE_6___default()({
+          pinned: tag.position() !== null,
+          child: !!tag.parent(),
+          colored: !!tag.color(),
+          selected: _this2.selected.includes(tag),
+          active: _this2.index === tag
+        }),
+        style: {
+          color: tag.color()
+        },
+        onmouseover: function onmouseover() {
+          return _this2.index = tag;
+        },
+        onclick: _this2.toggleTag.bind(_this2, tag)
+      }, (0,_common_helpers_tagIcon__WEBPACK_IMPORTED_MODULE_11__["default"])(tag), m("span", {
+        className: "SelectTagListItem-name"
+      }, flarum_helpers_highlight__WEBPACK_IMPORTED_MODULE_5___default()(tag.name(), filter)), tag.description() ? m("span", {
+        className: "SelectTagListItem-description"
+      }, tag.description()) : '');
+    })), !!app.forum.attribute('canBypassTagCounts') && m("div", {
+      className: "TagDiscussionModal-controls"
+    }, m(_ToggleButton__WEBPACK_IMPORTED_MODULE_14__["default"], {
+      className: "Button",
+      onclick: function onclick() {
+        return _this2.bypassReqs = !_this2.bypassReqs;
+      },
+      isToggled: this.bypassReqs
+    }, app.translator.trans('flarum-tags.forum.choose_tags.bypass_requirements'))))];
+  };
+
+  _proto.meetsRequirements = function meetsRequirements(primaryCount, secondaryCount) {
+    if (this.bypassReqs) {
+      return true;
+    }
+
+    return primaryCount >= this.minPrimary && secondaryCount >= this.minSecondary;
+  };
+
+  _proto.toggleTag = function toggleTag(tag) {
+    if (this.selected.includes(tag)) {
+      this.removeTag(tag);
+    } else {
+      this.addTag(tag);
+    }
+
+    if (this.filter()) {
+      this.filter('');
+      this.index = this.tags[0];
+    }
+
+    this.onready();
+  };
+
+  _proto.select = function select(e) {
+    // Ctrl + Enter submits the selection, just Enter completes the current entry
+    if (e.metaKey || e.ctrlKey || this.selected.includes(this.index)) {
+      if (this.selected.length) {
+        // The DOM submit method doesn't emit a `submit event, so we
+        // simulate a manual submission so our `onsubmit` logic is run.
+        this.$('button[type="submit"]').click();
+      }
+    } else {
+      this.getItem(this.index)[0].dispatchEvent(new Event('click'));
+    }
+  };
+
+  _proto.selectableItems = function selectableItems() {
+    return this.$('.TagDiscussionModal-list > li');
+  };
+
+  _proto.getCurrentNumericIndex = function getCurrentNumericIndex() {
+    return this.selectableItems().index(this.getItem(this.index));
+  };
+
+  _proto.getItem = function getItem(index) {
+    return this.selectableItems().filter("[data-index=\"" + index.id() + "\"]");
+  };
+
+  _proto.setIndex = function setIndex(index, scrollToItem) {
+    var $items = this.selectableItems();
+    var $dropdown = $items.parent();
+
+    if (index < 0) {
+      index = $items.length - 1;
+    } else if (index >= $items.length) {
+      index = 0;
+    }
+
+    var $item = $items.eq(index);
+    this.index = app.store.getById('tags', $item.attr('data-index'));
+    m.redraw();
+
+    if (scrollToItem) {
+      var dropdownScroll = $dropdown.scrollTop();
+      var dropdownTop = $dropdown.offset().top;
+      var dropdownBottom = dropdownTop + $dropdown.outerHeight();
+      var itemTop = $item.offset().top;
+      var itemBottom = itemTop + $item.outerHeight();
+      var scrollTop;
+
+      if (itemTop < dropdownTop) {
+        scrollTop = dropdownScroll - dropdownTop + itemTop - parseInt($dropdown.css('padding-top'), 10);
+      } else if (itemBottom > dropdownBottom) {
+        scrollTop = dropdownScroll - dropdownBottom + itemBottom + parseInt($dropdown.css('padding-bottom'), 10);
+      }
+
+      if (typeof scrollTop !== 'undefined') {
+        $dropdown.stop(true).animate({
+          scrollTop: scrollTop
+        }, 100);
+      }
+    }
+  };
+
+  _proto.onsubmit = function onsubmit(e) {
+    e.preventDefault();
+    var discussion = this.attrs.discussion;
+    var tags = this.selected;
+
+    if (discussion) {
+      discussion.save({
+        relationships: {
+          tags: tags
+        }
+      }).then(function () {
+        if (app.current.matches((flarum_components_DiscussionPage__WEBPACK_IMPORTED_MODULE_2___default()))) {
+          app.current.get('stream').update();
+        }
+
+        m.redraw();
+      });
+    }
+
+    if (this.attrs.onsubmit) this.attrs.onsubmit(tags);
+    this.hide();
+  };
+
+  return TagDiscussionModal;
+}((flarum_components_Modal__WEBPACK_IMPORTED_MODULE_1___default()));
+
+
+
+/***/ }),
+
+/***/ "./src/forum/components/TagHero.js":
+/*!*****************************************!*\
+  !*** ./src/forum/components/TagHero.js ***!
+  \*****************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ TagHero)
+/* harmony export */ });
+/* harmony import */ var _babel_runtime_helpers_esm_inheritsLoose__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/esm/inheritsLoose */ "./node_modules/@babel/runtime/helpers/esm/inheritsLoose.js");
+/* harmony import */ var flarum_Component__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! flarum/Component */ "flarum/Component");
+/* harmony import */ var flarum_Component__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(flarum_Component__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _common_helpers_tagIcon__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../common/helpers/tagIcon */ "./src/common/helpers/tagIcon.js");
+
+
+
+
+var TagHero = /*#__PURE__*/function (_Component) {
+  (0,_babel_runtime_helpers_esm_inheritsLoose__WEBPACK_IMPORTED_MODULE_0__["default"])(TagHero, _Component);
+
+  function TagHero() {
+    return _Component.apply(this, arguments) || this;
+  }
+
+  var _proto = TagHero.prototype;
+
+  _proto.view = function view() {
+    var tag = this.attrs.model;
+    var color = tag.color();
+    return m("header", {
+      className: 'Hero TagHero' + (color ? ' TagHero--colored' : ''),
+      style: color ? {
+        '--hero-bg': color
+      } : ''
+    }, m("div", {
+      className: "container"
+    }, m("div", {
+      className: "containerNarrow"
+    }, m("h2", {
+      className: "Hero-title"
+    }, tag.icon() && (0,_common_helpers_tagIcon__WEBPACK_IMPORTED_MODULE_2__["default"])(tag, {}, {
+      useColor: false
+    }), " ", tag.name()), m("div", {
+      className: "Hero-subtitle"
+    }, tag.description()))));
+  };
+
+  return TagHero;
+}((flarum_Component__WEBPACK_IMPORTED_MODULE_1___default()));
+
+
+
+/***/ }),
+
+/***/ "./src/forum/components/TagLinkButton.js":
+/*!***********************************************!*\
+  !*** ./src/forum/components/TagLinkButton.js ***!
+  \***********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ TagLinkButton)
+/* harmony export */ });
+/* harmony import */ var _babel_runtime_helpers_esm_inheritsLoose__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/esm/inheritsLoose */ "./node_modules/@babel/runtime/helpers/esm/inheritsLoose.js");
+/* harmony import */ var flarum_components_Link__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! flarum/components/Link */ "flarum/components/Link");
+/* harmony import */ var flarum_components_Link__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(flarum_components_Link__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var flarum_components_LinkButton__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! flarum/components/LinkButton */ "flarum/components/LinkButton");
+/* harmony import */ var flarum_components_LinkButton__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(flarum_components_LinkButton__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var flarum_utils_classList__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! flarum/utils/classList */ "flarum/utils/classList");
+/* harmony import */ var flarum_utils_classList__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(flarum_utils_classList__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _common_helpers_tagIcon__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../common/helpers/tagIcon */ "./src/common/helpers/tagIcon.js");
+
+
+
+
+
+
+var TagLinkButton = /*#__PURE__*/function (_LinkButton) {
+  (0,_babel_runtime_helpers_esm_inheritsLoose__WEBPACK_IMPORTED_MODULE_0__["default"])(TagLinkButton, _LinkButton);
+
+  function TagLinkButton() {
+    return _LinkButton.apply(this, arguments) || this;
+  }
+
+  var _proto = TagLinkButton.prototype;
+
+  _proto.view = function view(vnode) {
+    var tag = this.attrs.model;
+    var active = this.constructor.isActive(this.attrs);
+    var description = tag && tag.description();
+    var className = flarum_utils_classList__WEBPACK_IMPORTED_MODULE_3___default()(['TagLinkButton', 'hasIcon', this.attrs.className, tag.isChild() && 'child']);
+    return m((flarum_components_Link__WEBPACK_IMPORTED_MODULE_1___default()), {
+      className: className,
+      href: this.attrs.route,
+      style: tag ? {
+        '--color': tag.color()
+      } : '',
+      title: description || ''
+    }, (0,_common_helpers_tagIcon__WEBPACK_IMPORTED_MODULE_4__["default"])(tag, {
+      className: 'Button-icon'
+    }), m("span", {
+      className: "Button-label"
+    }, tag ? tag.name() : app.translator.trans('flarum-tags.forum.index.untagged_link')));
+  };
+
+  TagLinkButton.initAttrs = function initAttrs(attrs) {
+    _LinkButton.initAttrs.call(this, attrs);
+
+    var tag = attrs.model;
+    attrs.params.tags = tag ? tag.slug() : 'untagged';
+    attrs.route = app.route('tag', attrs.params);
+  };
+
+  return TagLinkButton;
+}((flarum_components_LinkButton__WEBPACK_IMPORTED_MODULE_2___default()));
+
+
+
+/***/ }),
+
+/***/ "./src/forum/components/TagsPage.js":
+/*!******************************************!*\
+  !*** ./src/forum/components/TagsPage.js ***!
+  \******************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ TagsPage)
+/* harmony export */ });
+/* harmony import */ var _babel_runtime_helpers_esm_inheritsLoose__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/esm/inheritsLoose */ "./node_modules/@babel/runtime/helpers/esm/inheritsLoose.js");
+/* harmony import */ var flarum_components_Page__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! flarum/components/Page */ "flarum/components/Page");
+/* harmony import */ var flarum_components_Page__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(flarum_components_Page__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var flarum_components_IndexPage__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! flarum/components/IndexPage */ "flarum/components/IndexPage");
+/* harmony import */ var flarum_components_IndexPage__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(flarum_components_IndexPage__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var flarum_components_Link__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! flarum/components/Link */ "flarum/components/Link");
+/* harmony import */ var flarum_components_Link__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(flarum_components_Link__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var flarum_components_LoadingIndicator__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! flarum/components/LoadingIndicator */ "flarum/components/LoadingIndicator");
+/* harmony import */ var flarum_components_LoadingIndicator__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(flarum_components_LoadingIndicator__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var flarum_helpers_listItems__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! flarum/helpers/listItems */ "flarum/helpers/listItems");
+/* harmony import */ var flarum_helpers_listItems__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(flarum_helpers_listItems__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var flarum_helpers_humanTime__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! flarum/helpers/humanTime */ "flarum/helpers/humanTime");
+/* harmony import */ var flarum_helpers_humanTime__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(flarum_helpers_humanTime__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var _common_helpers_tagIcon__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../common/helpers/tagIcon */ "./src/common/helpers/tagIcon.js");
+/* harmony import */ var _common_helpers_tagLabel__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../common/helpers/tagLabel */ "./src/common/helpers/tagLabel.js");
+/* harmony import */ var _common_utils_sortTags__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../common/utils/sortTags */ "./src/common/utils/sortTags.js");
+
+
+
+
+
+
+
+
+
+
+
+var TagsPage = /*#__PURE__*/function (_Page) {
+  (0,_babel_runtime_helpers_esm_inheritsLoose__WEBPACK_IMPORTED_MODULE_0__["default"])(TagsPage, _Page);
+
+  function TagsPage() {
+    return _Page.apply(this, arguments) || this;
+  }
+
+  var _proto = TagsPage.prototype;
+
+  _proto.oninit = function oninit(vnode) {
+    var _this = this;
+
+    _Page.prototype.oninit.call(this, vnode);
+
+    app.history.push('tags', app.translator.trans('flarum-tags.forum.header.back_to_tags_tooltip'));
+    this.tags = [];
+    var preloaded = app.preloadedApiDocument();
+
+    if (preloaded) {
+      this.tags = (0,_common_utils_sortTags__WEBPACK_IMPORTED_MODULE_9__["default"])(preloaded.filter(function (tag) {
+        return !tag.isChild();
+      }));
+      return;
+    }
+
+    this.loading = true;
+    app.tagList.load(['children', 'lastPostedDiscussion', 'parent']).then(function () {
+      _this.tags = (0,_common_utils_sortTags__WEBPACK_IMPORTED_MODULE_9__["default"])(app.store.all('tags').filter(function (tag) {
+        return !tag.isChild();
+      }));
+      _this.loading = false;
+      m.redraw();
+    });
+  };
+
+  _proto.view = function view() {
+    if (this.loading) {
+      return m((flarum_components_LoadingIndicator__WEBPACK_IMPORTED_MODULE_4___default()), null);
+    }
+
+    var pinned = this.tags.filter(function (tag) {
+      return tag.position() !== null;
+    });
+    var cloud = this.tags.filter(function (tag) {
+      return tag.position() === null;
+    });
+    return m("div", {
+      className: "TagsPage"
+    }, flarum_components_IndexPage__WEBPACK_IMPORTED_MODULE_2___default().prototype.hero(), m("div", {
+      className: "container"
+    }, m("nav", {
+      className: "TagsPage-nav IndexPage-nav sideNav"
+    }, m("ul", null, flarum_helpers_listItems__WEBPACK_IMPORTED_MODULE_5___default()(flarum_components_IndexPage__WEBPACK_IMPORTED_MODULE_2___default().prototype.sidebarItems().toArray()))), m("div", {
+      className: "TagsPage-content sideNavOffset"
+    }, m("ul", {
+      className: "TagTiles"
+    }, pinned.map(function (tag) {
+      var lastPostedDiscussion = tag.lastPostedDiscussion();
+      var children = (0,_common_utils_sortTags__WEBPACK_IMPORTED_MODULE_9__["default"])(tag.children() || []);
+      return m("li", {
+        className: 'TagTile ' + (tag.color() ? 'colored' : ''),
+        style: {
+          '--tag-bg': tag.color()
+        }
+      }, m((flarum_components_Link__WEBPACK_IMPORTED_MODULE_3___default()), {
+        className: "TagTile-info",
+        href: app.route.tag(tag)
+      }, tag.icon() && (0,_common_helpers_tagIcon__WEBPACK_IMPORTED_MODULE_7__["default"])(tag, {}, {
+        useColor: false
+      }), m("h3", {
+        className: "TagTile-name"
+      }, tag.name()), m("p", {
+        className: "TagTile-description"
+      }, tag.description()), children ? m("div", {
+        className: "TagTile-children"
+      }, children.map(function (child) {
+        return [m((flarum_components_Link__WEBPACK_IMPORTED_MODULE_3___default()), {
+          href: app.route.tag(child)
+        }, child.name()), ' '];
+      })) : ''), lastPostedDiscussion ? m((flarum_components_Link__WEBPACK_IMPORTED_MODULE_3___default()), {
+        className: "TagTile-lastPostedDiscussion",
+        href: app.route.discussion(lastPostedDiscussion, lastPostedDiscussion.lastPostNumber())
+      }, m("span", {
+        className: "TagTile-lastPostedDiscussion-title"
+      }, lastPostedDiscussion.title()), flarum_helpers_humanTime__WEBPACK_IMPORTED_MODULE_6___default()(lastPostedDiscussion.lastPostedAt())) : m("span", {
+        className: "TagTile-lastPostedDiscussion"
+      }));
+    })), cloud.length ? m("div", {
+      className: "TagCloud"
+    }, cloud.map(function (tag) {
+      return [(0,_common_helpers_tagLabel__WEBPACK_IMPORTED_MODULE_8__["default"])(tag, {
+        link: true
+      }), ' '];
+    })) : '')));
+  };
+
+  _proto.oncreate = function oncreate(vnode) {
+    _Page.prototype.oncreate.call(this, vnode);
+
+    app.setTitle(app.translator.trans('flarum-tags.forum.all_tags.meta_title_text'));
+    app.setTitleCount(0);
+  };
+
+  return TagsPage;
+}((flarum_components_Page__WEBPACK_IMPORTED_MODULE_1___default()));
+
+
+
+/***/ }),
+
+/***/ "./src/forum/components/ToggleButton.js":
+/*!**********************************************!*\
+  !*** ./src/forum/components/ToggleButton.js ***!
+  \**********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ ToggleButton)
+/* harmony export */ });
+/* harmony import */ var _babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/esm/objectWithoutPropertiesLoose */ "./node_modules/@babel/runtime/helpers/esm/objectWithoutPropertiesLoose.js");
+/* harmony import */ var _babel_runtime_helpers_esm_inheritsLoose__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime/helpers/esm/inheritsLoose */ "./node_modules/@babel/runtime/helpers/esm/inheritsLoose.js");
+/* harmony import */ var flarum_common_Component__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! flarum/common/Component */ "flarum/common/Component");
+/* harmony import */ var flarum_common_Component__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(flarum_common_Component__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var flarum_common_components_Button__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! flarum/common/components/Button */ "flarum/common/components/Button");
+/* harmony import */ var flarum_common_components_Button__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(flarum_common_components_Button__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var flarum_common_utils_classList__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! flarum/common/utils/classList */ "flarum/common/utils/classList");
+/* harmony import */ var flarum_common_utils_classList__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(flarum_common_utils_classList__WEBPACK_IMPORTED_MODULE_4__);
+
+
+var _excluded = ["className", "isToggled"];
+
+
+
+/**
+ * @TODO move to core
+ */
+
+var ToggleButton = /*#__PURE__*/function (_Component) {
+  (0,_babel_runtime_helpers_esm_inheritsLoose__WEBPACK_IMPORTED_MODULE_1__["default"])(ToggleButton, _Component);
+
+  function ToggleButton() {
+    return _Component.apply(this, arguments) || this;
+  }
+
+  var _proto = ToggleButton.prototype;
+
+  _proto.view = function view(vnode) {
+    var _this$attrs = this.attrs,
+        className = _this$attrs.className,
+        isToggled = _this$attrs.isToggled,
+        attrs = (0,_babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_0__["default"])(_this$attrs, _excluded);
+
+    var icon = isToggled ? 'far fa-check-circle' : 'far fa-circle';
+    return m((flarum_common_components_Button__WEBPACK_IMPORTED_MODULE_3___default()), Object.assign({}, attrs, {
+      icon: icon,
+      className: flarum_common_utils_classList__WEBPACK_IMPORTED_MODULE_4___default()([className, isToggled && 'Button--toggled'])
+    }), vnode.children);
+  };
+
+  return ToggleButton;
+}((flarum_common_Component__WEBPACK_IMPORTED_MODULE_2___default()));
+
+
+
+/***/ }),
+
+/***/ "./src/forum/index.js":
+/*!****************************!*\
+  !*** ./src/forum/index.js ***!
+  \****************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var flarum_Model__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! flarum/Model */ "flarum/Model");
+/* harmony import */ var flarum_Model__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(flarum_Model__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var flarum_models_Discussion__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! flarum/models/Discussion */ "flarum/models/Discussion");
+/* harmony import */ var flarum_models_Discussion__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(flarum_models_Discussion__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var flarum_components_IndexPage__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! flarum/components/IndexPage */ "flarum/components/IndexPage");
+/* harmony import */ var flarum_components_IndexPage__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(flarum_components_IndexPage__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _common_models_Tag__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../common/models/Tag */ "./src/common/models/Tag.js");
+/* harmony import */ var _components_TagsPage__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/TagsPage */ "./src/forum/components/TagsPage.js");
+/* harmony import */ var _components_DiscussionTaggedPost__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/DiscussionTaggedPost */ "./src/forum/components/DiscussionTaggedPost.js");
+/* harmony import */ var _states_TagListState__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./states/TagListState */ "./src/forum/states/TagListState.js");
+/* harmony import */ var _addTagList__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./addTagList */ "./src/forum/addTagList.js");
+/* harmony import */ var _addTagFilter__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./addTagFilter */ "./src/forum/addTagFilter.js");
+/* harmony import */ var _addTagLabels__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./addTagLabels */ "./src/forum/addTagLabels.js");
+/* harmony import */ var _addTagControl__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./addTagControl */ "./src/forum/addTagControl.js");
+/* harmony import */ var _addTagComposer__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./addTagComposer */ "./src/forum/addTagComposer.js");
+/* harmony import */ var _compat__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./compat */ "./src/forum/compat.js");
+/* harmony import */ var _flarum_core_forum__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! @flarum/core/forum */ "@flarum/core/forum");
+/* harmony import */ var _flarum_core_forum__WEBPACK_IMPORTED_MODULE_13___default = /*#__PURE__*/__webpack_require__.n(_flarum_core_forum__WEBPACK_IMPORTED_MODULE_13__);
+
+
+
+
+
+
+
+
+
+
+
+
+app.initializers.add('flarum-tags', function (app) {
+  app.routes.tags = {
+    path: '/tags',
+    component: _components_TagsPage__WEBPACK_IMPORTED_MODULE_4__["default"]
+  };
+  app.routes.tag = {
+    path: '/t/:tags',
+    component: (flarum_components_IndexPage__WEBPACK_IMPORTED_MODULE_2___default())
+  };
+
+  app.route.tag = function (tag) {
+    return app.route('tag', {
+      tags: tag.slug()
+    });
+  };
+
+  app.postComponents.discussionTagged = _components_DiscussionTaggedPost__WEBPACK_IMPORTED_MODULE_5__["default"];
+  app.store.models.tags = _common_models_Tag__WEBPACK_IMPORTED_MODULE_3__["default"];
+  app.tagList = new _states_TagListState__WEBPACK_IMPORTED_MODULE_6__["default"]();
+  (flarum_models_Discussion__WEBPACK_IMPORTED_MODULE_1___default().prototype.tags) = flarum_Model__WEBPACK_IMPORTED_MODULE_0___default().hasMany('tags');
+  (flarum_models_Discussion__WEBPACK_IMPORTED_MODULE_1___default().prototype.canTag) = flarum_Model__WEBPACK_IMPORTED_MODULE_0___default().attribute('canTag');
+  (0,_addTagList__WEBPACK_IMPORTED_MODULE_7__["default"])();
+  (0,_addTagFilter__WEBPACK_IMPORTED_MODULE_8__["default"])();
+  (0,_addTagLabels__WEBPACK_IMPORTED_MODULE_9__["default"])();
+  (0,_addTagControl__WEBPACK_IMPORTED_MODULE_10__["default"])();
+  (0,_addTagComposer__WEBPACK_IMPORTED_MODULE_11__["default"])();
+}); // Expose compat API
+
+
+
+Object.assign(_flarum_core_forum__WEBPACK_IMPORTED_MODULE_13__.compat, _compat__WEBPACK_IMPORTED_MODULE_12__["default"]);
+
+/***/ }),
+
+/***/ "./src/forum/states/TagListState.js":
+/*!******************************************!*\
+  !*** ./src/forum/states/TagListState.js ***!
+  \******************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ TagListState)
+/* harmony export */ });
+/* harmony import */ var _babel_runtime_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/esm/asyncToGenerator */ "./node_modules/@babel/runtime/helpers/esm/asyncToGenerator.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1__);
+
+
+
+var TagListState = /*#__PURE__*/function () {
+  function TagListState() {
+    this.loadedIncludes = new Set();
+  }
+
+  var _proto = TagListState.prototype;
+
+  _proto.load = /*#__PURE__*/function () {
+    var _load = (0,_babel_runtime_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_0__["default"])( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1___default().mark(function _callee(includes) {
+      var _this = this;
+
+      var unloadedIncludes;
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1___default().wrap(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              if (includes === void 0) {
+                includes = [];
+              }
+
+              unloadedIncludes = includes.filter(function (include) {
+                return !_this.loadedIncludes.has(include);
+              });
+
+              if (!(unloadedIncludes.length === 0)) {
+                _context.next = 4;
+                break;
+              }
+
+              return _context.abrupt("return", Promise.resolve(app.store.all('tags')));
+
+            case 4:
+              return _context.abrupt("return", app.store.find('tags', {
+                include: unloadedIncludes.join(',')
+              }).then(function (val) {
+                unloadedIncludes.forEach(function (include) {
+                  return _this.loadedIncludes.add(include);
+                });
+                return val;
+              }));
+
+            case 5:
+            case "end":
+              return _context.stop();
+          }
+        }
+      }, _callee);
+    }));
+
+    function load(_x) {
+      return _load.apply(this, arguments);
+    }
+
+    return load;
+  }();
+
+  return TagListState;
+}();
+
+
+
+/***/ }),
+
+/***/ "./src/forum/utils/getSelectableTags.js":
+/*!**********************************************!*\
+  !*** ./src/forum/utils/getSelectableTags.js ***!
+  \**********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ getSelectableTags)
+/* harmony export */ });
+function getSelectableTags(discussion) {
+  var tags = app.store.all('tags');
+
+  if (discussion) {
+    tags = tags.filter(function (tag) {
+      return tag.canAddToDiscussion() || discussion.tags().indexOf(tag) !== -1;
+    });
+  } else {
+    tags = tags.filter(function (tag) {
+      return tag.canStartDiscussion();
+    });
+  }
+
+  return tags;
+}
+
+/***/ }),
+
+/***/ "@flarum/core/forum":
+/*!******************************!*\
+  !*** external "flarum.core" ***!
+  \******************************/
+/***/ ((module) => {
+
+"use strict";
+module.exports = flarum.core;
+
+/***/ }),
+
+/***/ "flarum/Component":
+/*!**************************************************!*\
+  !*** external "flarum.core.compat['Component']" ***!
+  \**************************************************/
+/***/ ((module) => {
+
+"use strict";
+module.exports = flarum.core.compat['Component'];
+
+/***/ }),
+
+/***/ "flarum/Model":
+/*!**********************************************!*\
+  !*** external "flarum.core.compat['Model']" ***!
+  \**********************************************/
+/***/ ((module) => {
+
+"use strict";
+module.exports = flarum.core.compat['Model'];
+
+/***/ }),
+
+/***/ "flarum/common/Component":
+/*!*********************************************************!*\
+  !*** external "flarum.core.compat['common/Component']" ***!
+  \*********************************************************/
+/***/ ((module) => {
+
+"use strict";
+module.exports = flarum.core.compat['common/Component'];
+
+/***/ }),
+
+/***/ "flarum/common/components/Button":
+/*!*****************************************************************!*\
+  !*** external "flarum.core.compat['common/components/Button']" ***!
+  \*****************************************************************/
+/***/ ((module) => {
+
+"use strict";
+module.exports = flarum.core.compat['common/components/Button'];
+
+/***/ }),
+
+/***/ "flarum/common/utils/classList":
+/*!***************************************************************!*\
+  !*** external "flarum.core.compat['common/utils/classList']" ***!
+  \***************************************************************/
+/***/ ((module) => {
+
+"use strict";
+module.exports = flarum.core.compat['common/utils/classList'];
+
+/***/ }),
+
+/***/ "flarum/components/Button":
+/*!**********************************************************!*\
+  !*** external "flarum.core.compat['components/Button']" ***!
+  \**********************************************************/
+/***/ ((module) => {
+
+"use strict";
+module.exports = flarum.core.compat['components/Button'];
+
+/***/ }),
+
+/***/ "flarum/components/DiscussionComposer":
+/*!**********************************************************************!*\
+  !*** external "flarum.core.compat['components/DiscussionComposer']" ***!
+  \**********************************************************************/
+/***/ ((module) => {
+
+"use strict";
+module.exports = flarum.core.compat['components/DiscussionComposer'];
+
+/***/ }),
+
+/***/ "flarum/components/DiscussionHero":
+/*!******************************************************************!*\
+  !*** external "flarum.core.compat['components/DiscussionHero']" ***!
+  \******************************************************************/
+/***/ ((module) => {
+
+"use strict";
+module.exports = flarum.core.compat['components/DiscussionHero'];
+
+/***/ }),
+
+/***/ "flarum/components/DiscussionListItem":
+/*!**********************************************************************!*\
+  !*** external "flarum.core.compat['components/DiscussionListItem']" ***!
+  \**********************************************************************/
+/***/ ((module) => {
+
+"use strict";
+module.exports = flarum.core.compat['components/DiscussionListItem'];
+
+/***/ }),
+
+/***/ "flarum/components/DiscussionPage":
+/*!******************************************************************!*\
+  !*** external "flarum.core.compat['components/DiscussionPage']" ***!
+  \******************************************************************/
+/***/ ((module) => {
+
+"use strict";
+module.exports = flarum.core.compat['components/DiscussionPage'];
+
+/***/ }),
+
+/***/ "flarum/components/EventPost":
+/*!*************************************************************!*\
+  !*** external "flarum.core.compat['components/EventPost']" ***!
+  \*************************************************************/
+/***/ ((module) => {
+
+"use strict";
+module.exports = flarum.core.compat['components/EventPost'];
+
+/***/ }),
+
+/***/ "flarum/components/IndexPage":
+/*!*************************************************************!*\
+  !*** external "flarum.core.compat['components/IndexPage']" ***!
+  \*************************************************************/
+/***/ ((module) => {
+
+"use strict";
+module.exports = flarum.core.compat['components/IndexPage'];
+
+/***/ }),
+
+/***/ "flarum/components/Link":
+/*!********************************************************!*\
+  !*** external "flarum.core.compat['components/Link']" ***!
+  \********************************************************/
+/***/ ((module) => {
+
+"use strict";
+module.exports = flarum.core.compat['components/Link'];
+
+/***/ }),
+
+/***/ "flarum/components/LinkButton":
+/*!**************************************************************!*\
+  !*** external "flarum.core.compat['components/LinkButton']" ***!
+  \**************************************************************/
+/***/ ((module) => {
+
+"use strict";
+module.exports = flarum.core.compat['components/LinkButton'];
+
+/***/ }),
+
+/***/ "flarum/components/LoadingIndicator":
+/*!********************************************************************!*\
+  !*** external "flarum.core.compat['components/LoadingIndicator']" ***!
+  \********************************************************************/
+/***/ ((module) => {
+
+"use strict";
+module.exports = flarum.core.compat['components/LoadingIndicator'];
+
+/***/ }),
+
+/***/ "flarum/components/Modal":
+/*!*********************************************************!*\
+  !*** external "flarum.core.compat['components/Modal']" ***!
+  \*********************************************************/
+/***/ ((module) => {
+
+"use strict";
+module.exports = flarum.core.compat['components/Modal'];
+
+/***/ }),
+
+/***/ "flarum/components/Page":
+/*!********************************************************!*\
+  !*** external "flarum.core.compat['components/Page']" ***!
+  \********************************************************/
+/***/ ((module) => {
+
+"use strict";
+module.exports = flarum.core.compat['components/Page'];
+
+/***/ }),
+
+/***/ "flarum/components/Separator":
+/*!*************************************************************!*\
+  !*** external "flarum.core.compat['components/Separator']" ***!
+  \*************************************************************/
+/***/ ((module) => {
+
+"use strict";
+module.exports = flarum.core.compat['components/Separator'];
+
+/***/ }),
+
+/***/ "flarum/extend":
+/*!***********************************************!*\
+  !*** external "flarum.core.compat['extend']" ***!
+  \***********************************************/
+/***/ ((module) => {
+
+"use strict";
+module.exports = flarum.core.compat['extend'];
+
+/***/ }),
+
+/***/ "flarum/helpers/highlight":
+/*!**********************************************************!*\
+  !*** external "flarum.core.compat['helpers/highlight']" ***!
+  \**********************************************************/
+/***/ ((module) => {
+
+"use strict";
+module.exports = flarum.core.compat['helpers/highlight'];
+
+/***/ }),
+
+/***/ "flarum/helpers/humanTime":
+/*!**********************************************************!*\
+  !*** external "flarum.core.compat['helpers/humanTime']" ***!
+  \**********************************************************/
+/***/ ((module) => {
+
+"use strict";
+module.exports = flarum.core.compat['helpers/humanTime'];
+
+/***/ }),
+
+/***/ "flarum/helpers/listItems":
+/*!**********************************************************!*\
+  !*** external "flarum.core.compat['helpers/listItems']" ***!
+  \**********************************************************/
+/***/ ((module) => {
+
+"use strict";
+module.exports = flarum.core.compat['helpers/listItems'];
+
+/***/ }),
+
+/***/ "flarum/models/Discussion":
+/*!**********************************************************!*\
+  !*** external "flarum.core.compat['models/Discussion']" ***!
+  \**********************************************************/
+/***/ ((module) => {
+
+"use strict";
+module.exports = flarum.core.compat['models/Discussion'];
+
+/***/ }),
+
+/***/ "flarum/states/DiscussionListState":
+/*!*******************************************************************!*\
+  !*** external "flarum.core.compat['states/DiscussionListState']" ***!
+  \*******************************************************************/
+/***/ ((module) => {
+
+"use strict";
+module.exports = flarum.core.compat['states/DiscussionListState'];
+
+/***/ }),
+
+/***/ "flarum/states/GlobalSearchState":
+/*!*****************************************************************!*\
+  !*** external "flarum.core.compat['states/GlobalSearchState']" ***!
+  \*****************************************************************/
+/***/ ((module) => {
+
+"use strict";
+module.exports = flarum.core.compat['states/GlobalSearchState'];
+
+/***/ }),
+
+/***/ "flarum/utils/DiscussionControls":
+/*!*****************************************************************!*\
+  !*** external "flarum.core.compat['utils/DiscussionControls']" ***!
+  \*****************************************************************/
+/***/ ((module) => {
+
+"use strict";
+module.exports = flarum.core.compat['utils/DiscussionControls'];
+
+/***/ }),
+
+/***/ "flarum/utils/KeyboardNavigatable":
+/*!******************************************************************!*\
+  !*** external "flarum.core.compat['utils/KeyboardNavigatable']" ***!
+  \******************************************************************/
+/***/ ((module) => {
+
+"use strict";
+module.exports = flarum.core.compat['utils/KeyboardNavigatable'];
+
+/***/ }),
+
+/***/ "flarum/utils/Stream":
+/*!*****************************************************!*\
+  !*** external "flarum.core.compat['utils/Stream']" ***!
+  \*****************************************************/
+/***/ ((module) => {
+
+"use strict";
+module.exports = flarum.core.compat['utils/Stream'];
+
+/***/ }),
+
+/***/ "flarum/utils/classList":
+/*!********************************************************!*\
+  !*** external "flarum.core.compat['utils/classList']" ***!
+  \********************************************************/
+/***/ ((module) => {
+
+"use strict";
+module.exports = flarum.core.compat['utils/classList'];
+
+/***/ }),
+
+/***/ "flarum/utils/computed":
+/*!*******************************************************!*\
+  !*** external "flarum.core.compat['utils/computed']" ***!
+  \*******************************************************/
+/***/ ((module) => {
+
+"use strict";
+module.exports = flarum.core.compat['utils/computed'];
+
+/***/ }),
+
+/***/ "flarum/utils/extract":
+/*!******************************************************!*\
+  !*** external "flarum.core.compat['utils/extract']" ***!
+  \******************************************************/
+/***/ ((module) => {
+
+"use strict";
+module.exports = flarum.core.compat['utils/extract'];
+
+/***/ }),
+
+/***/ "flarum/utils/extractText":
+/*!**********************************************************!*\
+  !*** external "flarum.core.compat['utils/extractText']" ***!
+  \**********************************************************/
+/***/ ((module) => {
+
+"use strict";
+module.exports = flarum.core.compat['utils/extractText'];
+
+/***/ }),
+
+/***/ "flarum/utils/mixin":
+/*!****************************************************!*\
+  !*** external "flarum.core.compat['utils/mixin']" ***!
+  \****************************************************/
+/***/ ((module) => {
+
+"use strict";
+module.exports = flarum.core.compat['utils/mixin'];
+
+/***/ }),
+
+/***/ "./node_modules/@babel/runtime/helpers/esm/asyncToGenerator.js":
+/*!*********************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/esm/asyncToGenerator.js ***!
+  \*********************************************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ _asyncToGenerator)
+/* harmony export */ });
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {
+  try {
+    var info = gen[key](arg);
+    var value = info.value;
+  } catch (error) {
+    reject(error);
+    return;
+  }
+
+  if (info.done) {
+    resolve(value);
+  } else {
+    Promise.resolve(value).then(_next, _throw);
+  }
+}
+
+function _asyncToGenerator(fn) {
+  return function () {
+    var self = this,
+        args = arguments;
+    return new Promise(function (resolve, reject) {
+      var gen = fn.apply(self, args);
+
+      function _next(value) {
+        asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);
+      }
+
+      function _throw(err) {
+        asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);
+      }
+
+      _next(undefined);
+    });
+  };
+}
+
+/***/ }),
+
+/***/ "./node_modules/@babel/runtime/helpers/esm/inheritsLoose.js":
+/*!******************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/esm/inheritsLoose.js ***!
+  \******************************************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ _inheritsLoose)
+/* harmony export */ });
+/* harmony import */ var _setPrototypeOf_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./setPrototypeOf.js */ "./node_modules/@babel/runtime/helpers/esm/setPrototypeOf.js");
+
+function _inheritsLoose(subClass, superClass) {
+  subClass.prototype = Object.create(superClass.prototype);
+  subClass.prototype.constructor = subClass;
+  (0,_setPrototypeOf_js__WEBPACK_IMPORTED_MODULE_0__["default"])(subClass, superClass);
+}
+
+/***/ }),
+
+/***/ "./node_modules/@babel/runtime/helpers/esm/objectWithoutPropertiesLoose.js":
+/*!*********************************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/esm/objectWithoutPropertiesLoose.js ***!
+  \*********************************************************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ _objectWithoutPropertiesLoose)
+/* harmony export */ });
+function _objectWithoutPropertiesLoose(source, excluded) {
+  if (source == null) return {};
+  var target = {};
+  var sourceKeys = Object.keys(source);
+  var key, i;
+
+  for (i = 0; i < sourceKeys.length; i++) {
+    key = sourceKeys[i];
+    if (excluded.indexOf(key) >= 0) continue;
+    target[key] = source[key];
+  }
+
+  return target;
+}
+
+/***/ }),
+
+/***/ "./node_modules/@babel/runtime/helpers/esm/setPrototypeOf.js":
+/*!*******************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/esm/setPrototypeOf.js ***!
+  \*******************************************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ _setPrototypeOf)
+/* harmony export */ });
+function _setPrototypeOf(o, p) {
+  _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) {
+    o.__proto__ = p;
+    return o;
+  };
+
+  return _setPrototypeOf(o, p);
+}
+
+/***/ })
+
+/******/ 	});
+/************************************************************************/
+/******/ 	// The module cache
+/******/ 	var __webpack_module_cache__ = {};
+/******/ 	
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+/******/ 		// Check if module is in cache
+/******/ 		var cachedModule = __webpack_module_cache__[moduleId];
+/******/ 		if (cachedModule !== undefined) {
+/******/ 			return cachedModule.exports;
+/******/ 		}
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = __webpack_module_cache__[moduleId] = {
+/******/ 			// no module.id needed
+/******/ 			// no module.loaded needed
+/******/ 			exports: {}
+/******/ 		};
+/******/ 	
+/******/ 		// Execute the module function
+/******/ 		__webpack_modules__[moduleId](module, module.exports, __webpack_require__);
+/******/ 	
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+/******/ 	
+/************************************************************************/
+/******/ 	/* webpack/runtime/compat get default export */
+/******/ 	(() => {
+/******/ 		// getDefaultExport function for compatibility with non-harmony modules
+/******/ 		__webpack_require__.n = (module) => {
+/******/ 			var getter = module && module.__esModule ?
+/******/ 				() => (module['default']) :
+/******/ 				() => (module);
+/******/ 			__webpack_require__.d(getter, { a: getter });
+/******/ 			return getter;
+/******/ 		};
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/define property getters */
+/******/ 	(() => {
+/******/ 		// define getter functions for harmony exports
+/******/ 		__webpack_require__.d = (exports, definition) => {
+/******/ 			for(var key in definition) {
+/******/ 				if(__webpack_require__.o(definition, key) && !__webpack_require__.o(exports, key)) {
+/******/ 					Object.defineProperty(exports, key, { enumerable: true, get: definition[key] });
+/******/ 				}
+/******/ 			}
+/******/ 		};
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/hasOwnProperty shorthand */
+/******/ 	(() => {
+/******/ 		__webpack_require__.o = (obj, prop) => (Object.prototype.hasOwnProperty.call(obj, prop))
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/make namespace object */
+/******/ 	(() => {
+/******/ 		// define __esModule on exports
+/******/ 		__webpack_require__.r = (exports) => {
+/******/ 			if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
+/******/ 				Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
+/******/ 			}
+/******/ 			Object.defineProperty(exports, '__esModule', { value: true });
+/******/ 		};
+/******/ 	})();
+/******/ 	
+/************************************************************************/
+var __webpack_exports__ = {};
+// This entry need to be wrapped in an IIFE because it need to be in strict mode.
+(() => {
+"use strict";
+/*!******************!*\
+  !*** ./forum.js ***!
+  \******************/
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _src_common__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./src/common */ "./src/common/index.js");
+/* harmony import */ var _src_common__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_src_common__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony reexport (unknown) */ var __WEBPACK_REEXPORT_OBJECT__ = {};
+/* harmony reexport (unknown) */ for(const __WEBPACK_IMPORT_KEY__ in _src_common__WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== "default") __WEBPACK_REEXPORT_OBJECT__[__WEBPACK_IMPORT_KEY__] = () => _src_common__WEBPACK_IMPORTED_MODULE_0__[__WEBPACK_IMPORT_KEY__]
+/* harmony reexport (unknown) */ __webpack_require__.d(__webpack_exports__, __WEBPACK_REEXPORT_OBJECT__);
+/* harmony import */ var _src_forum__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./src/forum */ "./src/forum/index.js");
+
+
+})();
+
+module.exports = __webpack_exports__;
+/******/ })()
+;
 //# sourceMappingURL=forum.js.map
