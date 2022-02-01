@@ -19,7 +19,7 @@ use Psr\Http\Message\ServerRequestInterface as Request;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use Flarum\Forum\Content\Index;
 
-class Tag
+class Tag extends Index
 {
 
     /**
@@ -42,10 +42,7 @@ class Tag
      */
     protected $translator;
 
-    /**
-     * @var Index
-     */
-    protected $params;
+  
 
     /**
      * @param Client $api
@@ -53,13 +50,14 @@ class Tag
      * @param TagRepository $tags
      * @param TranslatorInterface $translator
      */
-    public function __construct(Client $api, Factory $view, TagRepository $tags, TranslatorInterface $translator, Index $params)
+    public function __construct(Client $api, Factory $view, TagRepository $tags, TranslatorInterface $translator)
     {
         $this->api = $api;
         $this->view = $view;
         $this->tags = $tags;
         $this->translator = $translator;
-        $this->params = $params;
+     
+        parent::__construct();
 
     }
 
@@ -73,11 +71,11 @@ class Tag
 
         $slug = Arr::pull($queryParams, 'slug');
 
-        $paramArray = $this->params->generateParams($queryParams); # return array of paramters in herited from index
+        $paramArray = $this->generateParams($queryParams); # return array of paramters in herited from index
         $paramArray['filter']['tag'] = $slug;
 
 
-        $apiDocument = $this->params->getApiDocument($request, $paramArray); # calls protected method in index
+        $apiDocument = $this->getApiDocument($request, $paramArray); # calls protected method in index
 
         $tagsDocument = $this->getTagsDocument($request, $slug);
 
