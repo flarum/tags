@@ -29,8 +29,10 @@ class DeleteTagHandler
 
     /**
      * @param DeleteTag $command
-     * @return \Flarum\Tags\Tag
+     *
      * @throws \Flarum\User\Exception\PermissionDeniedException
+     *
+     * @return \Flarum\Tags\Tag
      */
     public function handle(DeleteTag $command)
     {

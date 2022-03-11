@@ -29,7 +29,7 @@ class UpdateTest extends TestCase
         $this->extension('flarum-tags');
 
         $this->prepareDatabase([
-            'tags' => $this->tags(),
+            'tags'  => $this->tags(),
             'users' => [
                 $this->normalUser(),
             ],
@@ -47,8 +47,8 @@ class UpdateTest extends TestCase
                 ['id' => 1, 'discussion_id' => 1, 'user_id' => 2, 'type' => 'comment', 'content' => '<t><p>Text</p></t>'],
             ],
             'discussion_tag' => [
-                ['discussion_id' => 1, 'tag_id' => 1]
-            ]
+                ['discussion_id' => 1, 'tag_id' => 1],
+            ],
         ]);
     }
 
@@ -60,15 +60,15 @@ class UpdateTest extends TestCase
         $response = $this->send(
             $this->request('PATCH', '/api/discussions/1', [
                 'authenticatedAs' => 2,
-                'json' => [
+                'json'            => [
                     'data' => [
                         'relationships' => [
                             'tags' => [
                                 'data' => [
-                                    ['type' => 'tags', 'id' => 2]
-                                ]
-                            ]
-                        ]
+                                    ['type' => 'tags', 'id' => 2],
+                                ],
+                            ],
+                        ],
                     ],
                 ],
             ])
@@ -87,15 +87,15 @@ class UpdateTest extends TestCase
         $response = $this->send(
             $this->request('PATCH', '/api/discussions/1', [
                 'authenticatedAs' => 2,
-                'json' => [
+                'json'            => [
                     'data' => [
                         'relationships' => [
                             'tags' => [
                                 'data' => [
-                                    ['type' => 'tags', 'id' => 2]
-                                ]
-                            ]
-                        ]
+                                    ['type' => 'tags', 'id' => 2],
+                                ],
+                            ],
+                        ],
                     ],
                 ],
             ])
@@ -112,16 +112,16 @@ class UpdateTest extends TestCase
         $response = $this->send(
             $this->request('PATCH', '/api/discussions/1', [
                 'authenticatedAs' => 1,
-                'json' => [
+                'json'            => [
                     'data' => [
                         'relationships' => [
                             'tags' => [
                                 'data' => [
                                     ['type' => 'tags', 'id' => 1],
-                                    ['type' => 'tags', 'id' => 2]
-                                ]
-                            ]
-                        ]
+                                    ['type' => 'tags', 'id' => 2],
+                                ],
+                            ],
+                        ],
                     ],
                 ],
             ])
@@ -140,16 +140,16 @@ class UpdateTest extends TestCase
         $response = $this->send(
             $this->request('PATCH', '/api/discussions/1', [
                 'authenticatedAs' => 2,
-                'json' => [
+                'json'            => [
                     'data' => [
                         'relationships' => [
                             'tags' => [
                                 'data' => [
                                     ['type' => 'tags', 'id' => 1],
-                                    ['type' => 'tags', 'id' => 2]
-                                ]
-                            ]
-                        ]
+                                    ['type' => 'tags', 'id' => 2],
+                                ],
+                            ],
+                        ],
                     ],
                 ],
             ])
@@ -168,15 +168,15 @@ class UpdateTest extends TestCase
         $response = $this->send(
             $this->request('PATCH', '/api/discussions/1', [
                 'authenticatedAs' => 2,
-                'json' => [
+                'json'            => [
                     'data' => [
                         'relationships' => [
                             'tags' => [
                                 'data' => [
-                                    ['type' => 'tags', 'id' => 5]
-                                ]
-                            ]
-                        ]
+                                    ['type' => 'tags', 'id' => 5],
+                                ],
+                            ],
+                        ],
                     ],
                 ],
             ])
@@ -195,16 +195,16 @@ class UpdateTest extends TestCase
         $response = $this->send(
             $this->request('PATCH', '/api/discussions/1', [
                 'authenticatedAs' => 2,
-                'json' => [
+                'json'            => [
                     'data' => [
                         'relationships' => [
                             'tags' => [
                                 'data' => [
                                     ['type' => 'tags', 'id' => 1],
-                                    ['type' => 'tags', 'id' => 11]
-                                ]
-                            ]
-                        ]
+                                    ['type' => 'tags', 'id' => 11],
+                                ],
+                            ],
+                        ],
                     ],
                 ],
             ])
@@ -223,19 +223,19 @@ class UpdateTest extends TestCase
         $response = $this->send(
             $this->request('PATCH', '/api/discussions/1', [
                 'authenticatedAs' => 2,
-                'json' => [
+                'json'            => [
                     'data' => [
                         'attributes' => [
-                            'title' => 'test - too-obscure',
+                            'title'   => 'test - too-obscure',
                             'content' => 'predetermined content for automated testing - too-obscure',
                         ],
                         'relationships' => [
                             'tags' => [
                                 'data' => [
-                                    ['type' => 'tags', 'id' => 4]
-                                ]
-                            ]
-                        ]
+                                    ['type' => 'tags', 'id' => 4],
+                                ],
+                            ],
+                        ],
                     ],
                 ],
             ])
@@ -254,16 +254,16 @@ class UpdateTest extends TestCase
         $response = $this->send(
             $this->request('PATCH', '/api/discussions/1', [
                 'authenticatedAs' => 2,
-                'json' => [
+                'json'            => [
                     'data' => [
                         'relationships' => [
                             'tags' => [
                                 'data' => [
                                     ['type' => 'tags', 'id' => 2],
-                                    ['type' => 'tags', 'id' => 3]
-                                ]
-                            ]
-                        ]
+                                    ['type' => 'tags', 'id' => 3],
+                                ],
+                            ],
+                        ],
                     ],
                 ],
             ])
@@ -282,15 +282,15 @@ class UpdateTest extends TestCase
         $response = $this->send(
             $this->request('PATCH', '/api/discussions/1', [
                 'authenticatedAs' => 2,
-                'json' => [
+                'json'            => [
                     'data' => [
                         'relationships' => [
                             'tags' => [
                                 'data' => [
-                                    ['type' => 'tags', 'id' => 11]
-                                ]
-                            ]
-                        ]
+                                    ['type' => 'tags', 'id' => 11],
+                                ],
+                            ],
+                        ],
                     ],
                 ],
             ])

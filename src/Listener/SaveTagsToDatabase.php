@@ -37,8 +37,8 @@ class SaveTagsToDatabase
 
     /**
      * @param SettingsRepositoryInterface $settings
-     * @param Factory $validator
-     * @param TranslatorInterface $translator
+     * @param Factory                     $validator
+     * @param TranslatorInterface         $translator
      */
     public function __construct(SettingsRepositoryInterface $settings, Factory $validator, TranslatorInterface $translator)
     {
@@ -49,6 +49,7 @@ class SaveTagsToDatabase
 
     /**
      * @param Saving $event
+     *
      * @throws PermissionDeniedException
      * @throws ValidationException
      */
@@ -84,8 +85,8 @@ class SaveTagsToDatabase
             }
 
             foreach ($newTags as $tag) {
-                if (! in_array($tag->id, $oldTagIds) && $actor->cannot('addToDiscussion', $tag)) {
-                    throw new PermissionDeniedException;
+                if (!in_array($tag->id, $oldTagIds) && $actor->cannot('addToDiscussion', $tag)) {
+                    throw new PermissionDeniedException();
                 }
             }
 
@@ -94,10 +95,10 @@ class SaveTagsToDatabase
             );
         }
 
-        if (! $discussion->exists || isset($event->data['relationships']['tags']['data'])) {
+        if (!$discussion->exists || isset($event->data['relationships']['tags']['data'])) {
             foreach ($newTags as $tag) {
-                if (! $discussion->exists && $actor->cannot('startDiscussion', $tag)) {
-                    throw new PermissionDeniedException;
+                if (!$discussion->exists && $actor->cannot('startDiscussion', $tag)) {
+                    throw new PermissionDeniedException();
                 }
 
                 if ($tag->position !== null && $tag->parent_id === null) {
@@ -107,11 +108,11 @@ class SaveTagsToDatabase
                 }
             }
 
-            if (! $discussion->exists && $primaryCount === 0 && $secondaryCount === 0 && ! $actor->hasPermission('startDiscussion')) {
-                throw new PermissionDeniedException;
+            if (!$discussion->exists && $primaryCount === 0 && $secondaryCount === 0 && !$actor->hasPermission('startDiscussion')) {
+                throw new PermissionDeniedException();
             }
 
-            if (! $actor->can('bypassTagCounts', $discussion)) {
+            if (!$actor->can('bypassTagCounts', $discussion)) {
                 $this->validateTagCount('primary', $primaryCount);
                 $this->validateTagCount('secondary', $secondaryCount);
             }
@@ -125,7 +126,8 @@ class SaveTagsToDatabase
 
     /**
      * @param string $type
-     * @param int $count
+     * @param int    $count
+     *
      * @throws ValidationException
      */
     protected function validateTagCount($type, $count)

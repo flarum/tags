@@ -39,7 +39,7 @@ class TagSerializer extends AbstractSerializer
             'isHidden'           => (bool) $tag->is_hidden,
             'lastPostedAt'       => $this->formatDate($tag->last_posted_at),
             'canStartDiscussion' => $this->actor->can('startDiscussion', $tag),
-            'canAddToDiscussion' => $this->actor->can('addToDiscussion', $tag)
+            'canAddToDiscussion' => $this->actor->can('addToDiscussion', $tag),
         ];
 
         if ($this->actor->isAdmin()) {

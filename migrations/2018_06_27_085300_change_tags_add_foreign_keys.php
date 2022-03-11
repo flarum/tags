@@ -24,7 +24,7 @@ return [
         };
 
         $connection->table('tags')->update([
-            'last_posted_user_id' => $select('last_posted_user_id', 'discussions', 'last_posted_discussion_id'),
+            'last_posted_user_id'       => $select('last_posted_user_id', 'discussions', 'last_posted_discussion_id'),
             'last_posted_discussion_id' => $select('id', 'discussions', 'last_posted_discussion_id'),
         ]);
 
@@ -41,5 +41,5 @@ return [
             $table->dropForeign(['last_posted_discussion_id']);
             $table->dropForeign(['last_posted_user_id']);
         });
-    }
+    },
 ];

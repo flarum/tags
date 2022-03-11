@@ -17,9 +17,9 @@ use Illuminate\Support\Str;
 class ScopeDiscussionVisibilityForAbility
 {
     /**
-     * @param User $actor
+     * @param User    $actor
      * @param Builder $query
-     * @param string $ability
+     * @param string  $ability
      */
     public function __invoke(User $actor, Builder $query, $ability)
     {
@@ -61,7 +61,7 @@ class ScopeDiscussionVisibilityForAbility
 
         // Hide discussions with no tags if the user doesn't have that global
         // permission.
-        if (! $actor->hasPermission($permission)) {
+        if (!$actor->hasPermission($permission)) {
             $query->has('tags');
         }
     }

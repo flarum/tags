@@ -50,15 +50,16 @@ class DiscussionTaggedPost extends AbstractEventPost implements MergeableInterfa
     /**
      * Create a new instance in reply to a discussion.
      *
-     * @param int $discussionId
-     * @param int $userId
+     * @param int   $discussionId
+     * @param int   $userId
      * @param array $oldTagIds
      * @param array $newTagIds
+     *
      * @return static
      */
     public static function reply($discussionId, $userId, array $oldTagIds, array $newTagIds)
     {
-        $post = new static;
+        $post = new static();
 
         $post->content = static::buildContent($oldTagIds, $newTagIds);
         $post->created_at = time();
@@ -73,6 +74,7 @@ class DiscussionTaggedPost extends AbstractEventPost implements MergeableInterfa
      *
      * @param array $oldTagIds
      * @param array $newTagIds
+     *
      * @return array
      */
     public static function buildContent(array $oldTagIds, array $newTagIds)

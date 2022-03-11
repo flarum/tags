@@ -17,23 +17,23 @@ use Flarum\User\User;
 use Illuminate\Database\Eloquent\Builder;
 
 /**
- * @property int $id
- * @property string $name
- * @property string $slug
- * @property string $description
- * @property string $color
- * @property string $background_path
- * @property string $background_mode
- * @property int $position
- * @property int $parent_id
- * @property string $default_sort
- * @property bool $is_restricted
- * @property bool $is_hidden
- * @property int $discussion_count
+ * @property int            $id
+ * @property string         $name
+ * @property string         $slug
+ * @property string         $description
+ * @property string         $color
+ * @property string         $background_path
+ * @property string         $background_mode
+ * @property int            $position
+ * @property int            $parent_id
+ * @property string         $default_sort
+ * @property bool           $is_restricted
+ * @property bool           $is_hidden
+ * @property int            $discussion_count
  * @property \Carbon\Carbon $last_posted_at
- * @property int $last_posted_discussion_id
- * @property int $last_posted_user_id
- * @property string $icon
+ * @property int            $last_posted_discussion_id
+ * @property int            $last_posted_user_id
+ * @property string         $icon
  * @property TagState
  */
 class Tag extends AbstractModel
@@ -45,8 +45,8 @@ class Tag extends AbstractModel
     protected $dates = ['last_posted_at'];
 
     protected $casts = [
-        'is_hidden' => 'bool',
-        'is_restricted' => 'bool'
+        'is_hidden'     => 'bool',
+        'is_restricted' => 'bool',
     ];
 
     public static function boot()
@@ -72,12 +72,13 @@ class Tag extends AbstractModel
      * @param string $description
      * @param string $color
      * @param string $icon
-     * @param bool $isHidden
+     * @param bool   $isHidden
+     *
      * @return static
      */
     public static function build($name, $slug, $description, $color, $icon, $isHidden)
     {
-        $tag = new static;
+        $tag = new static();
 
         $tag->name = $name;
         $tag->slug = $slug;
@@ -149,14 +150,15 @@ class Tag extends AbstractModel
      * exist.
      *
      * @param User $user
+     *
      * @return TagState
      */
     public function stateFor(User $user)
     {
         $state = $this->state()->where('user_id', $user->id)->first();
 
-        if (! $state) {
-            $state = new TagState;
+        if (!$state) {
+            $state = new TagState();
             $state->tag_id = $this->id;
             $state->user_id = $user->id;
         }
@@ -166,7 +168,8 @@ class Tag extends AbstractModel
 
     /**
      * @param Builder $query
-     * @param User $user
+     * @param User    $user
+     *
      * @return Builder
      */
     public function scopeWithStateFor(Builder $query, User $user)
@@ -174,7 +177,7 @@ class Tag extends AbstractModel
         return $query->with([
             'state' => function ($query) use ($user) {
                 $query->where('user_id', $user->id);
-            }
+            },
         ]);
     }
 
@@ -185,7 +188,7 @@ class Tag extends AbstractModel
      */
     public function wasUnrestricted()
     {
-        return ! $this->is_restricted && $this->wasChanged('is_restricted');
+        return !$this->is_restricted && $this->wasChanged('is_restricted');
     }
 
     /**

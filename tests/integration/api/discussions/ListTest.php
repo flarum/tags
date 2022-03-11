@@ -30,7 +30,7 @@ class ListTest extends TestCase
         $this->extension('flarum-tags');
 
         $this->prepareDatabase([
-            'tags' => $this->tags(),
+            'tags'  => $this->tags(),
             'users' => [
                 $this->normalUser(),
             ],
@@ -100,7 +100,7 @@ class ListTest extends TestCase
     {
         $response = $this->send(
             $this->request('GET', '/api/discussions', [
-                'authenticatedAs' => 1
+                'authenticatedAs' => 1,
             ])
         );
 
@@ -119,7 +119,7 @@ class ListTest extends TestCase
     {
         $response = $this->send(
             $this->request('GET', '/api/discussions', [
-                'authenticatedAs' => 2
+                'authenticatedAs' => 2,
             ])
         );
 
@@ -205,7 +205,7 @@ class ListTest extends TestCase
 
         if ($actorId) {
             $reqParams = [
-                'authenticatedAs' => $actorId
+                'authenticatedAs' => $actorId,
             ];
         }
 
@@ -230,7 +230,7 @@ class ListTest extends TestCase
 
         if ($actorId) {
             $reqParams = [
-                'authenticatedAs' => $actorId
+                'authenticatedAs' => $actorId,
             ];
         }
 

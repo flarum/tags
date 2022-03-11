@@ -30,14 +30,14 @@ class ListTest extends TestCase
         $this->extension('flarum-tags');
 
         $this->prepareDatabase([
-            'tags' => $this->tags(),
+            'tags'  => $this->tags(),
             'users' => [
                 $this->normalUser(),
             ],
             'group_permission' => [
                 ['group_id' => Group::MEMBER_ID, 'permission' => 'tag8.viewForum'],
-                ['group_id' => Group::MEMBER_ID, 'permission' => 'tag11.viewForum']
-            ]
+                ['group_id' => Group::MEMBER_ID, 'permission' => 'tag11.viewForum'],
+            ],
         ]);
     }
 
@@ -48,7 +48,7 @@ class ListTest extends TestCase
     {
         $response = $this->send(
             $this->request('GET', '/api/tags', [
-                'authenticatedAs' => 1
+                'authenticatedAs' => 1,
             ])
         );
 
@@ -67,7 +67,7 @@ class ListTest extends TestCase
     {
         $response = $this->send(
             $this->request('GET', '/api/tags', [
-                'authenticatedAs' => 2
+                'authenticatedAs' => 2,
             ])
         );
 
@@ -91,7 +91,7 @@ class ListTest extends TestCase
             $this->request('GET', '/api/tags', [
                 'authenticatedAs' => 2,
             ])->withQueryParams([
-                'include' => 'children'
+                'include' => 'children',
             ])
         );
 

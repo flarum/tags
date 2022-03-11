@@ -17,6 +17,7 @@ class CreatePostWhenTagsAreChanged
 {
     /**
      * @param DiscussionWasTagged $event
+     *
      * @return void
      */
     public function handle(DiscussionWasTagged $event)

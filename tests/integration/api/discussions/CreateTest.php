@@ -29,7 +29,7 @@ class CreateTest extends TestCase
         $this->extension('flarum-tags');
 
         $this->prepareDatabase([
-            'tags' => $this->tags(),
+            'tags'  => $this->tags(),
             'users' => [
                 $this->normalUser(),
             ],
@@ -39,7 +39,7 @@ class CreateTest extends TestCase
                 ['group_id' => Group::MEMBER_ID, 'permission' => 'tag8.startDiscussion'],
                 ['group_id' => Group::MEMBER_ID, 'permission' => 'tag11.viewForum'],
                 ['group_id' => Group::MEMBER_ID, 'permission' => 'tag11.startDiscussion'],
-            ]
+            ],
         ]);
     }
 
@@ -51,13 +51,13 @@ class CreateTest extends TestCase
         $response = $this->send(
             $this->request('POST', '/api/discussions', [
                 'authenticatedAs' => 1,
-                'json' => [
+                'json'            => [
                     'data' => [
                         'attributes' => [
-                            'title' => 'test - too-obscure',
+                            'title'   => 'test - too-obscure',
                             'content' => 'predetermined content for automated testing - too-obscure',
                         ],
-                    ]
+                    ],
                 ],
             ])
         );
@@ -73,13 +73,13 @@ class CreateTest extends TestCase
         $response = $this->send(
             $this->request('POST', '/api/discussions', [
                 'authenticatedAs' => 2,
-                'json' => [
+                'json'            => [
                     'data' => [
                         'attributes' => [
-                            'title' => 'test - too-obscure',
+                            'title'   => 'test - too-obscure',
                             'content' => 'predetermined content for automated testing - too-obscure',
                         ],
-                    ]
+                    ],
                 ],
             ])
         );
@@ -95,19 +95,19 @@ class CreateTest extends TestCase
         $this->prepareDatabase([
             'group_permission' => [
                 ['group_id' => Group::MEMBER_ID, 'permission' => 'bypassTagCounts'],
-            ]
+            ],
         ]);
 
         $response = $this->send(
             $this->request('POST', '/api/discussions', [
                 'authenticatedAs' => 2,
-                'json' => [
+                'json'            => [
                     'data' => [
                         'attributes' => [
-                            'title' => 'test - too-obscure',
+                            'title'   => 'test - too-obscure',
                             'content' => 'predetermined content for automated testing - too-obscure',
                         ],
-                    ]
+                    ],
                 ],
             ])
         );
@@ -123,19 +123,19 @@ class CreateTest extends TestCase
         $response = $this->send(
             $this->request('POST', '/api/discussions', [
                 'authenticatedAs' => 2,
-                'json' => [
+                'json'            => [
                     'data' => [
                         'attributes' => [
-                            'title' => 'test - too-obscure',
+                            'title'   => 'test - too-obscure',
                             'content' => 'predetermined content for automated testing - too-obscure',
                         ],
                         'relationships' => [
                             'tags' => [
                                 'data' => [
-                                    ['type' => 'tags', 'id' => 1]
-                                ]
-                            ]
-                        ]
+                                    ['type' => 'tags', 'id' => 1],
+                                ],
+                            ],
+                        ],
                     ],
                 ],
             ])
@@ -152,19 +152,19 @@ class CreateTest extends TestCase
         $response = $this->send(
             $this->request('POST', '/api/discussions', [
                 'authenticatedAs' => 2,
-                'json' => [
+                'json'            => [
                     'data' => [
                         'attributes' => [
-                            'title' => 'test - too-obscure',
+                            'title'   => 'test - too-obscure',
                             'content' => 'predetermined content for automated testing - too-obscure',
                         ],
                         'relationships' => [
                             'tags' => [
                                 'data' => [
-                                    ['type' => 'tags', 'id' => 5]
-                                ]
-                            ]
-                        ]
+                                    ['type' => 'tags', 'id' => 5],
+                                ],
+                            ],
+                        ],
                     ],
                 ],
             ])
@@ -181,25 +181,25 @@ class CreateTest extends TestCase
         $this->prepareDatabase([
             'group_permission' => [
                 ['group_id' => Group::MEMBER_ID, 'permission' => 'bypassTagCounts'],
-            ]
+            ],
         ]);
 
         $response = $this->send(
             $this->request('POST', '/api/discussions', [
                 'authenticatedAs' => 2,
-                'json' => [
+                'json'            => [
                     'data' => [
                         'attributes' => [
-                            'title' => 'test - too-obscure',
+                            'title'   => 'test - too-obscure',
                             'content' => 'predetermined content for automated testing - too-obscure',
                         ],
                         'relationships' => [
                             'tags' => [
                                 'data' => [
-                                    ['type' => 'tags', 'id' => 5]
-                                ]
-                            ]
-                        ]
+                                    ['type' => 'tags', 'id' => 5],
+                                ],
+                            ],
+                        ],
                     ],
                 ],
             ])
@@ -216,20 +216,20 @@ class CreateTest extends TestCase
         $response = $this->send(
             $this->request('POST', '/api/discussions', [
                 'authenticatedAs' => 2,
-                'json' => [
+                'json'            => [
                     'data' => [
                         'attributes' => [
-                            'title' => 'test - too-obscure',
+                            'title'   => 'test - too-obscure',
                             'content' => 'predetermined content for automated testing - too-obscure',
                         ],
                         'relationships' => [
                             'tags' => [
                                 'data' => [
                                     ['type' => 'tags', 'id' => 1],
-                                    ['type' => 'tags', 'id' => 11]
-                                ]
-                            ]
-                        ]
+                                    ['type' => 'tags', 'id' => 11],
+                                ],
+                            ],
+                        ],
                     ],
                 ],
             ])
@@ -246,19 +246,19 @@ class CreateTest extends TestCase
         $response = $this->send(
             $this->request('POST', '/api/discussions', [
                 'authenticatedAs' => 2,
-                'json' => [
+                'json'            => [
                     'data' => [
                         'attributes' => [
-                            'title' => 'test - too-obscure',
+                            'title'   => 'test - too-obscure',
                             'content' => 'predetermined content for automated testing - too-obscure',
                         ],
                         'relationships' => [
                             'tags' => [
                                 'data' => [
-                                    ['type' => 'tags', 'id' => 4]
-                                ]
-                            ]
-                        ]
+                                    ['type' => 'tags', 'id' => 4],
+                                ],
+                            ],
+                        ],
                     ],
                 ],
             ])
@@ -275,20 +275,20 @@ class CreateTest extends TestCase
         $response = $this->send(
             $this->request('POST', '/api/discussions', [
                 'authenticatedAs' => 2,
-                'json' => [
+                'json'            => [
                     'data' => [
                         'attributes' => [
-                            'title' => 'test - too-obscure',
+                            'title'   => 'test - too-obscure',
                             'content' => 'predetermined content for automated testing - too-obscure',
                         ],
                         'relationships' => [
                             'tags' => [
                                 'data' => [
                                     ['type' => 'tags', 'id' => 2],
-                                    ['type' => 'tags', 'id' => 3]
-                                ]
-                            ]
-                        ]
+                                    ['type' => 'tags', 'id' => 3],
+                                ],
+                            ],
+                        ],
                     ],
                 ],
             ])
@@ -305,19 +305,19 @@ class CreateTest extends TestCase
         $response = $this->send(
             $this->request('POST', '/api/discussions', [
                 'authenticatedAs' => 2,
-                'json' => [
+                'json'            => [
                     'data' => [
                         'attributes' => [
-                            'title' => 'test - too-obscure',
+                            'title'   => 'test - too-obscure',
                             'content' => 'predetermined content for automated testing - too-obscure',
                         ],
                         'relationships' => [
                             'tags' => [
                                 'data' => [
-                                    ['type' => 'tags', 'id' => 11]
-                                ]
-                            ]
-                        ]
+                                    ['type' => 'tags', 'id' => 11],
+                                ],
+                            ],
+                        ],
                     ],
                 ],
             ])

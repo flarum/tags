@@ -28,7 +28,8 @@ class TagRepository
 
     /**
      * @param array|string $relations
-     * @param User $actor
+     * @param User         $actor
+     *
      * @return Builder
      */
     public function with($relations, User $actor): Builder
@@ -53,10 +54,12 @@ class TagRepository
      * Find a tag by ID, optionally making sure it is visible to a certain
      * user, or throw an exception.
      *
-     * @param int $id
+     * @param int  $id
      * @param User $actor
-     * @return Tag
+     *
      * @throws \Illuminate\Database\Eloquent\ModelNotFoundException
+     *
+     * @return Tag
      */
     public function findOrFail($id, User $actor = null)
     {
@@ -70,6 +73,7 @@ class TagRepository
      * certain user.
      *
      * @param User|null $user
+     *
      * @return \Illuminate\Database\Eloquent\Collection
      */
     public function all(User $user = null)
@@ -82,8 +86,9 @@ class TagRepository
     /**
      * Get the ID of a tag with the given slug.
      *
-     * @param string $slug
+     * @param string    $slug
      * @param User|null $user
+     *
      * @return int
      */
     public function getIdForSlug($slug, User $user = null): ?int
@@ -97,7 +102,8 @@ class TagRepository
      * Scope a query to only include records that are visible to a user.
      *
      * @param Builder $query
-     * @param User $user
+     * @param User    $user
+     *
      * @return Builder
      */
     protected function scopeVisibleTo(Builder $query, User $user = null)

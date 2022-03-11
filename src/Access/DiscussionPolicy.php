@@ -31,9 +31,10 @@ class DiscussionPolicy extends AbstractPolicy
     }
 
     /**
-     * @param User $actor
-     * @param string $ability
+     * @param User       $actor
+     * @param string     $ability
      * @param Discussion $discussion
+     *
      * @return bool
      */
     public function can(User $actor, $ability, Discussion $discussion)
@@ -48,7 +49,7 @@ class DiscussionPolicy extends AbstractPolicy
 
             foreach ($tags as $tag) {
                 if ($tag->is_restricted) {
-                    if (! $actor->hasPermission('tag'.$tag->id.'.discussion.'.$ability)) {
+                    if (!$actor->hasPermission('tag'.$tag->id.'.discussion.'.$ability)) {
                         return $this->deny();
                     }
 
@@ -66,8 +67,9 @@ class DiscussionPolicy extends AbstractPolicy
      * This method checks, if the user is still allowed to edit the tags
      * based on the configuration item.
      *
-     * @param User $actor
+     * @param User       $actor
      * @param Discussion $discussion
+     *
      * @return bool
      */
     public function tag(User $actor, Discussion $discussion)
@@ -78,7 +80,7 @@ class DiscussionPolicy extends AbstractPolicy
             if (
                 $allowEditTags === '-1'
                 || ($allowEditTags === 'reply' && $discussion->participant_count <= 1)
-                || (is_numeric($allowEditTags) && $discussion->created_at->diffInMinutes(new Carbon) < $allowEditTags)
+                || (is_numeric($allowEditTags) && $discussion->created_at->diffInMinutes(new Carbon()) < $allowEditTags)
             ) {
                 return $this->allow();
             }

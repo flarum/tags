@@ -31,14 +31,14 @@ class TagPolicyTest extends TestCase
         $this->extension('flarum-tags');
 
         $this->prepareDatabase([
-            'tags' => $this->tags(),
+            'tags'  => $this->tags(),
             'users' => [
                 $this->normalUser(),
             ],
             'group_permission' => [
                 ['group_id' => Group::MEMBER_ID, 'permission' => 'tag6.arbitraryAbility!'],
                 ['group_id' => Group::MEMBER_ID, 'permission' => 'tag8.arbitraryAbility!'],
-            ]
+            ],
         ]);
     }
 
@@ -87,8 +87,8 @@ class TagPolicyTest extends TestCase
     {
         $this->prepareDatabase([
             'group_permission' => [
-                ['group_id' => Group::MEMBER_ID, 'permission' => 'arbitraryAbility!']
-            ]
+                ['group_id' => Group::MEMBER_ID, 'permission' => 'arbitraryAbility!'],
+            ],
         ]);
 
         $this->app();

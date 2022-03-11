@@ -30,8 +30,8 @@ class Creating
     public $data;
 
     /**
-     * @param Tag $tag
-     * @param User $actor
+     * @param Tag   $tag
+     * @param User  $actor
      * @param array $data
      */
     public function __construct(Tag $tag, User $actor, array $data)

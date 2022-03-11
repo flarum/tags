@@ -15,12 +15,12 @@ use Flarum\User\User;
 use Illuminate\Database\Eloquent\Builder;
 
 /**
- * @property int $user_id
- * @property int $tag_id
+ * @property int                 $user_id
+ * @property int                 $tag_id
  * @property \Carbon\Carbon|null $marked_as_read_at
- * @property bool $is_hidden
- * @property Tag $tag
- * @property User $user
+ * @property bool                $is_hidden
+ * @property Tag                 $tag
+ * @property User                $user
  */
 class TagState extends AbstractModel
 {
@@ -60,6 +60,7 @@ class TagState extends AbstractModel
      * Set the keys for a save update query.
      *
      * @param Builder $query
+     *
      * @return Builder
      */
     protected function setKeysForSaveQuery($query)

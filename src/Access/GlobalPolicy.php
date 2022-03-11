@@ -28,7 +28,8 @@ class GlobalPolicy extends AbstractPolicy
 
     /**
      * @param Flarum\User\User $actor
-     * @param string $ability
+     * @param string           $ability
+     *
      * @return bool|void
      */
     public function can(User $actor, string $ability)
@@ -43,7 +44,7 @@ class GlobalPolicy extends AbstractPolicy
         }
 
         if (in_array($ability, ['viewForum', 'startDiscussion'])) {
-            if (! isset($enoughPrimary[$actor->id][$ability])) {
+            if (!isset($enoughPrimary[$actor->id][$ability])) {
                 $primaryTagsWhereNeedsPermission = $this->settings->get('flarum-tags.min_primary_tags');
                 $primaryTagsWhereHasPermission = Tag::whereHasPermission($actor, $ability)
                     ->where('tags.position', '!=', null)
@@ -57,7 +58,7 @@ class GlobalPolicy extends AbstractPolicy
                 }
             }
 
-            if (! isset($enoughSecondary[$actor->id][$ability])) {
+            if (!isset($enoughSecondary[$actor->id][$ability])) {
                 $secondaryTagsWhereNeedsPermission = $this->settings->get('flarum-tags.min_secondary_tags');
                 $secondaryTagsWhereHasPermission = Tag::whereHasPermission($actor, $ability)
                     ->where('tags.position', '=', null)

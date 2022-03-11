@@ -28,7 +28,7 @@ class EditTagHandler
 
     /**
      * @param TagRepository $tags
-     * @param TagValidator $validator
+     * @param TagValidator  $validator
      */
     public function __construct(TagRepository $tags, TagValidator $validator)
     {
@@ -38,8 +38,10 @@ class EditTagHandler
 
     /**
      * @param EditTag $command
-     * @return \Flarum\Tags\Tag
+     *
      * @throws \Flarum\User\Exception\PermissionDeniedException
+     *
+     * @return \Flarum\Tags\Tag
      */
     public function handle(EditTag $command)
     {

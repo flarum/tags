@@ -101,7 +101,7 @@ class UpdateTagMetadata
     public function whenPostIsDeleted(PostDeleted $event)
     {
         $discussion = $event->post->discussion;
-        $delta = ! $discussion->exists && $discussion->hidden_at === null ? -1 : 0;
+        $delta = !$discussion->exists && $discussion->hidden_at === null ? -1 : 0;
         $this->updateTags($discussion, $delta);
     }
 
@@ -123,13 +123,13 @@ class UpdateTagMetadata
 
     /**
      * @param \Flarum\Discussion\Discussion $discussion
-     * @param int $delta
-     * @param Tag[]|null $tags
-     * @param Post $post: This is only used when a post has been hidden
+     * @param int                           $delta
+     * @param Tag[]|null                    $tags
+     * @param Post                          $post:      This is only used when a post has been hidden
      */
     protected function updateTags(Discussion $discussion, $delta = 0, $tags = null, $post = null)
     {
-        if (! $tags) {
+        if (!$tags) {
             $tags = $discussion->tags;
         }
 
@@ -141,13 +141,13 @@ class UpdateTagMetadata
 
         foreach ($tags as $tag) {
             // We do not count private discussions or hidden discussions in tags
-            if (! $discussion->is_private) {
+            if (!$discussion->is_private) {
                 $tag->discussion_count += $delta;
             }
 
             // If this is a new / restored discussion, it isn't private, it isn't null,
             // and it's more recent than what we have now, set it as last posted discussion.
-            if ($delta >= 0 && ! $discussion->is_private && $discussion->hidden_at == null && ($discussion->last_posted_at >= $tag->last_posted_at) && $discussion->exists) {
+            if ($delta >= 0 && !$discussion->is_private && $discussion->hidden_at == null && ($discussion->last_posted_at >= $tag->last_posted_at) && $discussion->exists) {
                 $tag->setLastPostedDiscussion($discussion);
             } elseif ($discussion->id == $tag->last_posted_discussion_id) {
                 // This is to persist refreshLastPost above. It is here instead of there so that

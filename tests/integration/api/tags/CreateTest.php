@@ -58,7 +58,7 @@ class CreateTest extends TestCase
         $response = $this->send(
             $this->request('POST', '/api/tags', [
                 'authenticatedAs' => 1,
-                'json' => [],
+                'json'            => [],
             ])
         );
 
@@ -73,13 +73,13 @@ class CreateTest extends TestCase
         $response = $this->send(
             $this->request('POST', '/api/tags', [
                 'authenticatedAs' => 1,
-                'json' => [
+                'json'            => [
                     'data' => [
                         'attributes' => [
-                            'name' => 'Dev Blog',
-                            'slug' => 'dev-blog',
+                            'name'        => 'Dev Blog',
+                            'slug'        => 'dev-blog',
                             'description' => 'Follow Flarum development!',
-                            'color' => '#123456'
+                            'color'       => '#123456',
                         ],
                     ],
                 ],

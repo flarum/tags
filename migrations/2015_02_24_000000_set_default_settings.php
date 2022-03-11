@@ -10,8 +10,8 @@
 use Flarum\Database\Migration;
 
 return Migration::addSettings([
-    'flarum-tags.max_primary_tags' => '1',
-    'flarum-tags.min_primary_tags' => '1',
+    'flarum-tags.max_primary_tags'   => '1',
+    'flarum-tags.min_primary_tags'   => '1',
     'flarum-tags.max_secondary_tags' => '3',
     'flarum-tags.min_secondary_tags' => '0',
 ]);

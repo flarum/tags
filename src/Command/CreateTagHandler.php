@@ -31,6 +31,7 @@ class CreateTagHandler
 
     /**
      * @param CreateTag $command
+     *
      * @return Tag
      */
     public function handle(CreateTag $command)

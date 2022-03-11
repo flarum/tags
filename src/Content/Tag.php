@@ -41,9 +41,9 @@ class Tag
     protected $translator;
 
     /**
-     * @param Client $api
-     * @param Factory $view
-     * @param TagRepository $tags
+     * @param Client              $api
+     * @param Factory             $view
+     * @param TagRepository       $tags
      * @param TranslatorInterface $translator
      */
     public function __construct(Client $api, Factory $view, TagRepository $tags, TranslatorInterface $translator)
@@ -71,11 +71,11 @@ class Tag
         $tag = $this->tags->findOrFail($tagId, $actor);
 
         $params = [
-            'sort' => $sort && isset($sortMap[$sort]) ? $sortMap[$sort] : '',
+            'sort'   => $sort && isset($sortMap[$sort]) ? $sortMap[$sort] : '',
             'filter' => [
-                'tag' => "$slug"
+                'tag' => "$slug",
             ],
-            'page' => ['offset' => ($page - 1) * 20, 'limit' => 20]
+            'page' => ['offset' => ($page - 1) * 20, 'limit' => 20],
         ];
 
         $params['filter'] = array_merge($filters, $params['filter']);
@@ -111,9 +111,9 @@ class Tag
     {
         return [
             'latest' => '-lastPostedAt',
-            'top' => '-commentCount',
+            'top'    => '-commentCount',
             'newest' => '-createdAt',
-            'oldest' => 'createdAt'
+            'oldest' => 'createdAt',
         ];
     }
 
@@ -128,7 +128,7 @@ class Tag
     private function getTagsDocument(Request $request, string $slug)
     {
         return json_decode($this->api->withParentRequest($request)->withQueryParams([
-            'include' => 'children,children.parent,parent,parent.children.parent,state'
+            'include' => 'children,children.parent,parent,parent.children.parent,state',
         ])->get("/tags/$slug")->getBody());
     }
 }

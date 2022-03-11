@@ -61,7 +61,7 @@ class TagFilterGambit extends AbstractRegexGambit implements FilterInterface
                     $query->whereIn('discussions.id', function (Builder $query) {
                         $query->select('discussion_id')
                             ->from('discussion_tag');
-                    }, 'or', ! $negate);
+                    }, 'or', !$negate);
                 } else {
                     $id = $this->tags->getIdForSlug($slug);
 

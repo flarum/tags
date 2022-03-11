@@ -25,7 +25,7 @@ class Deleting
     public $actor;
 
     /**
-     * @param Tag $tag
+     * @param Tag  $tag
      * @param User $actor
      */
     public function __construct(Tag $tag, User $actor)

@@ -16,7 +16,7 @@ use Illuminate\Database\Eloquent\Builder;
 class ScopeTagVisibility
 {
     /**
-     * @param User $actor
+     * @param User    $actor
      * @param Builder $query
      */
     public function __invoke(User $actor, Builder $query)
