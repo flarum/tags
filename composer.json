@@ -1,5 +1,5 @@
 {
-    "name": "flarum/tags",
+    "name": "zeglup/tags",
     "description": "Organize discussions into a hierarchy of tags and categories.",
     "type": "flarum-extension",
     "keywords": [
