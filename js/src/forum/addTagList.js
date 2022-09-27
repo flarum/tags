@@ -42,18 +42,6 @@ export default function () {
       items.add('tag' + tag.id(), TagLinkButton.component({ model: tag, params, active }, tag?.name()), -14);
     };
 
-    sortTags(tags)
-      .filter(
-        (tag) => tag.position() !== null && (!tag.isChild() || (currentTag && (tag.parent() === currentTag || tag.parent() === currentTag.parent())))
-      )
-      .forEach(addTag);
-
-    const more = tags.filter((tag) => tag.position() === null).sort((a, b) => b.discussionCount() - a.discussionCount());
-
-    more.splice(0, 3).forEach(addTag);
-
-    if (more.length) {
-      items.add('moreTags', <LinkButton href={app.route('tags')}>{app.translator.trans('flarum-tags.forum.index.more_link')}</LinkButton>, -16);
-    }
+    tags.forEach(addTag);
   });
 }
