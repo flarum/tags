@@ -7,12 +7,16 @@
  * LICENSE file that was distributed with this source code.
  */
 
-namespace Flarum\Tags\Filter;
+namespace Flarum\Tags\Search\Filter;
 
-use Flarum\Filter\FilterInterface;
-use Flarum\Filter\FilterState;
-use Flarum\Filter\ValidateFilterTrait;
+use Flarum\Search\Database\DatabaseSearchState;
+use Flarum\Search\Filter\FilterInterface;
+use Flarum\Search\SearchState;
+use Flarum\Search\ValidateFilterTrait;
 
+/**
+ * @implements FilterInterface<DatabaseSearchState>
+ */
 class PostTagFilter implements FilterInterface
 {
     use ValidateFilterTrait;
@@ -22,11 +26,11 @@ class PostTagFilter implements FilterInterface
         return 'tag';
     }
 
-    public function filter(FilterState $filterState, string|array $filterValue, bool $negate): void
+    public function filter(SearchState $state, string|array $value, bool $negate): void
     {
-        $ids = $this->asIntArray($filterValue);
+        $ids = $this->asIntArray($value);
 
-        $filterState->getQuery()
+        $state->getQuery()
             ->join('discussion_tag', 'discussion_tag.discussion_id', '=', 'posts.discussion_id')
             ->whereIn('discussion_tag.tag_id', $ids, 'and', $negate);
     }

@@ -7,14 +7,18 @@
  * LICENSE file that was distributed with this source code.
  */
 
-namespace Flarum\Tags\Search\Gambit;
+namespace Flarum\Tags\Search;
 
-use Flarum\Search\GambitInterface;
+use Flarum\Search\AbstractFulltextFilter;
+use Flarum\Search\Database\DatabaseSearchState;
 use Flarum\Search\SearchState;
 use Flarum\Tags\TagRepository;
 use Illuminate\Database\Eloquent\Builder;
 
-class FulltextGambit implements GambitInterface
+/**
+ * @extends AbstractFulltextFilter<DatabaseSearchState>
+ */
+class FulltextFilter extends AbstractFulltextFilter
 {
     public function __construct(
         protected TagRepository $tags
@@ -30,14 +34,12 @@ class FulltextGambit implements GambitInterface
             ->orWhere('slug', 'like', "$searchValue%");
     }
 
-    public function apply(SearchState $search, string $bit): bool
+    public function search(SearchState $state, string $value): void
     {
-        $search->getQuery()
+        $state->getQuery()
             ->whereIn(
                 'id',
-                $this->getTagSearchSubQuery($bit)
+                $this->getTagSearchSubQuery($value)
             );
-
-        return true;
     }
 }
