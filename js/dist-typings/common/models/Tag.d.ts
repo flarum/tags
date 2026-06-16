@@ -3,6 +3,7 @@ import type Discussion from 'flarum/common/models/Discussion';
 export default class Tag extends Model {
     name(): string;
     slug(): string;
+    storedSlug(): string;
     description(): string | null;
     color(): string | null;
     icon(): string | null;
